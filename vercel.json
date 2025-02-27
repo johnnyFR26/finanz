@@ -1,0 +1,14 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "outputDirectory": "dist/finanz/browser",
+    "rewrites": [
+      {
+        "source": "/(.*)", 
+        "destination": "/index.html"
+      }
+    ],
+    "github": {
+      "silent": true,
+      "autoJobCancelation": true
+    }
+  }
