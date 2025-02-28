@@ -1,3 +1,4 @@
+import { isUserLogged } from './../guards/is-user-logged.can-activate.guard';
 import { HttpClient } from "@angular/common/http";
 import { effect, inject, Injectable, signal } from "@angular/core";
 import { createUser } from "../models/user.model";
@@ -33,6 +34,14 @@ export class UserService {
 
     setCurrentUser(user: UserStorage) {
         this.userInfo.set(user)
+    }
+
+    getUserInfo() {
+        return this.userInfo.asReadonly()
+    }
+
+    isUserLogged() {
+        return !!this.userInfo()
     }
 
 }
