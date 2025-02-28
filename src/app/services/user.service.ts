@@ -4,6 +4,7 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { createUser } from "../models/user.model";
 import { UserStorage } from "../models/user-storage.model";
 import { environment } from "../../environments/environment";
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserService {
         return this.http.post(`${this.urlApi}/users`, user)
     }
 
-    loginUser(user: { email: string, password: string }) {
+    loginUser(user: { email: string, password: string }): Observable<any> {
         return this.http.post(`${this.urlApi}/auth/login`, user)
     }
 
