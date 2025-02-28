@@ -42,6 +42,14 @@ export class SignInComponent {
     console.log('Form Value:', this.formValue())
 
     this.userService.createUser(this.formValue())
+
+    this.email.set('')
+    this.password.set('')
+    this.name.set('')
+    this.confirmPassword.set('')
+    this.phone.set('')
+    this.cpf.set('')
+    
   }
 
 }
