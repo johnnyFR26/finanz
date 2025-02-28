@@ -1,0 +1,12 @@
+form {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    gap: 10px; 
+
+    label{
+        color: white;
+    }
+}

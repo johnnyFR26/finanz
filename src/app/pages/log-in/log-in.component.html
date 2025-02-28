@@ -4,6 +4,6 @@
     <input type="email" id="email" name="email" [(ngModel)]="email" required email />
     <label for="password">Password</label>
     <input type="password" name="password" id="password" [(ngModel)]="password" required />
-    <button type="submit">Login!</button>
+    <button [disabled]="!isFormValid()" type="submit">Login!</button>
   </form>
   

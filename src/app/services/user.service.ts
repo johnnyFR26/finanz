@@ -22,7 +22,9 @@ export class UserService {
     }
 
     createUser(user: createUser) {
-        return this.http.post(`${this.urlApi}/users`, user)
+        return this.http.post(`${this.urlApi}/users`, user).subscribe((response: any) => {
+            console.log('Response:', response)
+        })
     }
 
     loginUser(user: { email: string, password: string }): Observable<any> {
