@@ -1,4 +1,3 @@
-import { isUserLogged } from './../guards/is-user-logged.can-activate.guard';
 import { HttpClient } from "@angular/common/http";
 import { effect, inject, Injectable, signal } from "@angular/core";
 import { createUser } from "../models/user.model";

@@ -25,7 +25,8 @@ export class LogInComponent {
   });
 
   public isFormValid = computed(() => {
-    return this.email().length > 0 && this.password().length > 0;
+    const EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return this.email().length > 0 && this.password().length > 0 && EMAIL_REGEXP.test(this.email());
   });
 
   onSubmit(){
