@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { EMAIL_REGEXP } from '../../utils/email-validator';
 
 @Component({
   selector: 'app-log-in',
@@ -25,7 +26,8 @@ export class LogInComponent {
   });
 
   public isFormValid = computed(() => {
-    return this.email().length > 0 && this.password().length > 0;
+   
+    return this.email().length > 0 && this.password().length > 0 && EMAIL_REGEXP.test(this.email());
   });
 
   onSubmit(){
