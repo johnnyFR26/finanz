@@ -1,4 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
-* {
+body {
     background-color: #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    height: calc(100vh - 16px);
+}
+.form {
+    background-color: #444444;
+    width: 230px;
+}
+body + *{
+    flex-direction: column; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+*{
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.form {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 5px; 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 5px #cbe957,
+    0 10px 0 5px #cbe957,
+    0 -2px 0 5px #cbe957,
+    0 10px 35px 0 #cbe95788,
+    0 0 35px 0 #cbe95788;
+    justify-self: center;
+}
+.gay{
+    position: relative;
+    width: 70%;
+    height: 5px;
+    background-image: radial-gradient(#cbe957 0,#00000000 70%);
+}
+h1{
+    margin-bottom: 0;
+}
+label{
+    align-self: flex-start;
+    position: relative;
+    top: 5px;
+    font-size: 15px;
+}
+.input {
+    background-color: #5d5d5d;
+    border-width: 0;
+    border-radius: 4px;
+    padding: 6px;
+    outline: 0;
+    width: calc(100% - 12px);
+}
+.input::placeholder{
+    color: #444444;
+}
+.button{
+    color: black;
+    background-color: #cbe957;
+    border: 0;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 7px 20px;
+    margin: 10px 0;
+}
+.link{
+    font-size: 12px;
+}
+.link a{
+    color:#cbe957;
+    text-decoration: none;
+}
+.link a:hover{
+    text-decoration: underline;
+}
+.logo{
+    width: 280px;
+    margin-bottom: 40px;
 }

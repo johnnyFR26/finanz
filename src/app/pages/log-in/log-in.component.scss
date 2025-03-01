@@ -1,8 +1,9 @@
-form {
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh;
-    gap: 10px; 
+.esqueci{
+    align-self: flex-end;
+    font-style: italic;
+    font-size: 11px;
+    text-decoration: none;
+}
+.esqueci:hover{
+    text-decoration: underline;
 }
