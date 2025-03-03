@@ -1,0 +1,12 @@
+:host{
+    display: block;
+}
+
+mat-toolbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+    background-color: #b4cf48;
+}
