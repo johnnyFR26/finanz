@@ -1,9 +1,32 @@
-<header>
-    <app-tool-bar></app-tool-bar>
-</header>
+<mat-sidenav-container class="container">
+  
+    <!-- Menu Lateral -->
+    <mat-sidenav class="sidemenu" #sidenav mode="side" opened="false">
+      <mat-nav-list>
+        <a mat-list-item (click)="sidenav.close()">Home</a>
+        <a mat-list-item (click)="sidenav.close()">Perfil</a>
+        <a mat-list-item (click)="sidenav.close()">Configurações</a>
+      </mat-nav-list>
+    </mat-sidenav>
+ 
+    <div></div>
 
-<h1>Body of the page</h1>
-
-<footer>
-    <p>Distribuido por Toasty Tech LTDA</p>
-</footer>
+    <!-- Conteúdo principal -->
+    <mat-sidenav-content>
+  
+      <header>
+        <app-tool-bar [sidenav]="sidenav"></app-tool-bar>  <!-- Passa o sidenav para o componente -->
+      </header>
+  
+      <main>
+        <h1>Body of the page</h1>
+      </main>
+  
+      <footer>
+        <p>Distribuido por Toasty Tech LTDA</p>
+      </footer>
+  
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+  

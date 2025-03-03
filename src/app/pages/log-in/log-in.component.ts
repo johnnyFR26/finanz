@@ -3,6 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { EMAIL_REGEXP } from '../../utils/email-validator';
+import {
+  MatSnackBar,
+  MatSnackBarAction,
+  MatSnackBarActions,
+  MatSnackBarLabel,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-log-in',
@@ -17,6 +25,8 @@ export class LogInComponent {
 
   public email = signal<string>('')
   public password = signal<string>('')
+
+  private snackbarMessage: string = ''
 
   public formValue = computed(() => {
     return {
@@ -33,25 +43,48 @@ export class LogInComponent {
   onSubmit(){
     console.log('Form Value:', this.formValue())
 
-    this.userService.loginUser(this.formValue()).subscribe((response) => {
-      console.log('Response:', response)
+    this.userService.loginUser(this.formValue()).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+    
+        if (!response || response.error) { 
+          
+          console.log("DEU MERDA");
+        } else {
+          console.log("Login bem-sucedido!")
 
-      if(!response.token){ 
-        return console.log("DEU MERDA")
-      }
-
-      this.userService.setCurrentUser({
-        token: response.token,
-        user: {
-          id: response.user.id,
-          name: response.user.name,
-          email: response.user.email
+          this.userService.setCurrentUser({
+            token: response.token,
+            user: {
+              id: response.user.id,
+              name: response.user.name,
+              email: response.user.email
+            }
+          })
+    
+          this.router.navigateByUrl('/home')
         }
-      })
-
-      this.router.navigateByUrl('/home')
+      },
+      error: (err) => {
+        console.error("Erro na requisição:", err.error);
+        console.log("DEU MERDA");
+        this.openSnackBar(err.error.error)
+      }
     })
 
   }
+
+  private _snackBar = inject(MatSnackBar);
+
+  durationInSeconds = 5;
+
+  openSnackBar(message: string) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      data: {message},
+    });
+  }
+
+
 
 }
