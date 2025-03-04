@@ -9,7 +9,16 @@ footer {
 .sidemenu{
     background-color: #3f3f3f;
     margin-right: 90%;
+    max-width: 50vw;
+    width: 360px;
+    min-width: 140px;
     height: 100%;
     position: fixed;
+    top:56px;
 }
-
+.center {
+    position: fixed;
+}
+.container {
+    background-color: #00000000;
+}

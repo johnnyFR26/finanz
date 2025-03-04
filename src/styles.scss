@@ -1,20 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     background-color: #252525;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    height: calc(100vh - 16px);
 }
 .form {
     background-color: #444444;
     width: 230px;
 }
-body + *{
+.centro{
     flex-direction: column; 
     display: flex;
     justify-content: center; 
     align-items: center;
+    height: calc(100vh - 16px);
+
 }
 *{
     color:white;
