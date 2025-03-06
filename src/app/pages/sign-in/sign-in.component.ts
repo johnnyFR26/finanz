@@ -41,7 +41,7 @@ export class SignInComponent {
   onSubmit(){
     console.log('Form Value:', this.formValue())
 
-    this.userService.createUser(this.formValue())
+    this.userService.createUserObserVable(this.formValue())
 
     this.email.set('')
     this.password.set('')
