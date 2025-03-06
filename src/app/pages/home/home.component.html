@@ -3,9 +3,9 @@
     <!-- Menu Lateral -->
     <mat-sidenav class="sidemenu" #sidenav mode="side" opened="false">
       <mat-nav-list>
-        <a mat-list-item (click)="sidenav.close()">Home</a>
-        <a mat-list-item (click)="redirectToDev()">Desenvolvedores</a>
-        <a mat-list-item (click)="sidenav.close()">Configurações</a>
+        <a mat-list-item (click)="redirectToPath('/home')">Home</a>
+        <a mat-list-item (click)="redirectToPath('/home/dev')">Desenvolvedores</a>
+        <a mat-list-item (click)="redirectToPath('/home/account')">Configurações</a>
       </mat-nav-list>
     </mat-sidenav>
  

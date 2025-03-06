@@ -10,6 +10,10 @@ export const routes: Routes = [
             {
                 path: 'dev',
                 loadComponent: () => import('./pages/home/developers/dev.component').then(m => m.DevComponent)
+            },
+            {
+                path: 'account',
+                loadComponent: () => import('./pages/home/createAccount/create-account.component').then(m => m.CreateAccountComponent)
             }
         ]
     },

@@ -19,8 +19,8 @@ export class HomeComponent {
   user = this.userService.getUserInfo()
   router = inject(Router)
 
-  public redirectToDev(){
-    this.router.navigate(['/home/dev'])
+  public redirectToPath(route: string){
+    this.router.navigate([route])
   }
 
 }
