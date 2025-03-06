@@ -4,7 +4,7 @@
     <mat-sidenav class="sidemenu" #sidenav mode="side" opened="false">
       <mat-nav-list>
         <a mat-list-item (click)="sidenav.close()">Home</a>
-        <a mat-list-item (click)="sidenav.close()">Perfil</a>
+        <a mat-list-item (click)="redirectToDev()">Desenvolvedores</a>
         <a mat-list-item (click)="sidenav.close()">Configurações</a>
       </mat-nav-list>
     </mat-sidenav>
@@ -19,6 +19,7 @@
       </header>
   
       <main class="centro">
+        <router-outlet></router-outlet>
         <h1>Bem vindo! {{user()?.user?.name}}</h1>
       </main>
   

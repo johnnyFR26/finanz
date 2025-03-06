@@ -5,7 +5,13 @@ export const routes: Routes = [
     {
         path: 'home',
         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
-        canActivate: [isUserLogged]
+        canActivate: [isUserLogged],
+        children: [
+            {
+                path: 'dev',
+                loadComponent: () => import('./pages/home/developers/dev.component').then(m => m.DevComponent)
+            }
+        ]
     },
     {
         path: 'login',
@@ -14,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'signin',
         loadComponent: () => import('./pages/sign-in/sign-in.component').then(m => m.SignInComponent)
+    },
+    {
+        path: 'dev',
+        loadComponent: () => import('./pages/home/developers/dev.component').then(m => m.DevComponent)
     },
     {
         path: '**',
