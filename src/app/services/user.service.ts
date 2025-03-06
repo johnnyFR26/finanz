@@ -34,6 +34,18 @@ export class UserService {
         })
     }
 
+    // new function to do after
+    createUserObserVable(user: createUser){
+        return this.http.post(`${this.urlApi}/users`, user).subscribe({
+            next: (response: any) => {
+                console.log('Response:', response)
+            },
+            error: (error: any) => {
+                console.log('Error:', error)
+            }
+        })
+    }
+
     loginUser(user: { email: string, password: string }): Observable<any> {
         return this.http.post(`${this.urlApi}/auth/login`, user)
     }
