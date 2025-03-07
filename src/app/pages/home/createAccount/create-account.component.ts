@@ -1,5 +1,6 @@
-import { Component, computed, signal } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { AccountService } from "../../../services/account.service";
 
 @Component({
     selector: 'app-create-account',
@@ -25,6 +26,7 @@ export class CreateAccountComponent {
 
     protected currentValue = signal<number>(0.00)
     private fixedCurrency = signal<string>('BR')
+    private accountService = inject(AccountService)
 
     public formValue = computed(() => {
         return {
@@ -34,8 +36,8 @@ export class CreateAccountComponent {
     })
 
     onSubmit(){
-        console.log('Form Value:', this
-        .formValue())
+        console.log('Form Value:', this.formValue())
+        this.accountService.createAccount(this.formValue())
     }
 
 
