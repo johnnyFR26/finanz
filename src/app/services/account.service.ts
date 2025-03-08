@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { CreateAccountModel } from "../models/create-account.model";
@@ -12,6 +12,7 @@ export class AccountService{
     private userService = inject(UserService)
     private currentUser = this.userService.getUserInfo()
     private urlApi = environment.urlApi
+    private currentAccount = signal<CreateAccountModel | null>(null)
 
     createAccount(account: CreateAccountModel){
         return this.http.post(`${this.urlApi}/accounts/${this.currentUser()?.user.email}`, account).subscribe({

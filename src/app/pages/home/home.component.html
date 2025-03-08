@@ -12,15 +12,15 @@
     <div></div>
 
     <!-- Conteúdo principal -->
+
     <mat-sidenav-content>
   
       <header>
-        <app-tool-bar [sidenav]="sidenav"></app-tool-bar>  <!-- Passa o sidenav para o componente -->
+        <app-tool-bar [sidenav]="sidenav"></app-tool-bar>
       </header>
   
       <main class="centro">
         <router-outlet></router-outlet>
-        <h1>Bem vindo! {{user()?.user?.name}}</h1>
       </main>
   
       <footer>

@@ -35,15 +35,15 @@ export class DevComponent {
             "role": "Frontend Developer"
         },
         {
-            "name": "Eric",
+            "name": "Eric Sandes",
             "role": "Web Designer"
         },
         {
-            "name": "Pedro Henrique Baum",
+            "name": "Pedro Augusto Baum",
             "role": "Web Developer"
         },
         {
-            "name": "Orlando",
+            "name": "Orlando Furlaneto",
             "role": "QA Engineer"
         }
     ]

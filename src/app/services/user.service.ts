@@ -11,11 +11,10 @@ import { SnackbarComponent } from "../components/snackbar/snackbar.component";
 @Injectable({
     providedIn: 'root'
 })
-
 export class UserService {
     private http = inject(HttpClient)
     private router = inject(Router)
-    private userInfo = signal<UserStorage | null>(null)
+    private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage()) // Inicializa com os dados do localStorage
     private urlApi = environment.urlApi
 
     constructor(){
@@ -39,7 +38,6 @@ export class UserService {
             error: (error: any) => {
                 console.log('Error:', error)
                 this.openSnackBar(error.error.error)
-
             }
         })
     }
@@ -49,7 +47,11 @@ export class UserService {
     }
 
     syncUserInfoWithLocalStorage() {
-        localStorage.setItem('UserData', JSON.stringify(this.userInfo()))
+        if (this.userInfo()) {
+            localStorage.setItem('UserData', JSON.stringify(this.userInfo()))
+        } else {
+            localStorage.removeItem('UserData')
+        }
     }
 
     setCurrentUser(user: UserStorage) {
@@ -64,14 +66,19 @@ export class UserService {
         return !!this.userInfo()
     }
 
-      private _snackBar = inject(MatSnackBar);
+    private loadUserFromLocalStorage(): UserStorage | null {
+        const storedUser = localStorage.getItem('UserData')
+        return storedUser ? JSON.parse(storedUser) : null
+    }
+
+    private _snackBar = inject(MatSnackBar);
     
-      durationInSeconds = 5;
+    durationInSeconds = 5;
     
-      openSnackBar(message: string) {
+    openSnackBar(message: string) {
         this._snackBar.openFromComponent(SnackbarComponent, {
-          duration: this.durationInSeconds * 1000,
-          data: {message},
+            duration: this.durationInSeconds * 1000,
+            data: {message},
         });
     }
 }
