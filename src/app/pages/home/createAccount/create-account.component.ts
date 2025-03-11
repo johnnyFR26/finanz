@@ -1,11 +1,13 @@
 import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { AccountService } from "../../../services/account.service";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
     selector: 'app-create-account',
     template: `
     <div class="create-account">
+    <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
         <div class="create-account__container">
             <h1 class="create-account__title">Criar conta</h1>
             <form (ngSubmit)="onSubmit()" class="create-account__form">
@@ -20,13 +22,14 @@ import { AccountService } from "../../../services/account.service";
             padding: 5px;
         }
     `,
-    imports: [FormsModule]
+    imports: [FormsModule, CurrencyPipe]
 })
 export class CreateAccountComponent {
 
     protected currentValue = signal<number>(0.00)
     private fixedCurrency = signal<string>('BR')
     private accountService = inject(AccountService)
+    protected account = this.accountService.getCurrentAccount()
 
     public formValue = computed(() => {
         return {

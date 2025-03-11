@@ -1,5 +1,7 @@
+import { CanActivate } from '@angular/router';
 import { Routes } from '@angular/router';
 import { isUserLogged } from './guards/is-user-logged.can-activate.guard';
+import { doesUserHaveAccount } from './guards/does-user-have-account.can-activate.guard';
 
 export const routes: Routes = [
     {
@@ -12,8 +14,13 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/home/developers/dev.component').then(m => m.DevComponent)
             },
             {
-                path: 'account',
+                path: 'createAccount',
                 loadComponent: () => import('./pages/home/createAccount/create-account.component').then(m => m.CreateAccountComponent)
+            },
+            {
+                path: 'account',
+                loadComponent: () => import('./pages/home/account/account.component').then(m => m.AccountComponent),
+                canActivate: [doesUserHaveAccount]
             }
         ]
     },

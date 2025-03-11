@@ -11,6 +11,7 @@ import {
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-log-in',
@@ -21,6 +22,7 @@ import { SnackbarComponent } from '../../components/snackbar/snackbar.component'
 export class LogInComponent {
 
   private userService = inject(UserService)
+  private accountService = inject(AccountService)
   private router = inject(Router)
 
   public email = signal<string>('')
@@ -63,6 +65,17 @@ export class LogInComponent {
           })
     
           this.router.navigateByUrl('/home')
+          
+          if(response.user.account != null){
+            this.accountService.setCurrentAccount({
+              currentValue: response.user.account.currentValue,
+              currency: response.user.account.currency,
+              id: response.user.account.id
+            })
+        }else{
+          console.log("Usuário não possui conta")
+        }
+
         }
       },
       error: (err) => {
