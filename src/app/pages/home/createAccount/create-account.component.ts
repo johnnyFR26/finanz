@@ -39,7 +39,4 @@ export class CreateAccountComponent {
         console.log('Form Value:', this.formValue())
         this.accountService.createAccount(this.formValue())
     }
-
-
-
 }

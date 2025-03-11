@@ -20,6 +20,9 @@ export class HomeComponent {
   router = inject(Router)
 
   public redirectToPath(route: string){
+    if(route == '/login'){
+      this.userService.setCurrentUser(null)
+    }
     this.router.navigate([route])
   }
 

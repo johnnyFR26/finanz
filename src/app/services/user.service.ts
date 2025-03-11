@@ -54,7 +54,7 @@ export class UserService {
         }
     }
 
-    setCurrentUser(user: UserStorage) {
+    setCurrentUser(user: UserStorage | null) {
         this.userInfo.set(user)
     }
 
