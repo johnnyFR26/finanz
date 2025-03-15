@@ -13,7 +13,7 @@ export class AccountService{
     private userService = inject(UserService)
     private currentUser = this.userService.getUserInfo()
     private urlApi = environment.urlApi
-    private currentAccount = signal<CreateAccountModel | null>(null)
+    private currentAccount = signal<CreateAccountModel | null>(this.loadAccountFromLocalStorage())
 
     constructor(){
         effect(()=> {
@@ -47,6 +47,15 @@ export class AccountService{
         }else{
             localStorage.removeItem('AccountData')
         }
+    }
+
+    loadAccountFromLocalStorage(): AccountStorageModel | null {
+        const storedAccount = localStorage.getItem('AccountData')
+        return storedAccount ? JSON.parse(storedAccount) : null
+    }
+
+    isAccountCreated(){
+        return !this.currentAccount()
     }
 
 }

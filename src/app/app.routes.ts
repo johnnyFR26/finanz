@@ -20,7 +20,7 @@ export const routes: Routes = [
             {
                 path: 'account',
                 loadComponent: () => import('./pages/home/account/account.component').then(m => m.AccountComponent),
-                canActivate: [doesUserHaveAccount]
+                canActivate: [doesUserHaveAccount],
             }
         ]
     },
