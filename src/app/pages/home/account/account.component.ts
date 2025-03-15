@@ -1,5 +1,5 @@
 import { CurrencyPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 
 @Component({
@@ -10,8 +10,11 @@ import { AccountService } from "../../../services/account.service";
     styleUrl: './account.component.scss',
     imports: [CurrencyPipe]
 })
-export class AccountComponent{
+export class AccountComponent implements OnInit{
 
+    ngOnInit(): void {     
+        console.table(this.account)
+    }
     private accountService = inject(AccountService)
     protected account = this.accountService.getCurrentAccount()
 

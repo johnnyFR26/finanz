@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { CreateAccountModel } from "../models/create-account.model";
 import { UserService } from "./user.service";
 import { AccountStorageModel } from "../models/account-storage.model";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ import { AccountStorageModel } from "../models/account-storage.model";
 export class AccountService{
     private http = inject(HttpClient)
     private userService = inject(UserService)
+    private router = inject(Router)
     private currentUser = this.userService.getUserInfo()
     private urlApi = environment.urlApi
     private currentAccount = signal<CreateAccountModel | null>(this.loadAccountFromLocalStorage())
@@ -26,6 +28,7 @@ export class AccountService{
             next: (response: any) => {
                 console.log('Response:', response)
                 this.setCurrentAccount(response)
+                this.router.navigateByUrl('/home/account')
             },
             error: (error: any) => {
                 console.log('Error:', error)
@@ -43,19 +46,19 @@ export class AccountService{
 
     syncAccountWithLocalStorage(){
         if(this.currentAccount()){
-            localStorage.setItem('AccountData', JSON.stringify(this.currentAccount()))
+            sessionStorage.setItem('AccountData', JSON.stringify(this.currentAccount()))
         }else{
-            localStorage.removeItem('AccountData')
+            sessionStorage.removeItem('AccountData')
         }
     }
 
     loadAccountFromLocalStorage(): AccountStorageModel | null {
-        const storedAccount = localStorage.getItem('AccountData')
+        const storedAccount = sessionStorage.getItem('AccountData')
         return storedAccount ? JSON.parse(storedAccount) : null
     }
 
     isAccountCreated(){
-        return !this.currentAccount()
+        return !!this.currentAccount()
     }
 
 }

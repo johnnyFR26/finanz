@@ -17,14 +17,13 @@ import { CurrencyPipe } from "@angular/common";
         </button>
         <span>Finanz</span>
         <span class="example-spacer"></span>
-        <span class="current">Saldo: {{account()?.currentValue | currency: 'BRL'}}</span>
         <button (click)="copyToClipboard()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
         </button>
         <span class="name-user">{{ user()?.user?.name }}</span>
     </mat-toolbar>
     `,
-    imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatSidenavModule, CurrencyPipe],
+    imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatSidenavModule],
     styleUrls: ['./tool-bar.component.scss']
 })
 export class ToolBarComponent{
