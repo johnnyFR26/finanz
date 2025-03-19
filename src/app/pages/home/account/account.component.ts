@@ -14,7 +14,9 @@ import { UserService } from "../../../services/user.service";
         <br>
         <hr>
         <button mat-fab extended color="primary" (click)="openDialog()">
-        <mat-icon>payment</mat-icon>Depositar</button>
+        <mat-icon>payment</mat-icon>
+            Depositar
+        </button>
     `,
     styleUrl: './account.component.scss',
     imports: [CurrencyPipe, MatIconModule, MatButtonModule]

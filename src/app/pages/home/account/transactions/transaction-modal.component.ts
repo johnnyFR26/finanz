@@ -3,7 +3,6 @@ import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -16,6 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 @Component({
     selector: 'app-transaction-modal',
     template: `
+    <div>
     <h2 mat-dialog-title>Enviar de {{data.name}}</h2>
     <mat-dialog-content>
       <p>Nova tranferencia</p>
@@ -25,9 +25,10 @@ import {MatInputModule} from '@angular/material/input';
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button (click)="onNoClick()">Cancelar</button>
       <button mat-button [mat-dialog-close]="animal()" cdkFocusInitial>Ok</button>
     </mat-dialog-actions>
+    </div>
     `,
     styleUrls: ['./transaction-modal.component.scss'],
     imports: [    
