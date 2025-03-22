@@ -12,6 +12,8 @@ import {
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { AccountService } from '../../../../services/account.service';
+import { TransactionService } from '../../../../services/transaction.service';
 
 
 @Component({
@@ -21,29 +23,31 @@ import {MatSelectModule} from '@angular/material/select';
     <h2 mat-dialog-title>Enviar de {{data.name}}</h2>
     <mat-dialog-content>
       <p>Nova tranferencia</p>
+
       <mat-form-field>
-      <mat-label>Para</mat-label>
-      <input matInput [(ngModel)]="value" />
+      <mat-label>De</mat-label>
+      <input matInput [(ngModel)]="destination" name="destination" [ngModelOptions]="{standalone: true}" />
       </mat-form-field>
       <mat-form-field>
       <mat-label>Valor</mat-label>
-      <input matInput [(ngModel)]="value" />
+      <input matInput type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Transferir</mat-label>
-        <mat-select>
+        <mat-select matSelect name="type">
         <mat-option value="input">Entrada</mat-option>
         <mat-option value="output">Saida</mat-option>
       </mat-select>
         </mat-form-field>
         <mat-form-field>
         <mat-label>Descriçao</mat-label>
-        <textarea matInput [(ngModel)]="value"></textarea>
+        <textarea matInput [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
       </mat-form-field>
-    </mat-dialog-content>
+
+    </mat-dialog-content> 
     <mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-button [mat-dialog-close]="animal()" cdkFocusInitial>Ok</button>
+      <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>
     </mat-dialog-actions>
     </div>
     `,
@@ -56,30 +60,41 @@ import {MatSelectModule} from '@angular/material/select';
         MatDialogTitle,
         MatDialogContent,
         MatDialogActions,
-        MatDialogClose,
         MatSelectModule
       ]
 })
 export class TransactionModalComponent{
     readonly dialogRef = inject(MatDialogRef<TransactionModalComponent>);
     readonly data = inject<any>(MAT_DIALOG_DATA);
-    readonly animal = model(this.data.animal);
+    readonly id = model(this.data.id);
+    private accountService = inject(AccountService)
+    public account = this.accountService.getCurrentAccount()
 
-    protected value = signal('0');
+    protected value = signal<number>(0.00);
     protected description = signal('');
     protected destination = signal('');
-    protected type = signal('');
+    protected type = signal('input');
+    private transactionService = inject(TransactionService)
 
     protected formValue = computed(() => {
       return {
         value: this.value(),
         description: this.description(),
         destination: this.destination(),
-        type: this.type()
+        type: this.type(),
+        accountId: this.account()?.id
       }
     })
   
     onNoClick(): void {
       this.dialogRef.close();
+      console.table(this.formValue())
+    }
+    onSubmit(): any {
+      console.table(this.formValue())
+      this.transactionService.createTransaction(this.formValue())
+      this.dialogRef.close()
+
+
     }
 }

@@ -15,7 +15,7 @@ export class AccountService{
     private router = inject(Router)
     private currentUser = this.userService.getUserInfo()
     private urlApi = environment.urlApi
-    private currentAccount = signal<CreateAccountModel | null>(this.loadAccountFromLocalStorage())
+    private currentAccount = signal<AccountStorageModel | null>(this.loadAccountFromLocalStorage())
 
     constructor(){
         effect(()=> {

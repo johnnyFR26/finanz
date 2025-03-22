@@ -33,10 +33,11 @@ export class AccountComponent implements OnInit{
     readonly dialog = inject(MatDialog);
     public name = signal('Lucas');
     public animal = signal('Dog');
+    public id = this.account()?.id
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TransactionModalComponent, {
-      data: {name: this.user()?.user.name, animal: this.animal()},
+      data: {name: this.user()?.user.name, animal: this.animal(), id: this.id},
     });
 }
 
