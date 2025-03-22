@@ -27,7 +27,7 @@ import { CurrencyPipe } from "@angular/common";
 export class CreateAccountComponent {
 
     protected currentValue = signal<number>(0.00)
-    private fixedCurrency = signal<string>('BR')
+    private fixedCurrency = signal<string>('BRL')
     private accountService = inject(AccountService)
     protected account = this.accountService.getCurrentAccount()
 

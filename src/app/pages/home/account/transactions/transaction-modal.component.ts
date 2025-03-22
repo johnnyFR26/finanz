@@ -22,6 +22,7 @@ import {MatInputModule} from '@angular/material/input';
       <mat-form-field>
         <mat-label>Transferir</mat-label>
         <input matInput [(ngModel)]="value" />
+        <mat-icon matSuffix>attach_money</mat-icon>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
