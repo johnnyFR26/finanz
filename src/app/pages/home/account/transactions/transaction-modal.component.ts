@@ -11,6 +11,8 @@ import {
 } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @Component({
     selector: 'app-transaction-modal',
@@ -20,9 +22,23 @@ import {MatInputModule} from '@angular/material/input';
     <mat-dialog-content>
       <p>Nova tranferencia</p>
       <mat-form-field>
+      <mat-label>Para</mat-label>
+      <input matInput [(ngModel)]="value" />
+      </mat-form-field>
+      <mat-form-field>
+      <mat-label>Valor</mat-label>
+      <input matInput [(ngModel)]="value" />
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Transferir</mat-label>
-        <input matInput [(ngModel)]="value" />
-        <mat-icon matSuffix>attach_money</mat-icon>
+        <mat-select>
+        <mat-option value="input">Entrada</mat-option>
+        <mat-option value="output">Saida</mat-option>
+      </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+        <mat-label>Descriçao</mat-label>
+        <textarea matInput [(ngModel)]="value"></textarea>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
@@ -41,6 +57,7 @@ import {MatInputModule} from '@angular/material/input';
         MatDialogContent,
         MatDialogActions,
         MatDialogClose,
+        MatSelectModule
       ]
 })
 export class TransactionModalComponent{

@@ -1,3 +1,7 @@
-div{
+div, mat-form-field{
     background-color: #cbe957;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
