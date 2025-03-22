@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {
@@ -64,8 +64,20 @@ export class TransactionModalComponent{
     readonly dialogRef = inject(MatDialogRef<TransactionModalComponent>);
     readonly data = inject<any>(MAT_DIALOG_DATA);
     readonly animal = model(this.data.animal);
-    value = 0;
-    protected valueSignal = signal('0');
+
+    protected value = signal('0');
+    protected description = signal('');
+    protected destination = signal('');
+    protected type = signal('');
+
+    protected formValue = computed(() => {
+      return {
+        value: this.value(),
+        description: this.description(),
+        destination: this.destination(),
+        type: this.type()
+      }
+    })
   
     onNoClick(): void {
       this.dialogRef.close();
