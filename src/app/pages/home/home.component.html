@@ -1,12 +1,13 @@
 <mat-sidenav-container class="container">
   
     <!-- Menu Lateral -->
-    <mat-sidenav class="sidemenu" #sidenav mode="side" opened="false">
+    <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
       <mat-nav-list>
         <div class="menu">
           <a mat-list-item (click)="redirectToPath('/home')">Home</a>
           <a mat-list-item (click)="redirectToPath('/home/dev')">Desenvolvedores</a>
-          <a mat-list-item (click)="redirectToPath('/home/account')">Configurações</a>
+          <a mat-list-item (click)="redirectToPath('/home/account')">Conta</a>
+          <a mat-list-item (click)="redirectToPath('/home/transactions')">Extrato</a>
           <a mat-list-item (click)="redirectToPath('/login')">Logout</a>
         </div>
 

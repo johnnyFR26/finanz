@@ -73,7 +73,7 @@ export class TransactionModalComponent{
     protected value = signal<number>(0.00);
     protected description = signal('');
     protected destination = signal('');
-    protected type = signal('input');
+    protected type = signal('output');
     private transactionService = inject(TransactionService)
 
     protected formValue = computed(() => {

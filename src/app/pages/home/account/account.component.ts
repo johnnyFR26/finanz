@@ -13,9 +13,13 @@ import { UserService } from "../../../services/user.service";
         <h1>Conta: {{account()?.currentValue | currency: 'BRL'}}</h1>
         <br>
         <hr>
-        <button mat-fab extended color="primary" (click)="openDialog()">
+        <button class="deposit" mat-fab extended color="primary" (click)="openDialog()">
         <mat-icon>payment</mat-icon>
             Depositar
+        </button>
+        <button class="transfer" mat-fab extended color="alert" (click)="openDialog()">
+        <mat-icon>transfer_within_a_station</mat-icon>
+            Transferir
         </button>
     `,
     styleUrl: './account.component.scss',
