@@ -62,12 +62,23 @@ label{
 }
 .button{
     color: black;
-    background-color: #cbe957;
+    background-color: #c6e93a;
     border: 0;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
+    box-shadow: 0 0 5px #cbe957;
+}
+.button:disabled{
+    color: rgb(54, 54, 54);
+    background-color: #b1b98f;
+    border: 0;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 7px 20px;
+    margin: 10px 0;
+    box-shadow: 0 0 0 black;
 }
 .link{
     font-size: 12px;

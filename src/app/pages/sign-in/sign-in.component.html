@@ -25,7 +25,7 @@
     <label for="password">CONFIRMAR SENHA</label>
     <input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" required />
 
-    <button type="submit" class="button">ENTRAR</button>
+    <button type="submit" [disabled]="!isFormValid()" class="button">ENTRAR</button>
 
     <div class="gay"></div>
 
