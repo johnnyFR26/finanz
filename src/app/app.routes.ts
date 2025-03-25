@@ -21,6 +21,11 @@ export const routes: Routes = [
                 path: 'account',
                 loadComponent: () => import('./pages/home/account/account.component').then(m => m.AccountComponent),
                 canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'transactions',
+                loadComponent: () => import('./pages/home/transactions-list/transactions-list.component').then(m => m.TransactionsListComponent),
+                canActivate: [doesUserHaveAccount],
             }
         ]
     },

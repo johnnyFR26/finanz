@@ -25,7 +25,19 @@ export class TransactionService{
                 })
             },
             error: (error: any) => {
-                console.log('Error:', error)
+                console.error('Error:', error)
+            }
+        })
+    }
+
+    getAccountTransactions(accountId: string){
+        return this.http.get(`${this.urlApi}/transactions/${accountId}`)
+        .subscribe({
+            next: (response: any) => {
+                console.log('Response:', response)
+            },
+            error: (error: any) => {
+                console.error('Error:', error)
             }
         })
     }
