@@ -34,7 +34,7 @@ import { TransactionService } from '../../../../services/transaction.service';
       </mat-form-field>
       <mat-form-field>
         <mat-label>Transferir</mat-label>
-        <mat-select matSelect name="type">
+        <mat-select matSelect [(ngModel)]="type" name="type">
         <mat-option value="input">Entrada</mat-option>
         <mat-option value="output">Saida</mat-option>
       </mat-select>

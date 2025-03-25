@@ -46,14 +46,14 @@ export class AccountService{
 
     syncAccountWithLocalStorage(){
         if(this.currentAccount()){
-            sessionStorage.setItem('AccountData', JSON.stringify(this.currentAccount()))
+            localStorage.setItem('AccountData', JSON.stringify(this.currentAccount()))
         }else{
-            sessionStorage.removeItem('AccountData')
+            localStorage.removeItem('AccountData')
         }
     }
 
     loadAccountFromLocalStorage(): AccountStorageModel | null {
-        const storedAccount = sessionStorage.getItem('AccountData')
+        const storedAccount = localStorage.getItem('AccountData')
         return storedAccount ? JSON.parse(storedAccount) : null
     }
 
