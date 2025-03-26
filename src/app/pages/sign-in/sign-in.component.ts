@@ -32,12 +32,12 @@ export class SignInComponent {
   });
 
   public isFormValid = computed(() => {
-    return this.email().length > 0 && this.password().length > 0 && this.name().length > 0 && this.confirmPassword().length > 0 && this.phone().length > 0 && this.cpf().length > 0 && this.password() === this.confirmPassword() && EMAIL_REGEXP.test(this.email());
-  });
+    return this.email().length > 0 && this.password().length > 0 && this.name().length > 0 && this.confirmPassword().length > 0 && this.phone().length > 0 && this.cpf().length > 0 && this.password() === this.confirmPassword() && EMAIL_REGEXP.test(this.email())
+  })
 
   public isPasswordValid = computed(() => {
     return this.password().length > 0 && this.password() === this.confirmPassword();
-  });
+  })
 
   onSubmit(){
     console.log('Form Value:', this.formValue())
@@ -52,5 +52,4 @@ export class SignInComponent {
     this.cpf.set('')
     
   }
-
 }
