@@ -5,10 +5,6 @@ import { Router } from '@angular/router';
 import { EMAIL_REGEXP } from '../../utils/email-validator';
 import {
   MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
 } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AccountService } from '../../services/account.service';
@@ -27,8 +23,6 @@ export class LogInComponent {
 
   public email = signal<string>('')
   public password = signal<string>('')
-
-  private snackbarMessage: string = ''
 
   public formValue = computed(() => {
     return {
@@ -97,7 +91,4 @@ export class LogInComponent {
       data: {message},
     });
   }
-
-
-
 }
