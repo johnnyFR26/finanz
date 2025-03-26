@@ -28,8 +28,6 @@ export class LogInComponent {
   public email = signal<string>('')
   public password = signal<string>('')
 
-  private snackbarMessage: string = ''
-
   public formValue = computed(() => {
     return {
       email: this.email(),
