@@ -1,7 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core'
-import { FormsModule } from '@angular/forms'
-import { UserService } from '../../services/user.service'
-import { EMAIL_REGEXP } from '../../utils/email-validator'
+import { Component, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { EMAIL_REGEXP } from '../../utils/email-validator';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,8 +32,8 @@ export class SignInComponent {
   });
 
   public isFormValid = computed(() => {
-    return this.email().length > 0 && this.password().length > 0 && this.name().length > 0 && this.confirmPassword().length > 0 && this.phone().length > 0 && this.cpf().length > 0 && this.password() === this.confirmPassword() && EMAIL_REGEXP.test(this.email())
-  })
+    return this.email().length > 0 && this.password().length > 0 && this.name().length > 0 && this.confirmPassword().length > 0 && this.phone().length > 0 && this.cpf().length > 0 && this.password() === this.confirmPassword() && EMAIL_REGEXP.test(this.email());
+  });
 
   public isPasswordValid = computed(() => {
     return this.password().length > 0 && this.password() === this.confirmPassword();
