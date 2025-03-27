@@ -8,6 +8,14 @@ import {MatTableModule} from '@angular/material/table';
     selector: 'app-transactions-list',
     template: `
         <h1>Transações</h1>
+        @for(let transaction of transactions(); track $index){
+            <div>
+                <p>{{transaction.id}}</p>
+                <p>{{transaction.value | currency: 'BRL'}}</p>
+                <p>{{transaction.type}}</p>
+                <p>{{transaction.createdAt}}</p>
+            </div>
+        }
 
       <table mat-table>
 
