@@ -37,7 +37,7 @@ export class SignInComponent {
 
   public isPasswordValid = computed(() => {
     return this.password().length > 0 && this.password() === this.confirmPassword();
-  });
+  })
 
   onSubmit(){
     console.log('Form Value:', this.formValue())
@@ -52,5 +52,4 @@ export class SignInComponent {
     this.cpf.set('')
     
   }
-
 }

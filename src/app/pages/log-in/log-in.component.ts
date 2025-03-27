@@ -1,17 +1,13 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
-import { EMAIL_REGEXP } from '../../utils/email-validator';
+import { Component, computed, inject, signal } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { UserService } from '../../services/user.service'
+import { Router } from '@angular/router'
+import { EMAIL_REGEXP } from '../../utils/email-validator'
 import {
   MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
-} from '@angular/material/snack-bar';
+} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../services/account.service'
 
 @Component({
   selector: 'app-log-in',
@@ -27,8 +23,6 @@ export class LogInComponent {
 
   public email = signal<string>('')
   public password = signal<string>('')
-
-  private snackbarMessage: string = ''
 
   public formValue = computed(() => {
     return {
@@ -97,7 +91,4 @@ export class LogInComponent {
       data: {message},
     });
   }
-
-
-
 }
