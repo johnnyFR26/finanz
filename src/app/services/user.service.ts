@@ -14,7 +14,7 @@ import { SnackbarComponent } from "../components/snackbar/snackbar.component";
 export class UserService {
     private http = inject(HttpClient)
     private router = inject(Router)
-    private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage()) // Inicializa com os dados do localStorage
+    private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage())
     private urlApi = environment.urlApi
 
     constructor(){

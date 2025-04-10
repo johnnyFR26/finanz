@@ -31,20 +31,10 @@ export class TransactionService{
             }
         })
     }
-
-    getAccountTransactions(accountId: string){
-        return this.http.get(`${this.urlApi}/transactions/${accountId}`)
-        .subscribe({
-            next: (response: any) => {
-                console.table(response)
-                this.setTransactions(response)
-            },
-            error: (error: any) => {
-                console.error('Error:', error)
-            }
-        })
-    }
-
+    getAccountTransactions(accountId: string) {
+        return this.http.get(`${this.urlApi}/transactions/${accountId}`);
+      }
+      
     setTransactions(transactions: TransactionModel[]){
         this.transactions.set(transactions)
     }

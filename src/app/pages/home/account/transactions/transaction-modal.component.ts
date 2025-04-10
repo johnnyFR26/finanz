@@ -82,7 +82,8 @@ export class TransactionModalComponent{
         description: this.description(),
         destination: this.destination(),
         type: this.type(),
-        accountId: this.account()?.id
+        accountId: this.account()?.id,
+        categoryId: "508fbc0a-a7a6-4b51-be8b-0b301aeaf0e1"
       }
     })
   
