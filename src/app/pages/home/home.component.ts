@@ -4,6 +4,8 @@ import { ToolBarComponent } from '../../components/toolbar/tool-bar.component';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { UserService } from '../../services/user.service'
+import { AccountService } from '../../services/account.service'
+
 import { RouterOutlet } from '@angular/router'
 
 @Component({
@@ -15,6 +17,7 @@ import { RouterOutlet } from '@angular/router'
 export class HomeComponent {
 
   userService = inject(UserService)
+  private accountService = inject(AccountService)
 
   user = this.userService.getUserInfo()
   router = inject(Router)
@@ -22,6 +25,7 @@ export class HomeComponent {
   public redirectToPath(route: string){
     if(route == '/login'){
       this.userService.setCurrentUser(null)
+      this.accountService.setCurrentAccount(null)
     }
     this.router.navigate([route])
   }
