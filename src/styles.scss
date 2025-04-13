@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-color: #252525;
+    background-color: var(--grey-blackground);
 }
 .form {
-    background-color: #444444;
+    background-color: var(--gray-form);
     width: 230px;
 }
 .centro{
@@ -15,6 +15,9 @@ body {
 
 }
 *{
+    --principal-color: #cbe957;
+    --grey-blackground: #252525;
+    --gray-form: #444444;
     color:white;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -27,18 +30,18 @@ body {
     gap: 5px; 
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 0 5px #cbe957,
-    0 10px 0 5px #cbe957,
-    0 -2px 0 5px #cbe957,
-    0 10px 35px 0 #cbe95788,
-    0 0 35px 0 #cbe95788;
+    box-shadow: 0 0 0 5px var(--principal-color),
+    0 10px 0 5px var(--principal-color),
+    0 -2px 0 5px var(--principal-color),
+    0 10px 35px 0 rgb(from var(--principal-color) r g b / 0.22),
+    0 0 35px 0 rgb(from var(--principal-color) r g b / 0.22);
     justify-self: center;
 }
 .gay{
     position: relative;
     width: 70%;
     height: 5px;
-    background-image: radial-gradient(#cbe957 0,#00000000 70%);
+    background-image: radial-gradient(var(--principal-color), #00000000 70%);
 }
 h1{
     margin-bottom: 0;
@@ -58,17 +61,23 @@ label{
     width: calc(100% - 12px);
 }
 .input::placeholder{
-    color: #444444;
+    color: var(--gray-form);
 }
 .button{
     color: black;
-    background-color: #c6e93a;
+    background-color: var(--principal-color);
     border: 0;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
-    box-shadow: 0 0 5px #cbe957;
+    box-shadow: 0 0 5px var(--principal-color);
+    transition: 0.3s;
+}
+.button:hover:not(:disabled){
+    scale: 1.2;
+    transition: 0.4s;
+    cursor:pointer;
 }
 .button:disabled{
     color: rgb(54, 54, 54);
@@ -78,13 +87,13 @@ label{
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
-    box-shadow: 0 0 0 black;
+    box-shadow: 0 0 0 #000;
 }
 .link{
     font-size: 12px;
 }
 .link a{
-    color:#cbe957;
+    color: var(--principal-color);
     text-decoration: none;
 }
 .link a:hover{

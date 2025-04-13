@@ -19,7 +19,7 @@ import { TransactionService } from '../../../../services/transaction.service';
 @Component({
     selector: 'app-transaction-modal',
     template: `
-    <div>
+    <div class="form">
     <h2 mat-dialog-title>Enviar de {{data.name}}</h2>
     <mat-dialog-content>
       <p>Nova tranferencia</p>
