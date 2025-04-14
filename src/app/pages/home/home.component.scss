@@ -16,13 +16,20 @@ footer {
     position: fixed;
     top:56px;
 }
+
 .center {
     position: fixed;
 }
+
 .container {
     background-color: #00000000;
 }
 
+*{
+    --mdc-list-list-item-label-text-color: white;
+    --mat-sys-on-surface: #cbe957;
+    --mat-sys-corner-full: 0;
+}
 
 matsidenav{
     background-color: #666565;
