@@ -20,7 +20,7 @@ import { TransactionService } from '../../../../services/transaction.service';
     selector: 'app-transaction-modal',
     template: `
     <div class="form">
-    <h2 mat-dialog-title>{{data.name}}</h2>
+    <h2 mat-dialog-title>{{formattedName}}</h2>
     <mat-dialog-content>
       <p>{{ this.data.title }}</p>
 
@@ -75,6 +75,11 @@ export class TransactionModalComponent{
     protected destination = signal('');
     protected type = signal('output');
     private transactionService = inject(TransactionService)
+
+    get formattedName(): string {
+      return this.data.name?.split(' ').slice(0, 2).join(' ') ?? '';
+    }
+    
 
     protected formValue = computed(() => {
       return {
