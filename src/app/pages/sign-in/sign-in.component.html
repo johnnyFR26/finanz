@@ -2,33 +2,33 @@
 <img src="FINANZ.png" class="logo"/>
 <form class="form" name="form" (ngSubmit)="onSubmit()">
   <h1>CADASTRO</h1>
-  <div class="gay"></div>
-    <label for="email">EMAIL</label>
-    <input class="input" type="email" id="email" name="email" [(ngModel)]="email" required email placeholder="emailexemplo@gmail.com"/>
-    
-    <label for="email">NOME</label>
-    <input class="input" type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Exemplo da Silva"/>
+  <div class="light"></div>
+  <label for="email">EMAIL</label>
+  <input class="input" type="email" id="email" name="email" [(ngModel)]="email" required email placeholder="emailexemplo@gmail.com"/>
+  
+  <label for="email">NOME</label>
+  <input class="input" type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Exemplo da Silva"/>
 
-    <div class="divisao">
-      <div>
-        <label for="phone">TELEFONE</label>
-        <input class="input" type="text" id="phone" name="phone" [(ngModel)]="phone" required placeholder="(13)99999-9999"/>
-      </div>
-      <div>
-      <label for="cpf">CPF</label>
-        <input class="input" type="text" id="cpf" name="cpf" [(ngModel)]="cpf" required placeholder="000.000.000-00"/>
-      </div>
+  <div class="divisao">
+    <div>
+      <label for="phone">TELEFONE</label>
+      <input class="input" type="text" id="phone" name="phone" [(ngModel)]="phone" required placeholder="(13)99999-9999"/>
     </div>
-    <label for="password">SENHA</label>
-    <input class="input" type="password" name="password" id="password" [(ngModel)]="password" required placeholder="senhaexemplo123"/>
+    <div>
+    <label for="cpf">CPF</label>
+      <input class="input" type="text" id="cpf" name="cpf" [(ngModel)]="cpf" required placeholder="000.000.000-00"/>
+    </div>
+  </div>
+  <label for="password">SENHA</label>
+  <input class="input" type="password" name="password" id="password" [(ngModel)]="password" required placeholder="senhaexemplo123"/>
 
-    <label for="password">CONFIRMAR SENHA</label>
-    <input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" required />
+  <label for="password">CONFIRMAR SENHA</label>
+  <input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" required />
 
-    <button type="submit" [disabled]="!isFormValid()" class="button">ENTRAR</button>
+  <button type="submit" [disabled]="!isFormValid()" class="button">ENTRAR</button>
 
-    <div class="gay"></div>
+  <div class="light"></div>
 
-    <p class="link">Já tem uma conta? faça login <a href="login">AQUI</a></p>
-  </form>
+  <p class="link">Já tem uma conta? faça login <a href="login">AQUI</a></p>
+</form>
 </div>
