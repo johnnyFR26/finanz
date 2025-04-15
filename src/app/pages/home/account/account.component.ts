@@ -6,6 +6,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
+import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
 
 @Component({
     selector: 'app-account',
@@ -20,6 +21,10 @@ import { UserService } from "../../../services/user.service";
         <button class="transfer" mat-fab extended color="alert" (click)="openDialog('Transferir')">
         <mat-icon>transfer_within_a_station</mat-icon>
             Transferir
+        </button>
+        <button class="add" mat-fab extended color="info" (click)="openCategoriesDialog()">
+        <mat-icon>playlist_add</mat-icon>
+            Categoria
         </button>
     `,
     styleUrl: './account.component.scss',
@@ -36,6 +41,14 @@ export class AccountComponent implements OnInit{
     protected account = this.accountService.getCurrentAccount()
     readonly dialog = inject(MatDialog);
     public id = this.account()?.id
+
+    openCategoriesDialog(): void {
+        const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
+          data: {
+            id: this.id,
+        },
+        });
+    }
 
   openDialog(title: String): void {
     const dialogRef = this.dialog.open(TransactionModalComponent, {
