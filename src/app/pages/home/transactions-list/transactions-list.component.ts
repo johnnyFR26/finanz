@@ -5,7 +5,6 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
-import { TransactionModel } from '../../../models/transaction.model';
 
 @Component({
   selector: 'app-transactions-list',
@@ -17,9 +16,9 @@ import { TransactionModel } from '../../../models/transaction.model';
     <table mat-table [dataSource]="transactions()" class="mat-elevation-z8" style="width: 100%;">
 
       <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let transaction"> {{transaction.id}} </td>
+      <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef> Destino </th>
+        <td mat-cell *matCellDef="let transaction"> {{transaction.destination}} </td>
       </ng-container>
 
       <!-- Value Column -->
@@ -52,7 +51,7 @@ export class TransactionsListComponent implements OnInit {
 
   protected account = this.accountService.getCurrentAccount();
   protected transactions = signal<any>([]);
-  protected displayedColumns: string[] = ['id', 'value', 'type', 'createdAt'];
+  protected displayedColumns: string[] = ['destination', 'value', 'type', 'createdAt'];
 
   ngOnInit(): void {
     this.transactionService.getAccountTransactions(this.account()!.id).subscribe((data) => {
