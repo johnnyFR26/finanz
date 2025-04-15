@@ -19,32 +19,29 @@ import { TransactionService } from '../../../../services/transaction.service';
 @Component({
     selector: 'app-transaction-modal',
     template: `
-    <div class="form">
-    <h2 mat-dialog-title>{{formattedName}}</h2>
-    <mat-dialog-content>
+    <div class="content">
+    <h2>{{formattedName}}</h2>
       <p>{{ this.data.title }}</p>
 
-      <mat-form-field>
-      <mat-label>De</mat-label>
-      <input matInput [(ngModel)]="destination" name="destination" [ngModelOptions]="{standalone: true}" />
-      </mat-form-field>
-      <mat-form-field>
-      <mat-label>Valor</mat-label>
-      <input matInput type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Transferir</mat-label>
-        <mat-select matSelect [(ngModel)]="type" name="type">
-        <mat-option value="input">Entrada</mat-option>
-        <mat-option value="output">Saida</mat-option>
-      </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-        <mat-label>Descriçao</mat-label>
-        <textarea matInput [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
-      </mat-form-field>
 
-    </mat-dialog-content> 
+      <label>De</label>
+      <input class="input" [(ngModel)]="destination" name="destination" [ngModelOptions]="{standalone: true}" />
+
+      <label>Valor</label>
+      <input class="input" type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
+      
+      
+        <label>Transferir</label>
+        <select class="input" [(ngModel)]="type" name="type">
+          <option value="input">Entrada</option>
+          <option value="output">Saida</option>
+        </select>
+        
+        
+        <label>Descriçao</label>
+        <textarea class="input" [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
+      
+
     <mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancelar</button>
       <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>

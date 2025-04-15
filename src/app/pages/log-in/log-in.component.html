@@ -3,14 +3,14 @@
   <img src="FINANZ.png" class="logo"/>
   <form name="form" (ngSubmit)="onSubmit()" class="form">
       <h1>LOG IN</h1>
-      <div class="gay"></div>
+      <div class="light"></div>
       <label for="email">EMAIL</label>
       <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com"/>
       <label for="password">SENHA</label>
       <input type="password" name="password" id="password" [(ngModel)]="password" required class="input" placeholder="senhaexemplo123"/>
       <a href="https://animaldle-etec.vercel.app" class="esqueci">esqueci minha senha</a>
       <button [disabled]="!isFormValid()" type="submit" class="button">Entrar</button>
-      <div class="gay"></div>
+      <div class="light"></div>
       <p class="link">não tem uma conta? cadastre-se <a href="signin">AQUI</a></p>
     </form>
 </div>
