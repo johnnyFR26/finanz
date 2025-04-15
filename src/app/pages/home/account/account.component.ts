@@ -13,11 +13,11 @@ import { UserService } from "../../../services/user.service";
         <h1>Conta: {{account()?.currentValue | currency: 'BRL'}}</h1>
         <br>
         <hr>
-        <button class="deposit" mat-fab extended color="primary" (click)="openDialog()">
+        <button class="deposit" mat-fab extended color="primary" (click)="openDialog('Depositar')">
         <mat-icon>payment</mat-icon>
             Depositar
         </button>
-        <button class="transfer" mat-fab extended color="alert" (click)="openDialog()">
+        <button class="transfer" mat-fab extended color="alert" (click)="openDialog('Transferir')">
         <mat-icon>transfer_within_a_station</mat-icon>
             Transferir
         </button>
@@ -35,13 +35,15 @@ export class AccountComponent implements OnInit{
     protected user = this.userService.getUserInfo()
     protected account = this.accountService.getCurrentAccount()
     readonly dialog = inject(MatDialog);
-    public name = signal('Lucas');
-    public animal = signal('Dog');
     public id = this.account()?.id
 
-  openDialog(): void {
+  openDialog(title: String): void {
     const dialogRef = this.dialog.open(TransactionModalComponent, {
-      data: {name: this.user()?.user.name, animal: this.animal(), id: this.id},
+      data: {
+        name: this.user()?.user.name,
+        id: this.id,
+        title: title,
+    },
     });
 }
 

@@ -20,9 +20,9 @@ import { TransactionService } from '../../../../services/transaction.service';
     selector: 'app-transaction-modal',
     template: `
     <div class="form">
-    <h2 mat-dialog-title>Enviar de {{data.name}}</h2>
+    <h2 mat-dialog-title>{{data.name}}</h2>
     <mat-dialog-content>
-      <p>Nova tranferencia</p>
+      <p>{{ this.data.title }}</p>
 
       <mat-form-field>
       <mat-label>De</mat-label>
