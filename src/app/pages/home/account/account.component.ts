@@ -14,11 +14,11 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
         <h1>Conta: {{account()?.currentValue | currency: 'BRL'}}</h1>
         <br>
         <hr>
-        <button class="deposit" mat-fab extended color="primary" (click)="openDialog('Depositar')">
+        <button class="deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
         <mat-icon>payment</mat-icon>
             Depositar
         </button>
-        <button class="transfer" mat-fab extended color="alert" (click)="openDialog('Transferir')">
+        <button class="transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
         <mat-icon>transfer_within_a_station</mat-icon>
             Transferir
         </button>
@@ -50,12 +50,13 @@ export class AccountComponent implements OnInit{
         });
     }
 
-  openDialog(title: String): void {
+  openDialog(title: String, type: String): void {
     const dialogRef = this.dialog.open(TransactionModalComponent, {
       data: {
         name: this.user()?.user.name,
         id: this.id,
         title: title,
+        type
     },
     });
 }

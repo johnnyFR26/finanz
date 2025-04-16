@@ -30,9 +30,10 @@ import { CategoryService } from '../../../../services/category.service';
       
       
         <label>Transferir</label>
-        <select class="input" [(ngModel)]="type" name="type">
-          <option value="input">Entrada</option>
-          <option value="output">Saida</option>
+        <select class="input" [(ngModel)]="categoryId" name="type">
+          @for (category of categories(); track $index) {
+            <option value="{{category.id}}">{{category.name}}</option>
+          }
         </select>
         
         
@@ -69,7 +70,8 @@ export class TransactionModalComponent{
     protected value = signal<number>(0.00);
     protected description = signal('');
     protected destination = signal('');
-    protected type = signal('output');
+    protected type = signal(this.data.type);
+    protected categoryId = signal<string | null>(null)
     private transactionService = inject(TransactionService)
 
     get formattedName(): string {
@@ -84,7 +86,7 @@ export class TransactionModalComponent{
         destination: this.destination(),
         type: this.type(),
         accountId: this.account()?.id,
-        categoryId: "7b199e69-0862-4854-9678-a587d59560f6"
+        categoryId: this.categoryId(),
       }
     })
   
