@@ -15,7 +15,7 @@ import { CurrencyPipe } from "@angular/common";
           <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
         </button>
-        <span>Finanz</span>
+        <img src="W-FINANZ.png" class="Logo"/>
         <span class="example-spacer"></span>
         <button (click)="copyToClipboard()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
