@@ -11,6 +11,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { AccountService } from '../../../../services/account.service';
 import { TransactionService } from '../../../../services/transaction.service';
 import { FormsModule } from '@angular/forms';
+import { CategoryService } from '../../../../services/category.service';
 
 
 @Component({
@@ -61,6 +62,9 @@ export class TransactionModalComponent{
     readonly id = model(this.data.id);
     private accountService = inject(AccountService)
     public account = this.accountService.getCurrentAccount()
+
+    private categoryService = inject(CategoryService)
+    protected categories = this.categoryService.getCurrentCategories()
 
     protected value = signal<number>(0.00);
     protected description = signal('');

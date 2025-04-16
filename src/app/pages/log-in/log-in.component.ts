@@ -8,6 +8,7 @@ import {
 } from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AccountService } from '../../services/account.service'
+import { CategoryService } from '../../services/category.service'
 
 @Component({
   selector: 'app-log-in',
@@ -19,6 +20,7 @@ export class LogInComponent {
 
   private userService = inject(UserService)
   private accountService = inject(AccountService)
+  private categoryService = inject(CategoryService)
   private router = inject(Router)
 
   public email = signal<string>('')
@@ -57,6 +59,8 @@ export class LogInComponent {
               email: response.user.email
             }
           })
+
+          this.categoryService.setCategories(response.user.account.categories)
     
           this.router.navigateByUrl('/home')
           

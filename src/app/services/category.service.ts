@@ -10,12 +10,16 @@ import { CategoryModel } from "../models/category.model";
 export class CategoryService{
     private urlApi = environment.urlApi;
     private http = inject(HttpClient);
-    private accountService = inject(AccountService)
     private categories = signal<CategoryModel[]>([])
 
-    getCategories(){
-        this.http.get(`${this.urlApi}/category`)
+    setCategories(categories: CategoryModel[]){
+        this.categories.set(categories)
     }
+
+    getCurrentCategories(){
+        return this.categories.asReadonly()
+    }
+
 
     createCategory(category: CategoryModel){
         return this.http.post(`${this.urlApi}/category`, category)
