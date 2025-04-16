@@ -13,7 +13,8 @@ export class CategoryService{
     private categories = signal<CategoryModel[]>([])
 
     setCategories(categories: CategoryModel[]){
-        this.categories.set(categories)
+        this.categories.set(this.categories().concat(categories))
+        console.table(this.categories())
     }
 
     getCurrentCategories(){
@@ -26,6 +27,7 @@ export class CategoryService{
         .subscribe({
             next: (response: any) => {
                 console.log('Response:', response)
+                this.setCategories([response])
             },
             error: (error: any) => {
                 console.error('Error:', error)
