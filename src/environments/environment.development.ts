@@ -1,3 +1,3 @@
 export const environment = {
-    urlApi: 'http://localhost:3000'
+    urlApi: 'https://api-thinktech.vercel.app'
 }
