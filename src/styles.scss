@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-image: linear-gradient( var(--grey-blackground) 10%, color-mix(in srgb, var(--principal-color), var(--grey-blackground) 80%)  50%, var(--grey-blackground) 90%);
+    background-color:var(--grey-blackground); 
 }
 .centro{
     flex-direction: column; 
@@ -11,6 +11,8 @@ body {
 
 }
 *{
+    --gradient2:linear-gradient(var(--principal-color), var(--grey-blackground));
+    --gradient: linear-gradient( var(--grey-blackground) 10%, color-mix(in srgb, var(--principal-color), var(--grey-blackground) 80%)  50%, var(--grey-blackground) 90%);
     --principal-color: #cbe957;
     --grey-blackground: #070707;
     --gray-form: #202020;
