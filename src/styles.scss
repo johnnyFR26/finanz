@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-color: var(--grey-blackground);
+    background-image: linear-gradient( var(--grey-blackground) 10%, color-mix(in srgb, var(--principal-color), var(--grey-blackground) 80%)  50%, var(--grey-blackground) 90%);
 }
 .centro{
     flex-direction: column; 
@@ -12,8 +12,10 @@ body {
 }
 *{
     --principal-color: #cbe957;
-    --grey-blackground: #252525;
-    --gray-form: #444444;
+    --grey-blackground: #070707;
+    --gray-form: #202020;
+    --placeholder: #474646;
+    --input-area: #303030;
     color:white;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -25,8 +27,8 @@ body {
     box-shadow: 0 0 0 5px var(--principal-color),
     0 10px 0 5px var(--principal-color),
     0 -2px 0 5px var(--principal-color),
-    0 10px 35px 0 rgb(from var(--principal-color) r g b / 0.22),
-    0 0 35px 0 rgb(from var(--principal-color) r g b / 0.22) !important;
+    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22),
+    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22) !important;
     justify-self: center !important;
 }
 .form, .content{
@@ -53,7 +55,7 @@ label{
     font-size: 15px;
 }
 .input {
-    background-color: #5d5d5d;
+    background-color: var(--input-area);
     border-width: 0;
     border-radius: 4px;
     padding: 6px;
@@ -61,7 +63,7 @@ label{
     width: calc(100% - 12px);
 }
 .input::placeholder{
-    color: var(--gray-form);
+    color: var(--placeholder);
 }
 .button{
     color: black;
@@ -91,6 +93,10 @@ label{
 }
 .link{
     font-size: 12px;
+    border-radius: 10px;
+    border:0;
+    background-color: var(--input-area);
+    padding:10px 3px;
 }
 .link a{
     color: var(--principal-color);
