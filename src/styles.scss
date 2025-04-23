@@ -24,7 +24,7 @@ body {
 }
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form) !important;
-    width: 230px !important;
+    width: 300px !important;
     border-radius: 5px !important;
     box-shadow: 0 0 0 5px var(--principal-color),
     0 10px 0 5px var(--principal-color),
@@ -34,6 +34,7 @@ body {
     justify-self: center !important;
 }
 .form, .content{
+    font-size: 20px;
     display: flex !important;
     flex-direction: column !important; 
     justify-content: center!important; 
@@ -53,11 +54,13 @@ h1{
 label{
     align-self: flex-start;
     position: relative;
+    margin-top: 20px;
     top: 5px;
-    font-size: 15px;
+    font-size: 22px;
 }
 .input {
     background-color: var(--input-area);
+    font-size: 16px;
     border-width: 0;
     border-radius: 4px;
     padding: 6px;
@@ -84,9 +87,9 @@ label{
     cursor:pointer;
 }
 .button:disabled{
-    color: rgb(54, 54, 54);
-    background-color: #b1b98f;
-    border: 0;
+    color: rgb(97, 97, 97);
+    background-color: rgba(0,0,0,0);
+    border: 2px solid;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
@@ -94,14 +97,18 @@ label{
     box-shadow: 0 0 0 #000;
 }
 .link{
+    width: 100%;
+    text-align: center;
+    font-weight:bolder;
     font-size: 12px;
-    border-radius: 10px;
+    border-radius: 4px;
     border:0;
     background-color: var(--input-area);
     padding:10px 3px;
 }
 .link a{
     color: var(--principal-color);
+    font-weight: bolder;
     text-decoration: none;
 }
 .link a:hover{

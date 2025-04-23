@@ -3,7 +3,6 @@
 }
 
 mat-toolbar {
-    display: flex;
     width: 100%;
     position: fixed;
     top: 0;
@@ -19,11 +18,11 @@ mat-toolbar {
     font-size: 20px;
     font-weight: bold;
     padding-right: 16px; 
-    margin-left: auto;
     scale: 1.3;
 }
 
 .Logo{
-    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
     height: 40px;
 }
