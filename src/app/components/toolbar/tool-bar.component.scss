@@ -8,7 +8,7 @@ mat-toolbar {
     top: 0;
     left: 0;
     z-index: 1000; /* Para garantir que fique acima de outros elementos */
-    background-color: #b4cf48;
+    background-color: var(--principal-color);
 
     .current{
         margin-left: 5px;
@@ -17,10 +17,12 @@ mat-toolbar {
 .name-user {
     font-size: 20px;
     font-weight: bold;
-    margin-left: auto; 
     padding-right: 16px; 
+    scale: 1.3;
 }
 
 .Logo{
+    margin-left: auto;
+    margin-right: auto;
     height: 40px;
 }
