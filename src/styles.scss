@@ -8,7 +8,6 @@ body {
     justify-content: center; 
     align-items: center;
     height: calc(100vh - 16px);
-
 }
 *{
     --gradient2:linear-gradient(var(--principal-color), var(--grey-blackground));
@@ -39,9 +38,19 @@ body {
     flex-direction: column !important; 
     justify-content: center!important; 
     align-items: center !important; 
-    gap: 5px !important; 
     padding: 10px !important;
 }
+@media (orientation: landscape) {
+    .form, .content{
+        font-size: 15px;
+    }
+    label{
+        font-size: 16.5px;
+    }
+    .input{
+        font-size: 12px;
+    }
+  }
 .light{
     position: relative;
     width: 70%;
@@ -54,8 +63,7 @@ h1{
 label{
     align-self: flex-start;
     position: relative;
-    margin-top: 20px;
-    top: 5px;
+    margin-top: 15px;
     font-size: 22px;
 }
 .input {
@@ -64,11 +72,10 @@ label{
     border-width: 0;
     border-radius: 4px;
     padding: 6px;
-    outline: 0;
     width: calc(100% - 12px);
-}
-.input::placeholder{
-    color: var(--placeholder);
+    &::placeholder{
+        color: var(--placeholder);
+    }    
 }
 .button{
     color: black;
@@ -80,21 +87,21 @@ label{
     margin: 10px 0;
     box-shadow: 0 0 5px var(--principal-color);
     transition: 0.2s;
-}
-.button:hover:not(:disabled){
-    scale: 1.1;
-    transition: 0.3s;
-    cursor:pointer;
-}
-.button:disabled{
-    color: rgb(97, 97, 97);
-    background-color: rgba(0,0,0,0);
-    border: 2px solid;
-    border-radius: 4px;
-    font-size: 20px;
-    padding: 7px 20px;
-    margin: 10px 0;
-    box-shadow: 0 0 0 #000;
+    &:hover:not(:disabled){
+        scale: 1.1;
+        transition: 0.3s;
+        cursor:pointer;
+    }
+    &:disabled{
+        color: rgb(97, 97, 97);
+        background-color: rgba(0,0,0,0);
+        border: 2px solid;
+        border-radius: 4px;
+        font-size: 20px;
+        padding: 7px 20px;
+        margin: 10px 0;
+        box-shadow: 0 0 0 #000;
+    }
 }
 .link{
     width: 100%;
@@ -105,14 +112,14 @@ label{
     border:0;
     background-color: var(--input-area);
     padding:10px 3px;
-}
-.link a{
-    color: var(--principal-color);
-    font-weight: bolder;
-    text-decoration: none;
-}
-.link a:hover{
-    text-decoration: underline;
+    a{
+        color: var(--principal-color);
+        font-weight: bolder;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 }
 .logo{
     width: 280px;
