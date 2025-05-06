@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Ruda;
+    src: url(../public/fonts/Ruda-VariableFont_wght.ttf);
+  }
+@font-face {
+font-family: League-Spartan;
+src: url(../public/fonts/LeagueSpartan-VariableFont_wght.ttf);
+font-weight: bold;
+}
+@font-face {
+font-family: Contrail-One;
+src: url(../public/fonts/ContrailOne-Regular.ttf);
+}
+@font-face {
+font-family: TT-Berlinerins;
+src: url("../public/fonts/TT Berlinerins Trial Grotesk.otf");
+}
 body {
     background-color:var(--grey-blackground); 
 }
@@ -19,7 +36,6 @@ body {
     --input-area: #303030;
     color:white;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
 }
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form) !important;
@@ -59,16 +75,20 @@ body {
 }
 h1{
     margin-bottom: 0;
+    font-family: League-Spartan;
 }
 label{
     align-self: flex-start;
     position: relative;
     margin-top: 15px;
     font-size: 22px;
+    font-family: League-Spartan;
+
 }
 .input {
     background-color: var(--input-area);
     font-size: 16px;
+    font-family: Ruda;
     border-width: 0;
     border-radius: 4px;
     padding: 6px;
@@ -85,6 +105,7 @@ label{
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
+    font-family: TT-Berlinerins;
     box-shadow: 0 0 5px var(--principal-color);
     transition: 0.2s;
     &:hover:not(:disabled){
@@ -106,15 +127,15 @@ label{
 .link{
     width: 100%;
     text-align: center;
-    font-weight:bolder;
-    font-size: 12px;
+    font-family: TT-Berlinerins;
+    font-size: 20px;
     border-radius: 4px;
     border:0;
     background-color: var(--input-area);
     padding:10px 3px;
     a{
+        font-family: TT-Berlinerins;
         color: var(--principal-color);
-        font-weight: bolder;
         text-decoration: none;
         &:hover{
             text-decoration: underline;
