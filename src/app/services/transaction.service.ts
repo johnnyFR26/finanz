@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { computed, inject, Injectable, input, signal } from "@angular/core";
 import { CreateTransactionModel } from "../models/create-transaction.model";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
@@ -34,8 +34,27 @@ export class TransactionService{
     getAccountTransactions(accountId: string) {
         return this.http.get(`${this.urlApi}/transactions/${accountId}`);
       }
+
+    sumAccountDeposits() {
+
+        const sumTransactions = this.transactions()
+            .filter(transaction => transaction.type == 'input')
+            .reduce((sum, number) => sum + parseFloat(number.value), 0);
+            
+        const subTransactions = this.transactions()
+            .filter(transaction => transaction.type == 'output')
+            .reduce((sum, number) => sum + parseFloat(number.value), 0);
+
+        const totalTransactions = computed(() => {
+            return {
+                sum: sumTransactions,
+                sub: subTransactions
+            }
+        })
+        return totalTransactions()
+    }
       
-    setTransactions(transactions: TransactionModel[]){
+    setTransactions(transactions: any){
         this.transactions.set(transactions)
     }
 

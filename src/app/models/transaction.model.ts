@@ -1,6 +1,6 @@
 export interface TransactionModel {
     id: string
-    value: number
+    value: string
     description: string
     destination: string
     type: string
