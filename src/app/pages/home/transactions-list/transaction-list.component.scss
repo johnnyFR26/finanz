@@ -1,7 +1,34 @@
 :host{
     display: block;
-    background-color: black;
+    background-color: rgb(31, 30, 30);
 }
-table{
-    background-color: black;
+.box{
+    width: 300px;
+}
+
+
+.gain{
+
+}
+.losts{
+    
+}
+.currency{
+    height: 85px;
+    border-left: 5px solid white;
+    padding: 0 0 0 5px;
+    display: flex;
+    flex-flow: column wrap;
+    h2{
+        margin: 0
+    }
+    mat-icon{
+        background-color: #38b6ff;
+        border-radius: 100%;
+        padding: 10px;
+        font-size: 60px;
+        height: 60px;
+        width: 60px;
+        align-self: end;
+    }
 }

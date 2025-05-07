@@ -16,6 +16,10 @@ src: url(../public/fonts/ContrailOne-Regular.ttf);
 font-family: TT-Berlinerins;
 src: url("../public/fonts/TT Berlinerins Trial Grotesk.otf");
 }
+@font-face {
+    font-family: Dosis;
+    src: url(../public/fonts/Dosis-VariableFont_wght.ttf);
+}
 body {
     background-color:var(--grey-blackground); 
 }
@@ -76,6 +80,10 @@ body {
 h1{
     margin-bottom: 0;
     font-family: League-Spartan;
+}
+h2{
+    font-family: Dosis;
+    font-weight: normal;
 }
 label{
     align-self: flex-start;
@@ -145,6 +153,11 @@ label{
 .logo{
     width: 280px;
     margin-bottom: 40px;
+}
+.box{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--gray-form);
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
