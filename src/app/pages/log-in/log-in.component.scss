@@ -3,7 +3,8 @@
     font-style: italic;
     font-size: 14px;
     text-decoration: none;
-}
-.esqueci:hover{
-    text-decoration: underline;
+    padding: 5px 0;
+    &:hover{
+        text-decoration: underline;
+    }
 }

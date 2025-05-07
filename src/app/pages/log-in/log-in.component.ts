@@ -59,8 +59,9 @@ export class LogInComponent {
               email: response.user.email
             }
           })
-
-          this.categoryService.setCategories(response.user.account.categories)
+          if(response.user.account){
+            this.categoryService.setCategories(response.user.account.categories)
+          }
     
           this.router.navigateByUrl('/home')
           
