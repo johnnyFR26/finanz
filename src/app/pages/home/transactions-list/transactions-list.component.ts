@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { CurrencyPipe, DatePipe } from '@angular/common';
@@ -52,10 +52,16 @@ export class TransactionsListComponent implements OnInit {
   protected account = this.accountService.getCurrentAccount();
   protected transactions = signal<any>([]);
   protected displayedColumns: string[] = ['destination', 'value', 'type', 'createdAt'];
+  constructor(){
+    effect(() => {
+      this.transactionService.sumAccountDeposits()
+    })
+  }
 
   ngOnInit(): void {
     this.transactionService.getAccountTransactions(this.account()!.id).subscribe((data) => {
       this.transactions.set(data);
+      this.transactionService.setTransactions(data)
     });
   }
 }
