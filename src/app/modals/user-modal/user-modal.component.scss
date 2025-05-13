@@ -1,0 +1,17 @@
+button{
+    background-color: var(--principal-color);
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 7px 20px;
+    margin: 10px 0;
+    font-family: TT-Berlinerins;
+    box-shadow: 0 0 5px var(--principal-color);
+    transition: 0.2s;
+    &:hover{
+        scale: 1.1;
+        transition: 0.3s;
+        cursor:pointer;
+    }
+}
