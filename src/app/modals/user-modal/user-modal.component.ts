@@ -15,7 +15,7 @@ import { UserService } from "../../services/user.service";
 
     <mat-dialog-actions>
       <button mat-button cancelar (click)="onNoClick()">Cancelar</button>
-      <button mat-button excluir (click)="onSubmit()" cdkFocusInitial>Ok</button>
+      <button class="excluir" mat-button excluir (click)="onSubmit()" cdkFocusInitial>Ok</button>
     </mat-dialog-actions>
     </div>
    

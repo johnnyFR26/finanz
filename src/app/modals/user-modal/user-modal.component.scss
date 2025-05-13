@@ -13,4 +13,7 @@ button{
         transition: 0.3s;
         cursor:pointer;
     }
+    &.excluir{
+        background-color: red;
+    }
 }
