@@ -15,7 +15,7 @@ import { UserService } from "../../services/user.service";
 
     <mat-dialog-actions>
       <button mat-button cancelar (click)="onNoClick()">Cancelar</button>
-      <button class="excluir" mat-button excluir (click)="onSubmit()" cdkFocusInitial>Ok</button>
+      <button class="excluir" mat-button excluir (click)="onSubmit()" cdkFocusInitial>Deletar</button>
     </mat-dialog-actions>
     </div>
    
@@ -34,6 +34,7 @@ export class UserModalComponent {
 
     onSubmit(): any {
         this.userService.deleteUser()
+        this.accountService.setCurrentAccount(null)
         this.dialogRef.close()
     }
 
