@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarComponent } from "../components/snackbar/snackbar.component";
-import { AccountService } from "./account.service";
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +16,6 @@ export class UserService {
     private router = inject(Router)
     private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage())
     private urlApi = environment.urlApi
-    private accountService = inject(AccountService)
 
     constructor(){
         effect(() => {
@@ -53,7 +51,6 @@ export class UserService {
             next: (response: any) => {
                 console.log('Response:', response)
                 this.setCurrentUser(null)
-                this.accountService.setCurrentAccount(null);
                 this.router.navigateByUrl('/login')
             },
             error: (error: any) => {
