@@ -11,3 +11,23 @@
     background-color: rgb(5, 138, 247);
     margin-left: 12px;
 }
+
+.delete{
+    color: white;
+    transition: 0.1s;
+    &:hover{
+        color: red;
+        transition: 0.2s;
+        scale: 1.1;
+    }
+}
+
+.side{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    justify-items: end;
+}
+.danger-button{
+    color: red !important;
+}

@@ -7,12 +7,17 @@ import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
+import { DeleteAccountModalComponent } from "./deleteAccount/deleteAccount-modal.component";
 
 @Component({
     selector: 'app-account',
     template: `
+        <div class="side">
         <h1>Conta: {{account()?.currentValue | currency: 'BRL'}}</h1>
-        <br>
+        <button (click)="openDeleteDialog()" mat-icon-button class="example-icon delete" aria-label="Example icon-button with menu icon">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </div>
         <hr>
         <button class="deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
         <mat-icon>payment</mat-icon>
@@ -44,6 +49,14 @@ export class AccountComponent implements OnInit{
 
     openCategoriesDialog(): void {
         const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
+          data: {
+            id: this.id,
+        },
+        });
+    }
+
+    openDeleteDialog(): void {
+        const dialogRef = this.dialog.open(DeleteAccountModalComponent, {
           data: {
             id: this.id,
         },

@@ -61,4 +61,7 @@ export class AccountService{
         return !!this.currentAccount()
     }
 
+    deleteAccount(){
+        
+    }
 }
