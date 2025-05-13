@@ -20,7 +20,7 @@ import { UserService } from "../../services/user.service";
     </div>
    
     `,
-    styleUrls: ['./user-modal.component.css'],
+    styleUrls: ['./user-modal.component.scss'],
     imports: [MatDialogActions, FormsModule],
 })
 export class UserModalComponent {
