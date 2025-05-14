@@ -7,7 +7,7 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule, NgxMaskDirective, NgxMaskPipe],
+  imports: [FormsModule, NgxMaskDirective],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })
