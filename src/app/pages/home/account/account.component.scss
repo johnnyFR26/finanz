@@ -1,13 +1,104 @@
+:host{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.button{
+    color: black;
+    width: 120px;
+    padding: 10px 0px;
+}
+
+.buttons{
+    display: flex;
+    width: 400px;
+    justify-content: space-evenly;
+}
+
 .deposit{
     background-color: #cbd957;
 }
 
 .transfer{
     background-color: #f31c1c;
-    margin-left: 12px;
 }
 
 .add{
     background-color: rgb(5, 138, 247);
-    margin-left: 12px;
 }
+
+.box{
+    margin-bottom: auto;
+    height: 150px;
+    width: 80%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.gains{
+    background-color: var(--principal-color);
+}
+.losts{
+    background-color: var(--red);
+}
+.currency{
+    margin-bottom: 10px;
+    height: 85px;
+    width: 100%;
+    border-left: 5px solid white;
+    padding: 0 0 0 5px;
+    display: flex;
+    flex-flow: column wrap;
+    h2{
+        margin: 0
+    }
+    mat-icon{
+        background-color: #38b6ff;
+        border-radius: 100%;
+        padding: 10px;
+        font-size: 60px;
+        height: 60px;
+        width: 60px;
+        align-self: end;
+    }
+}
+.gains, .losts{
+    margin: 0;
+    height: auto;
+    width: 132px;
+    .currency{
+        margin: 0;
+        height: auto;
+        border-left: 5px solid black;
+    }
+    h1{
+        font-size: 18px;
+    }
+    *{
+        font-size: 20px;
+        color: black;
+    }
+    mat-icon{
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        padding: 0;
+        background: 0;
+    }
+}
+.gains mat-icon{
+    rotate: -90deg;
+}
+.losts{
+    h2{
+        display: flex;
+    }
+    mat-icon{
+        rotate: 90deg;
+    }  
+} 

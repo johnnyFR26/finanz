@@ -11,21 +11,39 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
 @Component({
     selector: 'app-account',
     template: `
-        <h1>Conta: {{account()?.currentValue | currency: 'BRL'}}</h1>
-        <br>
-        <hr>
-        <button class="deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
-        <mat-icon>payment</mat-icon>
-            Depositar
-        </button>
-        <button class="transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
-        <mat-icon>transfer_within_a_station</mat-icon>
-            Transferir
-        </button>
-        <button class="add" mat-fab extended color="info" (click)="openCategoriesDialog()">
-        <mat-icon>playlist_add</mat-icon>
-            Categoria
-        </button>
+        <div class="box">
+          <div class="currency">
+            <h2>SALDO ATUAL</h2>
+            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+            <mat-icon>account_balance</mat-icon>
+          </div>
+          <div class="box gains">
+            <div class="currency">
+              <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
+              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+            </div>
+          </div>
+          <div class="box losts">
+            <div class="currency">
+              <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
+              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="button deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
+          <mat-icon>payment</mat-icon>
+              Depositar
+          </button>
+          <button class="button transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
+          <mat-icon>transfer_within_a_station</mat-icon>
+              Transferir
+          </button>
+          <button class="button add" mat-fab extended color="info" (click)="openCategoriesDialog()">
+          <mat-icon>playlist_add</mat-icon>
+              Categoria
+          </button>
+        </div>
     `,
     styleUrl: './account.component.scss',
     imports: [CurrencyPipe, MatIconModule, MatButtonModule]
