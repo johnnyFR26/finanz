@@ -18,7 +18,8 @@ import { AccountService } from '../../../services/account.service';
         <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
         <mat-icon>account_balance</mat-icon>
       </div>
-      <div class=""></div>
+      <div class="box gains"></div>
+      <div class="box losts"></div>
     </div>
   `,
   styleUrls: ['./transaction-list.component.scss'],

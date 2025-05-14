@@ -2,11 +2,12 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { EMAIL_REGEXP } from '../../utils/email-validator';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule],
+  imports: [FormsModule, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })

@@ -12,11 +12,11 @@
   <div class="divisao">
     <div>
       <label for="phone">TELEFONE</label>
-      <input class="input" type="text" id="phone" name="phone" [(ngModel)]="phone" required placeholder="(13)99999-9999"/>
+      <input class="input" type="text" id="phone" name="phone" mask="(00) 00000-0000" [(ngModel)]="phone" required placeholder="(13)99999-9999"/>
     </div>
     <div>
     <label for="cpf">CPF</label>
-      <input class="input" type="text" id="cpf" name="cpf" [(ngModel)]="cpf" required placeholder="000.000.000-00"/>
+      <input class="input" mask="000.000.000-00" type="text" id="cpf" name="cpf" [(ngModel)]="cpf" required placeholder="000.000.000-00"/>
     </div>
   </div>
   <label for="password">SENHA</label>
