@@ -1,0 +1,20 @@
+button{
+    background-color: var(--principal-color);
+    color: #000;
+    border: 0;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 7px 15px;
+    margin: 10px 10px;
+    font-family: TT-Berlinerins;
+    transition: 0.2s;
+    &:hover{
+        scale: 1.1;
+        transition: 0.3s;
+        cursor:pointer;
+    }
+    &.excluir{
+        background-color: var(--red);
+        color: white;
+    }
+}

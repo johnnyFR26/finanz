@@ -46,6 +46,19 @@ export class UserService {
         return this.http.post(`${this.urlApi}/auth/login`, user)
     }
 
+    deleteUser(){
+        return this.http.delete(`${this.urlApi}/users/${this.userInfo()?.user.email}`).subscribe({
+            next: (response: any) => {
+                console.log('Response:', response)
+                this.setCurrentUser(null)
+                this.router.navigateByUrl('/login')
+            },
+            error: (error: any) => {
+                console.log('Error:', error)
+            }
+        })
+    }
+
     syncUserInfoWithLocalStorage() {
         if (this.userInfo()) {
             localStorage.setItem('UserData', JSON.stringify(this.userInfo()))
