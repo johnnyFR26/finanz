@@ -34,12 +34,13 @@ body {
     --gradient2:linear-gradient(var(--principal-color), var(--grey-blackground));
     --gradient: linear-gradient( var(--grey-blackground) 10%, color-mix(in srgb, var(--principal-color), var(--grey-blackground) 80%)  50%, var(--grey-blackground) 90%);
     --principal-color: #cbe957;
-    --grey-blackground: #161616;
-    --gray-form: #202020;
-    --placeholder: #474646;
-    --input-area: #303030;
+    --grey-blackground: #181824;
+    --gray-form: #111119;
+    --placeholder: #464647;
+    --input-area: rgb(27, 27, 49);
     --red: #ff5757;
-    color:white;
+    --white: #f0f8ff;
+    color:#f0f8ff;
     font-family: Arial, Helvetica, sans-serif;
 }
 .form, .mat-mdc-dialog-surface{
@@ -109,7 +110,7 @@ label{
 .button{
     color: black;
     background-color: var(--principal-color);
-    border: 0;
+    border: 2px solid #0000;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
@@ -123,13 +124,9 @@ label{
         cursor:pointer;
     }
     &:disabled{
-        color: rgb(97, 97, 97);
+        color: rgb(58, 53, 83);
         background-color: rgba(0,0,0,0);
         border: 2px solid;
-        border-radius: 4px;
-        font-size: 20px;
-        padding: 7px 20px;
-        margin: 10px 0;
         box-shadow: 0 0 0 #000;
     }
 }
