@@ -37,10 +37,11 @@ body {
     --grey-blackground: #181824;
     --gray-form: #111119;
     --placeholder: #464647;
-    --input-area: rgb(27, 27, 49);
+    --input-area: #232334;
     --red: #ff5757;
     --white: #f0f8ff;
-    color:#f0f8ff;
+    --blue: #38b6ff;
+    color:  var(--white);
     font-family: Arial, Helvetica, sans-serif;
 }
 .form, .mat-mdc-dialog-surface{
@@ -95,6 +96,20 @@ label{
     font-family: League-Spartan;
 
 }
+
+.animation{
+    label{
+        &:not(+ .input:focus, +){
+            align-self: center;
+            position: absolute;
+            transition: .3s ease-in-out;
+        }
+        background-color: var(--input-area);
+        padding: 0 2px;
+        font-size: 90%;
+        transition: .2s ease-in-out;
+    }
+}
 .input {
     background-color: var(--input-area);
     font-size: 16px;
@@ -105,7 +120,7 @@ label{
     width: calc(100% - 12px);
     &::placeholder{
         color: var(--placeholder);
-    }    
+    }
 }
 .button{
     color: black;
@@ -159,4 +174,3 @@ label{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
