@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
+import { CreditCardComponent } from "../../../components/credit-card/credit-card.component";
 
 @Component({
     selector: 'app-account',
@@ -26,19 +27,7 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
               <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
             </div>
           </div>
-
-          <div class="box card">
-              <div class="currency">
-                <h2>CARTÃO DE CRÉDITO</h2>
-                <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-              </div>
-              <div class="animation">
-                <select class="input" name="type" id="input">
-                </select>
-                <label for="input">Cartão</label>
-              </div>
-          </div>
-
+          <credit_card/>
           <div class="box">
             <div class="buttons">
               <button class="button deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
@@ -57,7 +46,7 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
           </div>
     `,
     styleUrl: './account.component.scss',
-    imports: [CurrencyPipe, MatIconModule, MatButtonModule]
+    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardComponent]
 })
 export class AccountComponent implements OnInit{
     

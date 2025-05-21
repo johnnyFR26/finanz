@@ -31,13 +31,6 @@
     background-color: rgb(5, 138, 247);
 }
 
-.box{
-    margin-bottom: 10px;
-    width: 90%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-}
 
 .currency{
     margin-bottom: 20px;
@@ -62,7 +55,7 @@
         align-self: end;
     }
 }
-.gains, .losts, .card .currency{
+.gains, .losts{
     margin: 0;
     height: auto;
     width: auto;
@@ -100,16 +93,4 @@
         color: var(--red);
         rotate: 90deg;
     }
-}
-.card{
-    display: flex;
-    flex-wrap: wrap;
-    .currency{
-        border-left: 5px solid var(--blue);
-    }
-}
-.animation{
-    width: 50%;
-    font-size: 20px;
-    margin-left: 20px;
 }
