@@ -33,11 +33,9 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
                 <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
               </div>
               <div class="animation">
-                <label>Cartão</label>
-                <select class="input" name="type">
-                  <option>CARTÃO 1</option>
-                  <option>CARTÃO 2</option>
+                <select class="input" name="type" id="input">
                 </select>
+                <label for="input">Cartão</label>
               </div>
           </div>
 

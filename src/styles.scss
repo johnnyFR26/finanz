@@ -98,16 +98,24 @@ label{
 }
 
 .animation{
-    label{
-        &:not(+ .input:focus, +){
+    position: relative;
+    .input{
+        & + label{
+            top: -6px;
+            left: 6px;
             align-self: center;
             position: absolute;
             transition: .3s ease-in-out;
         }
-        background-color: var(--input-area);
-        padding: 0 2px;
-        font-size: 90%;
-        transition: .2s ease-in-out;
+        &:focus + label, &:not(input:placeholder-shown) + .label{
+            padding: 0 2px;
+            top: -25px;
+            font-size: 90%;
+            transition: .2s ease-in-out;
+        }
+        &:focus{
+            outline:0;
+        }
     }
 }
 .input {
@@ -118,6 +126,7 @@ label{
     border-radius: 4px;
     padding: 6px;
     width: calc(100% - 12px);
+
     &::placeholder{
         color: var(--placeholder);
     }
