@@ -41,6 +41,9 @@ body {
     --red: #ff5757;
     --white: #f0f8ff;
     --blue: #38b6ff;
+    --mat-sys-surface: var(--gray-form);
+    --mat-sys-on-surface: var(--white);
+    --mat-sys-on-surface-variant: var(--white);
     color:  var(--white);
     font-family: Arial, Helvetica, sans-serif;
 }

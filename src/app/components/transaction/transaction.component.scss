@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+:host{
+    width: 90%;
+}
+:root {
+  @include mat.expansion-overrides((
+    container-shape: 20px 20px,
+  ));
+}
