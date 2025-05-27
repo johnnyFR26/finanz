@@ -2,11 +2,9 @@ import { Component, inject, Input } from "@angular/core";
 import { MatToolbarModule } from '@angular/material/toolbar'
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { Clipboard } from '@angular/cdk/clipboard'
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav'
 import { UserService } from "../../services/user.service";
 import { AccountService } from "../../services/account.service";
-import { CurrencyPipe } from "@angular/common";
 import { MatDialog } from "@angular/material/dialog";
 import { UserModalComponent } from "../../modals/user-modal/user-modal.component";
 
@@ -36,7 +34,7 @@ export class ToolBarComponent{
     readonly dialog = inject(MatDialog)
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(UserModalComponent, {
+        this.dialog.open(UserModalComponent, {
           
         });
     }

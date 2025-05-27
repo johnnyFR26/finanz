@@ -7,42 +7,46 @@ import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
+import { CreditCardComponent } from "../../../components/credit-card/credit-card.component";
 
 @Component({
     selector: 'app-account',
     template: `
-        <div class="box">
-          <div class="currency">
-            <h2>SALDO ATUAL</h2>
-            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-            <mat-icon>account_balance</mat-icon>
+          <div class="box">
+            <div class="currency">
+              <h2>SALDO ATUAL</h2>
+              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+              <mat-icon>account_balance</mat-icon>
+            </div>
+            <div class="currency gains">
+              <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
+              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+            </div>
+            <div class="currency losts">
+              <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
+              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+            </div>
           </div>
-          <div class="currency gains">
-            <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
-            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+          <credit_card/>
+          <div class="box">
+            <div class="buttons">
+              <button class="button deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
+              <mat-icon>payment</mat-icon>
+                  Depositar
+              </button>
+              <button class="button transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
+              <mat-icon>transfer_within_a_station</mat-icon>
+                  Transferir
+              </button>
+              <button class="button add" mat-fab extended color="info" (click)="openCategoriesDialog()">
+              <mat-icon>playlist_add</mat-icon>
+                  Categoria
+              </button>
+            </div>
           </div>
-          <div class="currency losts">
-            <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
-            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-          </div>
-        </div>
-        <div class="buttons">
-          <button class="button deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
-          <mat-icon>payment</mat-icon>
-              Depositar
-          </button>
-          <button class="button transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
-          <mat-icon>transfer_within_a_station</mat-icon>
-              Transferir
-          </button>
-          <button class="button add" mat-fab extended color="info" (click)="openCategoriesDialog()">
-          <mat-icon>playlist_add</mat-icon>
-              Categoria
-          </button>
-        </div>
     `,
     styleUrl: './account.component.scss',
-    imports: [CurrencyPipe, MatIconModule, MatButtonModule]
+    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardComponent]
 })
 export class AccountComponent implements OnInit{
     

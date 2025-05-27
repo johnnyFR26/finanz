@@ -4,6 +4,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    align-content: flex-start;
 }
 
 .button{
@@ -30,13 +31,6 @@
     background-color: rgb(5, 138, 247);
 }
 
-.box{
-    margin-bottom: auto;
-    width: 90%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-}
 
 .currency{
     margin-bottom: 20px;
@@ -52,7 +46,7 @@
     }
 
     mat-icon{
-        background-color: #38b6ff;
+        background-color: var(--blue);
         border-radius: 5px;
         padding: 10px;
         font-size: 60px;
@@ -64,20 +58,15 @@
 .gains, .losts{
     margin: 0;
     height: auto;
-    width: 132px;
-
-    .currency{
-        margin: 0;
-        height: auto;
-    }
+    width: auto;
 
     h1{
-        font-size: 24px;
+        font-size: 20px;
         margin-top: 5px;
     }
 
     *{
-        font-size: 20px;
+        font-size: 18px;
         color: var(--white);
     }
 
@@ -100,11 +89,6 @@
 
 .losts{
     border-left: 5px solid var(--red);
-
-    h2{
-        display: flex;
-    }
-
     mat-icon{
         color: var(--red);
         rotate: 90deg;

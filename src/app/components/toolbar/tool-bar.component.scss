@@ -1,6 +1,10 @@
 :host{
     display: block;
 }
+*{
+    
+    --mat-icon-color: #171722;
+}
 
 mat-toolbar {
     width: 100%;

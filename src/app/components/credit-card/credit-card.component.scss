@@ -1,0 +1,36 @@
+
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .currency{
+        h2{
+            margin: 0
+        }
+        padding: 0 0 0 5px;
+        display: flex;
+        flex-flow: column wrap;
+        border-left: 5px solid var(--blue);
+        margin: 0;
+        height: auto;
+        width: auto;
+
+        h1{
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        *{
+            font-size: 18px;
+            color: var(--white);
+        }
+    }
+}
+
+
+.animation{
+    width: 50%;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
