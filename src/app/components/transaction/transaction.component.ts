@@ -1,10 +1,11 @@
 import { Component, inject, input, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'transaction',
-    imports: [MatIconModule, MatExpansionModule],
+    imports: [MatIconModule, MatExpansionModule, DatePipe],
     styleUrl: './transaction.component.scss',
     template: `
     <hr>
@@ -12,7 +13,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     <mat-expansion-panel-header>
       <mat-panel-title> <button mat-fab><mat-icon>check_circle</mat-icon></button> </mat-panel-title>
       <mat-panel-description>
-        Currently I am {{panelOpenState() ? 'open' : 'closed'}}
+        <div>
+        <span>{{transaction()?.createdAt | date: "dd/MM/YYYY"}}</span>
+        </div>
+        {{panelOpenState() ? 'aberto' : 'fechado'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{transaction()?.description}}</p>

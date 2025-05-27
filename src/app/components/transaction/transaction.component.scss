@@ -1,9 +1,25 @@
 @use '@angular/material' as mat;
 :host{
-    width: 90%;
+    width: 100%;
 }
 :root {
   @include mat.expansion-overrides((
     container-shape: 20px 20px,
   ));
+}
+button{
+  background-color: #0000;
+  border: 0;
+  border-radius: 100%;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+hr{
+    border: solid var(--grey-background);
+}
+
+mat-panel-title{
+  width: auto;
 }
