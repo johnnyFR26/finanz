@@ -17,17 +17,13 @@ import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal
             <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
             <mat-icon>account_balance</mat-icon>
           </div>
-          <div class="box gains">
-            <div class="currency">
-              <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-            </div>
+          <div class="currency gains">
+            <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
+            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
           </div>
-          <div class="box losts">
-            <div class="currency">
-              <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-            </div>
+          <div class="currency losts">
+            <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
+            <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
           </div>
         </div>
         <div class="buttons">
