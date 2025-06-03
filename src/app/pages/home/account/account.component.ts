@@ -30,15 +30,15 @@ import { CreditCardComponent } from "../../../components/credit-card/credit-card
           <credit_card/>
           <div class="box">
             <div class="buttons">
-              <button class="button deposit" mat-fab extended color="primary" (click)="openDialog('Depositar', 'input')">
+              <button class="button deposit" mat-fab extended (click)="openDialog('Depositar', 'input')">
               <mat-icon>payment</mat-icon>
                   Depositar
               </button>
-              <button class="button transfer" mat-fab extended color="alert" (click)="openDialog('Transferir', 'output')">
+              <button class="button transfer" mat-fab extended (click)="openDialog('Transferir', 'output')">
               <mat-icon>transfer_within_a_station</mat-icon>
                   Transferir
               </button>
-              <button class="button add" mat-fab extended color="info" (click)="openCategoriesDialog()">
+              <button class="button add" mat-fab extended (click)="openCategoriesDialog()">
               <mat-icon>playlist_add</mat-icon>
                   Categoria
               </button>

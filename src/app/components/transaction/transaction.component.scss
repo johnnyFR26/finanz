@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 :host{
     width: 100%;
+    --mat-expansion-header-collapsed-state-height: 60px;
 }
 :root {
   @include mat.expansion-overrides((
@@ -21,5 +22,14 @@ hr{
 }
 
 mat-panel-title{
-  width: auto;
+  flex-grow: 0;
+}
+
+h1{
+  font-size: large;
+  margin: 0;
+}
+
+.date{
+  font-size: medium;
 }

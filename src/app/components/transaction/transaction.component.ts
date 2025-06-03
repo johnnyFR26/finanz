@@ -1,11 +1,11 @@
 import { Component, inject, input, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
     selector: 'transaction',
-    imports: [MatIconModule, MatExpansionModule, DatePipe],
+    imports: [MatIconModule, MatExpansionModule, DatePipe, CurrencyPipe],
     styleUrl: './transaction.component.scss',
     template: `
     <hr>
@@ -14,7 +14,8 @@ import { DatePipe } from '@angular/common';
       <mat-panel-title> <button mat-fab><mat-icon>check_circle</mat-icon></button> </mat-panel-title>
       <mat-panel-description>
         <div>
-        <span>{{transaction()?.createdAt | date: "dd/MM/YYYY"}}</span>
+        <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
+        <h1>{{transaction().value | currency:"BRL"}}</h1>
         </div>
         {{panelOpenState() ? 'aberto' : 'fechado'}}
       </mat-panel-description>
