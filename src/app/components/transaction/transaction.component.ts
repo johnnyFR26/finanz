@@ -8,20 +8,28 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
     imports: [MatIconModule, MatExpansionModule, DatePipe, CurrencyPipe],
     styleUrl: './transaction.component.scss',
     template: `
-    <hr>
     <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-    <mat-expansion-panel-header>
-      <mat-panel-title> <button mat-fab><mat-icon>check_circle</mat-icon></button> </mat-panel-title>
-      <mat-panel-description>
-        <div>
-        <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
-        <h1>{{transaction().value | currency:"BRL"}}</h1>
-        </div>
-        {{panelOpenState() ? 'aberto' : 'fechado'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>{{transaction()?.description}}</p>
-  </mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <button mat-fab><mat-icon>check_circle</mat-icon></button> </mat-panel-title>
+        <mat-panel-description>
+          <div>
+          <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
+          <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency:"BRL"}}</h1>
+          </div>
+          Categoria<!--{{transaction().categoryId}}-->
+          <button aria-label="anexar" class="transaction-tools">
+            <mat-icon class="file">attach_file</mat-icon>
+          </button>
+          <button aria-label="editar" class="transaction-tools">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button aria-label="deletar" class="transaction-tools">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{transaction()?.description}}</p>
+    </mat-expansion-panel>
     `
 })
 

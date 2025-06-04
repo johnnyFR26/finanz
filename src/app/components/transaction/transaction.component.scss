@@ -33,3 +33,27 @@ h1{
 .date{
   font-size: medium;
 }
+
+.entrada{
+  color: var(--principal-color);
+}
+.saida{
+  color: var(--red);
+}
+.file{
+  rotate: 45deg;
+}
+
+.transaction-tools{
+  background-color: var(--input-area);
+  width: 34px;
+  height: 34px;
+  margin: 4px;
+  justify-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+mat-expansion-panel{
+  padding: 0;
+}
