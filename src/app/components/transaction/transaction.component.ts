@@ -17,15 +17,17 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
           <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency:"BRL"}}</h1>
           </div>
           Categoria<!--{{transaction().categoryId}}-->
-          <button aria-label="anexar" class="transaction-tools">
-            <mat-icon class="file">attach_file</mat-icon>
-          </button>
-          <button aria-label="editar" class="transaction-tools">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button aria-label="deletar" class="transaction-tools">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div class="transaction-tools">
+            <button aria-label="anexar">
+              <mat-icon class="file">attach_file</mat-icon>
+            </button>
+            <button aria-label="editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button aria-label="deletar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{transaction()?.description}}</p>

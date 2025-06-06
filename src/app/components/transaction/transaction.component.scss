@@ -17,10 +17,6 @@ button{
   height: 24px;
 }
 
-hr{
-    border: solid var(--grey-background);
-}
-
 mat-panel-title{
   flex-grow: 0;
 }
@@ -44,16 +40,29 @@ h1{
   rotate: 45deg;
 }
 
+
 .transaction-tools{
-  background-color: var(--input-area);
-  width: 34px;
-  height: 34px;
-  margin: 4px;
-  justify-self: flex-end;
-  justify-content: center;
-  align-items: center;
   display: flex;
+
+  justify-self: flex-end;
+  button{
+    background-color: var(--input-area);
+    width: 34px;
+    height: 34px;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+}
+mat-expansion-panel-header{
+  padding: 0 8px;
 }
 mat-expansion-panel{
-  padding: 0;
+  box-shadow: unset !important;
+  border-bottom: solid 2px var(--grey-background);
+  border-radius: 0;
+}
+mat-panel-description{
+  justify-content: space-around;
 }
