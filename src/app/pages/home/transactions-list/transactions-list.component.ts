@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
@@ -10,14 +9,16 @@ import { TransactionComponent } from '../../../components/transaction/transactio
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, CurrencyPipe, DatePipe, TransactionComponent],
+  imports: [CommonModule, MatTableModule, TransactionComponent],
   template: `
+  <div class="box">
     <h1>Transações</h1>
   @for (transaction of transactions(); track $index) {
     <transaction
       [transaction]="transaction"
     />
   }
+  </div>
   
   `,
   styleUrls: ['./transaction-list.component.scss'],

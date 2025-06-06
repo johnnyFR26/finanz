@@ -21,7 +21,7 @@ src: url("../public/fonts/TT Berlinerins Trial Grotesk.otf");
     src: url(../public/fonts/Dosis-VariableFont_wght.ttf);
 }
 body {
-    background-color:var(--grey-blackground); 
+    background-color:var(--grey-background); 
 }
 .centro{
     flex-direction: column; 
@@ -31,10 +31,10 @@ body {
     height: calc(100vh - 16px);
 }
 *{
-    --gradient2:linear-gradient(var(--principal-color), var(--grey-blackground));
-    --gradient: linear-gradient( var(--grey-blackground) 10%, color-mix(in srgb, var(--principal-color), var(--grey-blackground) 80%)  50%, var(--grey-blackground) 90%);
+    --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
+    --gradient: linear-gradient( var(--grey-background) 10%, color-mix(in srgb, var(--principal-color), var(--grey-background) 80%)  50%, var(--grey-background) 90%);
     --principal-color: #cbe957;
-    --grey-blackground: #181824;
+    --grey-background: #181824;
     --gray-form: #111119;
     --placeholder: #464647;
     --input-area: #232334;
@@ -44,6 +44,7 @@ body {
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
+    --mat-fab-foreground-color: black;
     color:  var(--white);
     font-family: Arial, Helvetica, sans-serif;
 }
