@@ -9,6 +9,7 @@ import {
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AccountService } from '../../services/account.service'
 import { CategoryService } from '../../services/category.service'
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-log-in',
@@ -17,6 +18,8 @@ import { CategoryService } from '../../services/category.service'
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
+  private auth: Auth = inject(Auth)
+    private googleProvider = new GoogleAuthProvider();
 
   private userService = inject(UserService)
   private accountService = inject(AccountService)
@@ -37,6 +40,26 @@ export class LogInComponent {
    
     return this.email().length > 0 && this.password().length > 0 && EMAIL_REGEXP.test(this.email());
   });
+
+    async loginWithGoogle() {
+    try {
+      const result = await signInWithPopup(this.auth, this.googleProvider);
+      console.log('Login bem-sucedido:', result.user);
+      // Redirecionar o usuário, etc.
+    } catch (error) {
+      console.error('Erro no login:', error);
+    }
+  }
+
+  async logout() {
+    try {
+      await signOut(this.auth);
+      console.log('Logout bem-sucedido');
+      // Redirecionar o usuário, etc.
+    } catch (error) {
+      console.error('Erro no logout:', error);
+    }
+  }
 
   onSubmit(){
     console.log('Form Value:', this.formValue())
