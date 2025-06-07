@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarComponent } from "../components/snackbar/snackbar.component";
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
@@ -16,12 +17,34 @@ export class UserService {
     private router = inject(Router)
     private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage())
     private urlApi = environment.urlApi
+    private auth: Auth = inject(Auth)
+    private googleProvider = new GoogleAuthProvider();
 
     constructor(){
         effect(() => {
             this.syncUserInfoWithLocalStorage()
         })
     }
+
+    async loginWithGoogle() {
+    try {
+      const result = await signInWithPopup(this.auth, this.googleProvider);
+      console.log('Login bem-sucedido:', result.user);
+      // Redirecionar o usuário, etc.
+    } catch (error) {
+      console.error('Erro no login:', error);
+    }
+  }
+
+  async logout() {
+    try {
+      await signOut(this.auth);
+      console.log('Logout bem-sucedido');
+      // Redirecionar o usuário, etc.
+    } catch (error) {
+      console.error('Erro no logout:', error);
+    }
+  }
 
     createUserObserVable(user: createUser){
         return this.http.post(`${this.urlApi}/users`, user).subscribe({
