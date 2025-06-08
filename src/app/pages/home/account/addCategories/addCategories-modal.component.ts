@@ -1,13 +1,10 @@
-import {ChangeDetectionStrategy, Component, computed, inject, model, signal} from '@angular/core';
+import {Component, computed, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
+  MatDialogRef
 } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -18,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
-    selector: 'app-transaction-modal',
+    selector: 'app-addCategories-modal',
     template: `
     <div class="content">
       <p>Criar categoria</p>
@@ -29,7 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
 
       <mat-label for="icon">Icone</mat-label>
       <mat-select name="icon" [(ngModel)]="icon">
-        <mat-option value="account_balance"><mat-icon>account_balance</mat-icon></mat-option>
+        @for (icon of icons; track $index) {
+          <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
+        }
       </mat-select>
 
     <mat-dialog-actions>
@@ -57,6 +56,15 @@ export class AddCategoriesModalComponent{
     public account = this.accountService.getCurrentAccount()
     public name = signal('')
     public icon = signal('')
+    public icons = [
+      'account_balance',
+      'savings',
+      'shopping_cart',
+      'payment',
+      'credit_card',
+      'attach_money'
+    ]
+
 
 
     private categoryService = inject(CategoryService)
@@ -65,7 +73,10 @@ export class AddCategoriesModalComponent{
     protected formValue = computed(() => {
       return {
         accountId: this.account()?.id,
-        name: this.name()
+        name: this.name(),
+        controls: JSON.stringify({
+          icon: this.icon()
+        })
       }
     })
   
