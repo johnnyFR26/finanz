@@ -13,8 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { AccountService } from '../../../../services/account.service';
-import { TransactionService } from '../../../../services/transaction.service';
 import { CategoryService } from '../../../../services/category.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -26,6 +26,11 @@ import { CategoryService } from '../../../../services/category.service';
 
       <label>Nome</label>
       <input class="input" [(ngModel)]="name" name="name" [ngModelOptions]="{standalone: true}" />
+
+      <mat-label for="icon">Icone</mat-label>
+      <mat-select name="icon" [(ngModel)]="icon">
+        <mat-option value="account_balance"><mat-icon>account_balance</mat-icon></mat-option>
+      </mat-select>
 
     <mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancelar</button>
@@ -40,7 +45,8 @@ import { CategoryService } from '../../../../services/category.service';
         FormsModule,
         MatButtonModule,
         MatDialogActions,
-        MatSelectModule
+        MatSelectModule,
+        MatIconModule
       ]
 })
 export class AddCategoriesModalComponent{
@@ -50,6 +56,7 @@ export class AddCategoriesModalComponent{
     private accountService = inject(AccountService)
     public account = this.accountService.getCurrentAccount()
     public name = signal('')
+    public icon = signal('')
 
 
     private categoryService = inject(CategoryService)

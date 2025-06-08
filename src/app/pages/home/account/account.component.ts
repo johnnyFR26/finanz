@@ -7,7 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
-import { CreditCardComponent } from "../../../components/credit-card/credit-card.component";
+import { CreditCardSelectComponent } from "../../../components/credit-card-select/credit-card-select.component";
 
 @Component({
     selector: 'app-account',
@@ -27,7 +27,7 @@ import { CreditCardComponent } from "../../../components/credit-card/credit-card
               <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
             </div>
           </div>
-          <credit_card/>
+          <credit-card-select/>
           <div class="box">
             <div class="buttons">
               <button class="button deposit" mat-fab extended (click)="openDialog('Depositar', 'input')">
@@ -46,7 +46,7 @@ import { CreditCardComponent } from "../../../components/credit-card/credit-card
           </div>
     `,
     styleUrl: './account.component.scss',
-    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardComponent]
+    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardSelectComponent]
 })
 export class AccountComponent implements OnInit{
     

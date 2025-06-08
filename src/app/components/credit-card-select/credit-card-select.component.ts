@@ -3,9 +3,9 @@ import { AccountService } from "../../services/account.service";
 import { CurrencyPipe } from "@angular/common";
 
 @Component({
-    selector: 'credit_card',
+    selector: 'credit-card-select',
     imports: [CurrencyPipe],
-    styleUrl: './credit-card.component.scss',
+    styleUrl: './credit-card-select.component.scss',
     template: `
     <div class="box card">
               <div class="currency">
@@ -20,7 +20,7 @@ import { CurrencyPipe } from "@angular/common";
           </div>
           `
 })
-export class CreditCardComponent{
+export class CreditCardSelectComponent{
     
     private accountService = inject(AccountService)
     protected account = this.accountService.getCurrentAccount()
