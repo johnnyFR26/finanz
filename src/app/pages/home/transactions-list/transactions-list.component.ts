@@ -23,17 +23,12 @@ import { TransactionComponent } from '../../../components/transaction/transactio
   `,
   styleUrls: ['./transaction-list.component.scss'],
 })
-export class TransactionsListComponent implements OnInit {
+export class TransactionsListComponent {
   private transactionService = inject(TransactionService);
   private accountService = inject(AccountService);
 
   protected account = this.accountService.getCurrentAccount();
-  protected transactions = signal<any>([]);
+  protected transactions = this.transactionService.getTransactions();
   protected displayedColumns: string[] = ['destination', 'value', 'type', 'createdAt'];
 
-  ngOnInit(): void {
-    this.transactionService.getAccountTransactions(this.account()!.id).subscribe((data) => {
-      this.transactions.set(data);
-    });
-  }
 }

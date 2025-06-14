@@ -4,6 +4,8 @@ import { Component } from "@angular/core";
     selector: 'credit-cards',
     styleUrl: './credit-cards.component.scss',
     imports: [],
-    template: ``
+    template: `
+        <h1>Cartões de Crédito</h1>
+    `
 })
 export class CreditCardsComponent {}

@@ -8,6 +8,7 @@ import { TransactionModalComponent } from "./transactions/transaction-modal.comp
 import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
 import { CreditCardSelectComponent } from "../../../components/credit-card-select/credit-card-select.component";
+import { TransactionService } from "../../../services/transaction.service";
 
 @Component({
     selector: 'app-account',
@@ -20,11 +21,11 @@ import { CreditCardSelectComponent } from "../../../components/credit-card-selec
             </div>
             <div class="currency gains">
               <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+              <h1>{{sum()| currency: 'BRL'}}</h1>
             </div>
             <div class="currency losts">
               <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+              <h1>{{sub() | currency: 'BRL'}}</h1>
             </div>
           </div>
           <credit-card-select/>
@@ -52,13 +53,18 @@ export class AccountComponent implements OnInit{
     
     ngOnInit(): void {     
         console.table(this.account)
+        console.log(this.sum())
     }
+    protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)
     protected user = this.userService.getUserInfo()
     protected account = this.accountService.getCurrentAccount()
     readonly dialog = inject(MatDialog);
     public id = this.account()?.id
+    protected sum = this.transactionService.sum;
+    protected sub = this.transactionService.sub;
+
 
     openCategoriesDialog(): void {
         const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
