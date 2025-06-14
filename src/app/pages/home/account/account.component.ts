@@ -9,6 +9,7 @@ import { UserService } from "../../../services/user.service";
 import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
 import { CreditCardSelectComponent } from "../../../components/credit-card-select/credit-card-select.component";
 import { TransactionService } from "../../../services/transaction.service";
+import { GraphsComponent } from "../../../components/graphs/graphs.component";
 
 @Component({
     selector: 'app-account',
@@ -45,9 +46,10 @@ import { TransactionService } from "../../../services/transaction.service";
               </button>
             </div>
           </div>
+          <app-graphs></app-graphs>
     `,
     styleUrl: './account.component.scss',
-    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardSelectComponent]
+    imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardSelectComponent, GraphsComponent]
 })
 export class AccountComponent implements OnInit{
     

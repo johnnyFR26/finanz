@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 
 import { routes } from './app.routes';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     // Adicione outros providers do Firebase aqui se precisar (ex: provideFirestore, provideStorage, etc.)
     // ---------------------------
+    provideCharts(withDefaultRegisterables())
   ],
 };
