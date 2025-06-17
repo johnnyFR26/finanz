@@ -16,7 +16,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
           <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
           <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency:"BRL"}}</h1>
           </div>
-          {{transaction().category.name}} 
+          {{transaction()?.category?.name}} 
           @if (transaction().category?.controls?.icon) {
             <mat-icon class="category-icon">{{transaction().category?.controls?.icon}}</mat-icon>
           }
