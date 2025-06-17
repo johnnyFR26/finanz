@@ -1,6 +1,8 @@
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from './../../../../node_modules/chart.js/dist/types/index.d';
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
+import { TransactionService } from '../../services/transaction.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
     selector: 'app-graphs',
@@ -9,6 +11,11 @@ import { Component } from "@angular/core";
     imports: [BaseChartDirective],
 })
 export class GraphsComponent {
+  private transactionService = inject(TransactionService);
+  private categoryService = inject(CategoryService);
+  protected categories = this.categoryService.getCurrentCategories();
+  protected sum = this.transactionService.sum; 
+  protected sub = this.transactionService.sub;
       // Gráfico de linhas (Receita e Despesa por mês)
   lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
@@ -45,7 +52,7 @@ export class GraphsComponent {
   doughnutChartData = {
     labels: ['Receitas', 'Despesas'],
     datasets: [{
-      data: [6000, 4000],
+      data: [this.sum(), this.sub()],
       backgroundColor: ['#9FF04C', '#E74C3C']
     }]
   };

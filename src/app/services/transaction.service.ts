@@ -12,13 +12,10 @@ export class TransactionService {
   private urlApi = environment.urlApi;
   private http = inject(HttpClient);
   private accountService = inject(AccountService);
-
   private transactions = signal<TransactionModel[]>([]);
-
   public inputTransactions = computed(() => 
     this.transactions().filter(t => t.type === 'input')
   );
-
   public outputTransactions = computed(() => 
     this.transactions().filter(t => t.type === 'output')
   );
@@ -28,6 +25,7 @@ export class TransactionService {
       .subscribe({
         next: (response: any) => {
           console.log('Response:', response);
+          this.setTransactions([response.transaction])
           this.accountService.setCurrentAccount({
             currentValue: response.accountUpdate.currentValue,
             currency: response.accountUpdate.currency,
@@ -61,7 +59,8 @@ export class TransactionService {
     );
 
   setTransactions(transactions: TransactionModel[]) {
-    this.transactions.set(transactions);
+    this.transactions.set(this.transactions().concat(transactions));
+    console.log(this.transactions());
   }
 
   getTransactions() {
