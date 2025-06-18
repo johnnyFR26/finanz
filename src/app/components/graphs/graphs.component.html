@@ -12,7 +12,13 @@
   <!-- Gráfico Receita vs Despesa -->
   <div class="chart">
     <canvas baseChart
-      [data]="doughnutChartData"
+      [data]="{
+    labels: ['Receitas', 'Despesas'],
+    datasets: [{
+      data: [this.sum(), this.sub()],
+      backgroundColor: ['#9FF04C', '#E74C3C']
+    }]
+  }"
       [options]="chartOptions"
       [type]="'doughnut'">
     </canvas>
