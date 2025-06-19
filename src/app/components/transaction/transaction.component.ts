@@ -38,11 +38,8 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
     `
 })
 
-export class TransactionComponent implements OnInit{
+export class TransactionComponent{
   readonly panelOpenState = signal(false);
   readonly transaction = input<any>();
   
-  ngOnInit(): void {
-      console.log(this.transaction())
-  }
 }
