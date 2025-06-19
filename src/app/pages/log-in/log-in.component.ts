@@ -65,7 +65,7 @@ export class LogInComponent {
             this.categoryService.setCategories(response.user.account.categories)
           }
     
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/home/account')
           
           if(response.user.account != null){
             this.accountService.setCurrentAccount({

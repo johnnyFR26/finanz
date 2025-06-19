@@ -8,10 +8,11 @@ import { AccountService } from '../../services/account.service'
 
 import { RouterOutlet } from '@angular/router'
 import { TransactionService } from '../../services/transaction.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [ToolBarComponent, MatSidenavModule, MatListModule, RouterOutlet],
+  imports: [ToolBarComponent, MatSidenavModule, MatListModule, RouterOutlet, MatIconModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

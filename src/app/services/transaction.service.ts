@@ -60,7 +60,6 @@ export class TransactionService {
 
   setTransactions(transactions: TransactionModel[]) {
     this.transactions.set(this.transactions().concat(transactions));
-    console.log(this.transactions());
   }
 
   getTransactions() {
