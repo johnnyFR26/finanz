@@ -13,11 +13,13 @@ import { TransactionComponent } from '../../../components/transaction/transactio
   template: `
   <div class="box">
     <h1>Transações</h1>
-  @for (transaction of transactions(); track $index) {
-    <transaction
-      [transaction]="transaction"
-    />
-  }
+    <div class= "box transaction-list">
+      @for (transaction of transactions(); track $index) {
+        <transaction
+          [transaction]="transaction"
+        />
+      }
+    </div>
   </div>
   
   `,

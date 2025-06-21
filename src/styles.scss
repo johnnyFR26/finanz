@@ -28,7 +28,12 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center;
-    height: calc(100vh - 16px);
+    height: 100%;
+}
+.mat-sidenav-container{
+    height: calc(100vh - 114.4px);
+    position: relative;
+    top: 64px;
 }
 *{
     --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
