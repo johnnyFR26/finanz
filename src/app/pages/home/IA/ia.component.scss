@@ -5,12 +5,21 @@
   padding: 16px;
 }
 
-.messages {
-  flex: 1; // Ocupa todo o espaço disponível
+.chat-container {
+  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 12px;
 }
 
 .cursor {
