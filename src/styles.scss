@@ -72,17 +72,8 @@ body {
     align-items: center !important; 
     padding: 10px !important;
 }
-@media (orientation: landscape) {
-    .form, .content{
-        font-size: 15px;
-    }
-    label{
-        font-size: 16.5px;
-    }
-    .input{
-        font-size: 12px;
-    }
-  }
+
+
 .light{
     position: relative;
     width: 70%;

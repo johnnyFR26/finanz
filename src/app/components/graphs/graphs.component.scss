@@ -1,0 +1,26 @@
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+
+  .chart {
+    background-color: #131313;
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+    width: 400px;
+    text-align: center;
+
+    canvas {
+      max-width: 100%;
+    }
+
+    p {
+      color: white;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+  }
+}

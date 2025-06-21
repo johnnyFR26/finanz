@@ -26,6 +26,16 @@ export const routes: Routes = [
                 path: 'transactions',
                 loadComponent: () => import('./pages/home/transactions-list/transactions-list.component').then(m => m.TransactionsListComponent),
                 canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'creditCard',
+                loadComponent: () => import('./pages/home/credit-cards/credit-cards.component').then(m => m.CreditCardsComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'IA',
+                loadComponent: () => import('./pages/home/IA/ia.component').then(m => m.IAComponent),
+                canActivate: [doesUserHaveAccount],
             }
         ]
     },

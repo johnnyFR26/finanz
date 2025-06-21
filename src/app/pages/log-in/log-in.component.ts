@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core'
+import { Component, computed, ElementRef, inject, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { UserService } from '../../services/user.service'
 import { Router } from '@angular/router'
@@ -9,6 +9,7 @@ import {
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AccountService } from '../../services/account.service'
 import { CategoryService } from '../../services/category.service'
+import * as anime from 'animejs';
 
 @Component({
   selector: 'app-log-in',
@@ -18,10 +19,11 @@ import { CategoryService } from '../../services/category.service'
 })
 export class LogInComponent {
 
-  private userService = inject(UserService)
+  protected userService = inject(UserService)
   private accountService = inject(AccountService)
   private categoryService = inject(CategoryService)
   private router = inject(Router)
+  private el = inject(ElementRef)
 
   public email = signal<string>('')
   public password = signal<string>('')
@@ -63,7 +65,7 @@ export class LogInComponent {
             this.categoryService.setCategories(response.user.account.categories)
           }
     
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/home/account')
           
           if(response.user.account != null){
             this.accountService.setCurrentAccount({

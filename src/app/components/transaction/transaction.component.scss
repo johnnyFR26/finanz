@@ -66,3 +66,14 @@ mat-expansion-panel{
 mat-panel-description{
   justify-content: space-around;
 }
+
+.category-icon{
+    background-color: #470688;
+    width: 34px;
+    height: 34px;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 100%;
+}

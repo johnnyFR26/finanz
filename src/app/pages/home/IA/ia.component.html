@@ -1,0 +1,18 @@
+<div class="messages">
+    <p><span id="first-message"></span><span class="cursor">|</span></p>
+</div>
+
+<div class="chat-input-container">
+  <textarea 
+    [(ngModel)]="message"
+    (keydown.enter)="sendMessage()"
+    placeholder="Digite sua mensagem..."
+    rows="1"
+    class="chat-input"
+    #inputArea
+  ></textarea>
+
+  <button class="send-button" (click)="sendMessage()">
+    <mat-icon>send</mat-icon>
+  </button>
+</div>

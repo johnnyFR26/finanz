@@ -1,24 +1,21 @@
-import {ChangeDetectionStrategy, Component, computed, inject, model, signal} from '@angular/core';
+import {Component, computed, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
+  MatDialogRef
 } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { AccountService } from '../../../../services/account.service';
-import { TransactionService } from '../../../../services/transaction.service';
 import { CategoryService } from '../../../../services/category.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
-    selector: 'app-transaction-modal',
+    selector: 'app-addCategories-modal',
     template: `
     <div class="content">
       <p>Criar categoria</p>
@@ -26,6 +23,13 @@ import { CategoryService } from '../../../../services/category.service';
 
       <label>Nome</label>
       <input class="input" [(ngModel)]="name" name="name" [ngModelOptions]="{standalone: true}" />
+
+      <mat-label for="icon">Icone</mat-label>
+      <mat-select name="icon" [(ngModel)]="icon">
+        @for (icon of icons; track $index) {
+          <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
+        }
+      </mat-select>
 
     <mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancelar</button>
@@ -40,7 +44,8 @@ import { CategoryService } from '../../../../services/category.service';
         FormsModule,
         MatButtonModule,
         MatDialogActions,
-        MatSelectModule
+        MatSelectModule,
+        MatIconModule
       ]
 })
 export class AddCategoriesModalComponent{
@@ -50,6 +55,16 @@ export class AddCategoriesModalComponent{
     private accountService = inject(AccountService)
     public account = this.accountService.getCurrentAccount()
     public name = signal('')
+    public icon = signal('')
+    public icons = [
+      'account_balance',
+      'savings',
+      'shopping_cart',
+      'payment',
+      'credit_card',
+      'attach_money'
+    ]
+
 
 
     private categoryService = inject(CategoryService)
@@ -58,7 +73,10 @@ export class AddCategoriesModalComponent{
     protected formValue = computed(() => {
       return {
         accountId: this.account()?.id,
-        name: this.name()
+        name: this.name(),
+        controls: JSON.stringify({
+          icon: this.icon()
+        })
       }
     })
   

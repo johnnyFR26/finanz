@@ -1,0 +1,38 @@
+<div class="charts-container">
+
+  <!-- Gráfico de Linha -->
+  <div class="chart">
+    <canvas baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="'line'">
+    </canvas>
+  </div>
+
+  <!-- Gráfico Receita vs Despesa -->
+  <div class="chart">
+    <canvas baseChart
+      [data]="{
+    labels: ['Receitas', 'Despesas'],
+    datasets: [{
+      data: [this.sum(), this.sub()],
+      backgroundColor: ['#9FF04C', '#E74C3C']
+    }]
+  }"
+      [options]="chartOptions"
+      [type]="'doughnut'">
+    </canvas>
+    <p>RECEITA X DESPESA</p>
+  </div>
+
+  <!-- Gráfico de Despesas por Categoria -->
+  <div class="chart">
+    <canvas baseChart
+      [data]="categoryChartData"
+      [options]="chartOptions"
+      [type]="'doughnut'">
+    </canvas>
+    <p>DESPESAS POR CATEGORIA</p>
+  </div>
+
+</div>

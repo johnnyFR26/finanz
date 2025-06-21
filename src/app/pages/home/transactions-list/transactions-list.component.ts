@@ -1,7 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-
+import { Component, inject } from '@angular/core';
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
 import { TransactionComponent } from '../../../components/transaction/transaction.component';
@@ -9,7 +6,7 @@ import { TransactionComponent } from '../../../components/transaction/transactio
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, TransactionComponent],
+  imports: [TransactionComponent],
   template: `
   <div class="box">
     <h1>Transações</h1>
@@ -25,17 +22,11 @@ import { TransactionComponent } from '../../../components/transaction/transactio
   `,
   styleUrls: ['./transaction-list.component.scss'],
 })
-export class TransactionsListComponent implements OnInit {
+export class TransactionsListComponent {
   private transactionService = inject(TransactionService);
   private accountService = inject(AccountService);
 
   protected account = this.accountService.getCurrentAccount();
-  protected transactions = signal<any>([]);
-  protected displayedColumns: string[] = ['destination', 'value', 'type', 'createdAt'];
+  protected transactions = this.transactionService.getTransactions();
 
-  ngOnInit(): void {
-    this.transactionService.getAccountTransactions(this.account()!.id).subscribe((data) => {
-      this.transactions.set(data);
-    });
-  }
 }
