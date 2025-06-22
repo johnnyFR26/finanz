@@ -46,6 +46,7 @@ body {
     --input-area: #232334;
     --red: #ff5757;
     --white: #f0f8ff;
+    --black: #171722;
     --blue: #38b6ff;
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
@@ -127,6 +128,51 @@ label{
     display: flex;
     justify-content: space-between;
 }
+
+.small-box{
+    margin: 0;
+    height: auto;
+    width: auto;
+    padding: 0 0 0 5px;
+
+    
+    h2{
+        margin: 0
+    }
+
+    h1{
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    *{
+        font-size: 18px;
+        color: var(--white);
+    }
+
+    mat-icon{
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        padding: 0;
+        background: 0;
+    }
+}
+
+.gains{
+    mat-icon{
+        color: var(--principal-color);
+        rotate: -90deg;
+    }
+}
+.losts{
+    mat-icon{
+        color: var(--red);
+        rotate: 90deg;
+    }
+}
+
+
 .input {
     background-color: var(--input-area);
     font-size: 16px;

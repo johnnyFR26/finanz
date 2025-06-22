@@ -1,3 +1,9 @@
+:host{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .transaction-list{
     overflow: auto;
     padding: 5px;
@@ -16,3 +22,116 @@
     }
     background-color: var(--gray-transaction);
 }
+
+.small-box{
+    background-color: var(--input-area);
+    border-radius: 5px;
+    height: 40px;
+    min-width: 120px;
+    display: flex;
+    flex-flow: column wrap;
+    margin: 20px 6px;
+    
+    h1{
+        font-size: large;
+        margin: 0;
+    }
+    h2{
+        font-size: medium;
+    }
+    
+    mat-icon{
+        font-size: 40px;
+        height: 40px;
+        width: 40px;
+        align-self: end;
+    }
+}
+.gains{
+    & h2{
+        color: var(--principal-color);
+    }
+}
+.losts{
+    & h2{
+        color: var(--red);
+    }    
+}
+
+.mini-box{
+    color: var(--black);
+    font-family: Dosis;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+        span, option{
+            color: var(--black);
+            font-family: Dosis;
+            font-weight: bold;
+            font-size: large;
+        }
+    background-color: var(--principal-color);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.month-selector{
+    background-color: #0000 !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button{
+        color: var(--principal-color);
+        background-color: #0000;
+        border:0;
+        padding: 0;
+        mat-icon{
+            width: 35px;
+            height: 35px;
+            font-size: 35px;
+            scale: 1.4;
+        }
+    }
+    &.all{
+        .mini-box{
+            background-color: var(--white);
+        }
+        button{
+            color: var(--white);
+        }
+    }
+
+    &.revenue{
+        .mini-box{
+            background-color: var(--principal-color);
+        }
+        button{
+            color: var(--principal-color);
+        }
+    }
+
+    &.expense{
+        .mini-box{
+            background-color: var(--red);
+        }
+        button{
+            color: var(--red);
+        }
+    }
+}
+
+    .all{
+        background-color: var(--white);
+    }
+
+    .revenue{
+        background-color: var(--principal-color);
+    }
+
+    .expense{
+        background-color: var(--red);
+    }
