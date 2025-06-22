@@ -8,6 +8,9 @@
     container-shape: 20px 20px,
   ));
 }
+*{
+  --mat-sys-surface: var(--gray-transaction);
+}
 button{
   background-color: #0000;
   border: 0;

@@ -31,7 +31,7 @@ body {
     height: 100%;
 }
 .mat-sidenav-container{
-    height: calc(100vh - 114.4px);
+    height: calc(100vh - 64px);
     position: relative;
     top: 64px;
 }
@@ -41,6 +41,7 @@ body {
     --principal-color: #cbe957;
     --grey-background: #181824;
     --gray-form: #111119;
+    --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #232334;
     --red: #ff5757;

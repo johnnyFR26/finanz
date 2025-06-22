@@ -1,13 +1,18 @@
-
 .transaction-list{
     overflow: auto;
+    padding: 5px;
+    border: solid 5px var(--gray-transaction);
     max-height: 50vh;
     &::-webkit-scrollbar{
         background: #0000;
-        width: 5px;
+        width: 7px;
     }
     &::-webkit-scrollbar-thumb{
         border-radius: 10px;
         background: #424242;
+        &:hover{
+            background: #626262;
+        }
     }
+    background-color: var(--gray-transaction);
 }

@@ -20,20 +20,20 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
           @if (transaction().category?.controls?.icon) {
             <mat-icon class="category-icon">{{transaction().category?.controls?.icon}}</mat-icon>
           }
-          <div class="transaction-tools">
-            <button aria-label="anexar">
-              <mat-icon class="file">attach_file</mat-icon>
-            </button>
-            <button aria-label="editar">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button aria-label="deletar">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{transaction()?.description}}</p>
+        <div class="transaction-tools">
+          <button aria-label="anexar">
+            <mat-icon class="file">attach_file</mat-icon>
+          </button>
+          <button aria-label="editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button aria-label="deletar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
     </mat-expansion-panel>
     `
 })
