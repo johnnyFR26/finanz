@@ -36,6 +36,10 @@ footer {
     --mat-sys-corner-full: 0;
 }
 
-matsidenav{
+mat-side-nav{
     background-color: #666565;
+}
+:host{
+    height: 100vh;
+    display: block;
 }
