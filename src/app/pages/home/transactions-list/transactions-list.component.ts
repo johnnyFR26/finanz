@@ -13,18 +13,18 @@ import { FormsModule } from '@angular/forms';
   template: `
   <select class="mini-box" style="margin-bottom:30px;scale:1.2;" [(ngModel)]="type" [ngClass]="{
     'all': type() == 'transaction',
-    'revenue': type() == 'revenue',
-    'expense': type() == 'expense'
+    'revenue': type() == 'input',
+    'expense': type() == 'output'
   }">
     <option class="all" value="transaction">Transações</option>
-    <option class="revenue" value="revenue">Receitas</option>
-    <option class="expense" value="expense">Despesas</option>
+    <option class="revenue" value="input">Receitas</option>
+    <option class="expense" value="output">Despesas</option>
   </select>
   <div class="box">
     <div class="month-selector" [ngClass]="{
     'all': type() == 'transaction',
-    'revenue': type() == 'revenue',
-    'expense': type() == 'expense'
+    'revenue': type() == 'input',
+    'expense': type() == 'output'
   }">
       <button><mat-icon>keyboard_arrow_left</mat-icon></button>
       <div class="mini-box"><span>Junho</span></div>
@@ -42,9 +42,23 @@ import { FormsModule } from '@angular/forms';
     </div>
     <div class= "box transaction-list">
       @for (transaction of transactions(); track $index) {
-        <transaction
-          [transaction]="transaction"
-        />
+        @if (type() != 'transaction') {
+          @if (transaction.type==type()) {
+            <transaction
+              [transaction]="transaction"
+              [ngClass]="{
+                'all': type() == 'transaction',
+                'revenue': type() == 'input',
+                'expense': type() == 'output'
+              }"
+            />
+          }
+        }
+        @else {
+            <transaction
+              [transaction]="transaction"
+            />
+          }
       }
     </div>
   </div>
@@ -60,9 +74,6 @@ export class TransactionsListComponent {
   protected transactions = this.transactionService.getTransactions();
   protected sum = this.transactionService.sum;
   protected sub = this.transactionService.sub;
-  protected type = signal<string | null>(null);
-
-  protected newType = computed(() => {
-  })
+  protected type = signal<string | null>('transaction');
 
 }

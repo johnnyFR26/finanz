@@ -124,14 +124,17 @@
     }
 }
 
-    .all{
-        background-color: var(--white);
-    }
+.all{
+    background-color: var(--white);
+    --type: var(--white);
+}
 
-    .revenue{
-        background-color: var(--principal-color);
-    }
+.revenue{
+    background-color: var(--principal-color);
+    --type: var(--principal-color);
+}
 
-    .expense{
-        background-color: var(--red);
-    }
+.expense{
+    background-color: var(--red);
+    --type: var(--red);
+}
