@@ -2,6 +2,7 @@ import { AfterViewInit, Component, inject } from "@angular/core";
 import { UserService } from "../../../services/user.service";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
+import { IaService } from "../../../services/ia.service";
 
 @Component({
     selector: "app-ia",
@@ -14,6 +15,8 @@ export class IAComponent implements AfterViewInit {
     protected user = this.userService.getUserInfo()
     protected initial: string = `Ola ${this.user()?.user?.name}, como posso te ajudar hoje?`
     protected message: string = ''
+    protected messasges: string[] = []
+    private iaService = inject(IaService)
 
 
     ngAfterViewInit(): void {
@@ -31,6 +34,14 @@ export class IAComponent implements AfterViewInit {
 
     sendMessage() {
         console.log(this.message)
+        this.messasges.push(this.message)
+        this.iaService.sendMessage(this.message).subscribe(res => {
+            //@ts-expect-error
+            console.log(res[0].output)
+            //@ts-expect-error
+            this.messasges.push(res[0].output)
+        })
+        this.message = ''
     }
 
 }
