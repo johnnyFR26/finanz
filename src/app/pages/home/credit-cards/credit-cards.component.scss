@@ -1,0 +1,96 @@
+@use '@angular/material' as mat;
+:host{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title{
+    color: var(--principal-color);
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 30px;
+    &::after{
+        content: "";
+        height: 2px;
+        width: 80%;
+        background-color: var(--principal-color);
+        position: absolute;
+        left: 10%;
+        bottom: -50%;
+    }
+}
+
+.cardAdd{
+    flex-direction: column;
+    align-items: center;
+    color: var(--input-area2);
+    mat-icon{
+        min-width: 100px;
+        min-height: 100px;
+        font-size: 100px;
+    }
+    h2{
+        color: var(--input-area2);
+        text-align: center;
+    }
+}
+
+.card{
+    font-family: league-spartan;
+}
+.cardName{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+    h3{
+        margin: 0;
+        flex-grow: 1;
+    }
+}
+.cardContent{
+    display: flexbox;
+    width: 100%;
+    direction: column;
+    flex-wrap: wrap;
+    *{font-family: Dosis;}
+    p{margin-top: 0;}
+    div{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        span{color: var(--red); flex-grow: 1; text-align: end;}
+    }
+    mat-progress-bar{
+        border-radius: 20px;
+        overflow: hidden;
+        &::after{
+            content: ""attr(data) "%";
+            height: 18px;
+            width: 30px;
+            position: absolute;
+            color: var(--white);
+            text-shadow: 1px 0 5px #000;
+            right: 10px;
+        }
+    }
+    @include mat.progress-bar-overrides((
+    active-indicator-color: var(--red),
+    active-indicator-height:20px,
+    track-height: 20px,
+    track-shape: 20px,
+    ));
+    button{
+        --color: var(--principal-color) !important;
+    }
+    @include mat.button-overrides((
+        text-container-shape: 20px,
+    ));
+}
+

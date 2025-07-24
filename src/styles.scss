@@ -1,24 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: Ruda;
-    src: url(../public/fonts/Ruda-VariableFont_wght.ttf);
+    src: url(/fonts/Ruda-VariableFont_wght.ttf);
   }
 @font-face {
 font-family: League-Spartan;
-src: url(../public/fonts/LeagueSpartan-VariableFont_wght.ttf);
+src: url(/fonts/LeagueSpartan-VariableFont_wght.ttf);
 font-weight: bold;
 }
 @font-face {
 font-family: Contrail-One;
-src: url(../public/fonts/ContrailOne-Regular.ttf);
+src: url(/fonts/ContrailOne-Regular.ttf);
 }
 @font-face {
 font-family: TT-Berlinerins;
-src: url("../public/fonts/TT Berlinerins Trial Grotesk.otf");
+src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
 }
 @font-face {
     font-family: Dosis;
-    src: url(../public/fonts/Dosis-VariableFont_wght.ttf);
+    src: url(/fonts/Dosis-VariableFont_wght.ttf);
 }
 body {
     background-color:var(--grey-background); 
@@ -26,14 +26,29 @@ body {
 .centro{
     flex-direction: column; 
     display: flex;
-    justify-content: center; 
     align-items: center;
-    height: 100%;
+    padding-top: var(--topsize);
+    height: calc(100% - var(--topsize));
 }
+
+@media (orientation: portrait){
+    *{
+        --topsize: 25px;
+        --headersize: 56px;
+    }
+}
+
+@media (orientation: landscape){
+    *{
+        --topsize: 45px;
+        --headersize: 64px;
+    }
+}
+
 .mat-sidenav-container{
-    height: calc(100vh - 64px);
+    height: calc(100vh - var(--headersize));
     position: relative;
-    top: 64px;
+    top: var(--headersize);
 }
 *{
     --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
@@ -44,15 +59,18 @@ body {
     --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #232334;
+    --input-area2: #373760;
     --red: #ff5757;
     --white: #f0f8ff;
     --black: #171722;
     --blue: #38b6ff;
+    --mat-sys-primary: var(--principal-color);
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
+    --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
-    color:  var(--white);
+    color:  var(--color, var(--white));
     font-family: Arial, Helvetica, sans-serif;
 }
 .form, .mat-mdc-dialog-surface{
