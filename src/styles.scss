@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
 @font-face {
     font-family: Ruda;
     src: url(/fonts/Ruda-VariableFont_wght.ttf);
@@ -64,6 +66,8 @@ body {
     --white: #f0f8ff;
     --black: #171722;
     --blue: #38b6ff;
+    --magenta: #cb6ce6;
+    --yellow: #ffde59;
     --mat-sys-primary: var(--principal-color);
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
@@ -145,6 +149,9 @@ label{
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--gray-form);
 }
 
 .small-box{
@@ -249,10 +256,137 @@ label{
     width: 280px;
     margin-bottom: 40px;
 }
-.box{
-    border-radius: 5px;
-    padding: 10px;
-    background-color: var(--gray-form);
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.title{
+    color: var(--principal-color);
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 30px;
+    &::after{
+        content: "";
+        height: 2px;
+        width: 80%;
+        background-color: var(--principal-color);
+        position: absolute;
+        left: 10%;
+        bottom: -50%;
+    }
+}
+
+.mini-box{
+    color: var(--black);
+    font-family: Dosis;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+        span, option{
+            color: var(--black);
+            font-family: Dosis;
+            font-weight: bold;
+            font-size: large;
+        }
+    background-color: var(--principal-color);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.month-selector{
+    background-color: #0000 !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button{
+        color: var(--principal-color);
+        background-color: #0000;
+        border:0;
+        padding: 0;
+        mat-icon{
+            width: 35px;
+            height: 35px;
+            font-size: 35px;
+            scale: 1.4;
+        }
+    }
+    &.all{
+        .mini-box{
+            background-color: var(--white);
+        }
+        button{
+            color: var(--white);
+        }
+    }
+
+    &.revenue{
+        .mini-box{
+            background-color: var(--principal-color);
+        }
+        button{
+            color: var(--principal-color);
+        }
+    }
+
+    &.expense{
+        .mini-box{
+            background-color: var(--red);
+        }
+        button{
+            color: var(--red);
+        }
+    }
+}
+
+.tools{
+  display: flex;
+  justify-self: flex-end;
+
+  & button{
+    background-color: var(--input-area);
+    width: 34px;
+    height: 34px;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 0;
+    border-radius: 100%;
+    padding: 0;
+  }
+}
+
+.category-icon{
+    background-color: #470688;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 34px;
+    padding: 2px;
+    margin: 4px;
+    border-radius: 100%;
+}
+
+
+mat-progress-bar{
+    border-radius: 20px;
+    overflow: hidden;
+    &::after{
+        content: ""attr(data) "%";
+        height: 18px;
+        width: 30px;
+        position: absolute;
+        color: var(--white);
+        text-shadow: 1px 0 5px #000;
+        right: 10px;
+    }
+}
+@include mat.progress-bar-overrides((
+active-indicator-height:20px,
+track-height: 20px,
+track-shape: 20px,
+));

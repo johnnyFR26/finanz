@@ -30,7 +30,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{transaction()?.description}}</p>
-        <div class="transaction-tools">
+        <div class="tools">
           <button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
           </button>
