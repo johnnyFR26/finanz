@@ -7,7 +7,7 @@ import { CurrencyPipe } from "@angular/common";
     imports: [CurrencyPipe],
     styleUrl: './credit-card-select.component.scss',
     template: `
-    <div class="box card">
+    <div class="box creditCard">
               <div class="currency">
                 <h2>CARTÃO DE CRÉDITO</h2>
                 <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
