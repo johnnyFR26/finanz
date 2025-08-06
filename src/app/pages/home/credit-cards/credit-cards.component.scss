@@ -1,4 +1,3 @@
-@use '@angular/material' as mat;
 :host{
     display: flex;
     align-items: center;
@@ -38,60 +37,5 @@
     }
 }
 
-.card{
-    font-family: league-spartan;
-    box-shadow: 0 20px 20px -12px #000;
-}
-.cardName{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    img{
-        width: 50px;
-        height: 50px;
-    }
-    h3{
-        margin: 0;
-        flex-grow: 1;
-    }
-}
-.cardContent{
-    display: flexbox;
-    width: 100%;
-    direction: column;
-    flex-wrap: wrap;
-    *{font-family: Dosis;}
-    p{margin-top: 0;}
-    div{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        span{color: var(--red); flex-grow: 1; text-align: end;}
-    }
-    mat-progress-bar{
-        border-radius: 20px;
-        overflow: hidden;
-        &::after{
-            content: ""attr(data) "%";
-            height: 18px;
-            width: 30px;
-            position: absolute;
-            color: var(--white);
-            text-shadow: 1px 0 5px #000;
-            right: 10px;
-        }
-    }
-    @include mat.progress-bar-overrides((
-    active-indicator-color: var(--red),
-    active-indicator-height:20px,
-    track-height: 20px,
-    track-shape: 20px,
-    ));
-    button{
-        --color: var(--principal-color) !important;
-    }
-    @include mat.button-overrides((
-        text-container-shape: 20px,
-    ));
-}
+
 
