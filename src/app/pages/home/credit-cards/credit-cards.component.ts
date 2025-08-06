@@ -17,7 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         </div>
         
         <div class="box card">
-            <div class="cardName">
+            <div class="name">
                 <img src="/credit-card/mastercard.svg">
                 <h3>CARTÃO 1</h3>
                 <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
