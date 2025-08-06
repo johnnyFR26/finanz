@@ -1,0 +1,70 @@
+@use '@angular/material' as mat;
+:host{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.remaining{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    *{
+        margin: 5px;
+    }
+    h1{color: var(--principal-color);}
+    h2{font-size: 20px;}
+}
+
+.small-box{
+    background-color: var(--gray-form);
+    border-radius: 5px;
+    height: 50px;
+    min-width: 140px;
+    
+    div{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    h1{
+        font-size: large;
+        margin: 0;
+    }
+    h2{
+        font-size: 14px;
+    }
+    
+    mat-icon{
+        font-size: 30px;
+        height: 30px;
+        width: 30px;
+    }
+    .material-symbols-outlined{
+        font-size: 30px;
+    }
+
+    &.gains{h2, span{color: var(--principal-color);}}
+    &.losts{h2, span{color: var(--red);}}
+    &.balance{h2, span{color: var(--magenta)}}
+    &.economy{h2, span{color: var(--yellow)}}
+}
+
+.TWOxTWO{
+    display: grid;
+    gap: 10px;
+    margin:10px;
+}
+@media (orientation: landscape) {
+  .TWOxTWO {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (orientation: portrait) {
+  .TWOxTWO {
+    grid-template-columns: 1fr 1fr;
+  }
+}
