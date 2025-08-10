@@ -1,3 +1,5 @@
+import { provideEventPlugins } from "@taiga-ui/event-plugins";
+import { provideAnimations } from "@angular/platform-browser/animations";
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -13,7 +15,8 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+        provideAnimations(),
+        provideZoneChangeDetection({ eventCoalescing: true }),
     provideEnvironmentNgxMask(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
@@ -22,6 +25,8 @@ export const appConfig: ApplicationConfig = {
     },
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
-    provideCharts(withDefaultRegisterables())
-  ],
+    provideCharts(withDefaultRegisterables()),
+        provideEventPlugins(),
+        provideEventPlugins()
+    ],
 };

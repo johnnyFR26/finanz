@@ -1,0 +1,22 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    margin-block-start: 1rem;
+ 
+    --tui-chart-categorical-00: var(--tui-chart-categorical-12);
+    --tui-chart-categorical-01: var(--principal-color);
+    --tui-chart-categorical-02: var(--tui-chart-categorical-03);
+    --tui-chart-categorical-03: var(--tui-chart-categorical-09);
+}
+
+.index-controller {
+    max-inline-size: 20rem;
+}
+
+.t-svg{
+    color: var(--input-area) !important;
+}
+:host ::ng-deep tui-arc-chart .t-svg path:first-child {
+  stroke: var(--input-area) !important;    /* sua cor */
+  stroke-opacity: 1 !important;  /* força cor sem transparência */
+}

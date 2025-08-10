@@ -23,6 +23,11 @@ export const routes: Routes = [
                 canActivate: [doesUserHaveAccount],
             },
             {
+                path: 'accounts',
+                loadComponent: () => import('./pages/home/accounts/accounts.component').then(m => m.AccountsComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
                 path: 'transactions',
                 loadComponent: () => import('./pages/home/transactions-list/transactions-list.component').then(m => m.TransactionsListComponent),
                 canActivate: [doesUserHaveAccount],
