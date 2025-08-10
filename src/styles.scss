@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
 @font-face {
     font-family: Ruda;
     src: url(/fonts/Ruda-VariableFont_wght.ttf);
@@ -19,9 +21,6 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
 @font-face {
     font-family: Dosis;
     src: url(/fonts/Dosis-VariableFont_wght.ttf);
-}
-body {
-    background-color:var(--grey-background); 
 }
 .centro{
     flex-direction: column; 
@@ -64,12 +63,21 @@ body {
     --white: #f0f8ff;
     --black: #171722;
     --blue: #38b6ff;
+    --magenta: #cb6ce6;
+    --yellow: #ffde59;
     --mat-sys-primary: var(--principal-color);
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
+    --tui-background-base: var(--grey-background);
+    --tui-text-primary: var(--white);
+    --tui-text-secondary: var(--principal-color);
+    --tui-text-tertiary: var(--white);
+    --tui-background-neutral-1: #232334;
+    --tui-background-neutral-1-hover: #373760;
+    --tui-background-neutral-1-pressed: #232334;
     color:  var(--color, var(--white));
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -145,6 +153,9 @@ label{
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--gray-form);
 }
 
 .small-box{
@@ -249,46 +260,9 @@ label{
     width: 280px;
     margin-bottom: 40px;
 }
-.box{
-    border-radius: 5px;
-    padding: 10px;
-    background-color: var(--gray-form);
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.name{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    img{
-        width: 50px;
-        height: 50px;
-    }
-    h3{
-        margin: 0;
-        flex-grow: 1;
-    }
-}
-.cardContent{
-    display: flex;
-    width: 100%;
-    direction: column;
-    flex-wrap: wrap;
-    *{font-family: Dosis;}
-    p{margin-top: 0;}
-    div{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        span{color: var(--red); flex-grow: 1; text-align: end;}
-    }
-}
-
-.card{
-    font-family: league-spartan;
-    box-shadow: 0 20px 20px -12px #000;
-}
 .title{
     color: var(--principal-color);
     display: inline-block;
@@ -307,17 +281,116 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
-.cardAdd{
-    flex-direction: column;
+.mini-box{
+    color: var(--black);
+    font-family: Dosis;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+        span, option{
+            color: var(--black);
+            font-family: Dosis;
+            font-weight: bold;
+            font-size: large;
+        }
+    background-color: var(--principal-color);
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    color: var(--input-area2);
-    mat-icon{
-        min-width: 100px;
-        min-height: 100px;
-        font-size: 100px;
+}
+
+.month-selector{
+    background-color: #0000 !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button{
+        color: var(--principal-color);
+        background-color: #0000;
+        border:0;
+        padding: 0;
+        mat-icon{
+            width: 35px;
+            height: 35px;
+            font-size: 35px;
+            scale: 1.4;
+        }
     }
-    h2{
-        color: var(--input-area2);
-        text-align: center;
+    &.all{
+        .mini-box{
+            background-color: var(--white);
+        }
+        button{
+            color: var(--white);
+        }
+    }
+
+    &.revenue{
+        .mini-box{
+            background-color: var(--principal-color);
+        }
+        button{
+            color: var(--principal-color);
+        }
+    }
+
+    &.expense{
+        .mini-box{
+            background-color: var(--red);
+        }
+        button{
+            color: var(--red);
+        }
     }
 }
+
+.tools{
+  display: flex;
+  justify-self: flex-end;
+
+  & button{
+    background-color: var(--input-area);
+    width: 34px;
+    height: 34px;
+    margin: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 0;
+    border-radius: 100%;
+    padding: 0;
+  }
+}
+
+.category-icon{
+    background-color: #470688;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 34px;
+    padding: 2px;
+    margin: 4px;
+    border-radius: 100%;
+}
+
+
+mat-progress-bar{
+    border-radius: 20px;
+    overflow: hidden;
+    &::after{
+        content: ""attr(data) "%";
+        height: 18px;
+        width: 30px;
+        position: absolute;
+        color: var(--white);
+        text-shadow: 1px 0 5px #000;
+        right: 10px;
+    }
+}
+@include mat.progress-bar-overrides((
+active-indicator-height:20px,
+track-height: 20px,
+track-shape: 20px,
+));
