@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+.cardContent{
+    margin: 30px 0;
+    justify-content: center;
+    
+    @include mat.button-overrides((
+        text-container-shape: 20px,
+    ));
+    button{width: 140px; padding: 0;}
+    .gains{--color:var(--principal-color)}
+    .loses{--color:var(--red);}
+
+}
+hr{
+    margin-right: -10px;
+    margin-left: -10px;
+    width: calc(100% + 20px);
+    overflow: visible;
+    height: 5px;
+    background-color: var(--grey-background);
+    border: none;
+}
