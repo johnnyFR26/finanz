@@ -279,7 +279,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-wrap: wrap;
     *{font-family: Dosis;}
     p{margin-top: 0;}
-    div{
+    div:not(mat-progress-bar div){
         display: flex;
         justify-content: space-between;
         width: 100%;

@@ -1,40 +1,8 @@
 @use '@angular/material' as mat;
-.card{
-    font-family: league-spartan;
-    box-shadow: 0 20px 20px -12px #000;
-}
-.cardName{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    img{
-        width: 50px;
-        height: 50px;
-    }
-    h3{
-        margin: 0;
-        flex-grow: 1;
-    }
-}
 .cardContent{
-    display: flexbox;
-    width: 100%;
-    direction: column;
-    flex-wrap: wrap;
-    *{font-family: Dosis;}
-    p{margin-top: 0;}
-    div{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        span{color: var(--red); flex-grow: 1; text-align: end;}
-    }
     @include mat.progress-bar-overrides((
     active-indicator-color: var(--principal-color),
     ));
-    button{
-        --color: var(--principal-color) !important;
-    }
     @include mat.button-overrides((
         text-container-shape: 20px,
     ));
