@@ -2,16 +2,17 @@ import { Component, inject, input, ChangeDetectionStrategy, signal, OnInit } fro
 import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe, CurrencyPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'transaction',
-    imports: [MatIconModule, MatExpansionModule, DatePipe, CurrencyPipe],
+    imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe],
     styleUrl: './transaction.component.scss',
     template: `
     <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <button mat-fab (click)="switchSelect()">
+          <button mat-fab-button (click)="switchSelect()">
             <mat-icon style="color: var(--type);">
               @if(buttonSelected()){check_circle}
               @else {radio_button_unchecked}
@@ -31,13 +32,13 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
       </mat-expansion-panel-header>
       <p>{{transaction()?.description}}</p>
         <div class="tools">
-          <button aria-label="anexar">
+          <button mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
           </button>
-          <button aria-label="editar">
+          <button mat-icon-button aria-label="editar">
             <mat-icon>edit</mat-icon>
           </button>
-          <button aria-label="deletar">
+          <button mat-icon-button aria-label="deletar">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

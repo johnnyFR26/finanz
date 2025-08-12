@@ -1,32 +1,5 @@
-@use '@angular/material' as mat;
 :host{
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-
-.cardContent{
-    display: flexbox;
-    width: 100%;
-    direction: column;
-    flex-wrap: wrap;
-    *{font-family: Dosis;}
-    p{margin-top: 0;}
-    div{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        span{color: var(--red); flex-grow: 1; text-align: end;}
-    }
-    button{
-        --color: var(--principal-color) !important;
-    }
-    @include mat.button-overrides((
-        text-container-shape: 20px,
-    ));
-}
-
-
-@include mat.progress-bar-overrides((
-active-indicator-color: var(--red),
-));
