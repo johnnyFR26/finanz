@@ -1,0 +1,52 @@
+@use '@angular/material' as mat;
+:host{width: 100%;}
+.plan{
+    background-color: var(--grey-background);
+    width: calc(100% - 20px);
+    *:not(mat-icon){font-family: Dosis;}
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tools{
+    justify-self: flex-end;
+}
+
+.category-icon{
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 24px;
+    padding: 2px;
+}
+.category{
+    display: flex;
+    align-items: center;
+    span{
+        font-family: Dosis;
+        margin: 5px;
+    }
+}
+.division{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 10px 0;
+    div{
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        span{color: var(--principal-color);}
+    }
+}
+
+mat-progress-bar{
+    margin: 10px 0;
+}
+@include mat.progress-bar-overrides((
+    active-indicator-color: var(--principal-color),
+));

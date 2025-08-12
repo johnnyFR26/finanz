@@ -11,7 +11,7 @@
 *{
   --mat-sys-surface: var(--gray-transaction);
 }
-button{
+button:not(.tools button){
   background-color: #0000;
   border: 0;
   border-radius: 100%;
@@ -43,21 +43,6 @@ h1{
   rotate: 45deg;
 }
 
-
-.transaction-tools{
-  display: flex;
-
-  justify-self: flex-end;
-  button{
-    background-color: var(--input-area);
-    width: 34px;
-    height: 34px;
-    margin: 4px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-}
 mat-expansion-panel-header{
   padding: 0 8px;
 }
@@ -68,15 +53,4 @@ mat-expansion-panel{
 }
 mat-panel-description{
   justify-content: space-around;
-}
-
-.category-icon{
-    background-color: #470688;
-    width: 34px;
-    height: 34px;
-    margin: 4px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    border-radius: 100%;
 }

@@ -18,25 +18,6 @@
         width: 100%;
         span{color: var(--red); flex-grow: 1; text-align: end;}
     }
-    mat-progress-bar{
-        border-radius: 20px;
-        overflow: hidden;
-        &::after{
-            content: ""attr(data) "%";
-            height: 18px;
-            width: 30px;
-            position: absolute;
-            color: var(--white);
-            text-shadow: 1px 0 5px #000;
-            right: 10px;
-        }
-    }
-    @include mat.progress-bar-overrides((
-    active-indicator-color: var(--red),
-    active-indicator-height:20px,
-    track-height: 20px,
-    track-shape: 20px,
-    ));
     button{
         --color: var(--principal-color) !important;
     }
@@ -45,3 +26,7 @@
     ));
 }
 
+
+@include mat.progress-bar-overrides((
+active-indicator-color: var(--red),
+));
