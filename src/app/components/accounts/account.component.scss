@@ -12,9 +12,10 @@
 
 }
 hr{
-    position:relative;
-    right: 10px;
+    margin-right: -10px;
+    margin-left: -10px;
     width: calc(100% + 20px);
+    overflow: visible;
     height: 5px;
     background-color: var(--grey-background);
     border: none;
