@@ -4,15 +4,38 @@
     <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
       <mat-nav-list>
         <div class="menu">
-          <a mat-list-item (click)="redirectToPath('/home')">Home</a>
-          <a mat-list-item (click)="redirectToPath('/home/account')">Conta</a>
-          <a mat-list-item (click)="redirectToPath('/home/accounts')">Contas</a>
-          <a mat-list-item (click)="redirectToPath('/home/transactions')">Extrato</a>
-          <a mat-list-item (click)="redirectToPath('/home/IA')">Zezinho IA <mat-icon>android</mat-icon></a>
-          <a mat-list-item (click)="redirectToPath('/home/creditCard')">Cartão de Crédito</a>
-          <a mat-list-item (click)="redirectToPath('/home/planning')">Planejamento</a>
-          <a mat-list-item (click)="redirectToPath('/home/dev')">Desenvolvedores</a>
-          <a mat-list-item (click)="redirectToPath('/login')">Logout</a>
+<a mat-list-item (click)="redirectToPath('/home/account')">
+  <mat-icon>home</mat-icon> Home
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/accounts')">
+  <mat-icon>account_balance</mat-icon> Contas
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/transactions')">
+  <mat-icon>receipt_long</mat-icon> Extrato
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/IA')">
+  <mat-icon>android</mat-icon> Zezinho IA
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/creditCard')">
+  <mat-icon>credit_card</mat-icon> Cartão de Crédito
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/planning')">
+  <mat-icon>event_note</mat-icon> Planejamento
+</a>
+
+<a mat-list-item (click)="redirectToPath('/home/dev')">
+  <mat-icon>code</mat-icon> Desenvolvedores
+</a>
+
+<a mat-list-item (click)="redirectToPath('/login')">
+  <mat-icon>logout</mat-icon> Logout
+</a>
+
         </div>
 
           
