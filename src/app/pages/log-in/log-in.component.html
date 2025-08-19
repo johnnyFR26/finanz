@@ -7,7 +7,17 @@
       <label for="email">EMAIL</label>
       <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com"/>
       <label for="password">SENHA</label>
-      <input type="password" name="password" id="password" [(ngModel)]="password" required class="input" placeholder="senhaexemplo123"/>
+      <div class="input">
+      <input matInput type="password" name="password" id="password" [(ngModel)]="password" [type]="showPassword ? 'password' : 'text'" class="input" placeholder="senhaexemplo123">
+        <mat-icon class="pass" (click)="togglePassword()" matSuffix>
+        @if(showPassword){
+          lock
+        }
+        @else{
+            lock_open
+        }
+        </mat-icon>
+      </div>
       <a href="https://drgustavbogel.com.br/tratamentos/doenca-de-alzheimer/?gad_source=1&gad_campaignid=20315126576&gbraid=0AAAAAoN-tODp8QMExlyGbZkH72WQtIkNa&gclid=EAIaIQobChMIv53RzsW0jQMVWGtIAB0DXAV-EAAYASAAEgKKOvD_BwE" class="esqueci">esqueci minha senha</a>
       <button [disabled]="!isFormValid()" type="submit" class="button">Entrar</button>
       <div class="light"></div>
@@ -15,4 +25,3 @@
       <p class="link"> NÃO TEM UMA CONTA? CADASTRE-SE <a href="signin">AQUI</a></p>
     </form>
 </div>
-  
