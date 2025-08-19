@@ -20,3 +20,15 @@
         text-decoration: underline;
     }
 }
+
+.input:not(input){
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: center;
+  .input{width: 100%;}
+}
+.pass{
+  position: absolute;
+}

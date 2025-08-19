@@ -10,10 +10,11 @@ import { SnackbarComponent } from '../../components/snackbar/snackbar.component'
 import { AccountService } from '../../services/account.service'
 import { CategoryService } from '../../services/category.service'
 import * as anime from 'animejs';
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule],
+  imports: [FormsModule, MatIconModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })
@@ -24,6 +25,11 @@ export class LogInComponent {
   private categoryService = inject(CategoryService)
   private router = inject(Router)
   private el = inject(ElementRef)
+  public showPassword = true
+
+   togglePassword() {
+    this.showPassword = !this.showPassword
+  }
 
   public email = signal<string>('')
   public password = signal<string>('')
@@ -36,7 +42,7 @@ export class LogInComponent {
   });
 
   public isFormValid = computed(() => {
-   
+
     return this.email().length > 0 && this.password().length > 0 && EMAIL_REGEXP.test(this.email());
   });
 
@@ -46,9 +52,9 @@ export class LogInComponent {
     this.userService.loginUser(this.formValue()).subscribe({
       next: (response) => {
         console.log('Response:', response);
-    
-        if (!response || response.error) { 
-          
+
+        if (!response || response.error) {
+
           console.log("DEU MERDA");
         } else {
           console.log("Login bem-sucedido!")
@@ -64,9 +70,9 @@ export class LogInComponent {
           if(response.user.account){
             this.categoryService.setCategories(response.user.account.categories)
           }
-    
+
           this.router.navigateByUrl('/home/account')
-          
+
           if(response.user.account != null){
             this.accountService.setCurrentAccount({
               currentValue: response.user.account.currentValue,
