@@ -1,27 +1,23 @@
 <!-- login.component.html -->
-<div class="centro">
-  <img src="FINANZ.png" class="logo"/>
-  <form name="form" (ngSubmit)="onSubmit()" class="form">
-      <h1>ENTRAR</h1>
-      <div class="light"></div>
-      <label for="email">EMAIL</label>
-      <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com"/>
-      <label for="password">SENHA</label>
-      <div class="input">
-      <input matInput type="password" name="password" id="password" [(ngModel)]="password" [type]="showPassword ? 'password' : 'text'" class="input" placeholder="senhaexemplo123">
-        <mat-icon class="pass" (click)="togglePassword()" matSuffix>
-        @if(showPassword){
-          lock
-        }
-        @else{
-            lock_open
-        }
-        </mat-icon>
-      </div>
-      <a href="https://drgustavbogel.com.br/tratamentos/doenca-de-alzheimer/?gad_source=1&gad_campaignid=20315126576&gbraid=0AAAAAoN-tODp8QMExlyGbZkH72WQtIkNa&gclid=EAIaIQobChMIv53RzsW0jQMVWGtIAB0DXAV-EAAYASAAEgKKOvD_BwE" class="esqueci">esqueci minha senha</a>
-      <button [disabled]="!isFormValid()" type="submit" class="button">Entrar</button>
-      <div class="light"></div>
-      <button class="google" (click)="userService.loginWithGoogle()"><img src="google.svg" alt="login com google"></button>
-      <p class="link"> NÃO TEM UMA CONTA? CADASTRE-SE <a href="signin">AQUI</a></p>
-    </form>
-</div>
+<form name="form" (ngSubmit)="onSubmit()" class="sign">
+<img src="favicon.ico" class="logo"/>
+  <h1>LOGIN</h1>
+  <label for="email">EMAIL</label>
+  <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com"/>
+  <label for="password">SENHA</label>
+  <div class="input">
+  <input matInput type="password" name="password" id="password" [(ngModel)]="password" [type]="showPassword ? 'password' : 'text'" class="input" placeholder="senhaexemplo123">
+    <mat-icon class="pass" (click)="togglePassword()" matSuffix>
+    @if(showPassword){
+      lock
+    }
+    @else{
+      lock_open
+    }
+    </mat-icon>
+  </div>
+  <a href="https://drgustavbogel.com.br/tratamentos/doenca-de-alzheimer/?gad_source=1&gad_campaignid=20315126576&gbraid=0AAAAAoN-tODp8QMExlyGbZkH72WQtIkNa&gclid=EAIaIQobChMIv53RzsW0jQMVWGtIAB0DXAV-EAAYASAAEgKKOvD_BwE" class="esqueci">esqueci minha senha</a>
+  <button [disabled]="!isFormValid()" type="submit" class="button">Entrar</button>
+  <button class="google" (click)="userService.loginWithGoogle()"><img src="google.svg" alt="login com google">Fazer Login com o Google</button>
+  <p class="link"> NÃO TEM UMA CONTA? CADASTRE-SE <a href="signin">AQUI</a></p>
+</form>

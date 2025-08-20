@@ -18,10 +18,74 @@ src: url(/fonts/ContrailOne-Regular.ttf);
 font-family: TT-Berlinerins;
 src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
 }
+
+
 @font-face {
-    font-family: Dosis;
-    src: url(/fonts/Dosis-VariableFont_wght.ttf);
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-ExtraLight.ttf);
+    font-weight: lighter;
 }
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-ExtraLightItalic.ttf);
+    font-weight: lighter;
+    font-style: italic;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-Light.ttf);
+    font-weight: 300;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-LightItalic.ttf);
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-Regular.ttf);
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-Italic.ttf);
+    font-style: italic;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-MediumItalic.ttf);
+    font-weight: 500;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-MediumItalic.ttf);
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-SemiBold.ttf);
+    font-weight: 600;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-SemiBoldItalic.ttf);
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-Bold.ttf);
+    font-weight: bold;
+}
+@font-face {
+    font-family: KoHo;
+    src: url(/fonts/KoHo/KoHo-BoldItalic.ttf);
+    font-weight: bold;
+    font-style: italic;
+}
+
+
 body {
     background-color:var(--grey-background); 
 }
@@ -78,23 +142,23 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .form, .mat-mdc-dialog-surface{
-    background-color: var(--gray-form) !important;
-    width: 300px !important;
-    border-radius: 5px !important;
+    background-color: var(--gray-form);
+    width: 300px;
+    border-radius: 5px;
     box-shadow: 0 0 0 5px var(--principal-color),
     0 10px 0 5px var(--principal-color),
     0 -2px 0 5px var(--principal-color),
     0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22),
-    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22) !important;
-    justify-self: center !important;
+    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22);
+    justify-self: center ;
 }
 .form, .content{
     font-size: 20px;
-    display: flex !important;
-    flex-direction: column !important; 
-    justify-content: center!important; 
-    align-items: center !important; 
-    padding: 10px !important;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px;
 }
 
 
