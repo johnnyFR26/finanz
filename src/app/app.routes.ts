@@ -63,7 +63,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'account',
+        redirectTo: 'home/account',
         pathMatch: 'full'
     }
 ];
