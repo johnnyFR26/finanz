@@ -1,7 +1,6 @@
 :host{
   display: flex;
   justify-content: end;
-  font-family: KoHo !important;
 }
 
 .esqueci{
@@ -15,34 +14,39 @@
   }
 }
 .google{
-  position: relative;
-  background-color: var(--grey-background);
+  animation: rotate 4s linear infinite;
+  background: linear-gradient(var(--grey-background),var(--grey-background)) padding-box,
+    conic-gradient(
+      from var(--angle),
+      #4285F4 0deg,
+      #DB4437 90deg,
+      #F4B400 180deg,
+      #0F9D58 270deg,
+      #4285F4 360deg
+    ) border-box;
   font-size: 20px;
   padding: 10px 20px;
   font-family: 'KoHo', sans-serif;
   font-size: 31px;
   border-radius: 8px;
-  border: none;
+  border: 3px solid #0000;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  z-index: 0;
   img{
     height: 35px;
   }
-  &::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: 8px;
-  background: linear-gradient(to right, #4285F4 0%, #DB4437 38%, #F4B400 71%, #0F9D58 100%);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  z-index: -1;
 }
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .input:not(input){
@@ -60,13 +64,15 @@
 
 .sign{
   width: 30%;
-  height: 100%;
+  height: 100vh;
   align-self: end;
   display: flex;
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
-  padding: 10%;
+  padding: 0 10%;
+  box-shadow: -10px 20px 100px #000;
 }
 
 .logo{width: 85px;}
+h1{font-weight:normal; font-family: KoHo;}
