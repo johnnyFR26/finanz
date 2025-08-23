@@ -1,4 +1,13 @@
 <!-- login.component.html -->
+ <div #container class="grid array-container">
+  @for (row of rows; track $index) {
+    <div class="row">
+      @for (col of cols; track $index) {
+        <div class="circle"></div>
+      }
+    </div>
+  }
+</div>
 <form name="form" (ngSubmit)="onSubmit()" class="sign">
   <img src="favicon.ico" class="logo"/>
   <h1>LOGIN</h1>

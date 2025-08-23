@@ -72,7 +72,28 @@
   align-items: center; 
   padding: 0 10%;
   box-shadow: -10px 20px 100px #000;
+  z-index: 1;
 }
 
 .logo{width: 85px;}
 h1{font-weight:normal; font-family: KoHo;}
+
+.array-container{
+  padding: 10px;
+  height: calc(100vh - 20px);
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .row{
+    display: flex;
+    gap: 10px;
+    flex: none;
+    .circle{
+      border-radius: 50%;
+      width: 30px;
+      aspect-ratio: 1 / 1;
+      background-color: var(--principal-color);
+    }
+  }
+}
