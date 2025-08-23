@@ -27,16 +27,23 @@
   font-size: 20px;
   padding: 10px 20px;
   font-family: 'KoHo', sans-serif;
-  font-size: 31px;
   border-radius: 8px;
   border: 3px solid #0000;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   img{
-    height: 35px;
+    height: 25px;
   }
+  transition: 0.2s;
 }
+
+.google:hover{
+  scale: 1.1;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
 @keyframes rotate {
   to {
     --angle: 360deg;
@@ -77,6 +84,18 @@
 
 .logo{width: 85px;}
 h1{font-weight:normal; font-family: KoHo;}
+
+@media (orientation: portrait) {
+  .array-container{display: none !important;}
+  .sign{
+    width: 100% !important;
+    .google{
+      font-size: 16px;
+      img{height: 20px !important;}
+    }
+    .link{font-size: 16px;}
+  }
+}
 
 .array-container{
   padding: 10px;
