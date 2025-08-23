@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, signal } from '@angular/core'
+import { Component, computed, ElementRef, inject, signal, ViewChild, AfterViewInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { UserService } from '../../services/user.service'
 import { Router } from '@angular/router'
@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon'
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })
-export class LogInComponent {
+export class LogInComponent implements AfterViewInit {
 
   protected userService = inject(UserService)
   private accountService = inject(AccountService)
@@ -26,6 +26,59 @@ export class LogInComponent {
   private router = inject(Router)
   private el = inject(ElementRef)
   public showPassword = true
+
+
+  rows: number[] = [];
+  cols: number[] = [];
+
+   @ViewChild('container', { static: true }) container!: ElementRef;
+
+  ngAfterViewInit(): void {
+    this.calculateGrid();
+
+    setTimeout(() => {
+      this.animationGrid();
+    });
+  }
+
+  animationGrid() {
+    const $circle = anime.utils.$('.circle');
+
+    const rows = this.rows.length;
+    const cols = this.cols.length;
+
+    const animateGrid = () => {
+      anime.animate($circle, {
+        scale: [
+          { to: [0.1, 1] },
+          { to: 0.1 }
+        ],
+        boxShadow: [
+          { to: '0 0 1rem 0 currentColor' },
+          { to: '0 0 0rem 0 currentColor' }
+        ],
+        delay: anime.stagger(100, {
+          grid: [cols, rows],
+          from: anime.utils.random(0, cols * rows)
+        }),
+        onComplete: animateGrid
+      });
+    };
+
+    animateGrid();
+  }
+
+  calculateGrid() {
+    const containerEl = this.container.nativeElement as HTMLElement;
+
+    const squareSize = 40;
+    
+    const numCols = Math.floor(containerEl.clientWidth / squareSize);
+    const numRows = Math.floor(containerEl.clientHeight / squareSize);
+
+    this.rows = Array.from({ length: numRows });
+    this.cols = Array.from({ length: numCols });
+  }
 
    togglePassword() {
     this.showPassword = !this.showPassword

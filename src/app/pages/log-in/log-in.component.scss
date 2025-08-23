@@ -1,34 +1,118 @@
+:host{
+  display: flex;
+  justify-content: end;
+}
+
 .esqueci{
-    align-self: flex-end;
-    font-family: Contrail-One;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 5px 0;
-    &:hover{
-        text-decoration: underline;
-    }
+  align-self: flex-end;
+  font-family: Contrail-One;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 5px 0;
+  &:hover{
+      text-decoration: underline;
+  }
 }
 .google{
-    display: none;
-    background-color: #1a1c1e;
-    font-size: 20px;
-    padding: 5px 5px;
-    font-family: Contrail-One;
-    text-decoration: none;
-    border-radius: 20%;
-    &:hover{
-        text-decoration: underline;
-    }
+  animation: rotate 4s linear infinite;
+  background: linear-gradient(var(--grey-background),var(--grey-background)) padding-box,
+    conic-gradient(
+      from var(--angle),
+      #4285F4 0deg,
+      #DB4437 90deg,
+      #F4B400 180deg,
+      #0F9D58 270deg,
+      #4285F4 360deg
+    ) border-box;
+  font-size: 20px;
+  padding: 10px 20px;
+  font-family: 'KoHo', sans-serif;
+  border-radius: 8px;
+  border: 3px solid #0000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  img{
+    height: 25px;
+  }
+  transition: 0.2s;
+}
+
+.google:hover{
+  scale: 1.1;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .input:not(input){
   padding: 0;
+  width: 100%;
   display: flex;
   flex-direction: row-reverse;
-  width: 100%;
   align-items: center;
   .input{width: 100%;}
 }
 .pass{
   position: absolute;
+  padding: 0 5px;
+}
+
+.sign{
+  width: 30%;
+  height: 100vh;
+  align-self: end;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 0 10%;
+  box-shadow: -10px 20px 100px #000;
+  z-index: 1;
+}
+
+.logo{width: 85px;}
+h1{font-weight:normal; font-family: KoHo;}
+
+@media (orientation: portrait) {
+  .array-container{display: none !important;}
+  .sign{
+    width: 100% !important;
+    .google{
+      font-size: 16px;
+      img{height: 20px !important;}
+    }
+    .link{font-size: 16px;}
+  }
+}
+
+.array-container{
+  padding: 10px;
+  height: calc(100vh - 20px);
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .row{
+    display: flex;
+    gap: 10px;
+    flex: none;
+    .circle{
+      border-radius: 50%;
+      width: 30px;
+      aspect-ratio: 1 / 1;
+      background-color: var(--principal-color);
+    }
+  }
 }
