@@ -1,8 +1,7 @@
-<div class="centro">
-<img src="FINANZ.png" class="logo"/>
-<form class="form" name="form" (ngSubmit)="onSubmit()">
-  <h1>CADASTRO</h1>
-  <div class="light"></div>
+<div class="array-container"></div>
+<form class="sign" name="form" (ngSubmit)="onSubmit()">
+  <img src="favicon.ico" class="logo"/>
+  <h1>Cadastrar</h1>
   <label for="email">EMAIL</label>
   <input class="input" type="email" id="email" name="email" [(ngModel)]="email" required email placeholder="emailexemplo@gmail.com"/>
   
@@ -27,8 +26,6 @@
 
   <button type="submit" [disabled]="!isFormValid()" class="button">ENTRAR</button>
 
-  <div class="light"></div>
 
-  <p class="link">JÁ TEM UMA CONTA? ENTRE <a href="login">AQUI</a></p>
+  <p class="link">Já tem uma conta? Faça Login <a (click)="goTo('login')">AQUI</a></p>
 </form>
-</div>

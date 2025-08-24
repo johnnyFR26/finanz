@@ -69,22 +69,6 @@
   padding: 0 5px;
 }
 
-.sign{
-  width: 30%;
-  height: 100vh;
-  align-self: end;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  padding: 0 10%;
-  box-shadow: -10px 20px 100px #000;
-  z-index: 1;
-}
-
-.logo{width: 85px;}
-h1{font-weight:normal; font-family: KoHo;}
-
 @media (orientation: portrait) {
   .array-container{display: none !important;}
   .sign{
@@ -95,6 +79,11 @@ h1{font-weight:normal; font-family: KoHo;}
     }
     .link{font-size: 16px;}
   }
+}
+
+.sign{
+  box-shadow: -10px 20px 100px #000;
+  view-transition-name: slide;
 }
 
 .array-container{
@@ -110,9 +99,17 @@ h1{font-weight:normal; font-family: KoHo;}
     flex: none;
     .circle{
       border-radius: 50%;
+      scale: 0.1;
       width: 30px;
       aspect-ratio: 1 / 1;
       background-color: var(--principal-color);
     }
   }
+  opacity: 1;
+  view-transition-name: animations;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 1s;
 }

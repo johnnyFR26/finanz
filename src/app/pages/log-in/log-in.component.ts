@@ -19,6 +19,15 @@ import { MatIconModule } from '@angular/material/icon'
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent implements AfterViewInit {
+  goTo(path: string) {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        this.router.navigate([path]);
+      });
+    } else {
+      this.router.navigate([path]);
+    }
+  }
 
   protected userService = inject(UserService)
   private accountService = inject(AccountService)
@@ -50,8 +59,8 @@ export class LogInComponent implements AfterViewInit {
     const animateGrid = () => {
       anime.animate($circle, {
         scale: [
-          { to: [0.1, 1] },
-          { to: 0.1 }
+          { to: [1, 10] },
+          { to: 1 }
         ],
         boxShadow: [
           { to: '0 0 1rem 0 currentColor' },

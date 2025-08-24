@@ -1,3 +1,7 @@
+:host{
+  display: flex;
+  justify-content: start;
+}
 .divisao{
     display: grid;
     width: 100%;
@@ -7,4 +11,22 @@
 .divisao div{
     display: grid;
     gap: 5px;
+}
+
+.sign{
+  box-shadow: 10px 20px 100px #000;
+  view-transition-name: slide;
+}
+.array-container{
+  opacity: 0;
+  view-transition-name: animations;
+  width: 50%;
+  height: 100vh;
+  position:absolute;
+  transform: translateX(-100%);
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 3s;
 }
