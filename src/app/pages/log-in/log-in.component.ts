@@ -21,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon'
 export class LogInComponent implements AfterViewInit {
   goTo(path: string) {
     if (document.startViewTransition) {
-      document.startViewTransition(() => {
+      document.startViewTransition( async () => {
         this.router.navigate([path]);
       });
     } else {
@@ -51,13 +51,13 @@ export class LogInComponent implements AfterViewInit {
   }
 
   animationGrid() {
-    const $circle = anime.utils.$('.circle');
+    const $element = anime.utils.$('.element');
 
     const rows = this.rows.length;
     const cols = this.cols.length;
 
     const animateGrid = () => {
-      anime.animate($circle, {
+      anime.animate($element, {
         scale: [
           { to: [1, 10] },
           { to: 1 }

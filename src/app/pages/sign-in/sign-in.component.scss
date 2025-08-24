@@ -17,13 +17,16 @@
   box-shadow: 10px 20px 100px #000;
   view-transition-name: slide;
 }
-.array-container{
-  opacity: 0;
-  view-transition-name: animations;
+.dots{
+  view-transition-name: dots;
   width: 50%;
   height: 100vh;
-  position:absolute;
+  position:fixed;
   transform: translateX(-100%);
+}
+.grid{view-transition-name: grid;}
+.row , .array-container{
+  gap: 2px;
 }
 
 ::view-transition-old(*),

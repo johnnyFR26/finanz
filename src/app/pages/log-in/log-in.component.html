@@ -1,9 +1,9 @@
 <!-- login.component.html -->
- <div #container class="grid array-container">
+<div #container class="dots array-container">
   @for (row of rows; track $index) {
     <div class="row">
       @for (col of cols; track $index) {
-        <div class="circle"></div>
+        <div class="element"></div>
       }
     </div>
   }
@@ -30,3 +30,4 @@
   <button class="google" (click)="userService.loginWithGoogle()"><img src="google.svg" alt="login com google">Fazer Login com o Google</button>
   <p class="link"> Não tem conta? Crie uma <a (click)="goTo('signin')">AQUI</a></p>
 </form>
+<div class="grid array-container"></div>
