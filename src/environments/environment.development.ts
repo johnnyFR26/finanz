@@ -1,5 +1,5 @@
 export const environment = {
-    urlApi: 'https://api-thinktech.vercel.app',
+    urlApi: 'http://localhost:3000',
     firebaseConfig: {
         apiKey: "AIzaSyCejP3eaANMY6mGJpCocyHwsDqIeh_2jwk",
         authDomain: "finanz-d5317.firebaseapp.com",

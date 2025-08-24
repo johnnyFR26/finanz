@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { AccountService } from "./account.service";
@@ -11,10 +11,17 @@ export class CategoryService{
     private urlApi = environment.urlApi;
     private http = inject(HttpClient);
     private categories = signal<CategoryModel[]>([])
+    private accountService = inject(AccountService)
+    private account = this.accountService.getCurrentAccount()
+
+    constructor(){
+        effect(() => {
+            this.getCategories()
+        })
+    }
 
     setCategories(categories: CategoryModel[]){
         this.categories.set(this.categories().concat(categories))
-        console.table(this.categories())
     }
 
     getCurrentCategories(){
@@ -33,5 +40,11 @@ export class CategoryService{
                 console.error('Error:', error)
             }
         })
+    }
+
+    getCategories(){
+        return this.http.get(`${this.urlApi}/category/${this.account()?.id}`).subscribe((response: any) => {
+            this.setCategories(response)
+        });
     }
 }

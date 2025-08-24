@@ -1,6 +1,6 @@
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from './../../../../node_modules/chart.js/dist/types/index.d';
-import { Component, inject } from "@angular/core";
+import { Component, computed, effect, inject, OnInit } from "@angular/core";
 import { TransactionService } from '../../services/transaction.service';
 import { CategoryService } from '../../services/category.service';
 
@@ -16,7 +16,38 @@ export class GraphsComponent {
   protected categories = this.categoryService.getCurrentCategories();
   protected sum = this.transactionService.sum; 
   protected sub = this.transactionService.sub;
-      // Gráfico de linhas (Receita e Despesa por mês)
+
+  categoriesNames = computed(() => {
+    return this.categories().map(c => c.name)
+  })
+  simpleOutputSums = computed(() => {
+
+  return this.categories().map(category => 
+    // @ts-ignore
+    category?.transactions
+      .filter(transaction => transaction.type === 'output')
+      .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
+  );
+});
+colors = [
+  "#FF5733", // Laranja avermelhado
+  "#33FF57", // Verde
+  "#3357FF", // Azul
+  "#FF33A6", // Rosa
+  "#FFD433", // Amarelo
+  "#33FFF3", // Ciano
+  "#8E33FF", // Roxo
+  "#FF8C33", // Laranja
+  "#33FF8C", // Verde claro
+  "#FF3333"  // Vermelho
+]
+
+  constructor() {
+    effect(() => {
+      this.categories = this.categoryService.getCurrentCategories()
+    })
+  }
+  
   lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [
@@ -48,7 +79,6 @@ export class GraphsComponent {
     }
   };
 
-  // Gráfico Receita x Despesa
   doughnutChartData = {
     labels: ['Receitas', 'Despesas'],
     datasets: [{
@@ -59,7 +89,7 @@ export class GraphsComponent {
 
   // Gráfico Despesas por Categoria
   categoryChartData = {
-    labels: ['Alimentação', 'Transporte', 'Lazer', 'Saúde', 'Outros'],
+    labels: this.categories().map(c => c.name),
     datasets: [{
       data: [30, 20, 25, 15, 10],
       backgroundColor: ['#3B82F6', '#EC4899', '#F59E0B', '#10B981', '#6366F1']
