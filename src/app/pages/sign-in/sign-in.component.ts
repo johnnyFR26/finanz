@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { EMAIL_REGEXP } from '../../utils/email-validator';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,17 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
   styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent {
+  private router = inject(Router)
+
+  goTo(path: string) {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        this.router.navigate([path]);
+      });
+    } else {
+      this.router.navigate([path]);
+    }
+  }
 
   private userService = inject(UserService)
 
