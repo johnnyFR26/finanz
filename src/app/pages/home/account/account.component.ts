@@ -34,11 +34,11 @@ import { GraphsComponent } from "../../../components/graphs/graphs.component";
             <div class="buttons">
               <button class="button deposit" mat-fab extended (click)="openDialog('Depositar', 'input')">
               <mat-icon>payment</mat-icon>
-                  Depositar
+                  Entrada +
               </button>
               <button class="button transfer" mat-fab extended (click)="openDialog('Transferir', 'output')">
               <mat-icon>transfer_within_a_station</mat-icon>
-                  Transferir
+                  Saída -
               </button>
               <button class="button add" mat-fab extended (click)="openCategoriesDialog()">
               <mat-icon>playlist_add</mat-icon>

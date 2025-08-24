@@ -20,16 +20,11 @@ import { CategoryService } from '../../../../services/category.service';
     <div class="content">
     <h2>{{formattedName}}</h2>
       <p>{{ this.data.title }}</p>
-
-
-      <label>De</label>
-      <input class="input" [(ngModel)]="destination" name="destination" [ngModelOptions]="{standalone: true}" />
-
       <label>Valor</label>
       <input class="input" type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
       
       
-        <label>Transferir</label>
+        <label>Categorias</label>
         <select class="input" [(ngModel)]="categoryId" name="type">
           @for (category of categories(); track $index) {
             <option value="{{category.id}}">{{category.name}}</option>
@@ -83,7 +78,7 @@ export class TransactionModalComponent{
       return {
         value: this.value(),
         description: this.description(),
-        destination: this.destination(),
+        destination: 'my wallet',
         type: this.type(),
         accountId: this.account()?.id,
         categoryId: this.categoryId(),
@@ -98,7 +93,5 @@ export class TransactionModalComponent{
       console.table(this.formValue())
       this.transactionService.createTransaction(this.formValue())
       this.dialogRef.close()
-
-
     }
 }

@@ -18,7 +18,13 @@
   <!-- Gráfico de Despesas por Categoria -->
   <div class="chart">
     <canvas baseChart
-      [data]="categoryChartData"
+      [data]="{
+      labels: this.categoriesNames(),
+      datasets: [{
+        data: this.simpleOutputSums(),
+        backgroundColor: this.colors
+      }]
+      }"
       [options]="chartOptions"
       [type]="'doughnut'">
     </canvas>
