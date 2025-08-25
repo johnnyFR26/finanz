@@ -1,6 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import * as anime from 'animejs';
 import { EMAIL_REGEXP } from '../../utils/email-validator';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { Router } from '@angular/router';
@@ -17,13 +18,71 @@ export class SignInComponent {
 
   goTo(path: string) {
     if (document.startViewTransition) {
-      document.startViewTransition(() => {
+      document.startViewTransition( async () => {
         this.router.navigate([path]);
       });
     } else {
       this.router.navigate([path]);
     }
   }
+
+  rows: number[] = [];
+  cols: number[] = [];
+
+   @ViewChild('container', { static: true }) container!: ElementRef;
+
+  ngAfterViewInit(): void {
+    this.calculateGrid();
+
+    setTimeout(() => {
+      this.animationGrid();
+    });
+  }
+
+  animationGrid() {
+  const $element = anime.utils.$('.element');
+  
+      const rows = this.rows.length;
+      const cols = this.cols.length;
+  
+      const animateGrid = () => {
+        anime.animate($element, {
+          scale: [
+            {to: [1, 0.1]},
+            {to: 1}
+          ],
+          transform: [
+            {to: ['rotate3d(0, 0, 0, 0deg) scale(1)',
+              'rotate3d(' + anime.utils.random(0.5,1) + 
+              ', ' + anime.utils.random(0.5,1) +
+              ', ' + anime.utils.random(0.5,1) +
+              ', ' + anime.utils.random(200,1000) + 
+              'deg) scale(0.1)']},
+            {to: 'rotate3d(0, 0, 0, 0deg) scale(1)'},
+          ],
+          delay: anime.stagger(100, {
+            grid: [cols, rows],
+            from: anime.utils.random(0, cols * rows)
+          }),
+          duration: 10000,
+          onComplete: animateGrid
+        });
+      };
+  
+      animateGrid();
+    }
+  
+    calculateGrid() {
+      const containerEl = this.container.nativeElement as HTMLElement;
+  
+      const squareSize = 32;
+      
+      const numCols = Math.floor(containerEl.clientWidth / squareSize);
+      const numRows = Math.floor(containerEl.clientHeight / squareSize);
+  
+      this.rows = Array.from({ length: numRows });
+      this.cols = Array.from({ length: numCols });
+    }
 
   private userService = inject(UserService)
 

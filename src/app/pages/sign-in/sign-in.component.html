@@ -1,4 +1,4 @@
-<div class="array-container"></div>
+<div class="dots array-container"></div>
 <form class="sign" name="form" (ngSubmit)="onSubmit()">
   <img src="favicon.ico" class="logo"/>
   <h1>Cadastrar</h1>
@@ -29,3 +29,12 @@
 
   <p class="link">Já tem uma conta? Faça Login <a (click)="goTo('login')">AQUI</a></p>
 </form>
+<div #container class="grid array-container">
+  @for (row of rows; track $index) {
+    <div class="row">
+      @for (col of cols; track $index) {
+        <div class="element"></div>
+      }
+    </div>
+  }
+</div>

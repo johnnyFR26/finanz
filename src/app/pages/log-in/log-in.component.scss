@@ -86,27 +86,18 @@
   view-transition-name: slide;
 }
 
-.array-container{
-  padding: 10px;
-  height: calc(100vh - 20px);
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  .row{
-    display: flex;
-    gap: 10px;
-    flex: none;
-    .circle{
-      border-radius: 50%;
-      scale: 0.1;
-      width: 30px;
-      aspect-ratio: 1 / 1;
-      background-color: var(--principal-color);
-    }
-  }
-  opacity: 1;
-  view-transition-name: animations;
+.element{
+  scale: 0.1;
+  border-radius: 50%;
+}
+
+.dots{view-transition-name: dots;}
+.grid{
+  view-transition-name: grid;
+  width: 50%;
+  height: 100vh;
+  position: fixed;
+  transform: translateX(100%);
 }
 
 ::view-transition-old(*),
