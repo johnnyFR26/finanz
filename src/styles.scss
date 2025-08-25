@@ -445,51 +445,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center;
 }
 
-.month-selector{
-    background-color: #0000 !important;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    button{
-        color: var(--principal-color);
-        background-color: #0000;
-        border:0;
-        padding: 0;
-        mat-icon{
-            width: 35px;
-            height: 35px;
-            font-size: 35px;
-            scale: 1.4;
-        }
-    }
-    &.all{
-        .mini-box{
-            background-color: var(--white);
-        }
-        button{
-            color: var(--white);
-        }
-    }
-
-    &.revenue{
-        .mini-box{
-            background-color: var(--principal-color);
-        }
-        button{
-            color: var(--principal-color);
-        }
-    }
-
-    &.expense{
-        .mini-box{
-            background-color: var(--red);
-        }
-        button{
-            color: var(--red);
-        }
-    }
-}
-
 .tools{
   display: flex;
   justify-self: flex-end;

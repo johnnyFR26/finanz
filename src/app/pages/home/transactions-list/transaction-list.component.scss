@@ -58,17 +58,18 @@
     }    
 }
 
-.all{
-    background-color: var(--white);
-    --type: var(--white);
+.all:not(month-selector), .revenue:not(month-selector), .expense:not(month-selector){
+    background-color: var(--type);
 }
 
+.all{
+    --type: var(--white);;
+}
+    
 .revenue{
-    background-color: var(--principal-color);
     --type: var(--principal-color);
 }
 
 .expense{
-    background-color: var(--red);
     --type: var(--red);
 }
