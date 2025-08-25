@@ -106,6 +106,22 @@ body {
         --topsize: 25px;
         --headersize: 56px;
     }
+    
+  .array-container{display: none !important;}
+  .sign{
+    width: 100% !important;
+    min-height: 100vh;
+    height: 100% !important;
+    .logo{
+        width: 70px;
+        margin: 20px 0;
+    }
+    .google{
+      font-size: 16px;
+      img{height: 20px !important;}
+    }
+    .link{font-size: 16px;}
+  }
 }
 
 @media (orientation: landscape){

@@ -69,18 +69,6 @@
   padding: 0 5px;
 }
 
-@media (orientation: portrait) {
-  .array-container{display: none !important;}
-  .sign{
-    width: 100% !important;
-    .google{
-      font-size: 16px;
-      img{height: 20px !important;}
-    }
-    .link{font-size: 16px;}
-  }
-}
-
 .sign{
   box-shadow: -10px 20px 100px #000;
   view-transition-name: slide;
