@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+:host{
+    width: 100%;
+    --componentColor: var(--type, var(--principal-color))
+}
+.month-selector{
+    background-color: #0000;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .mini-box{background-color: var(--componentColor);}
+    button{color: var(--componentColor);}
+    button{
+        background-color: #0000;
+        border:0;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        mat-icon{
+            width: 35px;
+            height: 35px;
+            font-size: 35px;
+            scale: 1.4;
+        }
+    }
+}

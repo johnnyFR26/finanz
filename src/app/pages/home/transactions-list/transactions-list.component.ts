@@ -5,11 +5,12 @@ import { TransactionComponent } from '../../../components/transaction/transactio
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MonthSelectorComponent } from "../../../components/month-selector/month-selector.component";
 
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
-  imports: [TransactionComponent, MatIcon, CurrencyPipe, FormsModule, CommonModule],
+  imports: [TransactionComponent, MatIcon, CurrencyPipe, FormsModule, CommonModule, MonthSelectorComponent],
   template: `
   <select class="mini-box" style="margin-bottom:30px;scale:1.2;" [(ngModel)]="type" [ngClass]="{
     'all': type() == 'transaction',
@@ -21,15 +22,11 @@ import { FormsModule } from '@angular/forms';
     <option class="expense" value="output">Despesas</option>
   </select>
   <div class="box">
-    <div class="month-selector" [ngClass]="{
+    <month-selector [ngClass]="{
     'all': type() == 'transaction',
     'revenue': type() == 'input',
     'expense': type() == 'output'
-  }">
-      <button><mat-icon>keyboard_arrow_left</mat-icon></button>
-      <div class="mini-box"><span>Junho</span></div>
-      <button><mat-icon>keyboard_arrow_right</mat-icon></button>
-    </div>
+  }"/>
     <div class="small-box gains">
       <h2 class="entrada">RECEITAS</h2>
       <h1>{{sum()| currency: 'BRL'}}</h1>

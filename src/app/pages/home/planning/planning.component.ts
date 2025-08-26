@@ -5,21 +5,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { TransactionService } from '../../../services/transaction.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PlanComponent } from '../../../components/plan/plan.component';
+import { MonthSelectorComponent } from "../../../components/month-selector/month-selector.component";
 
 @Component({
     selector: 'planning',
     styleUrl: './planning.component.scss',
-    imports: [PlanComponent, MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe],
+    imports: [PlanComponent, MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, MonthSelectorComponent],
     template: `
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200&icon_names=balance,payments" />
         
         <h2 class="title">PLANEJAMENTO</h2>
 
-        <div class="month-selector">
-            <button><mat-icon>keyboard_arrow_left</mat-icon></button>
-            <div class="mini-box"><span>Junho</span></div>
-            <button><mat-icon>keyboard_arrow_right</mat-icon></button>
-        </div>
+        <month-selector/>
 
         <div class="remaining">
             <h2>RESTAM</h2>

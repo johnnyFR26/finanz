@@ -34,9 +34,11 @@ export class SignInComponent {
   ngAfterViewInit(): void {
     this.calculateGrid();
 
-    setTimeout(() => {
-      this.animationGrid();
-    });
+    if(this.rows.length != 0){
+      setTimeout(() => {
+        this.animationGrid();
+      });
+    }
   }
 
   animationGrid() {
