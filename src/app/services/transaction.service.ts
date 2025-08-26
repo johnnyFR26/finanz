@@ -39,8 +39,8 @@ export class TransactionService {
   }
 
   getAccountTransactions(accountId: string) {
-    return this.http.get(`${this.urlApi}/transactions/${accountId}`).subscribe((response: any) => {
-      this.setTransactions(response);
+    return this.http.get(`${this.urlApi}/transactions/account/${accountId}`).subscribe((response: any) => {
+      this.setTransactions(response.transactions);
     });
   }
 
