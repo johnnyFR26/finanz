@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { AccountService } from '../../services/account.service';
 import { CategoryService } from '../../services/category.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @Component({
@@ -24,8 +25,8 @@ import { MatIconModule } from '@angular/material/icon';
       <label>Nome</label>
       <input class="input" [(ngModel)]="name" name="name" [ngModelOptions]="{standalone: true}" />
 
-      <mat-label for="icon">Icone</mat-label>
-      <div class="select-icon">
+      <mat-label for="icon" class="start">Icone</mat-label>
+      <div class="select-icon start">
         <mat-select name="icon" [(ngModel)]="icon">
           @for (icon of icons; track $index) {
             <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
@@ -33,6 +34,12 @@ import { MatIconModule } from '@angular/material/icon';
         </mat-select>
         <mat-icon class="icon">{{icon()}}</mat-icon>
       </div>
+
+      <mat-radio-group [(ngModel)]="type" name="type" class="radios start">
+        <mat-radio-button value="variable">Variável</mat-radio-button>
+        <mat-radio-button value="fixed" checked="true">Fixo</mat-radio-button>
+      </mat-radio-group>
+
       <mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Cancelar</button>
         <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>
@@ -47,7 +54,8 @@ import { MatIconModule } from '@angular/material/icon';
         MatButtonModule,
         MatDialogActions,
         MatSelectModule,
-        MatIconModule
+        MatIconModule,
+        MatRadioModule,
       ]
 })
 export class AddCategoriesModalComponent{
@@ -66,6 +74,7 @@ export class AddCategoriesModalComponent{
       'credit_card',
       'attach_money'
     ]
+    public type = signal('');
 
 
 

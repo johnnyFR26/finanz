@@ -1,3 +1,7 @@
+.content{
+  padding: 25px;
+}
+
 ::ng-deep .mat-mdc-option {
   color: white !important;
   background-color: #1a1a1a !important;
@@ -46,11 +50,30 @@ mat-select{
 
 .icon{
   top: 8px;
-  right: 16px;
+  right: 20px;
   position: absolute;
   z-index: 0;
 }
 
 .select-icon{
+  background-color: var(--input-area);
+  border-radius: 5px;
+  padding: 0 4px;
   position: relative;
+}
+
+::ng-deep .radios{
+  display: flex;
+  flex-direction: column;
+  label{
+    font-size: 20px;
+  }
+  margin-top: 20px;
+}
+.start{
+  align-self: flex-start;
+}
+
+.input{
+  margin-bottom: 20px;
 }
