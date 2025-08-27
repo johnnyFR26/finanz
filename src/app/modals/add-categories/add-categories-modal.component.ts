@@ -9,8 +9,8 @@ import {
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import { AccountService } from '../../../../services/account.service';
-import { CategoryService } from '../../../../services/category.service';
+import { AccountService } from '../../services/account.service';
+import { CategoryService } from '../../services/category.service';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -25,19 +25,21 @@ import { MatIconModule } from '@angular/material/icon';
       <input class="input" [(ngModel)]="name" name="name" [ngModelOptions]="{standalone: true}" />
 
       <mat-label for="icon">Icone</mat-label>
-      <mat-select name="icon" [(ngModel)]="icon">
-        @for (icon of icons; track $index) {
-          <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
-        }
-      </mat-select>
-
-    <mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>
-    </mat-dialog-actions>
+      <div class="select-icon">
+        <mat-select name="icon" [(ngModel)]="icon">
+          @for (icon of icons; track $index) {
+            <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
+          }
+        </mat-select>
+        <mat-icon class="icon">{{icon()}}</mat-icon>
+      </div>
+      <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>
+      </mat-dialog-actions>
     </div>
     `,
-    styleUrls: ['./addCategories-modal.component.scss'],
+    styleUrls: ['./add-categories-modal.component.scss'],
     imports: [    
         MatFormFieldModule,
         MatInputModule,
