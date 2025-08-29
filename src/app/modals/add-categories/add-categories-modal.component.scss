@@ -1,5 +1,7 @@
+@use '@angular/material' as mat;
 .content{
   padding: 25px;
+  flex-wrap: wrap;
 }
 
 ::ng-deep .mat-mdc-option {
@@ -60,6 +62,7 @@ mat-select{
   border-radius: 5px;
   padding: 0 4px;
   position: relative;
+  width: auto;
 }
 
 ::ng-deep .radios{
@@ -70,10 +73,53 @@ mat-select{
   }
   margin-top: 20px;
 }
+
 .start{
   align-self: flex-start;
 }
 
 .input{
   margin-bottom: 20px;
+}
+
+::ng-deep .expenditure *{
+  --mat-sys-primary: var(--red);
+  --mat-sys-on-surface: var(--red);
+}
+
+::ng-deep .income *{
+  --mat-sys-primary: var(--principal-color);
+  --mat-sys-on-surface: var(--principal-color);
+}
+
+.divisao div{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.fake-color-picker{
+  background-color: transparent;
+  width: 30px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  outline: 0;
+  margin: 5px 5px;
+  justify-self: center;
+}
+
+.color-box{
+  background-color: var(--input-area);
+  border-radius: 5px;
+  padding: 0 4px;
+  position: relative;
+  width: 40px;
+}
+
+.color-picker{
+  position: absolute;
+  top: 10px;
+  right: 0;
+  visibility: hidden;
 }

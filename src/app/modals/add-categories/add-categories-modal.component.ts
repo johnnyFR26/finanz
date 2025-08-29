@@ -25,19 +25,30 @@ import { MatRadioModule } from '@angular/material/radio';
       <label>Nome</label>
       <input class="input" [(ngModel)]="name" name="name" [ngModelOptions]="{standalone: true}" />
 
-      <mat-label for="icon" class="start">Icone</mat-label>
-      <div class="select-icon start">
-        <mat-select name="icon" [(ngModel)]="icon">
-          @for (icon of icons; track $index) {
-            <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
-          }
-        </mat-select>
-        <mat-icon class="icon">{{icon()}}</mat-icon>
-      </div>
+      <div class="divisao">
+        <div>
+          <mat-label for="icon" class="start">Icone</mat-label>
+          <div class="select-icon start">
+            <mat-select name="icon" [(ngModel)]="icon">
+              @for (icon of icons; track $index) {
+                <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
+              }
+            </mat-select>
+            <mat-icon class="icon" [style.color]="color()">{{icon()}}</mat-icon>
+          </div>
+        </div>
 
+        <div>
+          <mat-label for="color">Cor</mat-label>
+          <div class="color-box">
+            <div (click)="inputcolor.click()" [style.background-color]="color()" class="fake-color-picker"></div>
+            <input name="color" type="color" [(ngModel)]="color" #inputcolor class="color-picker"/>
+          </div>
+        </div>
+      </div>
       <mat-radio-group [(ngModel)]="type" name="type" class="radios start">
-        <mat-radio-button value="variable">Variável</mat-radio-button>
-        <mat-radio-button value="fixed" checked="true">Fixo</mat-radio-button>
+        <mat-radio-button value="income" class="income">Entrada</mat-radio-button>
+        <mat-radio-button value="expenditure" class="expenditure">Saída</mat-radio-button>
       </mat-radio-group>
 
       <mat-dialog-actions>
@@ -76,6 +87,8 @@ export class AddCategoriesModalComponent{
     ]
     public type = signal('');
 
+    public color = signal('');
+
 
 
     private categoryService = inject(CategoryService)
@@ -86,7 +99,9 @@ export class AddCategoriesModalComponent{
         accountId: this.account()?.id,
         name: this.name(),
         controls: JSON.stringify({
-          icon: this.icon()
+          icon: this.icon(),
+          color: this.color(),
+          type: this.type(),
         })
       }
     })

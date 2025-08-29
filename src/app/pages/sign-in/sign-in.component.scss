@@ -2,17 +2,10 @@
   display: flex;
   justify-content: start;
 }
-.divisao{
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 5px;
-}
 .divisao div{
     display: grid;
     gap: 5px;
 }
-
 .sign{
   box-shadow: 10px 20px 100px #000;
   view-transition-name: slide;
