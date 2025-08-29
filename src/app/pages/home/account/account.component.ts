@@ -6,7 +6,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
-import { AddCategoriesModalComponent } from "./addCategories/addCategories-modal.component";
+import { AddCategoriesModalComponent } from "../../../modals/add-categories/add-categories-modal.component";
 import { CreditCardSelectComponent } from "../../../components/credit-card-select/credit-card-select.component";
 import { TransactionService } from "../../../services/transaction.service";
 import { GraphsComponent } from "../../../components/graphs/graphs.component";

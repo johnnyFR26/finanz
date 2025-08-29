@@ -1,0 +1,125 @@
+@use '@angular/material' as mat;
+.content{
+  padding: 25px;
+  flex-wrap: wrap;
+}
+
+::ng-deep .mat-mdc-option {
+  color: white !important;
+  background-color: #1a1a1a !important;
+
+  padding: 2px 10px !important;
+  width: 100%;
+
+  &:hover {
+    background-color: #322f2f !important;
+  }
+}
+
+::ng-deep div.mat-mdc-select-panel {
+  background-color: #1a1a1a !important;
+}
+
+::ng-deep .mat-mdc-select-panel {
+  background-color: #101010 !important;
+  color: white;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2),
+              0px 2px 2px rgba(0, 0, 0, 0.14),
+              0px 1px 5px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  overflow-x: hidden !important;
+  &::-webkit-scrollbar{
+      background: #0000;
+      width: 7px;
+  }
+  &::-webkit-scrollbar-thumb{
+      border-radius: 10px;
+      background: #424242;
+      &:hover{
+          background: #626262;
+      }
+  }
+}
+
+mat-select{
+  background-color: transparent;
+  position: relative;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  z-index: 1;
+}
+
+.icon{
+  top: 8px;
+  right: 20px;
+  position: absolute;
+  z-index: 0;
+}
+
+.select-icon{
+  background-color: var(--input-area);
+  border-radius: 5px;
+  padding: 0 4px;
+  position: relative;
+  width: auto;
+}
+
+::ng-deep .radios{
+  display: flex;
+  flex-direction: column;
+  label{
+    font-size: 20px;
+  }
+  margin-top: 20px;
+}
+
+.start{
+  align-self: flex-start;
+}
+
+.input{
+  margin-bottom: 20px;
+}
+
+::ng-deep .expenditure *{
+  --mat-sys-primary: var(--red);
+  --mat-sys-on-surface: var(--red);
+}
+
+::ng-deep .income *{
+  --mat-sys-primary: var(--principal-color);
+  --mat-sys-on-surface: var(--principal-color);
+}
+
+.divisao div{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.fake-color-picker{
+  background-color: transparent;
+  width: 30px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  outline: 0;
+  margin: 5px 5px;
+  justify-self: center;
+}
+
+.color-box{
+  background-color: var(--input-area);
+  border-radius: 5px;
+  padding: 0 4px;
+  position: relative;
+  width: 40px;
+}
+
+.color-picker{
+  position: absolute;
+  top: 10px;
+  right: 0;
+  visibility: hidden;
+}
