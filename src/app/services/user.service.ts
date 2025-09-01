@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarComponent } from "../components/snackbar/snackbar.component";
 import { Auth, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
+import { AccountService } from "./account.service";
 
 @Injectable({
     providedIn: 'root'
@@ -28,9 +29,20 @@ export class UserService {
 
     async loginWithGoogle() {
     try {
-      const result = await signInWithPopup(this.auth, this.googleProvider);
-      console.log('Login bem-sucedido:', result.user);
-      // Redirecionar o usuário, etc.
+      const result = await signInWithPopup(this.auth, this.googleProvider)
+      //@ts-ignore
+      const { email, accessToken } = result.user
+
+      console.log('Login com Google bem-sucedido:', email, accessToken);
+      this.http.post(`${this.urlApi}/auth/google`, { email, accessToken }).subscribe({
+        next: (response: any) => {
+          this.setCurrentUser(response)
+          this.router.navigateByUrl('/home/account')
+        },
+        error: (error: any) => {
+          console.log('Error:', error)
+        }
+      })
     } catch (error) {
       console.error('Erro no login:', error);
     }

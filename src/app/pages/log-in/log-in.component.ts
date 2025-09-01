@@ -11,6 +11,7 @@ import { AccountService } from '../../services/account.service'
 import { CategoryService } from '../../services/category.service'
 import * as anime from 'animejs';
 import { MatIconModule } from '@angular/material/icon'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-log-in',
@@ -30,6 +31,7 @@ export class LogInComponent implements AfterViewInit {
   }
 
   protected userService = inject(UserService)
+  protected authService = inject(AuthService)
   private accountService = inject(AccountService)
   private categoryService = inject(CategoryService)
   private router = inject(Router)
