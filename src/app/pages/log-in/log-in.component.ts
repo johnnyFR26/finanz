@@ -37,7 +37,14 @@ export class LogInComponent implements AfterViewInit {
   private router = inject(Router)
   private el = inject(ElementRef)
   public showPassword = true
-
+  protected isMobile = (() => {
+   const userAgent = navigator.userAgent;
+   const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+   const isSmallScreen = window.innerWidth <= 768;
+   const hasTouchScreen = 'ontouchstart' in window;
+  
+   return isMobileUA || (isSmallScreen && hasTouchScreen);
+  })();
 
   rows: number[] = [];
   cols: number[] = [];
