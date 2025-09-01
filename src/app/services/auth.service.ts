@@ -27,7 +27,14 @@ export class AuthService {
           console.log('Login com Google bem-sucedido:', email, accessToken);
           this.http.post(`${this.urlApi}/auth/google`, { email, accessToken }).subscribe({
             next: (response: any) => {
-              this.userService.setCurrentUser(response.user)
+              this.userService.setCurrentUser({
+            token: response.token,
+            user: {
+              id: response.user.id,
+              name: response.user.name,
+              email: response.user.email
+            }
+          })
               this.accountService.setCurrentAccount(response.user.account)
               this.router.navigateByUrl('/home/account')
             },

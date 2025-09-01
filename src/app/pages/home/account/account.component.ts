@@ -81,7 +81,7 @@ export class AccountComponent implements OnInit{
       data: {
         name: this.user()?.user.name,
         id: this.id,
-        title: title,
+        title,
         type
     },
     });
