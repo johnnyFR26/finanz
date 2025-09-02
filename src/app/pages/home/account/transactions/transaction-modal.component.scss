@@ -1,6 +1,13 @@
-.select{
-    width: 70%;
-    align-self: flex-start;
+.categories{
+    mat-select{
+        width: 60%;
+        flex-grow: 1;
+        align-self: flex-start;
+    }
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
 }
 
 

@@ -27,12 +27,15 @@ import { AddCategoriesModalComponent } from '../../../../modals/add-categories/a
       
       
         <label>Categorias</label>
-        <mat-select class="input select" [(ngModel)]="categoryId" name="type">
-          @for (category of categories(); track $index) {
-            <mat-option value="{{category.id}}"><mat-icon [style.color]="category.controls?.color">{{category.controls?.icon}}</mat-icon> {{category.name}}</mat-option>
-          }
-        </mat-select>
-        <button mat-icon-button (click)="openCategoriesDialog()"><mat-icon>add_box</mat-icon></button>
+        <div class="categories">
+          <mat-select class="input" [(ngModel)]="categoryId" name="type">
+            @for (category of categories(); track $index) {
+              <mat-option [value]="category.id"><mat-icon [style.color]="category.controls?.color">{{category.controls?.icon}}</mat-icon> {{category.name}}</mat-option>
+            }
+          </mat-select>
+          <button mat-icon-button (click)="openCategoriesDialog()"><mat-icon>add_box</mat-icon></button>
+        </div>
+
         <label>Descriçao</label>
         <textarea class="input" [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
       
