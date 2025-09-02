@@ -18,7 +18,6 @@ import { CategoryService } from '../../../../services/category.service';
     selector: 'app-transaction-modal',
     template: `
     <div class="content">
-    <h2>{{formattedName}}</h2>
       <p>{{ this.data.title }}</p>
       <label>Valor</label>
       <input class="input" type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
@@ -30,8 +29,7 @@ import { CategoryService } from '../../../../services/category.service';
             <option value="{{category.id}}">{{category.name}}</option>
           }
         </select>
-        
-        
+              
         <label>Descriçao</label>
         <textarea class="input" [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
       
