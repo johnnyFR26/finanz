@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { Component, input } from "@angular/core";
+import { Component, computed, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,14 +17,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         </div>
         <div class="cardContent">
             <p>FATURA ABERTA</p>
-            <div>VALOR PARCIAL: <span>{{actualValue | currency:"BRL"}}</span></div>
+            <div>VALOR PARCIAL: <span>{{creditCard().availableLimit | currency:"BRL"}}</span></div>
             <div>FECHA EM: <span>{{date | date:"dd 'DE' MMMM 'DE' yyyy"}}</span></div><!-- tem que arrumar de inglês pra português-->
 
-            <p style="margin-top:10px;margin-bottom:0;">{{actualValue | currency:"BRL"}} de {{limit | currency:"BRL"}}</p>
-            <mat-progress-bar mode="determinate" [value]="percentage" [attr.data]="percentage"></mat-progress-bar>
+            <p style="margin-top:10px;margin-bottom:0;">{{creditCard().availableLimit | currency:"BRL"}} de {{creditCard().limit | currency:"BRL"}}</p>
+            <mat-progress-bar mode="determinate" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
 
             <div style="margin-top: 20px;">
-                {{balance | currency:"BRL"}} DISPONÍVEL
+                {{balance() | currency:"BRL"}} DISPONÍVEL
                 <button mat-button>ADICIONAR DESPESAS</button>
             </div>
         </div>
@@ -34,14 +34,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 
 export class CreditCardComponent{
-    protected limit = 1000;
-    protected actualValue = 250;
-    protected percentage = this.actualValue / this.limit * 100;
-    protected balance = this.limit - this.actualValue;
+    protected percentage = computed(() => (this.creditCard().availableLimit / this.creditCard().limit *100).toFixed(2));
+    protected balance = computed(() => this.creditCard().limit - this.creditCard().availableLimit);
     protected date = new Date();
 
     public creditCard = input({
         name: 'My credit card',
-        limit: 1000
+        limit: 1000,
+        availableLimit: 1000,
+
     })
 }
