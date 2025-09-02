@@ -40,10 +40,6 @@ import { GraphsComponent } from "../../../components/graphs/graphs.component";
               <mat-icon>transfer_within_a_station</mat-icon>
                   Saída -
               </button>
-              <button class="button add" mat-fab extended (click)="openCategoriesDialog()">
-              <mat-icon>playlist_add</mat-icon>
-                  Categoria
-              </button>
             </div>
           </div>
           <app-graphs></app-graphs>
@@ -68,13 +64,7 @@ export class AccountComponent implements OnInit{
     protected sub = this.transactionService.sub;
 
 
-    openCategoriesDialog(): void {
-        const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
-          data: {
-            id: this.id,
-        },
-        });
-    }
+    
 
   openDialog(title: String, type: String): void {
     const dialogRef = this.dialog.open(TransactionModalComponent, {
