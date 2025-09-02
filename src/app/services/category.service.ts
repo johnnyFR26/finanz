@@ -3,6 +3,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { AccountService } from "./account.service";
 import { CategoryModel } from "../models/category.model";
+import { CreateCategoryModel } from "../models/create-category.model";
 
 @Injectable({
     providedIn: 'root'
@@ -29,7 +30,7 @@ export class CategoryService{
     }
 
 
-    createCategory(category: CategoryModel){
+    createCategory(category: CreateCategoryModel){
         return this.http.post(`${this.urlApi}/category`, category)
         .subscribe({
             next: (response: any) => {

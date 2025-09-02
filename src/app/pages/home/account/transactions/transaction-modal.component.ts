@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, computed, inject, model, signal} fro
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
+  MatDialog,
   MatDialogActions,
   MatDialogRef,
 } from '@angular/material/dialog';
@@ -12,6 +13,8 @@ import { AccountService } from '../../../../services/account.service';
 import { TransactionService } from '../../../../services/transaction.service';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../../services/category.service';
+import { MatIconModule } from "@angular/material/icon";
+import { AddCategoriesModalComponent } from '../../../../modals/add-categories/add-categories-modal.component';
 
 
 @Component({
@@ -24,12 +27,15 @@ import { CategoryService } from '../../../../services/category.service';
       
       
         <label>Categorias</label>
-        <select class="input" [(ngModel)]="categoryId" name="type">
-          @for (category of categories(); track $index) {
-            <option value="{{category.id}}">{{category.name}}</option>
-          }
-        </select>
-              
+        <div class="categories">
+          <mat-select class="input" [(ngModel)]="categoryId" name="type">
+            @for (category of categories(); track $index) {
+              <mat-option [value]="category.id"><mat-icon [style.color]="category.controls?.color">{{category.controls?.icon}}</mat-icon> {{category.name}}</mat-option>
+            }
+          </mat-select>
+          <button mat-icon-button (click)="openCategoriesDialog()"><mat-icon>add_box</mat-icon></button>
+        </div>
+
         <label>Descriçao</label>
         <textarea class="input" [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
       
@@ -41,14 +47,15 @@ import { CategoryService } from '../../../../services/category.service';
     </div>
     `,
     styleUrls: ['./transaction-modal.component.scss'],
-    imports: [    
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatButtonModule,
-        MatDialogActions,
-        MatSelectModule
-      ]
+    imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogActions,
+    MatSelectModule,
+    MatIconModule
+]
 })
 export class TransactionModalComponent{
     readonly dialogRef = inject(MatDialogRef<TransactionModalComponent>);
@@ -56,6 +63,7 @@ export class TransactionModalComponent{
     readonly id = model(this.data.id);
     private accountService = inject(AccountService)
     public account = this.accountService.getCurrentAccount()
+    readonly dialog = inject(MatDialog);
 
     private categoryService = inject(CategoryService)
     protected categories = this.categoryService.getCurrentCategories()
@@ -91,5 +99,13 @@ export class TransactionModalComponent{
       console.table(this.formValue())
       this.transactionService.createTransaction(this.formValue())
       this.dialogRef.close()
+    }
+
+    openCategoriesDialog(): void {
+        const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
+          data: {
+            id: this.account()?.id,
+        },
+        });
     }
 }

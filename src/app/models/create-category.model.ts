@@ -1,13 +1,9 @@
 import { TransactionModel } from "./transaction.model"
 
-export interface CategoryModel {
+export interface CreateCategoryModel {
     name: string
     id?: string
     accountId?: string
     transactions?: TransactionModel[]
-    controls?: {
-        icon?: string
-        type?: string
-        color?: string
-    }
+    controls?: string
 }
