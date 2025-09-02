@@ -109,7 +109,6 @@ body {
     
   .array-container{display: none !important;}
   .sign{
-    z-index: -1;
     width: 100% !important;
     min-height: 100vh;
     height: 100% !important;
@@ -242,6 +241,7 @@ a{
 }
 
 .array-container{
+  z-index: -1;
   padding: 10px;
   height: calc(100vh - 20px);
   width: 50vw;
