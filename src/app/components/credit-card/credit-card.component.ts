@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { Component } from "@angular/core";
+import { Component, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -12,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
       <div class="box card">
         <div class="name">
             <img src="/credit-card/mastercard.svg">
-            <h3>CARTÃO 1</h3>
+            <h3>{{ creditCard().name}}</h3>
             <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
         </div>
         <div class="cardContent">
@@ -39,4 +39,9 @@ export class CreditCardComponent{
     protected percentage = this.actualValue / this.limit * 100;
     protected balance = this.limit - this.actualValue;
     protected date = new Date();
+
+    public creditCard = input({
+        name: 'My credit card',
+        limit: 1000
+    })
 }

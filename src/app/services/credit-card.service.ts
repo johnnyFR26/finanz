@@ -22,7 +22,7 @@ export class CreditCardService {
         this.creditCards.set(creditCards)
     }
     getCreditCards(){
-        this.http.get<CreditCardModel[]>(`${this.urlApi}/creditCards/${this.account()?.id}`).subscribe({
+        this.http.get<CreditCardModel[]>(`${this.urlApi}/creditcards/account/${this.account()?.id}`).subscribe({
             next: (response) => {
                 this.setCreditCards(response)
             },
@@ -32,8 +32,21 @@ export class CreditCardService {
         })
     }
 
+    createCreditCard(creditCard: CreditCardModel){
+        this.http.post(`${this.urlApi}/creditcards`, creditCard).subscribe({
+            next: (response) => {
+                console.log(response)
+                //@ts-expect-error
+                this.setCreditCards([...this.creditCards(), response])
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        })
+    }
+
     getCurrentCreditCard(){
-        return this.creditCards()
+        return this.creditCards.asReadonly()
     }
 
 
