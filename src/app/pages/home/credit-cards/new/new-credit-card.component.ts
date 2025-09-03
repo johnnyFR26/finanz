@@ -7,15 +7,18 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreditCardService } from "../../../../services/credit-card.service";
 import { AccountService } from "../../../../services/account.service";
 import { Router } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
     selector: "app-new-credit-card",
     styleUrls: ["./new-credit-card.component.scss"],
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon],
     providers: [provideNativeDateAdapter()],
     template: `
     <div class="new-credit-card">
-        <h2 class="title">Novo cartão de crédito</h2>
+        <button class="back" mat-icon-button (click)="this.router.navigate(['/home/creditCard'])"><mat-icon>keyboard_backspace</mat-icon></button>
+        <h2 class="title">NOVO CARTÃO DE CRÉDITO</h2>
         <form class="box" name="form" (ngSubmit)="onSubmit()">
             <div>
                 <label for="name">Nome do Cartão</label>

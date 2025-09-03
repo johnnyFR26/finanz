@@ -21,17 +21,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
             <div>FECHA EM: <span>{{date | date:"dd 'DE' MMMM 'DE' yyyy"}}</span></div><!-- tem que arrumar de inglês pra português-->
 
             <p style="margin-top:10px;margin-bottom:0;">{{expense() | currency:"BRL"}} de {{creditCard().limit | currency:"BRL"}}</p>
-            <mat-progress-bar mode="determinate" [ngClass]="
-                percentage() >= 70 ? 'low' : 'high'
-            " [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [ngClass]="percentage() >= 70 ? 'low' : 'high'" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
 
             <div style="margin-top: 20px;">
                 {{creditCard().availableLimit| currency:"BRL"}} DISPONÍVEL
                 <button mat-button>ADICIONAR DESPESAS</button>
             </div>
         </div>
-
-    </div>
+      </div>
     `
 })
 

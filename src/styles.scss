@@ -435,8 +435,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .cardAdd{
+    cursor: pointer;
     flex-direction: column;
     align-items: center;
+    transition: 0.3s;
     color: var(--input-area2);
     mat-icon{
         min-width: 100px;
@@ -444,8 +446,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         font-size: 100px;
     }
     h2{
+        transition: 0.3s;
         color: var(--input-area2);
         text-align: center;
+    }
+    &:hover{
+        transition: 0.5s;
+        color: var(--white);
+        h2{
+        transition: 0.5s;
+            color: var(--white);
+        }
     }
 }
 

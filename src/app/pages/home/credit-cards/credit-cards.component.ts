@@ -15,8 +15,8 @@ import { CreditCardService } from '../../../services/credit-card.service';
 
         <router-outlet></router-outlet>
 
-        <div class="box cardAdd">
-            <mat-icon (click)="this.router.navigate(['/home/creditCard/new'])" >add_circle</mat-icon>
+        <div (click)="this.router.navigate(['/home/creditCard/new'])" class="box cardAdd">
+            <mat-icon>add_circle</mat-icon>
             <h2>NOVO CARTÃO DE CRÉDITO</h2>
         </div>
         @for (card of creditCards(); track $index) {

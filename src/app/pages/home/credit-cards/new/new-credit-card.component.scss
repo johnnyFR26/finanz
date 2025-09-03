@@ -1,36 +1,56 @@
 .new-credit-card, form{
+    position: relative;
     height: 100%;
     display:flex;
     align-items: center;
     flex-direction: column;
     gap: 10px;
 }
-form{> div {width: 100%;}}
+
 .box{
     box-sizing: border-box;
     padding: 20px;
 }
-    @media (min-width:570px) {
-        form{
-            grid-template-columns: 1fr 1fr;
-            > button {grid-column: span 2;}
-        }
-    }
-    @media (min-width:850px) {
-        .box{
-            width: auto;
-        }
-    }
-    @media (max-width:570px) {
-        form{
-            grid-template-columns: 1fr;
-            > button {grid-column: span 1;}
-        }
-    }
+
+@media (min-width:570px) {
     form{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        gap: 20px 40px;
-        
+        grid-template-columns: 1fr 1fr;
+        > button {grid-column: span 2;}
     }
+}
+@media (min-width:850px) {
+    .box{
+        width: auto;
+        gap: 50px 40px;
+    }
+}
+@media (max-width:570px) {
+    form{
+        grid-template-columns: 1fr;
+        > button {grid-column: span 1;}
+    }
+}
+
+form{
+    padding: 50px 40px !important;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 20px 40px;
+    box-shadow: 0 10px 20px 0 #000;
+    > div {width: 100%;}
+}
+
+.back{
+    background-color: var(--principal-color);
+    color: var(--black);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 4px;
+    transition: 0.2s;
+    &:hover{
+        scale: 1.1;
+        transition: 0.4s;
+    }
+}
