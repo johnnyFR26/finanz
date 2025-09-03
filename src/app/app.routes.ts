@@ -36,12 +36,11 @@ export const routes: Routes = [
                 path: 'creditCard',
                 loadComponent: () => import('./pages/home/credit-cards/credit-cards.component').then(m => m.CreditCardsComponent),
                 canActivate: [doesUserHaveAccount],
-                children: [
-                    {
-                        path: 'new',
-                        loadComponent: () => import('./pages/home/credit-cards/new/new-credit-card.component').then(m => m.NewCreditCardComponent)
-                    }
-                ]
+            },
+            {
+                path: 'creditCard/new',
+                loadComponent: () => import('./pages/home/credit-cards/new/new-credit-card.component').then(m => m.NewCreditCardComponent),
+                canActivate: [doesUserHaveAccount],
             },
             {
                 path: 'IA',

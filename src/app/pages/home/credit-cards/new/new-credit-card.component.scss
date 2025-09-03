@@ -1,6 +1,36 @@
-div, form{
+.new-credit-card, form{
     height: 100%;
     display:flex;
     align-items: center;
     flex-direction: column;
+    gap: 10px;
 }
+form{> div {width: 100%;}}
+.box{
+    box-sizing: border-box;
+    padding: 20px;
+}
+    @media (min-width:570px) {
+        form{
+            grid-template-columns: 1fr 1fr;
+            > button {grid-column: span 2;}
+        }
+    }
+    @media (min-width:850px) {
+        .box{
+            width: auto;
+        }
+    }
+    @media (max-width:570px) {
+        form{
+            grid-template-columns: 1fr;
+            > button {grid-column: span 1;}
+        }
+    }
+    form{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        gap: 20px 40px;
+        
+    }

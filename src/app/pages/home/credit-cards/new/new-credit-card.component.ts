@@ -14,26 +14,33 @@ import { AccountService } from "../../../../services/account.service";
     providers: [provideNativeDateAdapter()],
     template: `
     <div class="new-credit-card">
-        <h1>new credit card</h1>
-        <form name="form" (ngSubmit)="onSubmit()">
-            <label for="name">Nome do Cartão</label>
-            <input class="input" type="text" id="name" name="name" [(ngModel)]="name" placeholder="Nome do Cartão" required>
+        <h2 class="title">Novo cartão de crédito</h2>
+        <form class="box" name="form" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="name">Nome do Cartão</label>
+                <input class="input" type="text" id="name" name="name" [(ngModel)]="name" placeholder="Nome do Cartão" required>
+            </div>
+            <div>
+                <label for="company">Empresa</label>
+                <input class="input" type="text" id="company" name="company" [(ngModel)]="company" placeholder="Empresa" required>
+            </div>
 
-            <label for="availableLimit">Limite Disponível</label>
-            <input class="input" type="number" id="availableLimit" [(ngModel)]="availableLimit" name="availableLimit" placeholder="Limite Disponível" required>
-
-            <label for="limit">Limite Total</label>
-            <input class="input" type="number" id="limit" name="limit" [(ngModel)]="limit" placeholder="Limite Total" required>
-
-            <label for="company">Empresa</label>
-            <input class="input" type="text" id="company" name="company" [(ngModel)]="company" placeholder="Empresa" required>
-
-            <label for="closingDate">Data de Encerramento</label>
-            <input class="input" type="number" id="closingDate" name="closingDate" [(ngModel)]="closingDate" placeholder="Data de Encerramento" required>
-
-            <label for="paymentDate">Data de Pagamento</label>
-            <input class="input" type="number" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate" placeholder="Data de Pagamento" required>
-
+            <div>
+                <label for="availableLimit">Limite Disponível</label>
+                <input class="input" type="number" id="availableLimit" [(ngModel)]="availableLimit" name="availableLimit" placeholder="Limite Disponível" required>
+            </div>
+            <div>
+                <label for="limit">Limite Total</label>
+                <input class="input" type="number" id="limit" name="limit" [(ngModel)]="limit" placeholder="Limite Total" required>
+            </div>
+            <div>
+                <label for="closingDate">Data de Encerramento</label>
+                <input class="input" type="number" id="closingDate" name="closingDate" [(ngModel)]="closingDate" placeholder="Data de Encerramento" required>
+            </div>
+            <div>
+                <label for="paymentDate">Data de Pagamento</label>
+                <input class="input" type="number" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate" placeholder="Data de Pagamento" required>
+            </div>
             
 
             <button class="button" type="submit">Salvar</button>
