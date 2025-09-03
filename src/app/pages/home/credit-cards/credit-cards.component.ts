@@ -19,9 +19,11 @@ import { CreditCardService } from '../../../services/credit-card.service';
             <mat-icon>add_circle</mat-icon>
             <h2>NOVO CARTÃO DE CRÉDITO</h2>
         </div>
-        @for (card of creditCards(); track $index) {
-            <credit-card [creditCard]="card"/>
-        }
+        <div class="cards">
+            @for (card of creditCards(); track $index) {
+                <credit-card [creditCard]="card"/>
+            }
+        </div>
     `
 })
 export class CreditCardsComponent {
