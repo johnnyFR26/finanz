@@ -6,6 +6,7 @@ import { MatInputModule } from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreditCardService } from "../../../../services/credit-card.service";
 import { AccountService } from "../../../../services/account.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-new-credit-card",
@@ -56,6 +57,7 @@ export class NewCreditCardComponent {
     protected company = signal('')
     protected closingDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
+    protected router = inject(Router)
     
     // Valores auxiliares para o datepicker
     protected closingDateValue = signal<Date | null>(null)
@@ -81,5 +83,6 @@ export class NewCreditCardComponent {
         console.log(this.formValue())
         //@ts-expect-error
         this.creditCardService.createCreditCard(this.formValue())
+        this.router.navigate(['/home/creditCard'])
     }
 }
