@@ -1,9 +1,13 @@
 @use '@angular/material' as mat;
 .cardContent{
-    @include mat.progress-bar-overrides((
-    active-indicator-color: var(--principal-color),
-    ));
     @include mat.button-overrides((
         text-container-shape: 20px,
     ));
+}
+
+.low{--mdc-linear-progress-active-indicator-color: var(--red); color: var(--red);}
+.high{--mdc-linear-progress-active-indicator-color: var(--principal-color); color: var(--principal-color);}
+
+.box{
+    width: 100%;
 }
