@@ -15,8 +15,7 @@ import { UserModalComponent } from "../../modals/user-modal/user-modal.component
             <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
                 <mat-icon>menu</mat-icon>
             </button>
-            <img src="B-FINANZ.png" class="Logo"/>
-            <span class="example-spacer"></span>
+            <img src="FINANZ.png" class="Logo"/>
             <button mat-icon-button class="name-user" (click)="openDialog()" aria-label="Example icon-button with share icon">
                 <mat-icon class="icon" >account_circle</mat-icon>
             </button>
