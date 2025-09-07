@@ -1,5 +1,4 @@
-import { CurrencyPipe } from "@angular/common";
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -11,11 +10,13 @@ import { AchievementComponent } from "../../../components/achievement/achievemen
     selector: 'my-account',
     template: `
     <div class="account-name">
-      <div class="account-photo">
-        <mat-icon class="photo">account_circle</mat-icon>
-        <button class="edit" mat-mini-fab><mat-icon>edit</mat-icon></button>
+      <div>
+        <div class="account-photo">
+          <mat-icon class="photo">account_circle</mat-icon>
+          <button class="edit" mat-mini-fab><mat-icon>edit</mat-icon></button>
+        </div>
+        <h1>{{username}}</h1>
       </div>
-      <h1>{{username}}</h1>
       <span class="typePlan">Standart</span>
     </div>
 
@@ -61,14 +62,9 @@ import { AchievementComponent } from "../../../components/achievement/achievemen
     </div>
     `,
     styleUrl: './my-account.component.scss',
-    imports: [CurrencyPipe, MatIconModule, MatButtonModule, AchievementComponent]
+    imports: [MatIconModule, MatButtonModule, AchievementComponent]
 })
-export class MyAccountComponent implements OnInit{
-    
-    ngOnInit(): void {     
-        console.table(this.account)
-        console.log(this.sum())
-    }
+export class MyAccountComponent{
     protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)

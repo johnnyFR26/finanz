@@ -21,10 +21,13 @@ h1, h2, label{
     border-left: 5px solid var(--principal-color);
     display: flex;
     align-items: center;
-    gap: 20px;
+    padding: 0 20px;
+    > div {
+        display: flex;
+        align-items: center;
+    }
     .account-photo{
         position: relative;
-        margin-left: 20px;
         .photo{
             height: 120px;
             width: 120px;
@@ -51,10 +54,13 @@ h1, h2, label{
     h1{
         border-bottom: 3px solid var(--principal-color);
         margin: 0;
+        flex-shrink: 2;
     }
     .typePlan{
         position: relative;
         top: 5px;
+        margin-left: 20px;
+        flex: none;
     }
 }
 
@@ -67,17 +73,12 @@ h1, h2, label{
 
 .achievements{
     grid-area: achievements;
-    h2{
-    }
     > div{
         display: grid;
         padding-right: 40px;
         border-right: 5px solid var(--principal-color);
         grid-template-columns: 1fr 1fr;
         gap: 30px;
-        achievement{
-
-        }
     }
 }
 
@@ -132,7 +133,7 @@ h1, h2, label{
     > div{
         display: flex;
         align-items: center;
-        gap: 10px;
+        column-gap: 10px;
         mat-icon{
             height: 90px;
             width: 90px;
@@ -165,5 +166,52 @@ h1, h2, label{
             width: 24px;
             font-size: 24px;
         }
+    }
+}
+
+@media (max-width: 1400px) {
+    .achievements > div{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1000px) {
+    :host{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "name"
+        "achievements"
+        "config"
+        ;
+    }
+    
+    .achievements > div{
+        grid-template-columns: 1fr 1fr;
+    }
+    .account-config{ padding-left: 0;}
+
+}
+
+@media (max-width: 700px) {
+    .achievements > div{
+        grid-template-columns: 1fr;
+        padding: 0;
+        border: 0;
+    }
+    .account-name{
+        padding: 0;
+        flex-wrap: wrap;
+        .typePlan{
+            margin-left: 20px;
+        }
+    }
+    h1{font-size: 25px;}
+
+}
+
+@media (max-width: 500px) {
+    .plan > div{
+        flex-wrap: wrap;
+        p{margin: 0 0 10px 0;}
     }
 }
