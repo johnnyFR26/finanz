@@ -5,6 +5,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { UserService } from "../../../services/user.service";
 import { TransactionService } from "../../../services/transaction.service";
 import { AchievementComponent } from "../../../components/achievement/achievement.component";
+import { AchievementService } from "../../../services/achievement.service";
 
 @Component({
     selector: 'my-account',
@@ -23,12 +24,9 @@ import { AchievementComponent } from "../../../components/achievement/achievemen
     <div class="achievements">
       <h2>CONQUISTAS</h2>
       <div>
-        <achievement [achievement]="achievement1"/>
-        <achievement [achievement]="achievement2"/>
-        <achievement [achievement]="achievement3"/>
-        <achievement [achievement]="achievement4"/>
-        <achievement [achievement]="achievement5"/>
-        <achievement [achievement]="achievement6"/>
+          @for (achievement of achievements(); track $index) {
+            <achievement [achievement]="achievement"/>
+          }
       </div>
     </div>
 
@@ -68,47 +66,12 @@ export class MyAccountComponent{
     protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)
+    private achievementService = inject(AchievementService)
     protected user = this.userService.getUserInfo()
     protected account = this.accountService.getCurrentAccount()
     public id = this.account()?.id
     protected sum = this.transactionService.sum;
     protected sub = this.transactionService.sub;
     readonly username = this.user()?.user?.name;
-
-    protected achievement1 = {
-        name: 'Economizador I',
-        description: 'Economize um total de ',
-        goal: 100,
-        current: 100,
-    }
-    protected achievement2 = {
-        name: 'Economizador II',
-        description: 'Economize um total de ',
-        goal: 500,
-        current: 100,
-    }
-    protected achievement3 = {
-        name: 'Economizador III',
-        description: 'Economize um total de ',
-        goal: 1000,
-        current: 100,
-    }
-    protected achievement4 = {
-        name: 'Economizador IV',
-        description: 'Economize um total de ',
-        goal: 2000,
-        current: 100,
-    }
-    protected achievement5 = {
-        name: 'Economizador V',
-        description: 'Economize um total de ',
-        goal: 5000,
-        current: 100,
-    }
-    protected achievement6 = {
-        name: 'Economizador VI',
-        description: 'Economize um total de ',
-        goal: 10000,
-        current: 100,
-    }
+    protected achievements = this.achievementService.getCurrentAchievements();
 }
