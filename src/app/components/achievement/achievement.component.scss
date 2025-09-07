@@ -1,0 +1,56 @@
+.box{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: var(--gray-box);
+    border: 1px solid;
+    border-radius: 10px;
+    &.completed{border-color: var(--principal-color);}
+    &.uncompleted{border-color: transparent}
+}
+
+.name{
+    align-items: flex-start;
+}
+
+h3{
+    color: var(--principal-color);
+    font-weight: normal;
+}
+
+p{
+    border-bottom: 2px solid var(--principal-color);
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+
+mat-progress-bar{
+    --mdc-linear-progress-track-color: var(--gray-form);
+}
+
+mat-icon{
+    height: 80px;
+    width: 80px;
+    font-size: 80px;
+    border-radius: 10px;
+    margin: 0 20px 0 0;
+    flex-shrink: 0;
+    &.completed{
+        color: var(--gray-form);
+        background-color: var(--principal-color);
+    }
+    &.uncompleted{
+        color: var(--gray-box);
+        background-color: var(--gray-form);
+    }
+}
+
+.current{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+span{
+    font-size: 12px;
+}

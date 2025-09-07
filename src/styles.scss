@@ -141,7 +141,10 @@ body {
     --gradient: linear-gradient( var(--grey-background) 10%, color-mix(in srgb, var(--principal-color), var(--grey-background) 80%)  50%, var(--grey-background) 90%);
     --principal-color: #cbe957;
     --grey-background: #181824;
+    --gray: #EBF2FF66;
     --gray-form: #111119;
+    --gray-box: #282838;
+    --gray-font: #7A7AA7;
     --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #232334;
@@ -160,7 +163,7 @@ body {
     --mat-fab-foreground-color: black;
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     color:  var(--color, var(--white));
-    font-family: var(--font, Arial, Helvetica, sans-serif);
+    font-family: var(--font, KoHo);
 }
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form);

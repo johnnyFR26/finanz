@@ -18,3 +18,16 @@ button{
         color: white;
     }
 }
+a{
+    display: flex;
+    align-self: flex-start;
+    margin-left: 20px;
+    mat-icon{
+        margin-left: 8px;
+        color: var(--principal-color);
+        align-self: baseline;
+    }
+}
+a:hover{
+    text-decoration: underline;
+}
