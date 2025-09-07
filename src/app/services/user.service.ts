@@ -3,7 +3,7 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { createUser } from "../models/user.model";
 import { UserStorage } from "../models/user-storage.model";
 import { environment } from "../../environments/environment";
-import { Observable } from 'rxjs';
+import { Observable, switchMap, timestamp } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarComponent } from "../components/snackbar/snackbar.component";
@@ -18,6 +18,7 @@ export class UserService {
     private router = inject(Router)
     private userInfo = signal<UserStorage | null>(this.loadUserFromLocalStorage())
     private urlApi = environment.urlApi
+    private ipInfoUrl = environment.ipinfoUrl
     private auth: Auth = inject(Auth)
     private googleProvider = new GoogleAuthProvider();
 
@@ -52,7 +53,6 @@ export class UserService {
     try {
       await signOut(this.auth);
       console.log('Logout bem-sucedido');
-      // Redirecionar o usuário, etc.
     } catch (error) {
       console.error('Erro no logout:', error);
     }
@@ -77,8 +77,24 @@ export class UserService {
         })
     }
 
-    loginUser(user: { email: string, password: string }): Observable<any> {
-        return this.http.post(`${this.urlApi}/auth/login`, user)
+
+    loginUser(user: { email: string, password: string, controls?: { ip: string } }): Observable<any> {
+       return this.http.get(this.ipInfoUrl).pipe(
+           switchMap((response: any) => {
+               const userWithIp = {
+                   ...user,
+                   controls: {
+                      ip: response.ip,
+                      location: response.loc,
+                      timezone: response.timezone,
+                      hostname: response.hostname,
+                      userAgent: navigator.userAgent,
+                      timestamp: Date.now()
+                  }
+                };
+                return this.http.post(`${this.urlApi}/auth/login`, userWithIp);
+           })
+       );
     }
 
     deleteUser(){
