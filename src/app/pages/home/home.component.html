@@ -16,9 +16,11 @@
   <mat-icon>receipt_long</mat-icon> Extrato
 </a>
 
-<a mat-list-item (click)="redirectToPath('/home/IA')">
-  <mat-icon>android</mat-icon> Zezinho IA
-</a>
+@if (this.user()?.user?.controls?.plan == 'premium') {
+  <a mat-list-item (click)="redirectToPath('/home/IA')">
+    <mat-icon>android</mat-icon> Zezinho IA
+  </a>
+}
 
 <a mat-list-item (click)="redirectToPath('/home/creditCard')">
   <mat-icon>credit_card</mat-icon> Cartão de Crédito

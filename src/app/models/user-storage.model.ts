@@ -4,5 +4,6 @@ export interface UserStorage {
         id: number
         name: string
         email: string
+        controls?: any
     }
 }
