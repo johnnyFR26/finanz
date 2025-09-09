@@ -221,7 +221,7 @@ a{
             position: absolute;
             transition: .3s ease-in-out;
         }
-        &:focus + label, &:not(input:placeholder-shown) + .label{
+        &:focus + label, &:not(input:placeholder-shown) + label{
             padding: 0 2px;
             top: -25px;
             font-size: 90%;

@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../../services/category.service';
 import { MatIconModule } from "@angular/material/icon";
 import { AddCategoriesModalComponent } from '../../../../modals/add-categories/add-categories-modal.component';
+import { CreditCardService } from '../../../../services/credit-card.service';
 
 
 @Component({
@@ -35,6 +36,15 @@ import { AddCategoriesModalComponent } from '../../../../modals/add-categories/a
           </mat-select>
           <button mat-icon-button (click)="openCategoriesDialog()"><mat-icon>add_box</mat-icon></button>
         </div>
+
+        @if (type() == "output") {
+          <label for="input">Cartão</label>
+          <mat-select [(ngModel)]="creditCardId" class="input" name="type" id="input">
+            @for(creditCard of creditCards(); track $index){
+              <mat-option [value]="creditCard.id">{{creditCard.name}}</mat-option>
+            }
+          </mat-select>
+        }
 
         <label>Descriçao</label>
         <textarea class="input" [(ngModel)]="description" name="description" [ngModelOptions]="{standalone: true}"></textarea>
@@ -67,6 +77,10 @@ export class TransactionModalComponent{
 
     private categoryService = inject(CategoryService)
     protected categories = this.categoryService.getCurrentCategories()
+    
+    private creditCardService = inject(CreditCardService);
+    protected creditCards = this.creditCardService.getCurrentCreditCard();
+    protected creditCardId = signal('');
 
     protected value = signal<number>(0.00);
     protected description = signal('');
@@ -88,6 +102,7 @@ export class TransactionModalComponent{
         type: this.type(),
         accountId: this.account()?.id,
         categoryId: this.categoryId(),
+        creditCardId: this.creditCardId(),
       }
     })
   
