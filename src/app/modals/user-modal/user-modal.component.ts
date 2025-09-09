@@ -19,7 +19,7 @@ import { Router } from "@angular/router";
    
     `,
     styleUrls: ['./user-modal.component.scss'],
-    imports: [MatDialogActions, FormsModule, MatIconModule],
+    imports: [FormsModule, MatIconModule],
 })
 export class UserModalComponent {
     private accountService = inject(AccountService)
