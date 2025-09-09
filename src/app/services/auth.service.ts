@@ -32,7 +32,8 @@ export class AuthService {
             user: {
               id: response.user.id,
               name: response.user.name,
-              email: response.user.email
+              email: response.user.email,
+              controls: response.user.controls
             }
           })
               this.accountService.setCurrentAccount(response.user.account)
