@@ -15,12 +15,6 @@ import { Router } from "@angular/router";
       <a (click)="redirectToPath('/home/my-account')">Ver Conta <mat-icon>exit_to_app</mat-icon></a>
       <br>
       <br>
-      <p>Deseja excluir a conta?</p>
-
-    <mat-dialog-actions>
-      <button mat-button cancelar (click)="onNoClick()">Cancelar</button>
-      <button class="excluir" mat-button excluir (click)="onSubmit()" cdkFocusInitial>Deletar</button>
-    </mat-dialog-actions>
     </div>
    
     `,
