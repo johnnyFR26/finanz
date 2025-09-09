@@ -35,6 +35,7 @@ import { AchievementService } from "../../../services/achievement.service";
         <label labelfor="coin-select">Moeda</label>
         <select name="coin" id="coin-select">
           <option value="BRL">Brasil (R$)</option>
+          <option value="USD">Estados Unidos ($)</option>
         </select>
         <label labelfor="appearence-select">Aparência</label>
         <select name="appearence" id="appearence-select">

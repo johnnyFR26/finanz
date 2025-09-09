@@ -1,8 +1,9 @@
 import { MatIcon } from '@angular/material/icon';
-import { Component, computed, input } from "@angular/core";
+import { Component, computed, inject, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AccountService } from '../../services/account.service';
 
 @Component({
     selector: 'achievement',
@@ -20,8 +21,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         <mat-progress-bar mode="determinate" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
 
         <div class="current">
-            <span>{{achievement().current| currency:"BRL"}}</span>
-            <span>{{achievement().goal| currency:"BRL"}}</span>
+            <span>{{achievement().current| currency:account()?.currency}}</span>
+            <span>{{achievement().goal| currency:account()?.currency}}</span>
         </div>
       </div>
     `
@@ -30,6 +31,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 export class AchievementComponent{
     protected percentage = computed((): number => Number((this.achievement().current / this.achievement().goal *100).toFixed(2)));
     protected date = new Date();
+
+    private accountService = inject(AccountService)
+    readonly account = this.accountService.getCurrentAccount()
 
     public achievement = input({
         name: 'Achievement',

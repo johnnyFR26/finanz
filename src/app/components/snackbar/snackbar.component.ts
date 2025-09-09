@@ -23,7 +23,7 @@ import {
       }
   
       .example-pizza-party {
-        color: red;
+        color: var(--red);
       }
       .close{
         margin-left: 20px;

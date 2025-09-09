@@ -1,3 +1,4 @@
+import { AccountService } from './../../../services/account.service';
 import { MatIcon } from '@angular/material/icon';
 import { Component, inject , input } from "@angular/core";
 import { CurrencyPipe } from '@angular/common';
@@ -20,23 +21,23 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
 
         <div class="remaining">
             <h2>RESTAM</h2>
-            <h1>{{ remaining | currency:"BRL"}}</h1>
+            <h1>{{ remaining | currency:account()?.currency}}</h1>
         </div>
 
         <div class="TWOxTWO">
             <div class="small-box gains">
                 <h2>RECEITAS</h2>
-                <div><h1>{{revenues| currency: 'BRL'}}</h1>
+                <div><h1>{{revenues| currency: account()?.currency}}</h1>
                 <mat-icon>forward</mat-icon></div>
             </div>
             <div class="small-box losts">
                 <h2>GASTOS PLANEJADOS</h2>
-                <div><h1>{{expenses | currency: 'BRL'}}</h1>
+                <div><h1>{{expenses | currency: account()?.currency}}</h1>
                 <mat-icon>forward</mat-icon></div>
             </div>
             <div class="small-box balance">
                 <h2>BALANÇO PLANEJADO</h2>
-                <div><h1>{{balance| currency: 'BRL'}}</h1>
+                <div><h1>{{balance| currency: account()?.currency}}</h1>
                 <span class="material-symbols-outlined">balance</span></div>
             </div>
             <div class="small-box economy">
@@ -53,6 +54,8 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
     `
 })
 export class PlanningComponent {
+    private accountService = inject(AccountService)
+    readonly account = this.accountService.getCurrentAccount()
     protected revenues = 1059;
     protected expenses = 900;
     protected remaining = 600;

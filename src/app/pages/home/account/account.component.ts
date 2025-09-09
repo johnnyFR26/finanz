@@ -17,16 +17,16 @@ import { GraphsComponent } from "../../../components/graphs/graphs.component";
           <div class="box">
             <div class="currency">
               <h2>SALDO ATUAL</h2>
-              <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
+              <h1>{{account()?.currentValue | currency: account()?.currency}}</h1>
               <mat-icon>account_balance</mat-icon>
             </div>
             <div class="small-box gains">
               <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{sum()| currency: 'BRL'}}</h1>
+              <h1>{{sum()| currency: account()?.currency}}</h1>
             </div>
             <div class="small-box losts">
               <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{sub() | currency: 'BRL'}}</h1>
+              <h1>{{sub() | currency: account()?.currency}}</h1>
             </div>
           </div>
           <credit-card-select/>

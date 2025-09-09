@@ -12,7 +12,7 @@ import { FormsModule } from "@angular/forms";
     <div class="box creditCard">
               <div class="currency">
                 <h2>CARTÃO DE CRÉDITO</h2>
-                <h1>{{currentCardLimit() | currency: 'BRL'}}</h1>
+                <h1>{{currentCardLimit() | currency: account()?.currency}}</h1>
               </div>
               <div class="animation">
                 <select [(ngModel)]="currentCardLimit" class="input" name="type" id="input">

@@ -3,6 +3,7 @@ import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { AccountService } from '../../services/account.service';
 
 @Component({
     selector: 'transaction',
@@ -22,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
         <mat-panel-description>
           <div>
           <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
-          <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency:"BRL"}}</h1>
+          <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
           {{transaction()?.category?.name}} 
           @if (transaction().category?.controls?.icon) {
@@ -50,6 +51,8 @@ export class TransactionComponent{
   readonly panelOpenState = signal(false);
   readonly transaction = input<any>();
   readonly buttonSelected = signal(true);
+  private accountService = inject(AccountService);
+  readonly account = this.accountService.getCurrentAccount()
   switchSelect() : void {
     if(this.buttonSelected() == true){
       this.buttonSelected.set(false);

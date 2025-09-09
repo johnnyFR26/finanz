@@ -1,5 +1,6 @@
+import { AccountService } from './../../services/account.service';
 import { MatIcon } from '@angular/material/icon';
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -21,17 +22,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
                 </div>
             </span>
             <div class="division">
-                <div><span>META</span>{{goal| currency: 'BRL'}}</div>
-                <div><span>PAGO</span>{{paid| currency: 'BRL'}}</div>
-                <div><span>PREVISTO</span>{{predicted| currency: 'BRL'}}</div>
-                <div><span>TOTAL</span>{{total| currency: 'BRL'}}</div>
+                <div><span>META</span>{{goal| currency: account()?.currency}}</div>
+                <div><span>PAGO</span>{{paid| currency: account()?.currency}}</div>
+                <div><span>PREVISTO</span>{{predicted| currency: account()?.currency}}</div>
+                <div><span>TOTAL</span>{{total| currency: account()?.currency}}</div>
             </div>
             <mat-progress-bar mode="determinate" [value]="percentage" [attr.data]="percentage"></mat-progress-bar>
-            <span>RESTAM {{missing| currency: 'BRL'}}</span>
+            <span>RESTAM {{missing| currency: account()?.currency}}</span>
         </div>
     `
 })
 export class PlanComponent {
+    readonly accountService = inject(AccountService)
+    protected account = this.accountService.getCurrentAccount()
     protected goal = 400;
     protected paid = 150;
     protected predicted = 200;
