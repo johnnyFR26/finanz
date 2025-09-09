@@ -69,6 +69,9 @@ h1, h2, label{
     color: var(--black);
     padding: 0 10px;
     border-radius: 7px;
+    &.premium{
+        background-color: var(--principal-color);
+    }
 }
 
 .achievements{
@@ -140,6 +143,9 @@ h1, h2, label{
             font-size: 90px;
             color: var(--gray);
             flex-shrink: 0;
+            &.premium{
+                color: var(--principal-color) !important;
+            }
         }
         div{
             flex-basis: 0;
@@ -157,7 +163,7 @@ h1, h2, label{
     button{
         --color: var(--principal-color);
         --mdc-text-button-label-text-weight: normal;
-        width: 170px;
+        width: 180px;
         background-color: var(--gray-form);
         border-radius: 10px;
         font-size: 18px;

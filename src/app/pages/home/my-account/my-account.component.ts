@@ -16,9 +16,9 @@ import { AchievementService } from "../../../services/achievement.service";
           <mat-icon class="photo">account_circle</mat-icon>
           <button class="edit" mat-mini-fab><mat-icon>edit</mat-icon></button>
         </div>
-        <h1>{{username}}</h1>
+        <h1>{{user()?.user?.name}}</h1>
       </div>
-      <span class="typePlan">Standart</span>
+      <span class="typePlan" [class]="user()?.user?.controls.plan">{{user()?.user?.controls.plan == 'premium' ? "Premium" : "Standard"}}</span>
     </div>
 
     <div class="achievements">
@@ -44,19 +44,38 @@ import { AchievementService } from "../../../services/achievement.service";
         </select>
       </div>
 
-      <div class="box plan">
-        <label>Seu Plano</label>
-        <div>
-          <mat-icon>stars</mat-icon>
+      @if (user()?.user?.controls.plan !== 'premium') {
+
+        <div class="box plan">
+          <label>Seu Plano</label>
           <div>
-            Finanz
-            <span class="typePlan">Standart</span>
+            <mat-icon>stars</mat-icon>
+            <div>
+              Finanz
+              <span class="typePlan">Standart</span>
+            </div>
+            <p>Você tem acesso apenas ao conteúdo do plano STANDART.<br>
+            Descubra todas as vantagens do plano <span>PREMIUM</span> no botão a seguir</p>
           </div>
-          <p>Você tem acesso apenas ao conteúdo do plano STANDART.<br>
-          Descubra todas as vantagens do plano <span>PREMIUM</span> no botão a seguir</p>
+          <button mat-button> Seja Premium <mat-icon>stars</mat-icon></button>
         </div>
-        <button mat-button> Seja Premium <mat-icon>stars</mat-icon></button>
-      </div>
+      }
+      @else {
+        <div class="box plan">
+          <label>Seu Plano</label>
+          <div>
+            <mat-icon class="premium">stars</mat-icon>
+            <div>
+              Finanz
+              <span class="typePlan premium">Premium</span>
+            </div>
+            <p>Você tem acesso apenas ao conteúdo do plano STANDART e PREMIUM.<br>
+            Descubra o poder do plano <span>PREMIUM</span> na plataforma com o Zezinho</p>
+          </div>
+          <button mat-button> Veja o Zezinho <mat-icon>star</mat-icon></button>
+        </div>
+      }
+
     </div>
     `,
     styleUrl: './my-account.component.scss',
@@ -72,6 +91,5 @@ export class MyAccountComponent{
     public id = this.account()?.id
     protected sum = this.transactionService.sum;
     protected sub = this.transactionService.sub;
-    readonly username = this.user()?.user?.name;
     protected achievements = this.achievementService.getCurrentAchievements();
 }
