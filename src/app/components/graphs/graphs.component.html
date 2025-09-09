@@ -6,7 +6,8 @@
     labels: ['Receitas', 'Despesas'],
     datasets: [{
       data: [this.sum(), this.sub()],
-      backgroundColor: ['#9FF04C', '#E74C3C']
+      backgroundColor: ['#9FF04C', '#E74C3C'],
+      borderWidth: 0,
     }]
   }"
       [options]="chartOptions"
@@ -22,7 +23,8 @@
       labels: this.categoriesNames(),
       datasets: [{
         data: this.simpleOutputSums(),
-        backgroundColor: this.colors
+        backgroundColor: this.colors,
+        borderWidth: 0,
       }]
       }"
       [options]="chartOptions"

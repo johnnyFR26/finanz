@@ -48,42 +48,14 @@ colors = [
     })
   }
   
-  lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [1000, 1200, 900, 1500, 1100, 1700, 2100, 1800, 2000, 2200, 1900, 2500],
-        borderColor: '#9FF04C',
-        backgroundColor: '#9FF04C',
-        tension: 0.4,
-        fill: false
-      },
-      {
-        label: 'Despesas',
-        data: [500, 700, 600, 900, 750, 1000, 1300, 1200, 1400, 1600, 1250, 1800],
-        borderColor: '#E74C3C',
-        backgroundColor: '#E74C3C',
-        tension: 0.4,
-        fill: false
-      }
-    ]
-  };
 
-  lineChartOptions: ChartOptions<'line'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom'
-      }
-    }
-  };
 
   doughnutChartData = {
     labels: ['Receitas', 'Despesas'],
     datasets: [{
       data: [this.sum(), this.sub()],
-      backgroundColor: ['#9FF04C', '#E74C3C']
+      backgroundColor: ['#9FF04C', '#E74C3C'],
+      borderWidth: 0,
     }]
   };
 
@@ -92,7 +64,7 @@ colors = [
     labels: this.categories().map(c => c.name),
     datasets: [{
       data: [30, 20, 25, 15, 10],
-      backgroundColor: ['#3B82F6', '#EC4899', '#F59E0B', '#10B981', '#6366F1']
+      backgroundColor: ['#3B82F6', '#EC4899', '#F59E0B', '#10B981', '#6366F1'],
     }]
   };
 
