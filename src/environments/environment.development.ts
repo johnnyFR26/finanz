@@ -1,6 +1,6 @@
 export const environment = {
-    urlApi: 'http://localhost:3000',
-    ipinfoUrl: 'https://ipinfo.io/?token=9917500cb1ff3a',
+    urlApi: 'https://api-thinktech.vercel.app',
+    ipinfoUrl: 'https://ipinfo.io/?token=9917500cb1ff3a',    
     firebaseConfig: {
         apiKey: "AIzaSyCejP3eaANMY6mGJpCocyHwsDqIeh_2jwk",
         authDomain: "finanz-d5317.firebaseapp.com",
