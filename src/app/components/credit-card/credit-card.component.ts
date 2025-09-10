@@ -23,7 +23,7 @@ import { AccountService } from '../../services/account.service';
         <div class="cardContent">
             <p>FATURA ABERTA</p>
             <div>VALOR PARCIAL: <span [ngClass]="percentage() >= 70 ? 'low' : 'high'">{{expense() | currency:account()?.currency}}</span></div>
-            <div>FECHA EM: <span>{{date | date:"dd 'DE' MMMM 'DE' yyyy"}}</span></div><!-- tem que arrumar de inglês pra português-->
+            <div>FECHA EM: <span>{{creditCard().invoices[0]?.closingDate | date:"dd 'DE' MMMM 'DE' yyyy"}}</span></div>
 
             <p style="margin-top:10px;margin-bottom:0;">{{expense() | currency:account()?.currency}} de {{creditCard().limit | currency:account()?.currency}}</p>
             <mat-progress-bar mode="determinate" [ngClass]="percentage() >= 70 ? 'low' : 'high'" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
@@ -40,7 +40,6 @@ import { AccountService } from '../../services/account.service';
 export class CreditCardComponent{
     protected percentage = computed((): number => Number((this.expense() / this.creditCard().limit *100).toFixed(2)));
     protected expense = computed(() => this.creditCard().limit - this.creditCard().availableLimit);
-    protected date = new Date();
 
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
@@ -49,6 +48,12 @@ export class CreditCardComponent{
         name: 'My credit card',
         limit: 1000,
         availableLimit: 1000,
-
+        invoices: [
+            {
+                dueDate: Date.now(),
+                closingDate: Date.now(),
+                status: true,
+            }
+        ]
     })
 }
