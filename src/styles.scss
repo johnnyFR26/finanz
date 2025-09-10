@@ -159,7 +159,9 @@ body {
     --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
+    --mat-sys-surface-container: var(--input-area);
     --mat-sys-surface-variant: var(--input-area2);
+    --mat-sys-background: var(--grey-background);
     --mat-fab-foreground-color: black;
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     color:  var(--color, var(--white));

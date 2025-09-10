@@ -1,4 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { Component, computed, inject, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,14 +8,17 @@ import { AccountService } from '../../services/account.service';
 
 @Component({
     selector: 'credit-card',
-    imports: [MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, CommonModule],
+    imports: [MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, CommonModule, MatMenuModule],
     styleUrl: './credit-card.component.scss',
     template: `
       <div class="box card">
         <div class="name">
             <img src="/credit-card/mastercard.svg">
             <h3>{{ creditCard().name}}</h3>
-            <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+            <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item><mat-icon>attach_money</mat-icon>Pagar Fatura</button>
+            </mat-menu>
         </div>
         <div class="cardContent">
             <p>FATURA ABERTA</p>
