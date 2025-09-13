@@ -106,6 +106,26 @@ export class SignInComponent {
     };
   });
 
+  public passowordLength = computed(() => {
+    return this.password().length > 8 
+  })
+
+  public passwordHasNumber = computed(() => {
+    return /\d/.test(this.password())
+  })
+
+  public passwordHasUppercase = computed(() => {
+    return /[A-Z]/.test(this.password())
+  })
+
+  public passwordHasLowercase = computed(() => {
+    return /[a-z]/.test(this.password())
+  })
+
+  public passwordHasSpecialCharacter = computed(() => {
+    return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(this.password())
+  })
+
   public isFormValid = computed(() => {
     return this.email().length > 0 && this.password().length > 0 && this.name().length > 0 && this.confirmPassword().length > 0 && this.phone().length > 0 && this.cpf().length > 0 && this.password() === this.confirmPassword() && EMAIL_REGEXP.test(this.email());
   });
