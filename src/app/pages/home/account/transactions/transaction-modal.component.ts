@@ -80,7 +80,7 @@ export class TransactionModalComponent{
     
     private creditCardService = inject(CreditCardService);
     protected creditCards = this.creditCardService.getCurrentCreditCard();
-    protected creditCardId = signal('');
+    protected creditCardId = signal(undefined);
 
     protected value = signal<number>(0.00);
     protected description = signal('');
