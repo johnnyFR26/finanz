@@ -53,6 +53,11 @@ export const routes: Routes = [
                 canActivate: [doesUserHaveAccount],
             },
             {
+                path: 'planning/new',
+                loadComponent: () => import('./pages/home/planning/new/new-planning.component').then(m => m.NewPlanningComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
                 path: 'my-account',
                 loadComponent: () => import('./pages/home/my-account/my-account.component').then(m => m.MyAccountComponent),
                 canActivate: [doesUserHaveAccount],
