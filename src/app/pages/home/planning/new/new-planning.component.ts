@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../../../services/category.service';
 
 interface Category {
   id: string;
@@ -249,16 +250,10 @@ export class NewPlanningComponent {
   private fb = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
+  private categoryService = inject(CategoryService)
 
   isSubmitting = signal(false);
-  availableCategoriesData = signal<Category[]>([
-    { id: '1', name: 'Alimentação' },
-    { id: '2', name: 'Transporte' },
-    { id: '3', name: 'Moradia' },
-    { id: '4', name: 'Lazer' },
-    { id: '5', name: 'Saúde' },
-    { id: '6', name: 'Educação' }
-  ]);
+  availableCategoriesData = this.categoryService.getCurrentCategories();
 
   planningForm: FormGroup;
 

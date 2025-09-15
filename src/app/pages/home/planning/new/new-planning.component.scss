@@ -1,10 +1,11 @@
 .new-planning {
-    background-color: var(--principal-color);
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+      background-color: var(--grey-background);
 
   .planning-card {
+        background-color: var(--grey-background);
     margin-bottom: 20px;
 
     mat-card-header {
