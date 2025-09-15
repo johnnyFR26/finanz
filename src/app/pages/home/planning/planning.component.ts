@@ -7,6 +7,7 @@ import { TransactionService } from '../../../services/transaction.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PlanComponent } from '../../../components/plan/plan.component';
 import { MonthSelectorComponent } from "../../../components/month-selector/month-selector.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'planning',
@@ -16,6 +17,10 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200&icon_names=balance,payments" />
         
         <h2 class="title">PLANEJAMENTO</h2>
+
+        <div (click)="this.router.navigate(['home/planning/new'])">
+            <mat-icon>trending_up</mat-icon>
+        </div>
 
         <month-selector/>
 
@@ -56,6 +61,7 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
 export class PlanningComponent {
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
+    protected router = inject(Router)
     protected revenues = 1059;
     protected expenses = 900;
     protected remaining = 600;
