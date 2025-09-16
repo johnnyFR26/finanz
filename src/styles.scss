@@ -147,7 +147,7 @@ body {
     --gray-font: #7A7AA7;
     --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
-    --input-area: #232334;
+    --input-area: #282838;
     --input-area2: #373760;
     --red: #ff5757;
     --white: #f0f8ff;
@@ -156,14 +156,27 @@ body {
     --magenta: #cb6ce6;
     --yellow: #ffde59;
     --mat-sys-primary: var(--principal-color);
-    --mat-sys-surface: var(--gray-form);
+    --mat-sys-surface: var(--gray-box);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
+    --mat-select-panel-background-color: var(--input-area);
+    --mat-option-selected-state-layer-color: var(--principal-color);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     color:  var(--color, var(--white));
     font-family: var(--font, KoHo);
+    &::-webkit-scrollbar{
+        background: #0000;
+        width: 7px;
+    }
+    &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+        background: #424242;
+        &:hover{
+            background: #626262;
+        }
+    }
 }
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form);
@@ -200,7 +213,7 @@ h2{
     font-family: Dosis;
     font-weight: normal;
 }
-label{
+label:not(.mdc-floating-label){
     align-self: flex-start;
     position: relative;
     margin-top: 15px;
@@ -277,18 +290,28 @@ a{
 
 .small-box{
     margin: 0;
-    height: auto;
-    width: auto;
+    width: 20%;
     padding: 0 0 0 5px;
-
+    box-sizing: border-box;
+    background-color: var(--gray-box);
+    border-radius: 10px;
+    padding: 12px 0 20px 15px;
+    box-shadow: 0 5px 10px -4px #000;
     
     h2{
-        margin: 0
+        font-family: KoHo;
+        font-size: 16px;
+        margin: 0;
     }
 
     h1{
-        font-size: 20px;
+        font-family: KoHo;
+        font-size: 35px;
+        font-weight: normal;
         margin-top: 5px;
+        border-left: 3px solid var(--small-box-color);
+        color: var(--small-box-color);
+        padding-left: 7px;
     }
 
     *{

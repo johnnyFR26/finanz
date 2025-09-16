@@ -6,15 +6,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 2rem;
   padding: 1rem 0;
   .chart {
-    background-color: #131313;
+    background-color: var(--gray-box);
     padding: 1rem;
     border-radius: 20px;
     text-align: center;
+    box-shadow: 0 5px 10px -4px #000;
 
     canvas {
+      padding: 10%;
       max-width: 100%;
     }
 
@@ -22,6 +23,7 @@
       color: white;
       margin-top: 0.5rem;
       font-weight: 600;
+      justify-self: flex-start;
     }
   }
 }
@@ -38,8 +40,8 @@
 @media (orientation: landscape) {
   .charts-container {
     .chart{
-      width: 40%;
-      max-width: 50%;
+      width: 25%;
+      max-width: 33%;
     }
   }
 }
