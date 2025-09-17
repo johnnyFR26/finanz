@@ -6,7 +6,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { TransactionModalComponent } from "./transactions/transaction-modal.component";
 import { UserService } from "../../../services/user.service";
-import { AddCategoriesModalComponent } from "../../../modals/add-categories/add-categories-modal.component";
 import { CreditCardSelectComponent } from "../../../components/credit-card-select/credit-card-select.component";
 import { TransactionService } from "../../../services/transaction.service";
 import { GraphsComponent } from "../../../components/graphs/graphs.component";
@@ -14,35 +13,38 @@ import { GraphsComponent } from "../../../components/graphs/graphs.component";
 @Component({
     selector: 'app-account',
     template: `
-          <div class="box">
-            <div class="currency">
-              <h2>SALDO ATUAL</h2>
-              <h1>{{account()?.currentValue | currency: account()?.currency}}</h1>
-              <mat-icon>account_balance</mat-icon>
-            </div>
-            <div class="small-box gains">
-              <h2>RECEITAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{sum()| currency: account()?.currency}}</h1>
-            </div>
-            <div class="small-box losts">
-              <h2>DESPESAS<mat-icon>forward</mat-icon></h2>
-              <h1>{{sub() | currency: account()?.currency}}</h1>
-            </div>
-          </div>
-          <credit-card-select/>
-          <div class="box">
-            <div class="buttons">
-              <button class="button deposit" mat-fab extended (click)="openDialog('Depositar', 'input')">
-              <mat-icon>payment</mat-icon>
-                  Entrada +
-              </button>
-              <button class="button transfer" mat-fab extended (click)="openDialog('Transferir', 'output')">
-              <mat-icon>transfer_within_a_station</mat-icon>
-                  Saída -
-              </button>
-            </div>
-          </div>
-          <app-graphs></app-graphs>
+      <div class="flex">
+        <div class="small-box currency">
+          <h2>Saldo Atual</h2>
+          <h1>{{account()?.currentValue | currency: account()?.currency}}</h1>
+        </div>
+        <div class="small-box gains">
+          <h2>Receitas</h2>
+          <h1>{{sum()| currency: account()?.currency}}</h1>
+        </div>
+        <div class="small-box losts">
+          <h2>Despesas</h2>
+          <h1>{{sub() | currency: account()?.currency}}</h1>
+        </div>
+        <div class="small-box credit-card">
+          <h2>Cartão de crédito</h2>
+          <h1>{{sub() | currency: account()?.currency}}</h1>
+        </div>
+      </div>
+      <credit-card-select/>
+      <div class="box">
+        <div class="buttons">
+          <button class="button deposit" mat-fab extended (click)="openDialog('Depositar', 'input')">
+          <mat-icon>payment</mat-icon>
+              Entrada +
+          </button>
+          <button class="button transfer" mat-fab extended (click)="openDialog('Transferir', 'output')">
+          <mat-icon>transfer_within_a_station</mat-icon>
+              Saída -
+          </button>
+        </div>
+      </div>
+      <app-graphs></app-graphs>
     `,
     styleUrl: './account.component.scss',
     imports: [CurrencyPipe, MatIconModule, MatButtonModule, CreditCardSelectComponent, GraphsComponent]

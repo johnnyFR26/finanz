@@ -1,6 +1,7 @@
 <div class="charts-container">
   <!-- Gráfico Receita vs Despesa -->
   <div class="chart">
+    <p>RECEITA X DESPESA</p>
     <canvas baseChart
       [data]="{
     labels: ['Receitas', 'Despesas'],
@@ -13,11 +14,11 @@
       [options]="chartOptions"
       [type]="'doughnut'">
     </canvas>
-    <p>RECEITA X DESPESA</p>
   </div>
 
   <!-- Gráfico de Despesas por Categoria -->
   <div class="chart">
+    <p>DESPESAS POR CATEGORIA</p>
     <canvas baseChart
       [data]="{
       labels: this.categoriesNames(),
@@ -30,7 +31,22 @@
       [options]="chartOptions"
       [type]="'doughnut'">
     </canvas>
+  </div>
+
+  <div class="chart">
     <p>DESPESAS POR CATEGORIA</p>
+    <canvas baseChart
+      [data]="{
+      labels: this.categoriesNames(),
+      datasets: [{
+        data: this.simpleOutputSums(),
+        backgroundColor: this.colors,
+        borderWidth: 0,
+      }]
+      }"
+      [options]="chartOptions"
+      [type]="'doughnut'">
+    </canvas>
   </div>
 
 </div>

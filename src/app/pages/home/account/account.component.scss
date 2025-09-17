@@ -33,38 +33,14 @@
 }
 
 
-.currency{
-    margin-bottom: 20px;
-    height: 85px;
-    width: 100%;
-    border-left: 5px solid var(--white);
-    padding: 0 0 0 5px;
+.currency{--small-box-color: var(--white);}
+.gains{--small-box-color: var(--principal-color);}
+.losts{--small-box-color: var(--red);}
+.credit-card{--small-box-color: var(--blue);}
+
+.flex{
     display: flex;
-    flex-flow: column wrap;
-
-    h2{
-        margin: 0
-    }
-
-    mat-icon{
-        background-color: var(--blue);
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 60px;
-        height: 60px;
-        width: 60px;
-        align-self: end;
-    }
-}
-
-.gains{ 
-    border-left: 5px solid var(--principal-color);
-}
-
-.losts{
-    border-left: 5px solid var(--red);
-    mat-icon{
-        color: var(--red);
-        rotate: 90deg;
-    }
+    width: calc(90vw + 20px);
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
