@@ -147,7 +147,7 @@ body {
     --gray-font: #7A7AA7;
     --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
-    --input-area: #282838;
+    --input-area: #232334;
     --input-area2: #373760;
     --red: #ff5757;
     --white: #f0f8ff;
@@ -156,7 +156,7 @@ body {
     --magenta: #cb6ce6;
     --yellow: #ffde59;
     --mat-sys-primary: var(--principal-color);
-    --mat-sys-surface: var(--gray-box);
+    --mat-sys-surface: var(--gray-form);
     --mat-sys-on-surface: var(--white);
     --mat-sys-on-surface-variant: var(--white);
     --mat-sys-surface-variant: var(--input-area2);
@@ -280,6 +280,7 @@ a{
 .box{
     margin-bottom: 10px;
     width: 90vw;
+    box-sizing: border-box;
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
@@ -289,29 +290,41 @@ a{
 }
 
 .small-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0;
-    width: 20%;
+    width: 100%;
     padding: 0 0 0 5px;
     box-sizing: border-box;
     background-color: var(--gray-box);
     border-radius: 10px;
-    padding: 12px 0 20px 15px;
+    padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
     
     h2{
         font-family: KoHo;
         font-size: 16px;
+        flex-shrink: 0;
         margin: 0;
+        margin-right: 5px;
     }
 
     h1{
         font-family: KoHo;
-        font-size: 35px;
+        font-size: 30px;
         font-weight: normal;
         margin-top: 5px;
         border-left: 3px solid var(--small-box-color);
         color: var(--small-box-color);
         padding-left: 7px;
+    }
+
+    div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
     }
 
     *{

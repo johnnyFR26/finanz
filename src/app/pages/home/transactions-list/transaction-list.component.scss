@@ -12,13 +12,14 @@
     background-color: var(--gray-transaction);
 }
 
-.small-box{
+.value{
     background-color: var(--input-area);
     border-radius: 5px;
     height: 40px;
     min-width: 120px;
     display: flex;
     flex-flow: column wrap;
+    padding: 5px;
     margin: 20px 6px;
     
     h1{
@@ -27,6 +28,7 @@
     }
     h2{
         font-size: medium;
+        margin: 0;
     }
     
     mat-icon{
