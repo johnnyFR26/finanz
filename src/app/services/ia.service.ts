@@ -1,15 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: "root",
 })
 export class IaService {
     private http = inject(HttpClient)
+    private urlApi = environment.urlApi
+    
 
     sendMessage(message: string) {
-       return this.http.post('http://localhost:5678/webhook-test/464dc37b-87fd-4710-b549-948770b8e487', {
-            "text": message
+       return this.http.post(`${this.urlApi}/ai-agent`, {
+            "message": message
         })
     }
 }

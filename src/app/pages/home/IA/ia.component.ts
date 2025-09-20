@@ -37,9 +37,7 @@ export class IAComponent implements AfterViewInit {
         this.messasges.push(this.message)
         this.iaService.sendMessage(this.message).subscribe(res => {
             //@ts-expect-error
-            console.log(res[0].output)
-            //@ts-expect-error
-            this.messasges.push(res[0].output)
+            this.messasges.push(res.message)
         })
         this.message = ''
     }
