@@ -5,7 +5,7 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-
+import { provideMarkdown } from 'ngx-markdown';
 import { routes } from './app.routes';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
@@ -22,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     },
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    provideMarkdown()
   ],
 };

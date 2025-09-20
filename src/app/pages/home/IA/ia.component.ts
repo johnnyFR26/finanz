@@ -3,12 +3,13 @@ import { UserService } from "../../../services/user.service";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
 import { IaService } from "../../../services/ia.service";
+import { MarkdownModule } from "ngx-markdown";
 
 @Component({
     selector: "app-ia",
     templateUrl: "./ia.component.html",
     styleUrls: ["./ia.component.scss"],
-    imports: [MatIconModule, FormsModule]
+    imports: [MatIconModule, FormsModule, MarkdownModule]
 })
 export class IAComponent implements AfterViewInit {
     private userService = inject(UserService)

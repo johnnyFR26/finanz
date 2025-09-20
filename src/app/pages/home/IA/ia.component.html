@@ -2,7 +2,7 @@
   <div class="messages">
       <p><span id="first-message"></span><span class="cursor">|</span></p>
       @for (message of messasges; track $index) {
-          <p>{{ message }}</p>
+        <markdown [data]="message"></markdown>
       }
   </div>
 </div>

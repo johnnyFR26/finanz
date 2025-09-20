@@ -24,6 +24,7 @@
     "animejs": "^4.0.2",
     "chart.js": "^4.5.0",
     "ng2-charts": "^8.0.0",
+    "ngx-markdown": "^20.1.0",
     "ngx-mask": "^19.0.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
