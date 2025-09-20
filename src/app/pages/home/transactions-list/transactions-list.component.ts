@@ -27,12 +27,12 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
     'revenue': type() == 'input',
     'expense': type() == 'output'
   }"/>
-    <div class="small-box gains">
+    <div class="value gains">
       <h2 class="entrada">RECEITAS</h2>
       <h1>{{sum()| currency: account()?.currency}}</h1>
       <mat-icon>forward</mat-icon>
     </div>
-    <div class="small-box losts">
+    <div class="value losts">
       <h2 class="saida">DESPESAS</h2>
       <h1>{{sub() | currency: account()?.currency}}</h1>
       <mat-icon>forward</mat-icon>

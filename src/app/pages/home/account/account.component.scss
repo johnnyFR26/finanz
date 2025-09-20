@@ -7,24 +7,27 @@
     align-content: flex-start;
 }
 
-.button{
-    color: black;
-    width: 120px;
-    padding: 10px 0px;
-}
-
 .buttons{
     display: flex;
-    width: 400px;
-    justify-content: space-evenly;
+    width: 90vw;
+    gap: 20px;
+
+    button{
+        background-color: var(--gray-box);
+        border: 2px solid currentColor;
+        border-radius: 10px;
+        width: 150px;
+        height: 35px;
+        padding: 10px 0px;
+    }
 }
 
 .deposit{
-    background-color: #4dc00a;
+    color: var(--principal-color);
 }
 
 .transfer{
-    background-color: #f31c1c;
+    color: var(--red);
 }
 
 .add{
@@ -33,38 +36,56 @@
 }
 
 
-.currency{
+.currency{--small-box-color: var(--white);}
+.gains{--small-box-color: var(--principal-color);}
+.losts{--small-box-color: var(--red);}
+.credit-card{--small-box-color: var(--blue);}
+
+.flex{
+    display: grid;
+    container-name: grid;
+    container-type: inline-size;
+    grid-template-columns: repeat(4, 1fr);
+    width: 90vw;
+    justify-content: space-between;
+    gap:2rem;
     margin-bottom: 20px;
-    height: 85px;
-    width: 100%;
-    border-left: 5px solid var(--white);
-    padding: 0 0 0 5px;
-    display: flex;
-    flex-flow: column wrap;
+}
 
-    h2{
-        margin: 0
+@media (max-width: 900px){
+    .flex{
+        gap:1rem;
+        grid-template-columns: 1fr 1fr;
     }
-
-    mat-icon{
-        background-color: var(--blue);
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 60px;
-        height: 60px;
-        width: 60px;
-        align-self: end;
+}
+@media (max-width: 600px){
+    .flex{
+        gap:0.5rem;
+        grid-template-columns: 1fr;
     }
 }
 
-.gains{ 
-    border-left: 5px solid var(--principal-color);
-}
-
-.losts{
-    border-left: 5px solid var(--red);
-    mat-icon{
-        color: var(--red);
-        rotate: 90deg;
+select{
+    border: 0;
+    width: 50%;
+    min-width: 40%;
+    flex-shrink: 0;
+    appearance: base-select;
+    background-color: var(--gray-form);
+    font-size: 16px;
+    option{
+        background-color: var(--input-area);
+        &:checked{background-color: var(--input-area2);}
+        &:hover{background-color: var(--principal-color);color: var(--black);}
+        &::checkmark{display: none;}
+    }
+    &::picker(select){
+        appearance: base-select;
+        border-radius: 0 0 10px 10px;
+        border: none;
+        box-shadow: 0 2px 10px -2px #000;
+        background-color: transparent;
+    }
+    &::picker-icon{
     }
 }
