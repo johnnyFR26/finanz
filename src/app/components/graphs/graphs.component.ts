@@ -29,6 +29,16 @@ export class GraphsComponent {
       .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
   );
 });
+
+  simpleInputSums = computed(() => {
+
+  return this.categories().map(category => 
+    // @ts-ignore
+    category?.transactions
+      .filter(transaction => transaction.type === 'input')
+      .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
+  );
+});
 colors = [
   "#FF5733", // Laranja avermelhado
   "#33FF57", // Verde

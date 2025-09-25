@@ -18,12 +18,12 @@
 
   <!-- Gráfico de Despesas por Categoria -->
   <div class="chart">
-    <p>DESPESAS POR CATEGORIA</p>
+    <p>RECEITAS POR CATEGORIA</p>
     <canvas baseChart
       [data]="{
       labels: this.categoriesNames(),
       datasets: [{
-        data: this.simpleOutputSums(),
+        data: this.simpleInputSums(),
         backgroundColor: this.colors,
         borderWidth: 0,
       }]
