@@ -9,7 +9,7 @@ interface CreatePlanningRequest {
   day?: number;
   year: number;
   total: number;
-  available: number;
+  availableLimit: number;
   title?: string;
   accountId: string;
   categories: PlanningCategory[];

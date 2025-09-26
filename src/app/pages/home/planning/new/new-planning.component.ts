@@ -34,7 +34,7 @@ interface CreatePlanningRequest {
   day?: number;
   year: number;
   total: number;
-  available: number;
+  availableLimit: number;
   title?: string;
   accountId: string;
   categories: PlanningCategory[];
@@ -392,7 +392,7 @@ export class NewPlanningComponent {
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           total: Number(formValue.total),
-          available: Number(formValue.available) || 0,
+          availableLimit: Number(formValue.available) || 0,
           title: formValue.title || undefined,
           accountId: this.account()?.id || '',
           categories: formValue.categories.map((cat: Category) => ({
