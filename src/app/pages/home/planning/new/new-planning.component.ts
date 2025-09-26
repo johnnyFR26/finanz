@@ -30,7 +30,7 @@ interface PlanningCategory {
 }
 
 interface CreatePlanningRequest {
-  month: string;
+  month: Date;
   day?: number;
   year: number;
   limit: number;
@@ -388,7 +388,7 @@ export class NewPlanningComponent {
         const selectedDate = new Date(formValue.date);
         
         const request: CreatePlanningRequest = {
-          month: /*String(selectedDate.getMonth() + 1)*/ new Date(selectedDate).toLocaleString('pt-BR', { month: 'long' }),
+          month: /*String(selectedDate.getMonth() + 1)*/ new Date(selectedDate),
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           limit: Number(formValue.total),

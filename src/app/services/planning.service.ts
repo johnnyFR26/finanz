@@ -5,7 +5,7 @@ import { PlanningModel } from "../models/planning.model";
 import { PlanningCategory } from "../models/planning-category.model";
 
 interface CreatePlanningRequest {
-  month: string;
+  month: Date;
   day?: number;
   year: number;
   limit: number;
