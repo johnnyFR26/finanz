@@ -66,16 +66,16 @@ interface CreatePlanningRequest {
             Crie seu planejamento mensal com categorias
           </mat-card-subtitle>
         </mat-card-header>
-
+    
         <mat-card-content>
           <form [formGroup]="planningForm" (ngSubmit)="onSubmit()" class="planning-form">
-            
+    
             <div class="form-section">
               <h3 class="section-title">
                 <mat-icon>info</mat-icon>
                 Informações Básicas
               </h3>
-              
+    
               <div class="form-row">
                 <mat-form-field class="full-width">
                   <mat-label>Título do Planejamento</mat-label>
@@ -83,7 +83,7 @@ interface CreatePlanningRequest {
                   <mat-icon matSuffix>title</mat-icon>
                 </mat-form-field>
               </div>
-
+    
               <div class="form-row">
                 <mat-form-field class="date-field">
                   <mat-label>Mês/Ano</mat-label>
@@ -93,62 +93,72 @@ interface CreatePlanningRequest {
                 </mat-form-field>
               </div>
             </div>
-
+    
             <mat-divider></mat-divider>
-
+    
             <!-- Limites Financeiros -->
             <div class="form-section">
               <h3 class="section-title">
                 <mat-icon>account_balance_wallet</mat-icon>
                 Limites Financeiros
               </h3>
-              
+    
               <div class="form-row">
                 <mat-form-field class="half-width">
                   <mat-label>Limite Total</mat-label>
                   <input matInput type="number" formControlName="total" placeholder="0.00">
                   <span matTextPrefix>R$ </span>
-                  <mat-error *ngIf="planningForm.get('total')?.hasError('required')">
-                    Limite total é obrigatório
-                  </mat-error>
-                  <mat-error *ngIf="planningForm.get('total')?.hasError('min')">
-                    Deve ser maior que zero
-                  </mat-error>
+                  @if (planningForm.get('total')?.hasError('required')) {
+                    <mat-error>
+                      Limite total é obrigatório
+                    </mat-error>
+                  }
+                  @if (planningForm.get('total')?.hasError('min')) {
+                    <mat-error>
+                      Deve ser maior que zero
+                    </mat-error>
+                  }
                 </mat-form-field>
-
+    
                 <mat-form-field class="half-width">
                   <mat-label>Valor Disponível</mat-label>
                   <input matInput type="number" formControlName="available" placeholder="0.00">
                   <span matTextPrefix>R$ </span>
-                  <mat-error *ngIf="planningForm.get('available')?.hasError('required')">
-                    Valor disponível é obrigatório
-                  </mat-error>
-                  <mat-error *ngIf="planningForm.get('available')?.hasError('min')">
-                    Deve ser maior que zero
-                  </mat-error>
+                  @if (planningForm.get('available')?.hasError('required')) {
+                    <mat-error>
+                      Valor disponível é obrigatório
+                    </mat-error>
+                  }
+                  @if (planningForm.get('available')?.hasError('min')) {
+                    <mat-error>
+                      Deve ser maior que zero
+                    </mat-error>
+                  }
                 </mat-form-field>
               </div>
-
-              <div class="values-summary" *ngIf="totalLimit() > 0">
-                <div class="summary-item">
-                  <span class="label">Limite Total:</span>
-                  <span class="value total">R$ {{ totalLimit() | number:'1.2-2' }}</span>
+    
+              @if (totalLimit() > 0) {
+                <div class="values-summary">
+                  <div class="summary-item">
+                    <span class="label">Limite Total:</span>
+                    <span class="value total">R$ {{ totalLimit() | number:'1.2-2' }}</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Disponível:</span>
+                    <span class="value available">R$ {{ availableLimit() | number:'1.2-2' }}</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Soma Categorias:</span>
+                    <span class="value categories" [class.warning]="categoriesTotal() > totalLimit()">
+                      R$ {{ categoriesTotal() | number:'1.2-2' }}
+                    </span>
+                  </div>
                 </div>
-                <div class="summary-item">
-                  <span class="label">Disponível:</span>
-                  <span class="value available">R$ {{ availableLimit() | number:'1.2-2' }}</span>
-                </div>
-                <div class="summary-item">
-                  <span class="label">Soma Categorias:</span>
-                  <span class="value categories" [class.warning]="categoriesTotal() > totalLimit()">
-                    R$ {{ categoriesTotal() | number:'1.2-2' }}
-                  </span>
-                </div>
-              </div>
+              }
             </div>
-
+    
             <mat-divider></mat-divider>
-
+    
             <!-- Categorias -->
             <div class="form-section">
               <div class="section-header">
@@ -156,87 +166,108 @@ interface CreatePlanningRequest {
                   <mat-icon>category</mat-icon>
                   Categorias do Planejamento
                 </h3>
-                <button type="button" mat-raised-button color="primary" (click)="addCategory()" 
-                        [disabled]="!hasAvailableCategories()">
+                <button type="button" mat-raised-button color="primary" (click)="addCategory()"
+                  [disabled]="!hasAvailableCategories()">
                   <mat-icon>add</mat-icon>
                   Adicionar Categoria
                 </button>
               </div>
-
+    
               <div formArrayName="categories" class="categories-list">
-                <div *ngFor="let categoryControl of categoriesArray.controls; let i = index" 
-                     [formGroupName]="i" class="category-item">
-                  <mat-card class="category-card">
-                    <div class="category-form">
-                      <mat-form-field class="category-select">
-                        <mat-label>Categoria</mat-label>
-                        <mat-select formControlName="categoryId" (selectionChange)="onCategoryChange(i)">
-                          <mat-option *ngFor="let category of availableCategories()" [value]="category.id">
-                            {{ category.name }}
-                          </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="getCategoryControl(i, 'categoryId')?.hasError('required')">
-                          Selecione uma categoria
-                        </mat-error>
-                      </mat-form-field>
-
-                      <mat-form-field class="limit-input">
-                        <mat-label>Limite</mat-label>
-                        <input matInput type="number" formControlName="limit" placeholder="0.00">
-                        <span matTextPrefix>R$ </span>
-                        <mat-error *ngIf="getCategoryControl(i, 'limit')?.hasError('required')">
-                          Limite é obrigatório
-                        </mat-error>
-                        <mat-error *ngIf="getCategoryControl(i, 'limit')?.hasError('min')">
-                          Deve ser maior que zero
-                        </mat-error>
-                      </mat-form-field>
-
-                      <button type="button" mat-icon-button color="warn" (click)="removeCategory(i)"
-                              [attr.aria-label]="'Remover categoria ' + i">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-
-                    <div class="category-info" *ngIf="getCategoryName(i)">
-                      <span class="category-name">{{ getCategoryName(i) }}</span>
-                      <span class="category-percentage" *ngIf="getCategoryLimit(i) > 0 && totalLimit() > 0">
-                        {{ (getCategoryLimit(i) / totalLimit() * 100) | number:'1.1-1' }}% do total
-                      </span>
-                    </div>
-                  </mat-card>
-                </div>
-
-                <div *ngIf="categoriesArray.length === 0" class="no-categories">
-                  <mat-icon>category</mat-icon>
-                  <p>Nenhuma categoria adicionada</p>
-                  <p class="hint">Clique em "Adicionar Categoria" para começar</p>
-                </div>
+                @for (categoryControl of categoriesArray.controls; track categoryControl; let i = $index) {
+                  <div
+                    [formGroupName]="i" class="category-item">
+                    <mat-card class="category-card">
+                      <div class="category-form">
+                        <mat-form-field class="category-select">
+                          <mat-label>Categoria</mat-label>
+                          <mat-select formControlName="categoryId" (selectionChange)="onCategoryChange(i)">
+                            @for (category of availableCategories(); track category) {
+                              <mat-option [value]="category.id">
+                                {{ category.name }}
+                              </mat-option>
+                            }
+                          </mat-select>
+                          @if (getCategoryControl(i, 'categoryId')?.hasError('required')) {
+                            <mat-error>
+                              Selecione uma categoria
+                            </mat-error>
+                          }
+                        </mat-form-field>
+                        <mat-form-field class="limit-input">
+                          <mat-label>Limite</mat-label>
+                          <input matInput type="number" formControlName="limit" placeholder="0.00">
+                          <span matTextPrefix>R$ </span>
+                          @if (getCategoryControl(i, 'limit')?.hasError('required')) {
+                            <mat-error>
+                              Limite é obrigatório
+                            </mat-error>
+                          }
+                          @if (getCategoryControl(i, 'limit')?.hasError('min')) {
+                            <mat-error>
+                              Deve ser maior que zero
+                            </mat-error>
+                          }
+                        </mat-form-field>
+                        <button type="button" mat-icon-button color="warn" (click)="removeCategory(i)"
+                          [attr.aria-label]="'Remover categoria ' + i">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                      @if (getCategoryName(i)) {
+                        <div class="category-info">
+                          <span class="category-name">{{ getCategoryName(i) }}</span>
+                          @if (getCategoryLimit(i) > 0 && totalLimit() > 0) {
+                            <span class="category-percentage">
+                              {{ (getCategoryLimit(i) / totalLimit() * 100) | number:'1.1-1' }}% do total
+                            </span>
+                          }
+                        </div>
+                      }
+                    </mat-card>
+                  </div>
+                }
+    
+                @if (categoriesArray.length === 0) {
+                  <div class="no-categories">
+                    <mat-icon>category</mat-icon>
+                    <p>Nenhuma categoria adicionada</p>
+                    <p class="hint">Clique em "Adicionar Categoria" para começar</p>
+                  </div>
+                }
               </div>
-
+    
               <!-- Validação de categorias -->
-              <div class="validation-messages" *ngIf="showValidationMessages()">
-                <div class="error-message" *ngIf="categoriesTotal() > totalLimit()">
-                  <mat-icon>warning</mat-icon>
-                  A soma dos limites das categorias (R$ {{ categoriesTotal() | number:'1.2-2' }}) 
-                  excede o limite total (R$ {{ totalLimit() | number:'1.2-2' }})
+              @if (showValidationMessages()) {
+                <div class="validation-messages">
+                  @if (categoriesTotal() > totalLimit()) {
+                    <div class="error-message">
+                      <mat-icon>warning</mat-icon>
+                      A soma dos limites das categorias (R$ {{ categoriesTotal() | number:'1.2-2' }})
+                      excede o limite total (R$ {{ totalLimit() | number:'1.2-2' }})
+                    </div>
+                  }
                 </div>
-              </div>
+              }
             </div>
-
+    
             <mat-divider></mat-divider>
-
+    
             <!-- Ações -->
             <div class="form-actions">
               <button type="button" mat-stroked-button (click)="onCancel()">
                 <mat-icon>cancel</mat-icon>
                 Cancelar
               </button>
-              
-              <button type="submit" mat-raised-button color="primary" 
-                      [disabled]="!planningForm.valid || isSubmitting() || categoriesTotal() > totalLimit()">
-                <mat-icon *ngIf="!isSubmitting()">save</mat-icon>
-                <mat-icon *ngIf="isSubmitting()" class="spinner">refresh</mat-icon>
+    
+              <button type="submit" mat-raised-button color="primary"
+                [disabled]="!planningForm.valid || isSubmitting() || categoriesTotal() > totalLimit()">
+                @if (!isSubmitting()) {
+                  <mat-icon>save</mat-icon>
+                }
+                @if (isSubmitting()) {
+                  <mat-icon class="spinner">refresh</mat-icon>
+                }
                 {{ isSubmitting() ? 'Criando...' : 'Criar Planejamento' }}
               </button>
             </div>
@@ -244,7 +275,7 @@ interface CreatePlanningRequest {
         </mat-card-content>
       </mat-card>
     </div>
-  `
+    `
 })
 export class NewPlanningComponent {
   private fb = inject(FormBuilder);
