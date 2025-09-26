@@ -1,16 +1,16 @@
 import { AccountService } from './../../../services/account.service';
 import { MatIcon } from '@angular/material/icon';
-import { Component, inject , input } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { TransactionService } from '../../../services/transaction.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PlanComponent } from '../../../components/plan/plan.component';
 import { MonthSelectorComponent } from "../../../components/month-selector/month-selector.component";
 import { Router } from '@angular/router';
+import { PlanningService } from '../../../services/planning.service';
 
 @Component({
-    selector: 'planning',
+    selector: 'app-planning',
     styleUrl: './planning.component.scss',
     imports: [PlanComponent, MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, MonthSelectorComponent],
     template: `
@@ -61,10 +61,13 @@ import { Router } from '@angular/router';
 export class PlanningComponent {
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
+    private planningService = inject(PlanningService)
+    readonly plannings = this.planningService.getPlanningsSignal()
     protected router = inject(Router)
     protected revenues = 1059;
     protected expenses = 900;
     protected remaining = 600;
     protected balance = 900;
     protected economy = 26.90;
+
 }
