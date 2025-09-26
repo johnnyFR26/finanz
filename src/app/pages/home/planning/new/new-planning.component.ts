@@ -388,7 +388,7 @@ export class NewPlanningComponent {
         const selectedDate = new Date(formValue.date);
         
         const request: CreatePlanningRequest = {
-          month: String(selectedDate.getMonth() + 1),
+          month: /*String(selectedDate.getMonth() + 1)*/ new Date(selectedDate).toLocaleString('pt-BR', { month: 'long' }),
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           limit: Number(formValue.total),
