@@ -1,6 +1,6 @@
 import { MatIcon } from '@angular/material/icon';
 import { Component, inject } from "@angular/core";
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CreditCardComponent } from '../../../components/credit-card/credit-card.component';
 import { Router, RouterOutlet } from '@angular/router';
@@ -9,7 +9,7 @@ import { CreditCardService } from '../../../services/credit-card.service';
 @Component({
     selector: 'credit-cards',
     styleUrl: './credit-cards.component.scss',
-    imports: [MatIcon, MatButtonModule, CommonModule, CreditCardComponent, RouterOutlet],
+    imports: [MatIcon, MatButtonModule, CreditCardComponent, RouterOutlet],
     template: `
         <h2 class="title">CARTÕES DE CRÉDITO</h2>
 

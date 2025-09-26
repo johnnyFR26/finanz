@@ -5,8 +5,8 @@
     ));
 }
 
-.low{--mdc-linear-progress-active-indicator-color: var(--red); color: var(--red);}
-.high{--mdc-linear-progress-active-indicator-color: var(--principal-color); color: var(--principal-color);}
+.low{--mat-progress-bar-active-indicator-color: var(--red); color: var(--red);}
+.high{--mat-progress-bar-active-indicator-color: var(--principal-color); color: var(--principal-color);}
 
 .box{
     width: 100%;

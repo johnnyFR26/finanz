@@ -1,8 +1,8 @@
-import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
 import { AccountService } from "./account.service";
 import { AchievementModal } from "../models/achievement.model";
+import { effect, inject, Injectable, signal } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
