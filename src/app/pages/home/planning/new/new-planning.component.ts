@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../../services/category.service';
 import { PlanningService } from '../../../../services/planning.service';
+import { AccountService } from '../../../../services/account.service';
 
 interface Category {
   id: string;
@@ -286,6 +287,8 @@ export class NewPlanningComponent {
   private router = inject(Router);
   private categoryService = inject(CategoryService)
   private planningService = inject(PlanningService)
+  private accountService = inject(AccountService)
+  private account = this.accountService.getCurrentAccount()
 
   isSubmitting = signal(false);
   availableCategoriesData = this.categoryService.getCurrentCategories();
@@ -389,9 +392,9 @@ export class NewPlanningComponent {
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           total: Number(formValue.total),
-          available: Number(formValue.available),
+          available: Number(formValue.available) || 0,
           title: formValue.title || undefined,
-          accountId: 'your-account-id',
+          accountId: this.account()?.id || '',
           categories: formValue.categories.map((cat: Category) => ({
             categoryId: cat.categoryId,
             limit: Number(cat.limit)
