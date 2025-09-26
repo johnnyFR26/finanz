@@ -20,6 +20,8 @@ import {
     styles: `
     :host {
         display: flex;
+        justify-content: space-between;
+        padding: 5px;
       }
   
       .example-pizza-party {
@@ -27,7 +29,13 @@ import {
       }
       .close{
         margin-left: 20px;
+        button{
+          background-color: transparent;
+          border: 1px solid var(--white);
+          border-radius: 5px;
+        }
       }
+      
     `
 })
 export class SnackbarComponent {
