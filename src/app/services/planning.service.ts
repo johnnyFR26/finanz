@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
+import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { PlanningModel } from "../models/planning.model";
 import { PlanningCategory } from "../models/planning-category.model";
@@ -21,6 +21,12 @@ export class PlanningService {
     private http = inject(HttpClient)
     private urlApi = environment.urlApi
     private plannings = signal<PlanningModel[]>([])
+
+    constructor() {
+        effect(() => {
+            this.getPlannings()
+        })
+    }
 
     createPlanning(planning: CreatePlanningRequest) {
         return this.http.post(`${this.urlApi}/planning`, planning).subscribe({
