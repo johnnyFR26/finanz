@@ -65,4 +65,8 @@ export class TransactionService {
   getTransactions() {
     return this.transactions.asReadonly();
   }
+
+  editTransaction(transaction: any) {
+
+  }
 }

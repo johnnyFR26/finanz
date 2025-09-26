@@ -4,6 +4,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
+import { TransactionModel } from '../../models/transaction.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTransactionModalComponent } from '../../modals/edit-transactions/edit-transaction-modal.component';
 
 @Component({
     selector: 'transaction',
@@ -27,7 +30,7 @@ import { AccountService } from '../../services/account.service';
           </div>
           {{transaction()?.category?.name}} 
           @if (transaction().category?.controls?.icon) {
-            <mat-icon class="category-icon">{{transaction().category?.controls?.icon}}</mat-icon>
+            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category?.controls?.icon}}</mat-icon>
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -36,7 +39,7 @@ import { AccountService } from '../../services/account.service';
           <button mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
           </button>
-          <button mat-icon-button aria-label="editar">
+        <button mat-icon-button aria-label="editar" (click)="openEditTransactionModal(this.transaction())">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button aria-label="deletar">
@@ -52,6 +55,7 @@ export class TransactionComponent{
   readonly transaction = input<any>();
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
+  readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
   switchSelect() : void {
     if(this.buttonSelected() == true){
@@ -61,4 +65,11 @@ export class TransactionComponent{
       this.buttonSelected.set(true)
     }
   };
+  openEditTransactionModal(transaction: TransactionModel) : void{
+    const dialogRef = this.dialog.open(EditTransactionModalComponent, {
+          data: {
+            transaction: transaction,
+        },
+        });
+  }
 }

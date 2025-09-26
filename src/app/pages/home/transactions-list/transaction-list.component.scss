@@ -4,12 +4,20 @@
     flex-direction: column;
 }
 
+.box{
+    width: 100vw;
+    height: calc(100vh - 174px);
+    margin: 0;
+}
+
 .transaction-list{
+    display: block;
     overflow: auto;
     padding: 5px;
     border: solid 5px var(--gray-transaction);
-    max-height: 50vh;
+    max-height: 65vh;
     background-color: var(--gray-transaction);
+    align-self: flex-end;
 }
 
 .value{
@@ -20,7 +28,6 @@
     display: flex;
     flex-flow: column wrap;
     padding: 5px;
-    margin: 20px 6px;
     
     h1{
         font-size: large;

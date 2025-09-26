@@ -52,5 +52,7 @@ mat-expansion-panel{
   border-radius: 0;
 }
 mat-panel-description{
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
 }
