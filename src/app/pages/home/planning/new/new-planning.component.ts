@@ -33,7 +33,7 @@ interface CreatePlanningRequest {
   month: number;
   day?: number;
   year: number;
-  total: number;
+  limit: number;
   availableLimit: number;
   title?: string;
   accountId: string;
@@ -391,7 +391,7 @@ export class NewPlanningComponent {
           month: selectedDate.getMonth() + 1,
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
-          total: Number(formValue.total),
+          limit: Number(formValue.total),
           availableLimit: Number(formValue.available) || 0,
           title: formValue.title || undefined,
           accountId: this.account()?.id || '',

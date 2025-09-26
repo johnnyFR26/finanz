@@ -8,7 +8,7 @@ interface CreatePlanningRequest {
   month: number;
   day?: number;
   year: number;
-  total: number;
+  limit: number;
   availableLimit: number;
   title?: string;
   accountId: string;
