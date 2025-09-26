@@ -13,10 +13,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../../services/category.service';
+import { PlanningService } from '../../../../services/planning.service';
 
 interface Category {
   id: string;
   name: string;
+  limit: number;
+  categoryId: string;
 }
 
 interface PlanningCategory {
@@ -37,7 +40,7 @@ interface CreatePlanningRequest {
 }
 
 @Component({
-  selector: 'new-planning',
+  selector: 'app-new-planning',
   standalone: true,
   imports: [
     CommonModule,
@@ -282,6 +285,7 @@ export class NewPlanningComponent {
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
   private categoryService = inject(CategoryService)
+  private planningService = inject(PlanningService)
 
   isSubmitting = signal(false);
   availableCategoriesData = this.categoryService.getCurrentCategories();
@@ -388,7 +392,7 @@ export class NewPlanningComponent {
           available: Number(formValue.available),
           title: formValue.title || undefined,
           accountId: 'your-account-id',
-          categories: formValue.categories.map((cat: any) => ({
+          categories: formValue.categories.map((cat: Category) => ({
             categoryId: cat.categoryId,
             limit: Number(cat.limit)
           }))
@@ -396,7 +400,7 @@ export class NewPlanningComponent {
 
         console.log('Criando planejamento:', request);
         
-        await this.createPlanning(request);
+        this.planningService.createPlanning(request);
         
         this.snackBar.open('Planejamento criado com sucesso!', 'Fechar', {
           duration: 3000,
@@ -423,14 +427,7 @@ export class NewPlanningComponent {
     this.router.navigate(['/planning']);
   }
 
-  private async createPlanning(request: CreatePlanningRequest): Promise<any> {
-    // Simula delay da API
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ success: true });
-      }, 1500);
-    });
-  }
+  
 
   private markFormGroupTouched(): void {
     Object.keys(this.planningForm.controls).forEach(key => {

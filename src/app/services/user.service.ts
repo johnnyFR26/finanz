@@ -3,12 +3,11 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { createUser } from "../models/user.model";
 import { UserStorage } from "../models/user-storage.model";
 import { environment } from "../../environments/environment";
-import { Observable, switchMap, timestamp } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackbarComponent } from "../components/snackbar/snackbar.component";
 import { Auth, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
-import { AccountService } from "./account.service";
 
 @Injectable({
     providedIn: 'root'
