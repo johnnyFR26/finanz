@@ -14,7 +14,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
             <span class="top">
                 <div class="category">
                     <mat-icon class="category-icon">restaurant</mat-icon>
-                    <span>ALIMENTAÇÃO</span>
+                    <span>{{plan().title}}</span>
                 </div>
                 <div class="tools">
                     <button mat-icon-button aria-label="editar"><mat-icon>edit</mat-icon></button>
@@ -23,11 +23,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
             </span>
             <div class="division">
                 <div><span>META</span>{{plan().limit| currency: account()?.currency}}</div>
-                <div><span>PAGO</span>{{paid| currency: account()?.currency}}</div>
-                <div><span>PREVISTO</span>{{predicted| currency: account()?.currency}}</div>
+
                 <div><span>TOTAL</span>{{missing()| currency: account()?.currency}}</div>
             </div>
-            <mat-progress-bar mode="determinate" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [value]="missing()" [attr.data]="percentage()"></mat-progress-bar>
             <span>RESTAM {{plan().available| currency: account()?.currency}}</span>
         </div>
     `
@@ -38,8 +37,6 @@ export class PlanComponent {
 
     public plan = input<any>()
     
-    protected paid = 150;
-    protected predicted = 200;
     protected missing = computed(() => this.plan().limit - this.plan().availableLimit);
     protected percentage = computed(() => this.missing() / this.plan().limit);
 }
