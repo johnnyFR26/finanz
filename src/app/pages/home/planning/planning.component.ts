@@ -53,8 +53,9 @@ import { PlanningService } from '../../../services/planning.service';
         </div> 
 
         <div class="box">
-            <plan/>
-            <plan/>
+            @for (plan of plannings(); track $index) {
+                <plan [plan]="plan"/>
+            }
         </div>
     `
 })
