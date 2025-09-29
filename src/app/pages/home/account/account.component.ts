@@ -54,12 +54,8 @@ import { FormsModule } from "@angular/forms";
     styleUrl: './account.component.scss',
     imports: [CurrencyPipe, MatIconModule, MatButtonModule, GraphsComponent, FormsModule]
 })
-export class AccountComponent implements OnInit{
+export class AccountComponent {
     
-    ngOnInit(): void {     
-        console.table(this.account)
-        console.log(this.sum())
-    }
     protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)

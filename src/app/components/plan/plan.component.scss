@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 :host{width: 100%;}
 .plan{
+    display: block;
     background-color: var(--grey-background);
     width: calc(100% - 20px);
     *:not(mat-icon){font-family: Dosis;}
@@ -33,7 +34,7 @@
 .division{
     display: grid;
     gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 10px 0;
     div{
         font-size: 14px;
@@ -50,3 +51,228 @@ mat-progress-bar{
 @include mat.progress-bar-overrides((
     active-indicator-color: var(--principal-color),
 ));
+
+.box.plan {
+  
+  .progress-container {
+    margin: 16px 0;
+    
+    .main-progress-bar {
+      position: relative;
+      width: 100%;
+      height: 24px;
+      background-color: var(--input-area);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      
+      .category-segment {
+        position: absolute;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: scaleY(1.1);
+          z-index: 2;
+          
+          .category-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-100%) translateX(-50%);
+          }
+        }
+        
+        .category-progress {
+          height: 100%;
+          transition: width 0.4s ease-out;
+          border-radius: inherit;
+        }
+        
+        .category-tooltip {
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translateY(-100%) translateX(-50%) scale(0.8);
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 8px 12px;
+          border-radius: 6px;
+          font-size: 12px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          
+          &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.8);
+          }
+          
+          mat-icon {
+            font-size: 14px;
+            width: 14px;
+            height: 14px;
+          }
+          
+          .progress-text {
+            font-weight: 600;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+    
+    .categories-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #666;
+        
+        .legend-color {
+          width: 12px;
+          height: 12px;
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
+        
+        .legend-text {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  
+  .overall-progress {
+    text-align: center;
+    margin: 12px 0;
+    
+    .progress-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  
+  .categories-detail {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    
+    .category-detail {
+      padding: 12px;
+      background: var(--gray-box);
+      border-radius: 8px;
+      flex-grow: 1;
+      
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+          color: #666;
+        }
+        
+        .category-name {
+          flex: 1;
+          font-weight: 500;
+        }
+        
+        .category-percentage {
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+      
+      .category-amounts {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #666;
+        
+        span {
+          &:first-child {
+            color: #f44336;
+          }
+          
+          &:last-child {
+            color: #4caf50;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .box.plan {
+    .progress-container {
+      .categories-legend {
+        .legend-item {
+          font-size: 11px;
+          
+          .legend-color {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+    
+    .categories-detail {
+      .category-detail {
+        padding: 8px;
+        
+        .category-header {
+          mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+          }
+        }
+        
+        .category-amounts {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--target-width);
+  }
+}
+
+.category-progress {
+  animation: progressFill 1s ease-out;
+}

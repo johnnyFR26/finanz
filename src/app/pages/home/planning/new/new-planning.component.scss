@@ -334,3 +334,17 @@
     }
   }
 }
+
+.back{
+    background-color: var(--principal-color);
+    color: var(--black);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 4px;
+    transition: 0.2s;
+    &:hover{
+        scale: 1.1;
+        transition: 0.4s;
+    }
+}

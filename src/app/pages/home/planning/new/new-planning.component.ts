@@ -60,6 +60,7 @@ interface CreatePlanningRequest {
   styleUrls: ['./new-planning.component.scss'],
   template: `
     <div class="new-planning">
+        <button class="back" mat-icon-button (click)="this.router.navigate(['/home/planning'])"><mat-icon>keyboard_backspace</mat-icon></button>
       <mat-card class="planning-card">
         <mat-card-header>
           <mat-card-title>
@@ -265,7 +266,7 @@ interface CreatePlanningRequest {
               </button>
     
               <button type="submit" mat-raised-button color="primary"
-                [disabled]="!planningForm.valid || isSubmitting() || categoriesTotal() > totalLimit()">
+                [disabled]="isSubmitting()">
                 @if (!isSubmitting()) {
                   <mat-icon>save</mat-icon>
                 }
@@ -284,7 +285,7 @@ interface CreatePlanningRequest {
 export class NewPlanningComponent {
   private fb = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
-  private router = inject(Router);
+  protected router = inject(Router);
   private categoryService = inject(CategoryService)
   private planningService = inject(PlanningService)
   private accountService = inject(AccountService)
@@ -380,7 +381,7 @@ export class NewPlanningComponent {
   }
 
   async onSubmit(): Promise<void> {
-    if (this.planningForm.valid && this.categoriesTotal() <= this.totalLimit()) {
+    if (this.planningForm.valid) {
       this.isSubmitting.set(true);
       
       try {

@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 :host{
     display: flex;
+    position: relative;
     align-items: center;
     flex-direction: column;
 }
@@ -17,11 +18,32 @@
     h2{font-size: 20px;}
 }
 
+.box{width: 99vw;}
+
+.add{
+    background-color: var(--principal-color);
+    color: var(--grey-background);
+    border-radius: 10px;
+    padding: 5px;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+        scale: 1.2;
+        rotate: (180deg);
+        transition: .5s;
+    }
+}
+
 .small-box{
     background-color: var(--gray-form);
     border-radius: 5px;
-    height: 50px;
     min-width: 140px;
+    padding: 10px;
     
     div{
         display: flex;

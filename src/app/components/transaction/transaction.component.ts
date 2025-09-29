@@ -25,7 +25,7 @@ import { EditTransactionModalComponent } from '../../modals/edit-transactions/ed
         </mat-panel-title>
         <mat-panel-description>
           <div>
-          <span class="date">{{transaction().createdAt | date: "dd/MM/YYYY"}}</span>
+          <span class="date">{{transaction().createdAt | date: "dd/MM/yyyy"}}</span>
           <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
           {{transaction()?.category?.name}} 

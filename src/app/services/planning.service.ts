@@ -45,7 +45,8 @@ export class PlanningService {
     getPlannings() {
         this.http.get<PlanningModel[]>(`${this.urlApi}/planning/account/${this.account()?.id}`).subscribe({
             next: (response) => {
-                this.plannings.set(response)
+                /*@ts-ignore */
+                this.setPlannings(response.plannings)
             },
             error: (error) => {
                 console.error(error)

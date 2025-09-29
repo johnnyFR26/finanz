@@ -5,7 +5,7 @@ export interface PlanningModel {
     month: number
     day?: number
     year: number
-    total: number
+    limit: number
     available: number
     title?: string
     accountId: string

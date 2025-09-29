@@ -6,7 +6,6 @@ export const doesUserHaveAccount: CanActivateFn = () => {
     const accountService = inject(AccountService);
     const router = inject(Router);
 
-    console.log('AccountService:', accountService.isAccountCreated())
     if (accountService.isAccountCreated()){
         return true;
     }
