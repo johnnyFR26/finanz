@@ -391,7 +391,7 @@ export class NewPlanningComponent {
           panelClass: ['success-snackbar']
         });
         
-        this.router.navigate(['/planning']);
+        this.router.navigate(['/home/planning']);
         
       } catch (error) {
         console.error('Erro ao criar planejamento:', error);
