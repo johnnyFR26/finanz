@@ -1,0 +1,207 @@
+.file-upload-modal {
+      width: 600px;
+      max-width: 90vw;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #e0e0e0;
+
+      h2 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+
+    .modal-content {
+      padding: 24px;
+      min-height: 300px;
+    }
+
+    .upload-area {
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--grey-background);
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        border-color: #2196F3;
+        background: var(--grey-input);
+      }
+
+      &.dragging {
+        border-color: var(--principal-color);
+        background: var(--grey-input);
+        border-style: solid;
+        transform: scale(1.02);
+      }
+
+      &.has-file {
+        border-color: var(--principal-color);
+        background: var(--grey-background);
+      }
+
+      &.uploading {
+        border-color: #FF9800;
+        background: var(--grey-background);
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+
+    .upload-prompt {
+      .upload-icon {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+        color: var(--principal-color);
+        margin-bottom: 16px;
+      }
+
+      .primary-text {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+        margin: 8px 0;
+      }
+
+      .secondary-text {
+        font-size: 14px;
+        color: #666;
+        margin: 4px 0;
+      }
+
+      .size-limit {
+        font-size: 12px;
+        color: #999;
+        margin-top: 8px;
+      }
+    }
+
+    .uploading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      .uploading-text {
+        font-size: 16px;
+        font-weight: 500;
+        color: #FF9800;
+        margin: 0;
+      }
+
+      .file-name {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+      }
+    }
+
+    .file-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      width: 100%;
+
+      .preview-image {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 8px;
+        object-fit: contain;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .file-icon-preview {
+        .large-icon {
+          font-size: 80px;
+          width: 80px;
+          height: 80px;
+          color: #2196F3;
+        }
+      }
+
+      .file-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+
+        .file-name {
+          font-size: 16px;
+          font-weight: 500;
+          color: #333;
+          margin: 0;
+          word-break: break-word;
+          max-width: 90%;
+        }
+
+        .file-size {
+          font-size: 14px;
+          color: #666;
+          margin: 0;
+        }
+
+        .file-type {
+          font-size: 12px;
+          color: #999;
+          margin: 0;
+        }
+      }
+
+      .remove-file {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+        mat-icon {
+          color: #f44336;
+        }
+      }
+    }
+
+    .error-message {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      margin-top: 16px;
+      background: #ffebee;
+      color: #c62828;
+      border-radius: 8px;
+      border: 1px solid #ef5350;
+
+      mat-icon {
+        color: #c62828;
+      }
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 16px 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }

@@ -7,6 +7,7 @@ import { AccountService } from '../../services/account.service';
 import { TransactionModel } from '../../models/transaction.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTransactionModalComponent } from '../../modals/edit-transactions/edit-transaction-modal.component';
+import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-file-modal.component';
 
 @Component({
     selector: 'transaction',
@@ -39,7 +40,7 @@ import { EditTransactionModalComponent } from '../../modals/edit-transactions/ed
       }
       <p>{{transaction()?.description}}</p>
         <div class="tools">
-          <button mat-icon-button aria-label="anexar">
+          <button (click)="openUploadModal()" mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
           </button>
         <button mat-icon-button aria-label="editar" (click)="openEditTransactionModal(this.transaction())">
@@ -60,6 +61,8 @@ export class TransactionComponent{
   private accountService = inject(AccountService);
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
+    uploadedFile: any = null;
+
   switchSelect() : void {
     if(this.buttonSelected() == true){
       this.buttonSelected.set(false);
@@ -68,11 +71,50 @@ export class TransactionComponent{
       this.buttonSelected.set(true)
     }
   };
+
+      openUploadModal(): void {
+    const dialogRef = this.dialog.open(FileUploadModalComponent, {
+      width: '600px',
+      maxWidth: '90vw',
+      disableClose: false,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Arquivo selecionado:', result);
+        this.handleFileUpload(result);
+      }
+    });
+  }
+
+  private handleFileUpload(fileData: any): void {
+    this.uploadedFile = {
+      name: fileData.file.name,
+      size: this.formatFileSize(fileData.file.size)
+    };
+
+    // Exemplo 1: Enviar como FormData (recomendado)
+    //this.sendAsFormData(fileData);
+
+    // Exemplo 2: Enviar como Base64
+    // this.sendAsBase64(fileData);
+
+    // Exemplo 3: Enviar como ArrayBuffer
+    // this.sendAsArrayBuffer(fileData);
+  }
   openEditTransactionModal(transaction: TransactionModel) : void{
     const dialogRef = this.dialog.open(EditTransactionModalComponent, {
           data: {
             transaction: transaction,
         },
         });
+  }
+  private formatFileSize(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
 }
