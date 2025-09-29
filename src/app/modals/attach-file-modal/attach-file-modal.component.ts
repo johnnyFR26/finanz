@@ -27,7 +27,7 @@ interface FileUploadData {
       <div class="modal-header">
         <h2 mat-dialog-title>
           <mat-icon>attach_file</mat-icon>
-          Upload de Arquivo
+          Anexar Arquivo
         </h2>
         <button mat-icon-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
@@ -35,7 +35,6 @@ interface FileUploadData {
       </div>
 
       <div mat-dialog-content class="modal-content">
-        <!-- Área de Upload -->
         <div 
           class="upload-area"
           [class.dragging]="isDragging()"
@@ -46,7 +45,6 @@ interface FileUploadData {
           (dragleave)="onDragLeave($event)"
           (drop)="onDrop($event)">
           
-          <!-- Estado: Aguardando arquivo -->
           @if (!selectedFile() && !isUploading()) {
             <div class="upload-prompt">
               <mat-icon class="upload-icon">cloud_upload</mat-icon>
@@ -56,7 +54,6 @@ interface FileUploadData {
             </div>
           }
 
-          <!-- Estado: Fazendo upload -->
           @if (isUploading()) {
             <div class="uploading-state">
               <mat-spinner diameter="60"></mat-spinner>
@@ -65,7 +62,6 @@ interface FileUploadData {
             </div>
           }
 
-          <!-- Estado: Arquivo selecionado -->
           @if (selectedFile() && !isUploading()) {
             <div class="file-preview">
               @if (filePreview()) {
@@ -92,7 +88,6 @@ interface FileUploadData {
           }
         </div>
 
-        <!-- Input oculto -->
         <input
           #fileInput
           type="file"
@@ -100,7 +95,6 @@ interface FileUploadData {
           accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
           style="display: none;">
 
-        <!-- Mensagem de erro -->
         @if (errorMessage()) {
           <div class="error-message">
             <mat-icon>error</mat-icon>
