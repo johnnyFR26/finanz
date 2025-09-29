@@ -101,7 +101,6 @@ interface CreatePlanningRequest {
     
             <mat-divider></mat-divider>
     
-            <!-- Limites Financeiros -->
             <div class="form-section">
               <h3 class="section-title">
                 <mat-icon>account_balance_wallet</mat-icon>
@@ -119,22 +118,6 @@ interface CreatePlanningRequest {
                     </mat-error>
                   }
                   @if (planningForm.get('total')?.hasError('min')) {
-                    <mat-error>
-                      Deve ser maior que zero
-                    </mat-error>
-                  }
-                </mat-form-field>
-    
-                <mat-form-field class="half-width">
-                  <mat-label>Valor Disponível</mat-label>
-                  <input matInput type="number" formControlName="available" placeholder="0.00">
-                  <span matTextPrefix>R$ </span>
-                  @if (planningForm.get('available')?.hasError('required')) {
-                    <mat-error>
-                      Valor disponível é obrigatório
-                    </mat-error>
-                  }
-                  @if (planningForm.get('available')?.hasError('min')) {
                     <mat-error>
                       Deve ser maior que zero
                     </mat-error>
@@ -164,7 +147,6 @@ interface CreatePlanningRequest {
     
             <mat-divider></mat-divider>
     
-            <!-- Categorias -->
             <div class="form-section">
               <div class="section-header">
                 <h3 class="section-title">
@@ -242,7 +224,6 @@ interface CreatePlanningRequest {
                 }
               </div>
     
-              <!-- Validação de categorias -->
               @if (showValidationMessages()) {
                 <div class="validation-messages">
                   @if (categoriesTotal() > totalLimit()) {
@@ -258,7 +239,6 @@ interface CreatePlanningRequest {
     
             <mat-divider></mat-divider>
     
-            <!-- Ações -->
             <div class="form-actions">
               <button type="button" mat-stroked-button (click)="onCancel()">
                 <mat-icon>cancel</mat-icon>
@@ -393,7 +373,7 @@ export class NewPlanningComponent {
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           limit: Number(formValue.total),
-          availableLimit: Number(formValue.available) || 0,
+          availableLimit: Number(formValue.total),
           title: formValue.title || undefined,
           accountId: this.account()?.id || '',
           categories: formValue.categories.map((cat: Category) => ({
