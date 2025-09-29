@@ -18,8 +18,8 @@ import { PlanningService } from '../../../services/planning.service';
         
         <h2 class="title">PLANEJAMENTO</h2>
 
-        <div (click)="this.router.navigate(['home/planning/new'])">
-            <mat-icon>trending_up</mat-icon>
+        <div class="add" (click)="this.router.navigate(['home/planning/new'])">
+            <mat-icon>add</mat-icon>
         </div>
 
         <month-selector/>
