@@ -43,13 +43,7 @@ export class TransactionService {
       this.setTransactions(response.transactions);
     });
   }
-
-  sumAccountDeposits() {
-    const sum = this.inputTransactions().reduce((acc, t) => acc + parseFloat(t.value), 0);
-    const sub = this.outputTransactions().reduce((acc, t) => acc + parseFloat(t.value), 0);
-
-    return { sum, sub };
-  }
+  
     public sum = computed(() =>
     this.inputTransactions().reduce((acc, t) => acc + parseFloat(t.value), 0)
     );

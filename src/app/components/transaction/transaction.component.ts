@@ -34,6 +34,9 @@ import { EditTransactionModalComponent } from '../../modals/edit-transactions/ed
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
+      @if(transaction().creditCard){
+        <p>Cartão: {{transaction()?.creditCard?.name}}</p>
+      }
       <p>{{transaction()?.description}}</p>
         <div class="tools">
           <button mat-icon-button aria-label="anexar">
