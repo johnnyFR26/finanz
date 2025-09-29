@@ -265,7 +265,7 @@ interface CreatePlanningRequest {
               </button>
     
               <button type="submit" mat-raised-button color="primary"
-                [disabled]="!planningForm.valid || isSubmitting() || categoriesTotal() > totalLimit()">
+                [disabled]="isSubmitting()">
                 @if (!isSubmitting()) {
                   <mat-icon>save</mat-icon>
                 }
@@ -380,7 +380,7 @@ export class NewPlanningComponent {
   }
 
   async onSubmit(): Promise<void> {
-    if (this.planningForm.valid && this.categoriesTotal() <= this.totalLimit()) {
+    if (this.planningForm.valid) {
       this.isSubmitting.set(true);
       
       try {
