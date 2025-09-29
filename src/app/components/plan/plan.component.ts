@@ -1,6 +1,6 @@
 import { AccountService } from './../../services/account.service';
 import { MatIcon } from '@angular/material/icon';
-import { Component, computed, inject, input } from "@angular/core";
+import { Component, computed, inject, input, signal } from "@angular/core";
 import { CurrencyPipe, NgStyle } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,6 +17,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
                     <span>{{plan().title}}</span>
                 </div>
                 <div class="tools">
+                    @if(!showDetails()){
+                        <button mat-icon-button aria-label="descricao" (click)="showDetails.set(true)"><mat-icon>visibility</mat-icon></button>
+                    }@else {
+                        <button mat-icon-button aria-label="descricao" (click)="showDetails.set(false)"><mat-icon>visibility_off</mat-icon></button>
+                    }
                     <button mat-icon-button aria-label="editar"><mat-icon>edit</mat-icon></button>
                     <button mat-icon-button aria-label="deletar"><mat-icon>delete</mat-icon></button>
                 </div>
@@ -109,7 +114,7 @@ export class PlanComponent {
     protected account = this.accountService.getCurrentAccount()
     
     public plan = input<any>()
-    public showDetails = input<boolean>(true)
+    public showDetails = signal(false)
     
     protected missing = computed(() => this.plan().limit - this.plan().availableLimit);
     protected percentage = computed(() => this.missing() / this.plan().limit);
