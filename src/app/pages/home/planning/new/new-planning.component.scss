@@ -2,18 +2,16 @@
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
-      background-color: var(--grey-background);
 
   .planning-card {
-        background-color: var(--grey-background);
+    background-color: transparent;
+    margin-top: 20px;
     margin-bottom: 20px;
 
     mat-card-header {
-    background-color: var(--grey-background);
       margin-bottom: 20px;
 
       mat-card-title {
-         background-color: var(--grey-background);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -22,7 +20,6 @@
       }
 
       mat-card-subtitle {
-        background-color: var(--grey-background);
         margin-top: 8px;
         opacity: 0.7;
       }
@@ -30,9 +27,7 @@
   }
 
   .planning-form {
-            background-color: var(--grey-background);
     .form-section {
-        background-color: var(--grey-background);
       margin-bottom: 32px;
 
       .section-title {
@@ -52,7 +47,6 @@
       }
 
       .section-header {
-                background-color: var(--grey-background);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -135,20 +129,16 @@
     }
 
     .categories-list {
-                background-color: var(--grey-background);
       .category-item {
-                background-color: var(--grey-background);
 
         margin-bottom: 16px;
 
         .category-card {
-                    background-color: var(--grey-background);
 
           padding: 16px;
           border-left: 4px solid #1976d2;
 
           .category-form {
-                    background-color: var(--grey-background);
 
             display: flex;
             align-items: flex-start;
@@ -160,7 +150,6 @@
             }
 
             .category-select {
-                        background-color: var(--grey-background);
               flex: 2;
               min-width: 200px;
             }
@@ -182,7 +171,6 @@
           }
 
           .category-info {
-                    background-color: var(--grey-background);
 
             margin-top: 12px;
             display: flex;
@@ -198,7 +186,6 @@
             }
 
             .category-name {
-                        background-color: var(--grey-background);
 
               font-weight: 500;
               color: #333;
@@ -216,7 +203,6 @@
       }
 
       .no-categories {
-                background-color: var(--grey-background);
 
         text-align: center;
         padding: 40px 20px;
@@ -231,7 +217,6 @@
         }
 
         p {
-                    background-color: var(--grey-background);
 
           margin: 8px 0;
 
@@ -251,7 +236,6 @@
         align-items: center;
         gap: 8px;
         padding: 12px 16px;
-                background-color: var(--grey-background);
         color: #c62828;
         border-radius: 4px;
         border-left: 4px solid #d32f2f;
