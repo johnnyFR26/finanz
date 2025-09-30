@@ -70,7 +70,7 @@ h1, h2, label{
     padding: 0 10px;
     border-radius: 7px;
     &.premium{
-        background-color: var(--principal-color);
+        background-color: var(--green);
     }
 }
 
@@ -116,7 +116,7 @@ h1, h2, label{
         option{
             background-color: var(--input-area);
             &:checked{background-color: var(--input-area2);}
-            &:hover{background-color: var(--principal-color);color: var(--black);}
+            &:hover{background-color: var(--green);color: var(--black);}
             &::checkmark{display: none;}
         }
         &::picker(select){

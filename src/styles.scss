@@ -137,34 +137,33 @@ body {
     top: var(--headersize);
 }
 *{
-    --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
-    --gradient: linear-gradient( var(--grey-background) 10%, color-mix(in srgb, var(--principal-color), var(--grey-background) 80%)  50%, var(--grey-background) 90%);
-    --principal-color: #cbe957;
-    --grey-background: #181824;
+    --principal-color: var(--black);
+    --grey-background: #E4EDFD;
     --gray: #EBF2FF66;
-    --gray-form: #111119;
-    --gray-box: #282838;
+    --gray-form: #d1d9eb;
+    --gray-box: #DFE3EB;
     --gray-font: #7A7AA7;
     --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
-    --input-area: #232334;
-    --input-area2: #373760;
-    --red: #ff5757;
+    --input-area: #d4d4ee;
+    --input-area2: #adaddf;
+    --green: #9DBE1F;
+    --red: #B83226;
     --white: #f0f8ff;
     --black: #171722;
-    --blue: #38b6ff;
+    --blue: #3060B0;
     --magenta: #cb6ce6;
     --yellow: #ffde59;
     --mat-sys-primary: var(--principal-color);
     --mat-sys-surface: var(--gray-form);
-    --mat-sys-on-surface: var(--white);
-    --mat-sys-on-surface-variant: var(--white);
+    --mat-sys-on-surface: var(--principal-color);
+    --mat-sys-on-surface-variant: currentColor;
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
     --mat-select-panel-background-color: var(--input-area);
     --mat-option-selected-state-layer-color: var(--principal-color);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
-    color:  var(--color, var(--white));
+    color:  var(--color, var(--black));
     font-family: var(--font, KoHo);
     &::-webkit-scrollbar{
         background: #0000;
@@ -178,15 +177,32 @@ body {
         }
     }
 }
+*.dark{
+    --green: #cbe957;
+    --red: #D35348;
+    --blue: #4285F4;
+    --principal-color: var(--green);
+    --grey-background: #181824;
+    --gray: #EBF2FF66;
+    --gray-form: #111119;
+    --gray-box: #282838;
+    --gray-font: #7A7AA7;
+    --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
+    --placeholder: #464647;
+    --input-area: #232334;
+    --input-area2: #373760;
+    color:  var(--color, var(--white));
+}
+
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form);
     width: 300px;
     border-radius: 5px;
-    box-shadow: 0 0 0 5px var(--principal-color),
-    0 10px 0 5px var(--principal-color),
-    0 -2px 0 5px var(--principal-color),
-    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22),
-    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22);
+    box-shadow: 0 0 0 5px var(--green),
+    0 10px 0 5px var(--green),
+    0 -2px 0 5px var(--green),
+    0 10px 35px 0 rgba(from var(--green) r g b / 0.22),
+    0 10px 35px 0 rgba(from var(--green) r g b / 0.22);
     justify-self: center ;
 }
 .form, .content{
@@ -329,7 +345,6 @@ a{
 
     *{
         font-size: 18px;
-        color: var(--white);
     }
 
     mat-icon{
@@ -350,7 +365,7 @@ a{
 
 .gains{
     mat-icon{
-        color: var(--principal-color);
+        color: var(--green);
         rotate: -90deg;
     }
 }
@@ -377,14 +392,14 @@ a{
 }
 .button{
     color: black;
-    background-color: var(--principal-color);
+    background-color: var(--green);
     border: 2px solid #0000;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
     font-family: TT-Berlinerins;
-    box-shadow: 0 0 5px var(--principal-color);
+    box-shadow: 0 0 5px var(--green);
     transition: 0.2s;
     &:hover:not(:disabled){
         scale: 1.1;
@@ -404,12 +419,12 @@ a{
     font-family: KoHo;
     font-size: 20px;
     border-radius: 4px;
-    border: 2px solid var(--principal-color);
+    border: 2px solid var(--green);
     background-color: var(--input-area);
     padding:10px 3px;
     a{
         font-family: KoHo;
-        color: var(--principal-color);
+        color: var(--green);
         text-decoration: none;
         &:hover{
             text-decoration: underline;
@@ -478,7 +493,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: column;
     align-items: center;
     transition: 0.3s;
-    color: var(--input-area2);
+    color: var(--input-area2); 
     mat-icon{
         min-width: 100px;
         min-height: 100px;
@@ -491,10 +506,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
     &:hover{
         transition: 0.5s;
-        color: var(--white);
+        color: var(--color);
         h2{
         transition: 0.5s;
-            color: var(--white);
+            color: var(--color);
         }
     }
 }

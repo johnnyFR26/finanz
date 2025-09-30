@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 :host{
     width: 100%;
-    --componentColor: var(--type, var(--principal-color))
+    --componentColor: var(--type, var(--green))
 }
 .month-selector{
     background-color: #0000;

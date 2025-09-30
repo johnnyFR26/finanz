@@ -23,7 +23,7 @@
 }
 
 .deposit{
-    color: var(--principal-color);
+    color: var(--green);
 }
 
 .transfer{
@@ -36,8 +36,8 @@
 }
 
 
-.currency{--small-box-color: var(--white);}
-.gains{--small-box-color: var(--principal-color);}
+.currency{--small-box-color: var(--color);}
+.gains{--small-box-color: var(--green);}
 .losts{--small-box-color: var(--red);}
 .credit-card{--small-box-color: var(--blue);}
 
@@ -76,7 +76,7 @@ select{
     option{
         background-color: var(--input-area);
         &:checked{background-color: var(--input-area2);}
-        &:hover{background-color: var(--principal-color);color: var(--black);}
+        &:hover{background-color: var(--green);color: var(--black);}
         &::checkmark{display: none;}
     }
     &::picker(select){
