@@ -8,11 +8,15 @@
   justify-content: space-between;
   padding: 1rem 0;
   .chart {
-    background-color: var(--gray-box);
+    background-color: var(--gray-form);
     padding: 1rem;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 5px 10px -4px #000;
+
+    &.dark{
+      background-color: var(--gray-box);
+    }
 
     canvas {
       padding: 10%;

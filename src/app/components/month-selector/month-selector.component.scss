@@ -8,10 +8,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    .mini-box{background-color: var(--componentColor);}
-    button{color: var(--componentColor);}
+    .mini-box{
+        background-color: var(--componentColor);
+        border: 1px solid var(--black);
+    }
     button{
-        background-color: #0000;
+        color: var(--componentColor);
+        background-color: transparent;
         border:0;
         padding: 0;
         cursor: pointer;
@@ -19,6 +22,7 @@
         align-items: center;
         justify-content: center;
         mat-icon{
+            color: var(--type1, var(--componentColor));
             width: 35px;
             height: 35px;
             font-size: 35px;

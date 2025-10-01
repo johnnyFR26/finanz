@@ -9,10 +9,10 @@
   ));
 }
 *{
-  --mat-sys-surface: var(--gray-transaction);
+  --mat-sys-surface: var(--gray-form);
 }
 button:not(.tools button){
-  background-color: #0000;
+  background-color: transparent;
   border: 0;
   border-radius: 100%;
   padding: 0;

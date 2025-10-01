@@ -137,20 +137,19 @@ body {
     top: var(--headersize);
 }
 *{
-    --principal-color: var(--black);
+    --principal-color: #181824;
     --grey-background: #E4EDFD;
     --gray: #EBF2FF66;
     --gray-form: #d1d9eb;
     --gray-box: #DFE3EB;
     --gray-font: #7A7AA7;
-    --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #d4d4ee;
-    --input-area2: #adaddf;
+    --input-area2: #c6c6da;
     --green: #9DBE1F;
     --red: #B83226;
     --white: #f0f8ff;
-    --black: #171722;
+    --black: #181824;
     --blue: #3060B0;
     --magenta: #cb6ce6;
     --yellow: #ffde59;
@@ -163,6 +162,7 @@ body {
     --mat-select-panel-background-color: var(--input-area);
     --mat-option-selected-state-layer-color: var(--principal-color);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
+    --reverse-color: var(--white);
     color:  var(--color, var(--black));
     font-family: var(--font, KoHo);
     &::-webkit-scrollbar{
@@ -178,6 +178,7 @@ body {
     }
 }
 *.dark{
+    --black: #171722;
     --green: #cbe957;
     --red: #D35348;
     --blue: #4285F4;
@@ -187,10 +188,10 @@ body {
     --gray-form: #111119;
     --gray-box: #282838;
     --gray-font: #7A7AA7;
-    --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #232334;
     --input-area2: #373760;
+    --reverse-color: var(--black);
     color:  var(--color, var(--white));
 }
 
@@ -313,11 +314,15 @@ a{
     width: 100%;
     padding: 0 0 0 5px;
     box-sizing: border-box;
-    background-color: var(--gray-box);
+    background-color: var(--gray-form);
     border-radius: 10px;
     padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
     
+    &.dark{
+        background-color: var(--gray-box);
+    }
+
     h2{
         font-family: KoHo;
         font-size: 16px;
@@ -539,8 +544,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   justify-self: flex-end;
 
-  & button{
-    background-color: var(--input-area);
+  button{
+    background-color: var(--input-area2);
     width: 34px;
     height: 34px;
     margin: 4px;
@@ -554,6 +559,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .category-icon{
+    color: var(--white);
     background-color: #470688;
     width: 30px !important;
     height: 30px !important;
@@ -572,8 +578,7 @@ mat-progress-bar{
         height: 18px;
         width: 30px;
         position: absolute;
-        color: var(--white);
-        text-shadow: 1px 0 5px #000;
+        text-shadow: 1px 0 5px var(--reverse-color);
         right: 10px;
     }
 }

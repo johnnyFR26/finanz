@@ -13,7 +13,6 @@
 
 ::ng-deep .mat-mdc-option {
   color: white !important;
-  background-color: #1a1a1a !important;
 
   padding: 2px 10px !important;
   width: 100%;
@@ -24,7 +23,7 @@
 }
 
 ::ng-deep div.mat-mdc-select-panel {
-  background-color: #1a1a1a !important;
+  background-color: var(--input-area);
 }
 
 ::ng-deep .mat-mdc-select-panel {

@@ -10,15 +10,16 @@
     margin: 0;
     display: flex;
     align-items: flex-end;
+    background-color: transparent;
 }
 
 .transaction-list{
     display: block;
     overflow: auto;
     padding: 5px;
-    border: solid 5px var(--gray-transaction);
+    border: solid 5px var(--gray-form);
     height: 60vh;
-    background-color: var(--gray-transaction);
+    background-color: var(--gray-form);
     align-self: flex-end;
     margin: 0;
     width: 100%;
@@ -65,7 +66,11 @@
 }
 
 .all{
-    --type: var(--white);;
+    --type: var(--white);
+    --type1: var(--black);
+    &.dark{
+        --type1: var(--white);
+    }
 }
     
 .revenue{

@@ -5,8 +5,8 @@
     ));
 }
 
-.low{--mat-progress-bar-active-indicator-color: var(--red); color: var(--red);}
-.high{--mat-progress-bar-active-indicator-color: var(--principal-color); color: var(--principal-color);}
+.low{--mat-progress-bar-active-indicator-color: var(--red);}
+.high{--mat-progress-bar-active-indicator-color: var(--green);}
 
 .box{
     width: 100%;
