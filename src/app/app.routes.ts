@@ -1,7 +1,7 @@
-import { CanActivate } from '@angular/router';
 import { Routes } from '@angular/router';
 import { isUserLogged } from './guards/is-user-logged.can-activate.guard';
 import { doesUserHaveAccount } from './guards/does-user-have-account.can-activate.guard';
+import { isUserPlanPremmium } from './guards/is-user-plan-premmium.can.activate.guard';
 
 export const routes: Routes = [
     {
@@ -45,7 +45,7 @@ export const routes: Routes = [
             {
                 path: 'IA',
                 loadComponent: () => import('./pages/home/IA/ia.component').then(m => m.IAComponent),
-                canActivate: [doesUserHaveAccount],
+                canActivate: [doesUserHaveAccount, isUserPlanPremmium],
             },
             {
                 path: 'planning',
