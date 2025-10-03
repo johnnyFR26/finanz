@@ -31,7 +31,7 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
           </div>
           {{transaction().category.name}} 
           @if (transaction().category.controls?.icon) {
-            <mat-icon class="category-icon" [style.background-color]="transaction().category?.controls?.color">{{transaction()?.category?.controls?.icon}}</mat-icon>
+            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category.controls?.icon}}</mat-icon>
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
