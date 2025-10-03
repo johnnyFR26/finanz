@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
 import { TransactionComponent } from '../../../components/transaction/transaction.component';
@@ -13,9 +13,9 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
   imports: [TransactionComponent, MatIcon, CurrencyPipe, FormsModule, CommonModule, MonthSelectorComponent],
   template: `
   <select class="mini-box" style="margin-bottom:30px;scale:1.2;" [(ngModel)]="type" [ngClass]="{
-    'all': type() == 'transaction',
-    'revenue': type() == 'input',
-    'expense': type() == 'output'
+    'all': type() === 'transaction',
+    'revenue': type() === 'input',
+    'expense': type() === 'output'
   }">
     <option class="all" value="transaction">Transações</option>
     <option class="revenue" value="input">Receitas</option>
@@ -23,9 +23,9 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
   </select>
   <div class="box">
     <month-selector [ngClass]="{
-    'all': type() == 'transaction',
-    'revenue': type() == 'input',
-    'expense': type() == 'output'
+    'all': type() === 'transaction',
+    'revenue': type() === 'input',
+    'expense': type() === 'output'
   }"/>
     <div class="value gains">
       <h2 class="entrada">RECEITAS</h2>
@@ -39,14 +39,14 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
     </div>
     <div class= "box transaction-list">
       @for (transaction of transactions(); track $index) {
-        @if (type() != 'transaction') {
-          @if (transaction.type==type()) {
+        @if (type() !== 'transaction') {
+          @if (transaction.type === type()) {
             <transaction
               [transaction]="transaction"
               [ngClass]="{
-                'all': type() == 'transaction',
-                'revenue': type() == 'input',
-                'expense': type() == 'output'
+                'all': type() === 'transaction',
+                'revenue': type() === 'input',
+                'expense': type() === 'output'
               }"
             />
           }
