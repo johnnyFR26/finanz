@@ -8,7 +8,7 @@ import { AchievementComponent } from "../../../components/achievement/achievemen
 import { AchievementService } from "../../../services/achievement.service";
 
 @Component({
-    selector: 'my-account',
+    selector: 'app-my-account',
     template: `
     <div class="account-name">
       <div>
@@ -18,7 +18,7 @@ import { AchievementService } from "../../../services/achievement.service";
         </div>
         <h1>{{user()?.user?.name}}</h1>
       </div>
-      <span class="typePlan" [class]="user()?.user?.controls.plan">{{user()?.user?.controls.plan == 'premium' ? "Premium" : "Standard"}}</span>
+      <span class="typePlan" [class]="user()?.user?.controls.plan">{{user()?.user?.controls.plan === 'premium' ? "Premium" : "Standard"}}</span>
     </div>
 
     <div class="achievements">
