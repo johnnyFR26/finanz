@@ -1,23 +1,103 @@
-<div class="chat-container">
-  <div class="messages">
-      <p><span id="first-message"></span><span class="cursor">|</span></p>
-      @for (message of messasges; track $index) {
-        <markdown [data]="message"></markdown>
-      }
-  </div>
-</div>
+   <div class="chat-wrapper">
+      <div class="chat-header">
+        <div class="header-info">
+          <mat-icon class="ai-icon">smart_toy</mat-icon>
+          <div class="header-text">
+            <h2>Zezinho IA</h2>
+            <span class="status" [class.online]="!isLoading()">
+              {{ isLoading() ? 'Digitando...' : 'Online' }}
+            </span>
+          </div>
+        </div>
+        <button mat-icon-button (click)="clearChat()" [disabled]="messages().length === 0">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
 
-<div class="chat-input-container">
-  <textarea 
-    [(ngModel)]="message"
-    (keydown.enter)="sendMessage()"
-    placeholder="Digite sua mensagem..."
-    rows="1"
-    class="chat-input"
-    #inputArea
-  ></textarea>
+      <div class="chat-container" #chatContainer>
+        <div class="messages">
+          @if (showInitialMessage()) {
+            <div class="message assistant initial-message">
+              <div class="message-avatar">
+                <mat-icon>smart_toy</mat-icon>
+              </div>
+              <div class="message-content">
+                <p>
+                  <span #initialMessageElement></span>
+                  <span class="cursor" [class.hidden]="!isTypingInitial()">|</span>
+                </p>
+              </div>
+            </div>
+          }
 
-  <button class="send-button" (click)="sendMessage()">
-    <mat-icon>send</mat-icon>
-  </button>
-</div>
+          <!-- Mensagens do chat -->
+          @for (message of messages(); track message.id) {
+            <div class="message" [class.user]="message.role === 'user'" [class.assistant]="message.role === 'assistant'">
+              <div class="message-avatar">
+                @if (message.role === 'user') {
+                  <mat-icon>person</mat-icon>
+                } @else {
+                  <mat-icon>smart_toy</mat-icon>
+                }
+              </div>
+              <div class="message-content">
+                @if (message.role === 'user') {
+                  <p>{{ message.content }}</p>
+                } @else {
+                  @if (message.isTyping) {
+                    <div class="typing-indicator">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  } @else {
+                    <markdown [data]="message.content"></markdown>
+                  }
+                }
+                <span class="message-time">{{ formatTime(message.timestamp) }}</span>
+              </div>
+            </div>
+          }
+
+          <!-- Indicador de carregamento -->
+          @if (isLoading() && !hasTypingMessage()) {
+            <div class="message assistant">
+              <div class="message-avatar">
+                <mat-icon>smart_toy</mat-icon>
+              </div>
+              <div class="message-content">
+                <div class="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="chat-input-container">
+        <textarea 
+          [(ngModel)]="currentMessage"
+          (keydown.enter)="handleEnter($event)"
+          (input)="adjustTextareaHeight()"
+          placeholder="Digite sua mensagem..."
+          rows="1"
+          class="chat-input"
+          [disabled]="isLoading()"
+          #inputArea
+        ></textarea>
+
+        <button 
+          class="send-button" 
+          (click)="sendMessage()"
+          >
+          @if (isLoading()) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            <mat-icon>send</mat-icon>
+          }
+        </button>
+      </div>
+    </div>
