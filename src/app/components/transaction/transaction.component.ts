@@ -29,16 +29,16 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
           <span class="date">{{transaction()!.createdAt | date: "dd/MM/yyyy"}}</span>
           <h1 [class]="transaction()!.type === 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
-          {{transaction()?.category?.name}} 
-          @if (transaction()?.category?.controls?.icon) {
-            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category?.controls?.icon}}</mat-icon>
+          {{transaction().category.name}} 
+          @if (transaction().category.controls?.icon) {
+            <mat-icon class="category-icon" [style.background-color]="transaction().category?.controls?.color">{{transaction()?.category?.controls?.icon}}</mat-icon>
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
-      @if(transaction()?.creditCard){
-        <p>Cartão: {{transaction()?.creditCard?.name}}</p>
+      @if(transaction().creditCard){
+        <p>Cartão: {{transaction().creditCard?.name}}</p>
       }
-      <p>{{transaction()?.description}}</p>
+      <p>{{transaction().description}}</p>
         <div class="tools">
           <button (click)="openUploadModal()" mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
@@ -56,7 +56,7 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
 
 export class TransactionComponent{
   readonly panelOpenState = signal(false);
-  readonly transaction = input<TransactionModel>();
+  readonly transaction = input.required<TransactionModel>();
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
   readonly dialog = inject(MatDialog);
