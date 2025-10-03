@@ -41,7 +41,7 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
       @for (transaction of transactions(); track $index) {
         @if (type() !== 'transaction') {
           @if (transaction.type === type()) {
-            <transaction
+            <app-transaction
               [transaction]="transaction"
               [ngClass]="{
                 'all': type() === 'transaction',
