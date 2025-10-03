@@ -52,7 +52,7 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
           }
         }
         @else {
-            <transaction
+            <app-transaction
               [transaction]="transaction"
             />
           }
