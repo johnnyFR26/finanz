@@ -1,4 +1,4 @@
-import { Component, inject, input, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -10,7 +10,7 @@ import { EditTransactionModalComponent } from '../../modals/edit-transactions/ed
 import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-file-modal.component';
 
 @Component({
-    selector: 'transaction',
+    selector: 'app-transaction',
     imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe],
     styleUrl: './transaction.component.scss',
     template: `
@@ -26,16 +26,16 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
         </mat-panel-title>
         <mat-panel-description>
           <div>
-          <span class="date">{{transaction().createdAt | date: "dd/MM/yyyy"}}</span>
-          <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
+          <span class="date">{{transaction()!.createdAt | date: "dd/MM/yyyy"}}</span>
+          <h1 [class]="transaction()!.type === 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
           {{transaction()?.category?.name}} 
-          @if (transaction().category?.controls?.icon) {
+          @if (transaction()?.category?.controls?.icon) {
             <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category?.controls?.icon}}</mat-icon>
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
-      @if(transaction().creditCard){
+      @if(transaction()?.creditCard){
         <p>Cartão: {{transaction()?.creditCard?.name}}</p>
       }
       <p>{{transaction()?.description}}</p>
@@ -56,7 +56,7 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
 
 export class TransactionComponent{
   readonly panelOpenState = signal(false);
-  readonly transaction = input<any>();
+  readonly transaction = input<TransactionModel>();
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
   readonly dialog = inject(MatDialog);
