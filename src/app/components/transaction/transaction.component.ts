@@ -8,6 +8,8 @@ import { TransactionModel } from '../../models/transaction.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTransactionModalComponent } from '../../modals/edit-transactions/edit-transaction-modal.component';
 import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-file-modal.component';
+import { FileUploadService } from '../../services/fileUpload.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-transaction',
@@ -59,8 +61,11 @@ export class TransactionComponent{
   readonly transaction = input.required<TransactionModel>();
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
+  private uploadService = inject(FileUploadService)
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
+    private snackBar = inject(MatSnackBar);
+
     uploadedFile: any = null;
 
   switchSelect() : void {
@@ -73,17 +78,31 @@ export class TransactionComponent{
   };
 
       openUploadModal(): void {
-    const dialogRef = this.dialog.open(FileUploadModalComponent, {
-      width: '600px',
-      maxWidth: '90vw',
-      disableClose: false,
-      autoFocus: true
-    });
+    const dialogRef = this.dialog.open(FileUploadModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Arquivo selecionado:', result);
-        this.handleFileUpload(result);
+        this.uploadService.uploadFile(result.file, {
+          userId: 'user-123',
+          categoryId: 'cat-456'
+        }).subscribe({
+          next: (progress) => {
+            if (progress.state === 'uploading') {
+              console.log(`Upload: ${progress.progress}%`);
+            } else if (progress.state === 'done') {
+              console.log('Upload completo!', progress.response);
+              this.snackBar.open('Arquivo enviado!', 'Fechar', {
+                duration: 3000
+              });
+            }
+          },
+          error: (error) => {
+            console.error('Erro:', error);
+            this.snackBar.open('Erro no upload', 'Fechar', {
+              duration: 5000
+            });
+          }
+        });
       }
     });
   }
