@@ -10,10 +10,22 @@ import { EditTransactionModalComponent } from '../../modals/edit-transactions/ed
 import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-file-modal.component';
 import { FileUploadService } from '../../services/fileUpload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageViewerModalComponent } from '../attachedFile/image-viewer.component';
+import { AttachmentGalleryComponent } from "../attachedFile/attachedFile.component";
+
+interface AttachedFile {
+  id: string;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+  uploadedAt: Date;
+  thumbnail?: string;
+}
 
 @Component({
     selector: 'app-transaction',
-    imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe],
+    imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe, AttachmentGalleryComponent],
     styleUrl: './transaction.component.scss',
     template: `
     <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -41,6 +53,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         <p>Cartão: {{transaction().creditCard?.name}}</p>
       }
       <p>{{transaction().description}}</p>
+      <app-attachment-gallery
+       [files]="attachedFiles"
+       (addAttachment)="openUploadModal()"
+        (fileClick)="viewFile($event)"
+       (fileDownload)="downloadFile($event)"
+       (fileDelete)="deleteFile($event)">
+    </app-attachment-gallery>
         <div class="tools">
           <button (click)="openUploadModal()" mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
@@ -65,6 +84,24 @@ export class TransactionComponent{
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
     private snackBar = inject(MatSnackBar);
+    attachedFiles: AttachedFile[] = [
+    {
+      id: '1',
+      name: 'documento.pdf',
+      url: 'https://example.com/file.pdf',
+      type: 'application/pdf',
+      size: 2048000,
+      uploadedAt: new Date()
+    },
+    {
+      id: '2',
+      name: 'imagem.jpg',
+      url: 'https://picsum.photos/400/300',
+      type: 'image/jpeg',
+      size: 1024000,
+      uploadedAt: new Date()
+    }
+  ];
 
     uploadedFile: any = null;
 
@@ -123,7 +160,7 @@ export class TransactionComponent{
     // this.sendAsArrayBuffer(fileData);
   }
   openEditTransactionModal(transaction: TransactionModel) : void{
-    const dialogRef = this.dialog.open(EditTransactionModalComponent, {
+     this.dialog.open(EditTransactionModalComponent, {
           data: {
             transaction: transaction,
         },
@@ -136,4 +173,23 @@ export class TransactionComponent{
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
+
+  viewFile(file: AttachedFile): void {
+    this.dialog.open(ImageViewerModalComponent, {
+      data: file,
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      panelClass: 'image-viewer-dialog'
+    });
+  }
+
+  downloadFile(file: AttachedFile): void {
+    window.open(file.url, '_blank');
+  }
+
+  deleteFile(file: AttachedFile): void {
+    if (confirm(`Deseja remover ${file.name}?`)) {
+      // Lógica de delete
+    }
+}
 }
