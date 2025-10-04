@@ -12,6 +12,7 @@ import { FileUploadService } from '../../services/fileUpload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageViewerModalComponent } from '../attachedFile/image-viewer.component';
 import { AttachmentGalleryComponent } from "../attachedFile/attachedFile.component";
+import { UserService } from '../../services/user.service';
 
 interface AttachedFile {
   id: string;
@@ -81,6 +82,8 @@ export class TransactionComponent{
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
   private uploadService = inject(FileUploadService)
+  private userService = inject(UserService)
+  private user = this.userService.getUserInfo()
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
     private snackBar = inject(MatSnackBar);
@@ -120,8 +123,8 @@ export class TransactionComponent{
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.uploadService.uploadFile(result.file, {
-          userId: 'user-123',
-          categoryId: 'cat-456'
+          userId: String(this.user()!.user.id),
+          transactionId: this.transaction().id
         }).subscribe({
           next: (progress) => {
             if (progress.state === 'uploading') {
