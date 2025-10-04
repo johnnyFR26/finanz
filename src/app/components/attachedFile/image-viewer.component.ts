@@ -6,11 +6,11 @@ import { MatIconModule } from "@angular/material/icon";
 
 interface AttachedFile {
   id: string;
-  name: string;
+  originalName: string;
   url: string;
-  type: string;
+  mimeType: string;
   size: number;
-  uploadedAt: Date;
+  createdAt: Date;
   thumbnail?: string;
 }
 
@@ -22,7 +22,7 @@ interface AttachedFile {
     <div class="image-viewer">
       <div class="viewer-header">
         <div class="file-info">
-          <h2>{{ file.name }}</h2>
+          <h2>{{ file.originalName }}</h2>
           <span>{{ formatFileSize(file.size) }}</span>
         </div>
         <div class="actions">
@@ -36,12 +36,12 @@ interface AttachedFile {
       </div>
 
       <div class="viewer-content">
-        @if (isImage(file.type)) {
+        @if (isImage(file.mimeType)) {
           <img [src]="file.url" [alt]="file.name">
         } @else {
           <div class="document-view">
-            <mat-icon>{{ getFileIcon(file.type) }}</mat-icon>
-            <p>{{ file.name }}</p>
+            <mat-icon>{{ getFileIcon(file.mimeType) }}</mat-icon>
+            <p>{{ file.originalName }}</p>
             <button mat-raised-button color="primary" (click)="onDownload()">
               <mat-icon>download</mat-icon>
               Baixar Arquivo
@@ -64,7 +64,7 @@ interface AttachedFile {
       justify-content: space-between;
       align-items: center;
       padding: 16px 24px;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid var(--grey-form);
 
       .file-info {
         h2 {

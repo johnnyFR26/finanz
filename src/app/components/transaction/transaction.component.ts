@@ -16,11 +16,11 @@ import { UserService } from '../../services/user.service';
 
 interface AttachedFile {
   id: string;
-  name: string;
+  originalName: string;
   url: string;
-  type: string;
+  mimeType: string;
   size: number;
-  uploadedAt: Date;
+  createdAt: Date;
   thumbnail?: string;
 }
 
@@ -54,13 +54,15 @@ interface AttachedFile {
         <p>Cartão: {{transaction().creditCard?.name}}</p>
       }
       <p>{{transaction().description}}</p>
-      <app-attachment-gallery
-       [files]="attachedFiles"
-       (addAttachment)="openUploadModal()"
-        (fileClick)="viewFile($event)"
-       (fileDownload)="downloadFile($event)"
-       (fileDelete)="deleteFile($event)">
-    </app-attachment-gallery>
+      @if(transaction().files.length > 0){      
+        <app-attachment-gallery
+         [files]="transaction()!.files"
+         (addAttachment)="openUploadModal()"
+          (fileClick)="viewFile($event)"
+         (fileDownload)="downloadFile($event)"
+         (fileDelete)="deleteFile($event)">
+      </app-attachment-gallery>
+      }
         <div class="tools">
           <button (click)="openUploadModal()" mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
@@ -87,24 +89,7 @@ export class TransactionComponent{
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
     private snackBar = inject(MatSnackBar);
-    attachedFiles: AttachedFile[] = [
-    {
-      id: '1',
-      name: 'documento.pdf',
-      url: 'https://example.com/file.pdf',
-      type: 'application/pdf',
-      size: 2048000,
-      uploadedAt: new Date()
-    },
-    {
-      id: '2',
-      name: 'imagem.jpg',
-      url: 'https://picsum.photos/400/300',
-      type: 'image/jpeg',
-      size: 1024000,
-      uploadedAt: new Date()
-    }
-  ];
+ 
 
     uploadedFile: any = null;
 
@@ -192,7 +177,7 @@ export class TransactionComponent{
   }
 
   deleteFile(file: AttachedFile): void {
-    if (confirm(`Deseja remover ${file.name}?`)) {
+    if (confirm(`Deseja remover ${file.originalName}?`)) {
       // Lógica de delete
     }
 }

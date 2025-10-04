@@ -8,11 +8,11 @@ import { ImageViewerModalComponent } from './image-viewer.component';
 
 interface AttachedFile {
   id: string;
-  name: string;
+  originalName: string;
   url: string;
-  type: string;
+  mimeType: string;
   size: number;
-  uploadedAt: Date;
+  createdAt: Date;
   thumbnail?: string;
 }
 
@@ -54,9 +54,9 @@ interface AttachedFile {
           @for (file of files(); track file.id) {
             <div class="attachment-card" (click)="onFileClick(file)">
               <!-- Preview de Imagem -->
-              @if (isImage(file.type)) {
+              @if (isImage(file.mimeType)) {
                 <div class="image-preview">
-                  <img [src]="file.url" [alt]="file.name">
+                  <img [src]="file.url" [alt]="file.originalName">
                   <div class="image-overlay">
                     <button 
                       mat-icon-button 
@@ -77,7 +77,7 @@ interface AttachedFile {
               } @else {
                 <!-- Preview de Documento -->
                 <div class="document-preview">
-                  <mat-icon class="doc-icon">{{ getFileIcon(file.type) }}</mat-icon>
+                  <mat-icon class="doc-icon">{{ getFileIcon(file.mimeType) }}</mat-icon>
                   <div class="document-overlay">
                     <button 
                       mat-icon-button 
@@ -99,12 +99,12 @@ interface AttachedFile {
 
               <!-- Informações do Arquivo -->
               <div class="file-info">
-                <div class="file-name" [matTooltip]="file.name">
-                  {{ file.name }}
+                <div class="file-name" [matTooltip]="file.originalName">
+                  {{ file.originalName }}
                 </div>
                 <div class="file-meta">
                   <span class="file-date">
-                    {{ formatDate(file.uploadedAt) }}
+                    {{ formatDate(file.createdAt) }}
                   </span>
                   <span class="file-size">
                     {{ formatFileSize(file.size) }}
@@ -199,7 +199,7 @@ interface AttachedFile {
     }
 
     .attachment-card {
-      background: white;
+      background: var(--grey-background);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -223,7 +223,7 @@ interface AttachedFile {
       width: 100%;
       height: 160px;
       overflow: hidden;
-      background: #f5f5f5;
+      background: var(--grey-background);
     }
 
     .image-preview {
@@ -305,13 +305,15 @@ interface AttachedFile {
         display: flex;
         justify-content: space-between;
         font-size: 12px;
-        color: #666;
+        color: black;
 
         .file-date {
+        color: black;
           flex: 1;
         }
 
         .file-size {
+                    color: black;
           font-weight: 500;
         }
       }
