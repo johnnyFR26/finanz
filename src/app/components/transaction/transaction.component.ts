@@ -175,6 +175,7 @@ export class TransactionComponent{
   }
 
   viewFile(file: AttachedFile): void {
+    console.log("2", file);
     this.dialog.open(ImageViewerModalComponent, {
       data: file,
       maxWidth: '90vw',

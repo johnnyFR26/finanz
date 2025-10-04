@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDialogModule } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 
 interface AttachedFile {
@@ -125,7 +125,9 @@ interface AttachedFile {
   `]
 })
 export class ImageViewerModalComponent {
-  file!: AttachedFile;
+    readonly data = inject<any>(MAT_DIALOG_DATA);
+
+  file = this.data;
 
   isImage(type: string): boolean {
     return type.startsWith('image/');

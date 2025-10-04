@@ -1,9 +1,10 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ImageViewerModalComponent } from './image-viewer.component';
 
 interface AttachedFile {
   id: string;
@@ -154,7 +155,7 @@ interface AttachedFile {
       }
 
       .add-button {
-        display: flex;
+        display: none;
         align-items: center;
         gap: 4px;
       }
@@ -374,8 +375,16 @@ export class AttachmentGalleryComponent {
   onAddAttachment(): void {
     this.addAttachment.emit();
   }
+  readonly dialog = inject(MatDialog);
 
   onFileClick(file: AttachedFile): void {
+    console.log(file);
+     this.dialog.open(ImageViewerModalComponent, {
+          data: file,
+          maxWidth: '90vw',
+          maxHeight: '90vh',
+          panelClass: 'image-viewer-dialog'
+        });
     this.fileClick.emit(file);
   }
 
