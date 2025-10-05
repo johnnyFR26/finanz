@@ -4,6 +4,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { AccountService } from "./account.service";
 import { TransactionModel } from "../models/transaction.model";
+import { CreateTransactionByYearmonthModel } from "../models/create-transaction-by-yearmonth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,24 @@ export class TransactionService {
     return this.http.get(`${this.urlApi}/transactions/account/${accountId}`).subscribe((response: any) => {
       this.setTransactions(response.transactions);
     });
+  }
+
+  getAccountTransactionsByYearMonth(yearmonth: CreateTransactionByYearmonthModel) {
+    return this.http.post(`${this.urlApi}/transactions/by-yearmonth`, yearmonth)
+      .subscribe({
+        next: (response: any) => {
+          console.log('Response:', response);
+          this.setTransactions([response.transactions]);
+          this.accountService.setCurrentAccount({
+            currentValue: response.accountUpdate.currentValue,
+            currency: response.accountUpdate.currency,
+            id: response.accountUpdate.id
+          });
+        },
+        error: (error: any) => {
+          console.error('Error:', error);
+        }
+      });
   }
   
     public sum = computed(() =>

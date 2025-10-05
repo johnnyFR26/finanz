@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
 import { TransactionComponent } from '../../../components/transaction/transaction.component';
@@ -67,8 +67,17 @@ export class TransactionsListComponent {
   private transactionService = inject(TransactionService);
   private accountService = inject(AccountService);
 
+  protected monthValue = computed(() => {
+    return{
+    year: 2025,
+    month: this.month(),
+    accountId: this.account,
+    }
+  });
+
+  private month = signal<number>(new Date().getMonth());
   protected account = this.accountService.getCurrentAccount();
-  protected transactions = this.transactionService.getTransactions();
+  protected transactions = this.transactionService.getAccountTransactionsByYearMonth(this.monthValue());
   protected sum = this.transactionService.sum;
   protected sub = this.transactionService.sub;
   protected type = signal<string | null>('transaction');
