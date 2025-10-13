@@ -50,12 +50,7 @@ export class TransactionService {
       .subscribe({
         next: (response: any) => {
           console.log('Response:', response);
-          this.setTransactions([response.transactions]);
-          this.accountService.setCurrentAccount({
-            currentValue: response.accountUpdate.currentValue,
-            currency: response.accountUpdate.currency,
-            id: response.accountUpdate.id
-          });
+          this.transactions.set(response.transactions);
         },
         error: (error: any) => {
           console.error('Error:', error);
