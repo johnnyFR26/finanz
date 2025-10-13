@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TransactionService } from '../../../services/transaction.service';
 import { AccountService } from '../../../services/account.service';
 import { TransactionComponent } from '../../../components/transaction/transaction.component';
@@ -26,7 +26,7 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
     'all': type() === 'transaction',
     'revenue': type() === 'input',
     'expense': type() === 'output'
-  }"/>
+  }" (month)="changeMonth($event)"/>
     <div class="value gains">
       <h2 class="entrada">RECEITAS</h2>
       <h1>{{sum()| currency: account()?.currency}}</h1>
@@ -67,8 +67,23 @@ export class TransactionsListComponent {
   private transactionService = inject(TransactionService);
   private accountService = inject(AccountService);
 
+  protected monthValue = computed(() => {
+    return{
+    year: 2025,
+    month: this.month(),
+    accountId: this.account()?.id,
+    }
+  });
+
+  changeMonth(month:number){
+    this.month.set(month + 1)
+    this.transactionService.getAccountTransactionsByYearMonth(this.monthValue());
+  }
+
+  protected month = signal<number>(new Date().getMonth() + 1);
   protected account = this.accountService.getCurrentAccount();
   protected transactions = this.transactionService.getTransactions();
+  protected transactionsByYearMonth = this.transactionService.getAccountTransactionsByYearMonth(this.monthValue());
   protected sum = this.transactionService.sum;
   protected sub = this.transactionService.sub;
   protected type = signal<string | null>('transaction');
