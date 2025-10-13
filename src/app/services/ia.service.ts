@@ -14,7 +14,7 @@ export class IaService {
     
 
     sendMessage(message: string) {
-       return this.http.post(`${this.urlApi}/ai-agent/chat${this.user()?.user.id}`, {
+       return this.http.post(`${this.urlApi}/ai-agent/chat/${this.user()?.user.id}`, {
             "message": message
         })
     }
