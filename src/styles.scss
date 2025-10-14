@@ -97,7 +97,7 @@ body {
     flex-direction: column; 
     display: flex;
     align-items: center;
-    height: calc(100% - var(--topsize));
+    height: 100%;
 }
 
 @media (orientation: portrait){
