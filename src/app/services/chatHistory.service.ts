@@ -25,16 +25,13 @@ export class ChatHistoryService {
   private dbVersion = 1;
   private db: IDBDatabase | null = null;
   
-  // Observable para notificar mudanças no histórico
   private messagesUpdated$ = new BehaviorSubject<void>(undefined);
 
   constructor() {
     this.initDB();
   }
 
-  /**
-   * Inicializa o IndexedDB
-   */
+ 
   private async initDB(): Promise<void> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, this.dbVersion);
@@ -52,14 +49,12 @@ export class ChatHistoryService {
       request.onupgradeneeded = (event) => {
         const db = (event.target as IDBOpenDBRequest).result;
 
-        // Object Store para mensagens
         if (!db.objectStoreNames.contains('messages')) {
           const messagesStore = db.createObjectStore('messages', { keyPath: 'id' });
           messagesStore.createIndex('conversationId', 'conversationId', { unique: false });
           messagesStore.createIndex('timestamp', 'timestamp', { unique: false });
         }
 
-        // Object Store para conversas
         if (!db.objectStoreNames.contains('conversations')) {
           const conversationsStore = db.createObjectStore('conversations', { keyPath: 'id' });
           conversationsStore.createIndex('userId', 'userId', { unique: false });
@@ -69,9 +64,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Garante que o DB está inicializado
-   */
+
   private async ensureDB(): Promise<IDBDatabase> {
     if (!this.db) {
       await this.initDB();
@@ -79,9 +72,7 @@ export class ChatHistoryService {
     return this.db!;
   }
 
-  /**
-   * Cria uma nova conversa
-   */
+
   async createConversation(userId: number, title = 'Nova Conversa'): Promise<string> {
     const db = await this.ensureDB();
     const conversationId = this.generateId();
@@ -104,9 +95,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Adiciona uma mensagem ao histórico
-   */
+
   async addMessage(
     conversationId: string,
     content: string,
@@ -127,11 +116,9 @@ export class ChatHistoryService {
       const messagesStore = transaction.objectStore('messages');
       const conversationsStore = transaction.objectStore('conversations');
 
-      // Adiciona a mensagem
       const addRequest = messagesStore.add(message);
 
       addRequest.onsuccess = () => {
-        // Atualiza o timestamp da conversa
         const getConvRequest = conversationsStore.get(conversationId);
         
         getConvRequest.onsuccess = () => {
@@ -150,9 +137,6 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Busca todas as mensagens de uma conversa
-   */
   async getMessages(conversationId: string): Promise<ChatMessage[]> {
     const db = await this.ensureDB();
 
@@ -173,24 +157,18 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Busca mensagens de uma conversa (Observable)
-   */
+
   getMessages$(conversationId: string): Observable<ChatMessage[]> {
     return from(this.getMessages(conversationId));
   }
 
-  /**
-   * Busca as últimas N mensagens de uma conversa
-   */
+
   async getRecentMessages(conversationId: string, limit = 20): Promise<ChatMessage[]> {
     const messages = await this.getMessages(conversationId);
     return messages.slice(-limit);
   }
 
-  /**
-   * Busca todas as conversas de um usuário
-   */
+
   async getConversations(userId: number): Promise<Conversation[]> {
     const db = await this.ensureDB();
 
@@ -211,16 +189,12 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Busca conversas de um usuário (Observable)
-   */
+
   getConversations$(userId: number): Observable<Conversation[]> {
     return from(this.getConversations(userId));
   }
 
-  /**
-   * Busca uma conversa específica
-   */
+
   async getConversation(conversationId: string): Promise<Conversation | null> {
     const db = await this.ensureDB();
 
@@ -234,9 +208,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Atualiza o título de uma conversa
-   */
+
   async updateConversationTitle(conversationId: string, title: string): Promise<void> {
     const db = await this.ensureDB();
 
@@ -262,9 +234,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Deleta uma conversa e todas as suas mensagens
-   */
+
   async deleteConversation(conversationId: string): Promise<void> {
     const db = await this.ensureDB();
 
@@ -274,7 +244,6 @@ export class ChatHistoryService {
       const conversationsStore = transaction.objectStore('conversations');
       const index = messagesStore.index('conversationId');
 
-      // Deleta todas as mensagens da conversa
       const messagesRequest = index.openCursor(conversationId);
       
       messagesRequest.onsuccess = (event) => {
@@ -298,9 +267,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Deleta uma mensagem específica
-   */
+
   async deleteMessage(messageId: string): Promise<void> {
     const db = await this.ensureDB();
 
@@ -317,9 +284,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Limpa todas as mensagens de uma conversa
-   */
+
   async clearConversationMessages(conversationId: string): Promise<void> {
     const db = await this.ensureDB();
 
@@ -344,9 +309,7 @@ export class ChatHistoryService {
     });
   }
 
-  /**
-   * Exporta todas as mensagens de uma conversa (para backup)
-   */
+
   async exportConversation(conversationId: string): Promise<string> {
     const conversation = await this.getConversation(conversationId);
     const messages = await this.getMessages(conversationId);
@@ -360,31 +323,22 @@ export class ChatHistoryService {
     return JSON.stringify(exportData, null, 2);
   }
 
-  /**
-   * Conta o total de mensagens em uma conversa
-   */
+
   async getMessageCount(conversationId: string): Promise<number> {
     const messages = await this.getMessages(conversationId);
     return messages.length;
   }
 
-  /**
-   * Observable para detectar mudanças no histórico
-   */
+
   get messagesUpdated(): Observable<void> {
     return this.messagesUpdated$.asObservable();
   }
 
-  /**
-   * Gera um ID único
-   */
   private generateId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  /**
-   * Limpa todo o banco de dados (use com cuidado!)
-   */
+
   async clearAll(): Promise<void> {
     const db = await this.ensureDB();
 
