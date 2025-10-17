@@ -1,5 +1,5 @@
 import { CurrencyPipe } from "@angular/common";
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, computed, inject, OnInit, signal } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -20,12 +20,26 @@ import { FormsModule } from "@angular/forms";
           <h1>{{account()?.currentValue | currency: account()?.currency}}</h1>
         </div>
         <div class="small-box gains">
-          <h2>Receitas</h2>
-          <h1>{{sum()| currency: account()?.currency}}</h1>
+          <div>
+            <h2>Receitas</h2>
+            <select [(ngModel)]="gainsMonth" class="input" name="type" id="input">
+              @for(month of months; track $index){
+                <option [value]="$index">{{month}}</option>
+              }
+            </select>
+          </div>
+          <h1>{{gainsValue()| currency: account()?.currency}}</h1>
         </div>
         <div class="small-box losts">
+          <div>
           <h2>Despesas</h2>
-          <h1>{{sub() | currency: account()?.currency}}</h1>
+            <select [(ngModel)]="lostsMonth" class="input" name="type" id="input">
+              @for(month of months; track $index){
+                <option [value]="$index">{{month}}</option>
+              }
+            </select>
+          </div>
+          <h1>{{lostsValue() | currency: account()?.currency}}</h1>
         </div>
         <div class="small-box credit-card">
           <div>
@@ -78,8 +92,35 @@ export class AccountComponent {
         id: this.id,
         title,
         type
-    },
+      },
     });
-}
+  }
+
+    readonly months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    protected lostsMonth = signal<number>(new Date().getMonth());
+    protected gainsMonth = signal<number>(new Date().getMonth());
+
+    protected lostsMonthValue = computed(() => {
+      return{
+      year: 2025,
+      month: this.lostsMonth(),
+      accountId: this.account()?.id,
+      }
+    });
+
+    protected gainsMonthValue = computed(() => {
+      return{
+      year: 2025,
+      month: this.gainsMonth(),
+      accountId: this.account()?.id,
+      }
+    });
+
+    protected gainsValue = computed(() => {
+      const gains = this.transactionService.getGainsTransactionsByYearMonth(this.gainsMonthValue()) || 0
+      console.log(gains)
+      return gains
+    });
+    protected lostsValue = computed(() => this.transactionService.getLostsTransactionsByYearMonth(this.lostsMonthValue()) || 0);
 
 }

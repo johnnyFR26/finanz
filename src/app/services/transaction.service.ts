@@ -73,6 +73,10 @@ export class TransactionService {
   getTransactions() {
     return this.transactions.asReadonly();
   }
+  
+  getTransactionsByYearMonth(yearmonth: CreateTransactionByYearmonthModel) {
+    return this.http.post(`${this.urlApi}/transactions/by-yearmonth`, yearmonth)
+  }
 
   editTransaction(transaction: any) {
 
