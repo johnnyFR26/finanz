@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -22,7 +22,10 @@ import { AchievementService } from "../../../services/achievement.service";
     </div>
 
     <div class="achievements">
-      <h2>CONQUISTAS</h2>
+      <section>
+        <h2>CONQUISTAS</h2>
+        <span>{{countdown}}</span>
+    </section>
       <div>
           @for (achievement of achievements(); track $index) {
             <achievement [achievement]="achievement"/>
@@ -82,7 +85,7 @@ import { AchievementService } from "../../../services/achievement.service";
     styleUrl: './my-account.component.scss',
     imports: [MatIconModule, MatButtonModule, AchievementComponent]
 })
-export class MyAccountComponent{
+export class MyAccountComponent implements OnInit{
     protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)
@@ -93,4 +96,47 @@ export class MyAccountComponent{
     protected sum = this.transactionService.sum;
     protected sub = this.transactionService.sub;
     protected achievements = this.achievementService.getCurrentAchievements();
+
+    protected countdown: string | undefined;
+
+    ngOnInit(): void {
+      this.updateCountDown();
+    }
+
+    updateCountDown() {
+    const calculateNextDay20 = () => {
+      const now = new Date();
+      const currentDay = now.getDate();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      
+      let targetDate: Date;
+      
+      if (currentDay < 20) {
+        targetDate = new Date(currentYear, currentMonth, 20);
+      } else {
+        targetDate = new Date(currentYear, currentMonth + 1, 20);
+      }
+      
+      targetDate.setHours(0, 0, 0, 0);
+      now.setHours(0, 0, 0, 0);
+      
+      const diff = targetDate.getTime() - now.getTime();
+      const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      
+      return daysRemaining;
+    };
+    
+    setInterval(() => {
+      const days = calculateNextDay20();
+      
+      if (days === 0) {
+        this.countdown = 'Hoje é o dia de atualização!';
+      } else if (days === 1) {
+        this.countdown = 'Falta 1 dia para a atualização!';
+      } else {
+        this.countdown = `Faltam ${days} dias para a atualização!`;
+      }
+    }, 1000);
+  }
 }
