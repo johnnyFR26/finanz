@@ -83,6 +83,14 @@ h1, h2, label{
         grid-template-columns: 1fr 1fr;
         gap: 30px;
     }
+    >section{
+        display: flex;
+        gap: 20px;
+        
+        >span{
+            padding-top: 30px;
+        }
+    }
 }
 
 .account-config{

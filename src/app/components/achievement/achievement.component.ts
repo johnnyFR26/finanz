@@ -15,14 +15,14 @@ import { AccountService } from '../../services/account.service';
             <mat-icon [ngClass]="percentage() >= 100 ? 'completed' : 'uncompleted'">attach_money</mat-icon>
             <div>
                 <h3>{{ achievement().name}}</h3>
-                <p>{{achievement().description}} {{achievement().goal | currency:'BRL'}}</p>
+                <p>{{achievement().description}}</p>
             </div>
         </div>
         <mat-progress-bar mode="determinate" [value]="percentage()" [attr.data]="percentage()"></mat-progress-bar>
 
         <div class="current">
-            <span>{{achievement().current| currency:account()?.currency}}</span>
-            <span>{{achievement().goal| currency:account()?.currency}}</span>
+            <span>{{achievement().current}}</span>
+            <span>{{achievement().goal}}</span>
         </div>
       </div>
     `
