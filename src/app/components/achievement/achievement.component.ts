@@ -7,7 +7,7 @@ import { AccountService } from '../../services/account.service';
 
 @Component({
     selector: 'achievement',
-    imports: [MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, CommonModule],
+    imports: [MatIcon, MatButtonModule, MatProgressBarModule, CommonModule],
     styleUrl: './achievement.component.scss',
     template: `
       <div class="box card" [ngClass]="percentage() >= 100 ? 'completed' : 'uncompleted'">
