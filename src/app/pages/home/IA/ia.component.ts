@@ -82,7 +82,7 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   // ID da conversa atual
   protected currentConversationId = signal<string | null>(null);
 
-  private initialMessage = `Olá ${this.user()?.user?.name || 'usuário'}, como posso te ajudar hoje?`;
+  private initialMessage = `Olá ${this.user()?.user?.name}, como posso te ajudar hoje?`;
 
   protected canSend = computed(() => {
     return  !this.isLoading();
@@ -159,10 +159,8 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
       const conversations = this.conversations();
       
       if (conversations.length > 0) {
-        // Carrega a conversa mais recente
         await this.selectConversation(conversations[0].id);
       } else {
-        // Cria uma nova conversa
         await this.createNewConversation();
       }
     } catch (error) {
@@ -219,7 +217,6 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
       m.role === 'user' || m.role === 'assistant'
     );
 
-    // Pega as últimas 20 mensagens (excluindo a última que acabou de ser enviada)
     const recentMessages = validMessages.slice(-21, -1);
 
     return recentMessages.map(msg => ({
@@ -231,27 +228,28 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   /**
    * Cria uma nova conversa
    */
-  async createNewConversation(): Promise<void> {
-    const userId = this.user()?.user?.id;
-    if (!userId) return;
+async createNewConversation(): Promise<void> {
+  const userId = this.user()?.user?.id;
+  if (!userId) return;
 
-    try {
-      const conversationId = await this.chatHistoryService.createConversation(
-        userId,
-        'Nova Conversa'
-      );
-      
-      this.currentConversationId.set(conversationId);
-      this.messages.set([]);
-      this.showInitialMessage.set(true);
-      this.isTypingInitial.set(true);
-      
-      await this.loadConversations();
-      setTimeout(() => this.typeInitialMessage(), 100);
-    } catch (error) {
-      console.error('Erro ao criar nova conversa:', error);
-    }
+  try {
+    const conversationId = await this.chatHistoryService.createConversation(
+      userId,
+      'Nova Conversa'
+    );
+    
+    this.currentConversationId.set(conversationId);
+    this.messages.set([]);
+    this.showInitialMessage.set(true);
+    
+    await this.loadConversations();
+    
+    this.isTypingInitial.set(true);
+    setTimeout(() => this.typeInitialMessage(), 100);
+  } catch (error) {
+    console.error('Erro ao criar nova conversa:', error);
   }
+}
 
   /**
    * Atualiza o título da conversa com base na primeira mensagem
