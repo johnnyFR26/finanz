@@ -50,6 +50,7 @@ export class WalletsService {
             .subscribe({
                 next: (response) => {
                     console.log(response)
+                    this.getHoldingsRequest()
                 },
                 error: (error) => {
                     console.error(error)
