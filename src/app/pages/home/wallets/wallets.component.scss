@@ -1,10 +1,25 @@
 @use '@angular/material' as mat;
 :host{
     display: flex;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
+    padding: 50px 5%;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .wallets{
-    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 700px;
+    overflow-y: auto;
+    gap: 25px;
+    width: 65%;
+    justify-items: center;
+    border-right: 2px solid var(--green);
+}
+
+.small-box{
+    width: 275px;
+    height: 207px;
 }

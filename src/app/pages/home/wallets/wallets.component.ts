@@ -9,12 +9,12 @@ import { WalletComponent } from '../../../components/wallet/wallet.component';
     template: `
         <h2 class="leftTitle">Carteiras de Investimentos</h2>
 
-        <section>
+        <section class="wallets">
             @for(wallet of wallets(); track $index){
                 <wallet [wallet]="wallet"/>
             }
             <wallet/>
-            <div class="addWallet">
+            <div class="small-box">
                 <mat-icon>add_circle</mat-icon>
                 <h2>NOVA CONTA</h2>
             </div>
