@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
                 <wallet [wallet]="wallet"/>
             }
             <wallet/>
-            <div class="small-box" (click)="this.router.navigate(['/home/creditCard/new'])">
+            <div class="small-box" (click)="this.router.navigate(['/home/wallets/new'])">
                 <mat-icon>add_circle_outline</mat-icon>
                 <h2 class="title">Criar uma caixinha</h2>
             </div>
