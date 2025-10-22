@@ -15,8 +15,8 @@ import { WalletComponent } from '../../../components/wallet/wallet.component';
             }
             <wallet/>
             <div class="small-box">
-                <mat-icon>add_circle</mat-icon>
-                <h2>NOVA CONTA</h2>
+                <mat-icon>add_circle_outline</mat-icon>
+                <h2 class="title">Criar uma caixinha</h2>
             </div>
         </section>
 

@@ -22,4 +22,20 @@
 .small-box{
     width: 275px;
     height: 207px;
+    color: var(--grey-background);
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+
+    mat-icon{
+        width: 81px;
+        height: 81px;
+        font-size: 81px;
+    }
+    &:hover{
+        color: var(--green);
+        transition: 0.2s;
+        scale: 1.1;
+        cursor: pointer;
+    }
 }
