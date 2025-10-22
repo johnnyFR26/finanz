@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { HoldingModel } from "../models/holding.model";
+import { CreateHoldingDto, HoldingModel } from "../models/holding.model";
 import { AccountService } from "./account.service";
-import { MovimentModel } from "../models/moviment.model";
+import { createMovimentModel, MovimentModel } from "../models/moviment.model";
 
 interface HoldingsResponse {
   holdings: HoldingModel[];
@@ -25,7 +25,7 @@ export class WalletsService {
         })
     }
 
-    postHoldingRequest(holding: HoldingModel) {
+    postHoldingRequest(holding: CreateHoldingDto) {
         return this.http.post<HoldingModel>(`${this.urlApi}/holdings`, holding)
             .subscribe({
                 next: (response) => {
@@ -45,7 +45,7 @@ export class WalletsService {
             });
     }
 
-    postMovimentRequest(moviment: MovimentModel) {
+    postMovimentRequest(moviment: createMovimentModel) {
         return this.http.post<MovimentModel>(`${this.urlApi}/moviment`, moviment)
             .subscribe({
                 next: (response) => {

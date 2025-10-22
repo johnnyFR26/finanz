@@ -8,3 +8,5 @@ export interface MovimentModel{
 }
 
 export type type = 'input' | 'output'
+
+export type createMovimentModel = Omit<MovimentModel, 'id' | 'createdAt' | 'updatedAt'>

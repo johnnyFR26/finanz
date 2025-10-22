@@ -12,3 +12,6 @@ export interface HoldingModel {
     movimentations: MovimentModel[];
     controls?: Record<string, object>;
 }
+
+export type CreateHoldingDto = Omit<HoldingModel, 'id' | 'createdAt' | 'updatedAt'>;
+
