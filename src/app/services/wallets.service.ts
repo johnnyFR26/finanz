@@ -3,6 +3,7 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HoldingModel } from "../models/holding.model";
 import { AccountService } from "./account.service";
+import { MovimentModel } from "../models/moviment.model";
 
 interface HoldingsResponse {
   holdings: HoldingModel[];
@@ -16,22 +17,43 @@ export class WalletsService {
     private urlApi = environment.urlApi
     private accountService = inject(AccountService)
     private account = this.accountService.getCurrentAccount()
-    private holdings = signal<HoldingModel[] | null>(null)
+    private holdings = signal<HoldingModel[]>([])
 
-    contructor(){
+    constructor(){
         effect(() => {
             this.getHoldingsRequest()
         })
     }
 
-     postHoldingRequest(holding: HoldingModel) {
-        return this.http.post(`${this.urlApi}/holdings`, holding)
+    postHoldingRequest(holding: HoldingModel) {
+        return this.http.post<HoldingModel>(`${this.urlApi}/holdings`, holding)
+            .subscribe({
+                next: (response) => {
+                    console.log(response)
+                    this.setHoldings([...this.holdings(), response])
+                },
+                error: (error) => {
+                    console.error(error)
+                }
+            });
     }
 
     private getHoldingsRequest() {
         return this.http.get<HoldingsResponse>(`${this.urlApi}/holdings/account/${this.account()?.id}`)
             .subscribe((response: HoldingsResponse) => {
-             this.holdings.set(response.holdings);
+                this.holdings.set(response.holdings);
+            });
+    }
+
+    postMovimentRequest(moviment: MovimentModel) {
+        return this.http.post<MovimentModel>(`${this.urlApi}/moviment`, moviment)
+            .subscribe({
+                next: (response) => {
+                    console.log(response)
+                },
+                error: (error) => {
+                    console.error(error)
+                }
             });
     }
 
