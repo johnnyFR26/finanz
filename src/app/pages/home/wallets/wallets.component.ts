@@ -1,7 +1,8 @@
 import { MatIcon } from '@angular/material/icon';
-import { Component, signal } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { MatButtonModule } from '@angular/material/button';
 import { WalletComponent } from '../../../components/wallet/wallet.component';
+import { Router } from '@angular/router';
 @Component({
     selector: 'wallets',
     styleUrl: './wallets.component.scss',
@@ -14,7 +15,7 @@ import { WalletComponent } from '../../../components/wallet/wallet.component';
                 <wallet [wallet]="wallet"/>
             }
             <wallet/>
-            <div class="small-box">
+            <div class="small-box" (click)="this.router.navigate(['/home/creditCard/new'])">
                 <mat-icon>add_circle_outline</mat-icon>
                 <h2 class="title">Criar uma caixinha</h2>
             </div>
@@ -26,4 +27,5 @@ import { WalletComponent } from '../../../components/wallet/wallet.component';
 })
 export class WalletsComponent {
     wallets = signal([])
+    protected router = inject(Router)
 }
