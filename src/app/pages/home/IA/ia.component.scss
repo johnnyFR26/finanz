@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+::ng-deep .mat-mdc-menu-content {
+  background-color: var(--grey-background);
+}
+
 .chat-wrapper {
   width: 100vw;
   height: 100%;
