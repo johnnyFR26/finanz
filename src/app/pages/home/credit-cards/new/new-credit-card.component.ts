@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
-import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreditCardService } from "../../../../services/credit-card.service";
@@ -62,7 +62,6 @@ export class NewCreditCardComponent {
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
     
-    // Valores auxiliares para o datepicker
     protected closingDateValue = signal<Date | null>(null)
     protected paymentDateValue = signal<Date | null>(null)
     
@@ -77,14 +76,14 @@ export class NewCreditCardComponent {
             company: this.company(),
             close: this.closingDate(),
             expire: this.paymentDate(),
-            accountId: this.account()?.id
+            accountId: this.account()?.id ?? ''
         }
     })
 
 
     onSubmit() {
         console.log(this.formValue())
-        //@ts-expect-error
+        //@ts-expect-error vou investigar ainda
         this.creditCardService.createCreditCard(this.formValue())
         this.router.navigate(['/home/creditCard'])
     }
