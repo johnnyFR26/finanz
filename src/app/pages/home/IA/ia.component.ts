@@ -109,9 +109,11 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+     setTimeout(() => {
     if (this.showInitialMessage()) {
       this.typeInitialMessage();
     }
+  }, 500);
   }
 
   ngOnDestroy(): void {
@@ -344,23 +346,39 @@ async createNewConversation(): Promise<void> {
     }
   }
 
-  private typeInitialMessage(): void {
-    const element = this.initialMessageElement?.nativeElement;
-    if (!element) return;
+  private isTyping = false;
 
-    element.innerHTML = '';
+private typeInitialMessage(): void {
+  if (this.isTyping) return;
+  this.isTyping = true;
+  
+  setTimeout(() => {
+    const element = this.initialMessageElement?.nativeElement;
+    if (!element) {
+      console.warn('Elemento de mensagem inicial não encontrado');
+      this.isTyping = false;
+      return;
+    }
+
+    element.textContent = '';
     let index = 0;
+    let displayedText = '';
+    
     const type = () => {
       if (index < this.initialMessage.length) {
-        element.innerHTML += this.initialMessage.charAt(index);
+        displayedText += this.initialMessage.charAt(index);
+        element.textContent = displayedText;
         index++;
         setTimeout(type, 50);
       } else {
         this.isTypingInitial.set(false);
+        this.isTyping = false;
       }
     };
+    
     type();
-  }
+  }, 50);
+}
 
   handleEnter(event: Event): void {
     const keyboardEvent = event as KeyboardEvent;
