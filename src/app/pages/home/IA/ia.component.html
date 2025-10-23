@@ -3,6 +3,8 @@
     class="sidebar-backdrop" 
     [class.show]="showSidebar()"
     (click)="toggleSidebar()"
+    (keydown.escape)="toggleSidebar()"
+    tabindex="0"
   ></div>
 
   <aside class="chat-sidebar" [class.open]="showSidebar()">
@@ -28,6 +30,8 @@
           class="conversation-item"
           [class.active]="currentConversationId() === conversation.id"
           (click)="selectConversation(conversation.id)"
+          (keydown.enter)="selectConversation(conversation.id)"
+          tabindex="0"
         >
           <div class="conversation-info">
             <h4 class="conversation-title">{{ conversation.title }}</h4>

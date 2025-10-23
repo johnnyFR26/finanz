@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
-import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreditCardService } from "../../../../services/credit-card.service";
@@ -11,8 +11,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-    selector: "app-new-credit-card",
-    styleUrls: ["./new-credit-card.component.scss"],
+    selector: "app-new-wallet",
+    styleUrls: ["./new-wallet.component.scss"],
     imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon],
     providers: [provideNativeDateAdapter()],
     template: `
@@ -52,7 +52,7 @@ import { MatIcon } from "@angular/material/icon";
     </div>
     `
 })
-export class NewCreditCardComponent {
+export class NewWalletComponent {
     private creditCardService = inject(CreditCardService)
     protected name = signal('')
     protected availableLimit = signal<number>(0.00)
@@ -62,6 +62,7 @@ export class NewCreditCardComponent {
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
     
+    // Valores auxiliares para o datepicker
     protected closingDateValue = signal<Date | null>(null)
     protected paymentDateValue = signal<Date | null>(null)
     
@@ -76,14 +77,14 @@ export class NewCreditCardComponent {
             company: this.company(),
             close: this.closingDate(),
             expire: this.paymentDate(),
-            accountId: this.account()?.id ?? ''
+            accountId: this.account()?.id
         }
     })
 
 
     onSubmit() {
         console.log(this.formValue())
-        //@ts-expect-error vou investigar ainda
+        //@ts-expect-error
         this.creditCardService.createCreditCard(this.formValue())
         this.router.navigate(['/home/creditCard'])
     }

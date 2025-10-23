@@ -23,6 +23,16 @@ export const routes: Routes = [
                 canActivate: [doesUserHaveAccount],
             },
             {
+                path: 'wallets',
+                loadComponent: () => import('./pages/home/wallets/wallets.component').then(m => m.WalletsComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'wallets/new',
+                loadComponent: () => import('./pages/home/wallets/new/new-wallet.component').then(m => m.NewWalletComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
                 path: 'accounts',
                 loadComponent: () => import('./pages/home/accounts/accounts.component').then(m => m.AccountsComponent),
                 canActivate: [doesUserHaveAccount],

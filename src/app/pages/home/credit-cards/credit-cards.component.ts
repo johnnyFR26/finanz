@@ -1,13 +1,12 @@
 import { MatIcon } from '@angular/material/icon';
 import { Component, inject } from "@angular/core";
-import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CreditCardComponent } from '../../../components/credit-card/credit-card.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { CreditCardService } from '../../../services/credit-card.service';
 
 @Component({
-    selector: 'credit-cards',
+    selector: 'app-credit-cards',
     styleUrl: './credit-cards.component.scss',
     imports: [MatIcon, MatButtonModule, CreditCardComponent, RouterOutlet],
     template: `
@@ -15,7 +14,11 @@ import { CreditCardService } from '../../../services/credit-card.service';
 
         <router-outlet></router-outlet>
 
-        <div (click)="this.router.navigate(['/home/creditCard/new'])" class="box cardAdd">
+        <div 
+        (click)="this.router.navigate(['/home/creditCard/new'])"
+        (keypress)="this.router.navigate(['/home/creditCard/new'])"
+        tabindex="0"
+         class="box cardAdd">
             <mat-icon>add_circle</mat-icon>
             <h2>NOVO CARTÃO DE CRÉDITO</h2>
         </div>

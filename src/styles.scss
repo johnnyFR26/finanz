@@ -138,7 +138,7 @@ body {
 *{
     --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
     --gradient: linear-gradient( var(--grey-background) 10%, color-mix(in srgb, var(--principal-color), var(--grey-background) 80%)  50%, var(--grey-background) 90%);
-    --principal-color: #cbe957;
+    --principal-color: var(--green);
     --grey-background: #181824;
     --gray: #EBF2FF66;
     --gray-form: #111119;
@@ -148,6 +148,7 @@ body {
     --placeholder: #464647;
     --input-area: #232334;
     --input-area2: #373760;
+    --green: #cbe957;
     --red: #ff5757;
     --white: #f0f8ff;
     --black: #171722;
@@ -328,7 +329,6 @@ a{
 
     *{
         font-size: 18px;
-        color: var(--white);
     }
 
     mat-icon{

@@ -1,0 +1,65 @@
+@use '@angular/material' as mat;
+*{
+    font-size: 13px;
+}
+.comparison{
+    span{
+        padding: 10px;
+        font-size: 16px;
+    }
+    hr{
+        flex-grow:2;
+        border-color:var(--green);
+    }
+}
+.info{
+    display: flex;
+    gap: 10px;
+    mat-icon{
+        width: 60px;
+        height: 60px;
+        font-size: 60px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--grey-background);
+    }
+
+    .description{
+        h1{
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            margin: 0;
+        }
+        flex-direction: column;
+        display: flex;
+        width: 150px;
+    }
+}
+.type{
+    padding: 10px 0;
+}
+
+details section{
+    display: flex;
+    flex-direction: column;
+    .data{
+        color: color-mix(in srgb,var(--white)70%,transparent);
+    }
+    > span {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.green{
+    color: var(--green);
+}
+
+summary{
+    text-align: center;
+    direction: rtl;
+    cursor: pointer;
+}

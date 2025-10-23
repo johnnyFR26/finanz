@@ -82,7 +82,7 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   // ID da conversa atual
   protected currentConversationId = signal<string | null>(null);
 
-  private initialMessage = `Olá ${this.user()?.user?.name || 'usuário'}, como posso te ajudar hoje?`;
+  private initialMessage = `Olá ${this.user()?.user?.name}, como posso te ajudar hoje?`;
 
   protected canSend = computed(() => {
     return  !this.isLoading();
@@ -109,9 +109,11 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+     setTimeout(() => {
     if (this.showInitialMessage()) {
       this.typeInitialMessage();
     }
+  }, 500);
   }
 
   ngOnDestroy(): void {
@@ -159,10 +161,8 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
       const conversations = this.conversations();
       
       if (conversations.length > 0) {
-        // Carrega a conversa mais recente
         await this.selectConversation(conversations[0].id);
       } else {
-        // Cria uma nova conversa
         await this.createNewConversation();
       }
     } catch (error) {
@@ -219,7 +219,6 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
       m.role === 'user' || m.role === 'assistant'
     );
 
-    // Pega as últimas 20 mensagens (excluindo a última que acabou de ser enviada)
     const recentMessages = validMessages.slice(-21, -1);
 
     return recentMessages.map(msg => ({
@@ -231,27 +230,28 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
   /**
    * Cria uma nova conversa
    */
-  async createNewConversation(): Promise<void> {
-    const userId = this.user()?.user?.id;
-    if (!userId) return;
+async createNewConversation(): Promise<void> {
+  const userId = this.user()?.user?.id;
+  if (!userId) return;
 
-    try {
-      const conversationId = await this.chatHistoryService.createConversation(
-        userId,
-        'Nova Conversa'
-      );
-      
-      this.currentConversationId.set(conversationId);
-      this.messages.set([]);
-      this.showInitialMessage.set(true);
-      this.isTypingInitial.set(true);
-      
-      await this.loadConversations();
-      setTimeout(() => this.typeInitialMessage(), 100);
-    } catch (error) {
-      console.error('Erro ao criar nova conversa:', error);
-    }
+  try {
+    const conversationId = await this.chatHistoryService.createConversation(
+      userId,
+      'Nova Conversa'
+    );
+    
+    this.currentConversationId.set(conversationId);
+    this.messages.set([]);
+    this.showInitialMessage.set(true);
+    
+    await this.loadConversations();
+    
+    this.isTypingInitial.set(true);
+    setTimeout(() => this.typeInitialMessage(), 100);
+  } catch (error) {
+    console.error('Erro ao criar nova conversa:', error);
   }
+}
 
   /**
    * Atualiza o título da conversa com base na primeira mensagem
@@ -346,23 +346,39 @@ export class IAComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  private typeInitialMessage(): void {
-    const element = this.initialMessageElement?.nativeElement;
-    if (!element) return;
+  private isTyping = false;
 
-    element.innerHTML = '';
+private typeInitialMessage(): void {
+  if (this.isTyping) return;
+  this.isTyping = true;
+  
+  setTimeout(() => {
+    const element = this.initialMessageElement?.nativeElement;
+    if (!element) {
+      console.warn('Elemento de mensagem inicial não encontrado');
+      this.isTyping = false;
+      return;
+    }
+
+    element.textContent = '';
     let index = 0;
+    let displayedText = '';
+    
     const type = () => {
       if (index < this.initialMessage.length) {
-        element.innerHTML += this.initialMessage.charAt(index);
+        displayedText += this.initialMessage.charAt(index);
+        element.textContent = displayedText;
         index++;
         setTimeout(type, 50);
       } else {
         this.isTypingInitial.set(false);
+        this.isTyping = false;
       }
     };
+    
     type();
-  }
+  }, 50);
+}
 
   handleEnter(event: Event): void {
     const keyboardEvent = event as KeyboardEvent;
