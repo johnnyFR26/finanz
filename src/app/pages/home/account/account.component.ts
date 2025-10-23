@@ -1,5 +1,5 @@
 import { CurrencyPipe } from "@angular/common";
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -71,8 +71,8 @@ export class AccountComponent {
     protected currentCardLimit = signal(0.00)
     
 
-  openDialog(title: String, type: String): void {
-    const dialogRef = this.dialog.open(TransactionModalComponent, {
+  openDialog(title: string, type: string): void {
+    this.dialog.open(TransactionModalComponent, {
       data: {
         name: this.user()?.user.name,
         id: this.id,
