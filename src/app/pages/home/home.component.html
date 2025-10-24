@@ -1,64 +1,64 @@
 <mat-sidenav-container class="container">
-  
-    <!-- Menu Lateral -->
-    <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
-      <mat-nav-list>
-        <div class="menu">
-<a mat-list-item (click)="redirectToPath('/home/account')">
-  <mat-icon>home</mat-icon> Home
-</a>
-
-<a mat-list-item (click)="redirectToPath('/home/wallets')">
-  <mat-icon>account_balance_wallet</mat-icon> Carteiras
-</a>
-
-<a mat-list-item (click)="redirectToPath('/home/accounts')">
-  <mat-icon>account_balance</mat-icon> Contas
-</a>
-
-<a mat-list-item (click)="redirectToPath('/home/transactions')">
-  <mat-icon>receipt_long</mat-icon> Extrato
-</a>
-
-@if (this.user()?.user?.controls?.plan == 'premium') {
-  <a mat-list-item (click)="redirectToPath('/home/IA')">
-    <mat-icon>star</mat-icon> Zezinho IA
-  </a>
-}
-
-<a mat-list-item (click)="redirectToPath('/home/creditCard')">
-  <mat-icon>credit_card</mat-icon> Cartão de Crédito
-</a>
-
-<a mat-list-item (click)="redirectToPath('/home/planning')">
-  <mat-icon>event_note</mat-icon> Planejamento
-</a>
-
-<a mat-list-item id="logout" (click)="redirectToPath('/login')">
-  <mat-icon>logout</mat-icon> Logout
-</a>
-
-        </div>
-
-          
-      </mat-nav-list>
-    </mat-sidenav>
  
-    <div></div>
-
-    <!-- Conteúdo principal -->
-
-    <mat-sidenav-content>
-  
-      <header>
-        <app-tool-bar [sidenav]="sidenav"></app-tool-bar>
-      </header>
-  
-      <main class="centro">
-        <router-outlet></router-outlet>
-      </main>   
-  
-    </mat-sidenav-content>
-  
-  </mat-sidenav-container>
-  
+  <!-- Menu Lateral -->
+  <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
+    <mat-nav-list>
+      <div class="menu">
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/account')">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
+        
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/wallets')">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>Carteiras</span>
+        </a>
+        
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/accounts')">
+          <mat-icon>account_balance</mat-icon>
+          <span>Contas</span>
+        </a>
+        
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/transactions')">
+          <mat-icon>receipt_long</mat-icon>
+          <span>Extrato</span>
+        </a>
+        
+        @if (this.user()?.user?.controls?.plan == 'premium') {
+          <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/IA')">
+            <mat-icon>star</mat-icon>
+            <span>Zezinho IA</span>
+          </a>
+        }
+        
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/creditCard')">
+          <mat-icon>credit_card</mat-icon>
+          <span>Cartão de Crédito</span>
+        </a>
+        
+        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/planning')">
+          <mat-icon>event_note</mat-icon>
+          <span>Planejamento</span>
+        </a>
+      </div>
+      
+      <!-- Logout fora do .menu para posicionamento fixo -->
+      <a mat-list-item id="logout" (click)="redirectToPath('/login')">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+ 
+  <!-- Conteúdo principal -->
+  <mat-sidenav-content>
+    <header>
+      <app-tool-bar [sidenav]="sidenav"></app-tool-bar>
+    </header>
+ 
+    <main class="centro">
+      <router-outlet></router-outlet>
+    </main>  
+  </mat-sidenav-content>
+ 
+</mat-sidenav-container>
