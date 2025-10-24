@@ -4,46 +4,77 @@
   <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
     <mat-nav-list>
       <div class="menu">
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/account')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/account')"
+        (keypress)="redirectToPath('/home/account')"
+        tabindex="0"
+        >
           <mat-icon>home</mat-icon>
           <span>Home</span>
         </a>
         
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/wallets')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/wallets')"
+        (keypress)="redirectToPath('/home/wallets')"
+        tabindex="0"
+        >
           <mat-icon>account_balance_wallet</mat-icon>
           <span>Carteiras</span>
         </a>
         
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/accounts')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/accounts')"
+        (keypress)="redirectToPath('/home/accounts')"
+        tabindex="0"
+        >
           <mat-icon>account_balance</mat-icon>
           <span>Contas</span>
         </a>
         
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/transactions')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/transactions')"
+        (keypress)="redirectToPath('/home/transactions')"
+        tabindex="0"
+        >
           <mat-icon>receipt_long</mat-icon>
           <span>Extrato</span>
         </a>
         
-        @if (this.user()?.user?.controls?.plan == 'premium') {
-          <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/IA')">
+        @if (this.user()?.user?.controls?.plan === 'premium') {
+          <a mat-list-item routerLinkActive="active" 
+          (click)="redirectToPath('/home/IA')"
+          (keypress)="redirectToPath('/home/IA')"
+          tabindex="0"
+          >
             <mat-icon>star</mat-icon>
             <span>Zezinho IA</span>
           </a>
         }
         
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/creditCard')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/creditCard')"
+        (keypress)="redirectToPath('/home/creditCard')"
+        tabindex="0"
+        >
           <mat-icon>credit_card</mat-icon>
           <span>Cartão de Crédito</span>
         </a>
         
-        <a mat-list-item routerLinkActive="active" (click)="redirectToPath('/home/planning')">
+        <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/planning')"
+        (keypress)="redirectToPath('/home/planning')"
+        tabindex="0"
+        >
           <mat-icon>event_note</mat-icon>
           <span>Planejamento</span>
         </a>
       </div>
       
-      <!-- Logout fora do .menu para posicionamento fixo -->
-      <a mat-list-item id="logout" (click)="redirectToPath('/login')">
+      <a mat-list-item id="logout" 
+      (click)="redirectToPath('/login')"
+      (keypress)="redirectToPath('/login')"
+      tabindex="0"
+      >
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
       </a>
