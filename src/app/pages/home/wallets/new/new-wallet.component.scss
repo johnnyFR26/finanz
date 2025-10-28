@@ -1,44 +1,87 @@
-.new-credit-card, form{
-    position: relative;
-    height: 100%;
+:host{
     display:flex;
     align-items: center;
     flex-direction: column;
-    gap: 10px;
 }
 
 .box{
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+
+    width: auto;
     box-sizing: border-box;
-    padding: 20px;
-}
+    padding: 20px 80px;
 
-@media (min-width:570px) {
-    form{
-        grid-template-columns: 1fr 1fr;
-        > button {grid-column: span 2;}
-    }
-}
-@media (min-width:850px) {
-    .box{
-        width: auto;
-        gap: 50px 40px;
-    }
-}
-@media (max-width:570px) {
-    form{
-        grid-template-columns: 1fr;
-        > button {grid-column: span 1;}
-    }
-}
-
-form{
-    padding: 50px 40px !important;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    gap: 20px 40px;
     box-shadow: 0 10px 20px 0 #000;
-    > div {width: 100%;}
+    background-color: var(--gray-box);
+}
+
+h2{
+    color: var(--green);
+    font-size: 32px;
+    font-family: KoHo;
+    margin: 0;
+}
+
+.titleInput{
+    width: 100%;
+}
+
+label{
+    font-family: AbeeZee;
+    font-size: 16px;
+    bottom: 6px;
+}
+
+.input{
+    background-color: var(--grey-background);
+}
+
+button{
+    align-self: center;
+}
+
+.radios{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    label{
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--grey-background);
+        border-radius: 10px;
+        padding: 15px;
+        gap: 10px;
+        width: 200px;
+        border: 3px solid transparent;
+        mat-icon{
+            font-size: 37px;
+            width: 37px;
+            height: 37px;
+            color: #080808;
+        }
+        &:hover mat-icon{color: var(--white);}
+        transition: .2s;
+    }
+    input{
+        visibility: hidden;
+        position: absolute;
+        &:checked + label{
+            border-color: var(--green);
+            mat-icon{color: var(--green);}
+        }
+    }
+}
+
+.percent{
+    width: 100px;
 }
 
 .back{
@@ -53,4 +96,45 @@ form{
         scale: 1.1;
         transition: 0.4s;
     }
+    z-index: 2;
+}
+
+mat-select{
+  background-color: transparent;
+  position: relative;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  z-index: 1;
+
+  
+}
+
+.select-icon{
+  background-color: var(--grey-background);
+  border-radius: 5px;
+  padding: 0 4px;
+  position: relative;
+  width: auto;
+}
+
+.icon{
+  top: 8px;
+  right: 20px;
+  position: absolute;
+  z-index: 0;
+}
+
+.mat-mdc-option {
+    padding: 2px 10px !important;
+}
+
+::ng-deep div.mat-mdc-select-panel {
+    background-color: var(--grey-background);
+}
+
+::ng-deep .mat-mdc-select-panel {
+    background-color: #101010 !important;
+    border-radius: 0 6px 6px 0;
+    overflow-x: hidden !important;
 }

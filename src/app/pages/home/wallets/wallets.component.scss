@@ -17,6 +17,7 @@
     width: 65%;
     justify-items: center;
     border-right: 2px solid var(--green);
+    padding-top: 2px;
 }
 
 .small-box{
@@ -35,7 +36,8 @@
     &:hover{
         color: var(--green);
         transition: 0.2s;
-        scale: 1.1;
+        border: 2px solid var(--green);
         cursor: pointer;
+        scale: 1.01;
     }
 }
