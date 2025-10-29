@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatSelect } from "@angular/material/select";
-import { NgxOtpInputComponent, NgxOtpInputComponentOptions } from "ngx-otp-input";
+import { DateInputComponent } from "../../../../components/date-input/date-input.component";
 
 export type day = "01" | "02" | undefined
 export type month = "01" | "02" | undefined
@@ -19,7 +19,7 @@ export type year = "01" | "02" | undefined
 @Component({
     selector: "app-new-wallet",
     styleUrls: ["./new-wallet.component.scss"],
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon, MatOption, MatSelect, NgxOtpInputComponent],
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon, MatOption, MatSelect, DateInputComponent],
     providers: [provideNativeDateAdapter()],
     template: `
     <button class="back" mat-icon-button (click)="this.router.navigate(['/home/wallets'])"><mat-icon>keyboard_backspace</mat-icon></button>
@@ -78,9 +78,7 @@ export type year = "01" | "02" | undefined
                 </label>
             </div>
             <div>
-                <ngx-otp-input [options]="{otpLength:3}">
-
-                </ngx-otp-input>
+                <date-input/>
             </div>
         </div>
         

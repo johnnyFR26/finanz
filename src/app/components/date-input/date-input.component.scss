@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+:host{
+    width: 100%;
+}
+
+span{
+    color: var(--green);
+    margin: 0 10px;
+    font-size: 40px;
+}
+input{
+    background-color: var(--grey-background);
+    height: 40px;
+    width: 50px;
+    font-size: 24px;
+    border: 0;
+    text-align: center;
+    border-radius: 4px
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+.year{
+    width: 70px;
+}
