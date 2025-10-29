@@ -81,7 +81,67 @@ button{
 }
 
 .percent{
-    width: 100px;
+    display: flex;
+    align-items: center;
+    color: var(--green);
+    gap: 5px;
+    .input{
+        color: var(--green);
+        width: 70px;
+        font-size: 24px;
+    }
+    mat-icon{
+        width: 48px;
+        height: 48px;
+        font-size: 48px;
+    }
+}
+
+.check{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    --greenHover: color-mix(in hsl, var(--green), #000 30%);
+    --actualColor: var(--green);
+    label{
+        input{
+            visibility: hidden;
+        }
+        span{
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--actualColor);
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            &:after{
+                content: "";
+                position: absolute;
+                display: none;
+                left: 35%;
+                top: 10%;
+                width: 5px;
+                height: 10px;
+                border: solid var(--gray-box);
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+        &:hover{
+            --actualColor: var(--greenHover);
+        }
+        input:checked + span{
+            background-color: var(--actualColor);
+            &:after{
+                display: block;
+            }
+        }
+    }
 }
 
 .back{

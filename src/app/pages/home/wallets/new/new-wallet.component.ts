@@ -51,16 +51,30 @@ import { MatSelect } from "@angular/material/select";
             </label>
         </div>
         <div>
-            <label for="limit">Porcentagem(%) do rendimento:</label>
-            <input class="input percent" type="number" id="limit" name="limit" [(ngModel)]="limit">
+            <label for="percent">Porcentagem(%) do rendimento:</label>
+            <div class = "percent">
+                <input class="input" type="number" id="percent" name="percent" [(ngModel)]="percent">
+                <mat-icon>percent</mat-icon>
+            </div>
         </div>
-        <div>
-            <label for="closingDate">Data de Encerramento</label>
-            <input class="input" type="number" id="closingDate" name="closingDate" [(ngModel)]="closingDate" placeholder="Data de Encerramento" required>
+        <div class="check">
+            <label for="compound">Rendimento sobre rendimento</label>
+            <label for="compound">
+                <input type="checkbox" id="compound" name="compound" [(ngModel)]="compound" placeholder="Data de Encerramento" required>
+                <span></span>
+            </label>
         </div>
-        <div>
-            <label for="paymentDate">Data de Pagamento</label>
-            <input class="input" type="number" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate" placeholder="Data de Pagamento" required>
+        <div style="width:100%;">
+            <div class="check">
+                <label for="closingDate">Data Limite do investimento</label>
+                <label for="closingDate">
+                    <input type="checkbox" id="closingDate" name="closingDate" [(ngModel)]="closingDate" placeholder="Data de Encerramento" required>
+                    <span></span>
+                </label>
+            </div>
+            <div>
+                <input class="input" type="number" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate" placeholder="Data de Pagamento" required>
+            </div>
         </div>
         
 
@@ -72,9 +86,10 @@ export class NewWalletComponent {
     private creditCardService = inject(CreditCardService)
     protected name = signal('')
     protected availableLimit = signal<number>(0.00)
-    protected limit = signal<number>(0.00)
+    protected percent = signal<number>(0.00)
     protected company = signal('')
     protected closingDate = signal<{month: number, day: number}>({month: 1, day: 1})
+    protected compound = signal<{month: number, day: number}>({month: 1, day: 1})
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
     
@@ -99,7 +114,7 @@ export class NewWalletComponent {
         return {
             name: this.name(),
             availableLimit: this.availableLimit(),
-            limit: this.limit(),
+            limit: this.percent(),
             company: this.company(),
             close: this.closingDate(),
             expire: this.paymentDate(),
