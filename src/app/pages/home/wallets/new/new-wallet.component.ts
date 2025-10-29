@@ -10,11 +10,16 @@ import { Router } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatSelect } from "@angular/material/select";
+import { NgxOtpInputComponent, NgxOtpInputComponentOptions } from "ngx-otp-input";
+
+export type day = "01" | "02" | undefined
+export type month = "01" | "02" | undefined
+export type year = "01" | "02" | undefined
 
 @Component({
     selector: "app-new-wallet",
     styleUrls: ["./new-wallet.component.scss"],
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon, MatOption, MatSelect],
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon, MatOption, MatSelect, NgxOtpInputComponent],
     providers: [provideNativeDateAdapter()],
     template: `
     <button class="back" mat-icon-button (click)="this.router.navigate(['/home/wallets'])"><mat-icon>keyboard_backspace</mat-icon></button>
@@ -73,7 +78,9 @@ import { MatSelect } from "@angular/material/select";
                 </label>
             </div>
             <div>
-                <input class="input" type="number" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDate" placeholder="Data de Pagamento" required>
+                <ngx-otp-input [options]="{otpLength:3}">
+
+                </ngx-otp-input>
             </div>
         </div>
         
@@ -101,6 +108,19 @@ export class NewWalletComponent {
       'payment',
       'credit_card',
       'attach_money'
+    ]
+
+
+    public dates = [
+        {
+            day: <day> undefined
+        },
+        {
+            month: <month> undefined
+        },
+        {
+            year: <year> undefined
+        }
     ]
     
     // Valores auxiliares para o datepicker
