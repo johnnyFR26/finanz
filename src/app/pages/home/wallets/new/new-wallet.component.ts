@@ -62,23 +62,23 @@ export type year = "01" | "02" | undefined
                 <mat-icon>percent</mat-icon>
             </div>
         </div>
-        <div class="check">
-            <label for="compound">Rendimento sobre rendimento</label>
-            <label for="compound">
-                <input type="checkbox" id="compound" name="compound" [(ngModel)]="compound" placeholder="Data de Encerramento" required>
-                <span></span>
-            </label>
-        </div>
-        <div style="width:100%;">
+        <div class="checks">
+            <div class="check">
+                <label for="compound">Rendimento sobre rendimento</label>
+                <label for="compound">
+                    <input type="checkbox" id="compound" [(ngModel)]="compound">
+                    <span></span>
+                </label>
+            </div>
             <div class="check">
                 <label for="closingDate">Data Limite do investimento</label>
-                <label for="closingDate">
-                    <input type="checkbox" id="closingDate" name="closingDate" [(ngModel)]="closingDate" placeholder="Data de Encerramento" required>
+                <label for="closingDateCheckbox">
+                    <input type="checkbox" id="closingDateCheckbox" [(ngModel)]="closingDateCheckbox">
                     <span></span>
                 </label>
             </div>
             <div>
-                <date-input/>
+                <date-input [disable]="closingDateCheckbox()" (dateOutput)="updateDate($event)"/>
             </div>
         </div>
         
@@ -93,8 +93,9 @@ export class NewWalletComponent {
     protected availableLimit = signal<number>(0.00)
     protected percent = signal<number>(0.00)
     protected company = signal('')
-    protected closingDate = signal<{month: number, day: number}>({month: 1, day: 1})
-    protected compound = signal<{month: number, day: number}>({month: 1, day: 1})
+    protected closingDateCheckbox = signal<boolean>(false)
+    protected closingDate = signal<object>({day: 1, month: 1, year: 2025})
+    protected compound = signal<boolean>(false)
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
     
@@ -109,17 +110,9 @@ export class NewWalletComponent {
     ]
 
 
-    public dates = [
-        {
-            day: <day> undefined
-        },
-        {
-            month: <month> undefined
-        },
-        {
-            year: <year> undefined
-        }
-    ]
+    updateDate(date: object){
+        this.closingDate.set(date)
+    }
     
     // Valores auxiliares para o datepicker
     protected closingDateValue = signal<Date | null>(null)

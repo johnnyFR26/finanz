@@ -8,11 +8,12 @@
     display:flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 
     width: auto;
     box-sizing: border-box;
-    padding: 20px 80px;
+    padding: 20px 50px;
+    margin-top: 10px;
 
     box-shadow: 0 10px 20px 0 #000;
     background-color: var(--gray-box);
@@ -95,6 +96,10 @@ button{
         height: 48px;
         font-size: 48px;
     }
+}
+
+.checks{
+    width: 100%;
 }
 
 .check{

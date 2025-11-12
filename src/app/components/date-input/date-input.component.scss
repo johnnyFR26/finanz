@@ -3,6 +3,17 @@
     width: 100%;
 }
 
+input:disabled{
+    background-color: color-mix(in srgb, var(--grey-background), transparent 50%);
+    color: var(--placeholder);
+    &::placeholder{
+        color: var(--placeholder);
+    }
+    & + span{
+        color: color-mix(in srgb, var(--green), transparent 50%);
+    }
+}
+
 span{
     color: var(--green);
     margin: 0 10px;
