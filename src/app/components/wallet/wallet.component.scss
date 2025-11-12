@@ -54,7 +54,7 @@ details section{
     }
 }
 
-.green{
+.green, .green::ng-deep *{
     color: var(--green);
 }
 
@@ -62,4 +62,8 @@ summary{
     text-align: center;
     direction: rtl;
     cursor: pointer;
+}
+
+::ng-deep .cents{
+    font-size: 10px;
 }

@@ -45,9 +45,9 @@ import { AccountService } from '../../services/account.service';
                 </section>
             </details>
             <div class="comparison">
-                <span>{{wallet().movimentations[0].value| currency: account()?.currency}}</span>
+                <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
                 <hr/>
-                <span class="green">{{wallet().total | currency: account()?.currency}}</span>
+                <span class="green" [innerHTML]="formatMoney(wallet().total)"></span>
             </div>
         </div>
             
@@ -77,4 +77,17 @@ export class WalletComponent{
         },
     })
     readonly passedTime = new Date().getMonth() - this.wallet().createdAt.getMonth();
+
+    
+    formatMoney(value: number){
+        const currency = this.account()?.currency ;
+        const formatted = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency,
+            minimumFractionDigits: 2,
+        }).format(value);
+
+        const [money, cents] = formatted.split(',');
+        return `${money},<span class="cents">${cents}</span>`;
+    }
 }
