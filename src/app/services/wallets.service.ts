@@ -26,6 +26,7 @@ export class WalletsService {
     }
 
     postHoldingRequest(holding: CreateHoldingDto) {
+        console.log(holding.dueDate instanceof Date)
         return this.http.post<HoldingModel>(`${this.urlApi}/holdings`, holding)
             .subscribe({
                 next: (response) => {

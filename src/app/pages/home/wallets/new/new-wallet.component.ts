@@ -4,17 +4,15 @@ import { provideNativeDateAdapter, MatOption } from "@angular/material/core";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { CreditCardService } from "../../../../services/credit-card.service";
 import { AccountService } from "../../../../services/account.service";
 import { Router } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatSelect } from "@angular/material/select";
 import { DateInputComponent } from "../../../../components/date-input/date-input.component";
-
-export type day = "01" | "02" | undefined
-export type month = "01" | "02" | undefined
-export type year = "01" | "02" | undefined
+import { WalletsService } from "../../../../services/wallets.service";
+import { type } from "../../../../models/moviment.model";
+import { CreateHoldingDto } from "../../../../models/holding.model";
 
 @Component({
     selector: "app-new-wallet",
@@ -23,17 +21,27 @@ export type year = "01" | "02" | undefined
     providers: [provideNativeDateAdapter()],
     template: `
     <button class="back" mat-icon-button (click)="this.router.navigate(['/home/wallets'])"><mat-icon>keyboard_backspace</mat-icon></button>
-    <div class="box">
+    <form class="box" name="form" (ngSubmit)="onSubmit()">
         <h2>Criar Carteira de Investimentos nova</h2>
-        <div class="titleInput">
+        <div class="Input">
             <label for="name">Título:</label>
             <input class="input" type="text" id="name" name="name" [(ngModel)]="name" required>
+        </div>
+        
+        <div class="Input">
+            <label for="value">Valor inicial:</label>
+            <input class="input" type="number" id="value" name="value" [(ngModel)]="value" required>
+        </div>
+        
+        <div class="Input">
+            <label for="description">Descrição:</label>
+            <textarea class="input" id="description" name="description" [(ngModel)]="description" required></textarea>
         </div>
         
         <div>
             <label>ícone:</label>
             <div class="select-icon">
-                <mat-select name="icon" [(ngModel)]="icon">
+                <mat-select id="icon" name="icon" [(ngModel)]="icon">
                     @for (icon of icons; track $index) {
                     <mat-option value="{{icon}}"><mat-icon>{{icon}}</mat-icon></mat-option>
                     }
@@ -43,13 +51,13 @@ export type year = "01" | "02" | undefined
         </div>
 
         <div class="radios">
-            <input type="radio" name="type" id="daily">
+            <input type="radio" name="type" id="daily" value="daily" [(ngModel)]="type">
             <label for="daily">
                 Rendimento diário
                 <mat-icon>calendar_today</mat-icon>
 
             </label>
-            <input type="radio" name="type" id="monthly">
+            <input type="radio" name="type" id="monthly" value="monthly" [(ngModel)]="type">
             <label for="monthly">
                 Rendimento mensal
                 <mat-icon>calendar_today</mat-icon>
@@ -66,14 +74,14 @@ export type year = "01" | "02" | undefined
             <div class="check">
                 <label for="compound">Rendimento sobre rendimento</label>
                 <label for="compound">
-                    <input type="checkbox" id="compound" [(ngModel)]="compound">
+                    <input type="checkbox" id="compound" name="compound" [(ngModel)]="compound">
                     <span></span>
                 </label>
             </div>
             <div class="check">
                 <label for="closingDate">Data Limite do investimento</label>
                 <label for="closingDateCheckbox">
-                    <input type="checkbox" id="closingDateCheckbox" [(ngModel)]="closingDateCheckbox">
+                    <input type="checkbox" id="closingDateCheckbox" name="closingDateCheckbox" [(ngModel)]="closingDateCheckbox">
                     <span></span>
                 </label>
             </div>
@@ -83,23 +91,23 @@ export type year = "01" | "02" | undefined
         </div>
         
 
-        <button class="button" (onClick)="onSubmit()">Salvar</button>
-    </div>
+        <input class="button" type="submit" value="Salvar"/>
+    </form>
     `
 })
 export class NewWalletComponent {
-    private creditCardService = inject(CreditCardService)
+    private walletsService = inject(WalletsService)
     protected name = signal('')
-    protected availableLimit = signal<number>(0.00)
+    protected value = signal<number>(0)
+    protected description = signal('')
+    protected type = signal('')
     protected percent = signal<number>(0.00)
-    protected company = signal('')
     protected closingDateCheckbox = signal<boolean>(false)
-    protected closingDate = signal<object>({day: 1, month: 1, year: 2025})
+    protected closingDate = signal<Date>(new Date())
     protected compound = signal<boolean>(false)
-    protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
     
-    public icon = signal('')
+    protected icon = signal('')
     public icons = [
       'account_balance',
       'savings',
@@ -110,34 +118,51 @@ export class NewWalletComponent {
     ]
 
 
-    updateDate(date: object){
+    updateDate(date: Date){
         this.closingDate.set(date)
     }
     
-    // Valores auxiliares para o datepicker
-    protected closingDateValue = signal<Date | null>(null)
-    protected paymentDateValue = signal<Date | null>(null)
     
     private accountService = inject(AccountService)
     private account = this.accountService.getCurrentAccount()
-
+    
+    
     private formValue = computed(() => {
-        return {
+        let dueDate = this.closingDateCheckbox() ? this.closingDate() : new Date(); 
+        console.log(dueDate)
+        return <CreateHoldingDto>{
+            accountId: this.account()?.id,
             name: this.name(),
-            availableLimit: this.availableLimit(),
-            limit: this.percent(),
-            company: this.company(),
-            close: this.closingDate(),
-            expire: this.paymentDate(),
-            accountId: this.account()?.id
+            tax: this.percent(),
+            total: 0,
+            dueDate: new Date(dueDate),
+            controls:{
+                icon: this.icon(),
+                type: this.type(),
+                description: this.description(),
+                compound: this.compound(),
+            },
+
         }
     })
+
+    
 
 
     onSubmit() {
         console.log(this.formValue())
-        //@ts-expect-error
-        this.creditCardService.createCreditCard(this.formValue())
+        this.walletsService.postHoldingRequest(this.formValue())
+
+        let holdings = this.walletsService.getHoldings()
+        let firstMoviment = computed(() => {
+            return{
+                value: this.value(),
+                holdingId: holdings()[holdings.length - 1].id,
+                type: <type>"input"
+            }
+        })
+        this.walletsService.postMovimentRequest(firstMoviment())
+
         this.router.navigate(['/home/creditCard'])
     }
 }

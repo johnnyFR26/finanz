@@ -1,4 +1,4 @@
-import { Component, computed, input, output, Signal, signal} from '@angular/core';
+import { Component, computed, input, output, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms'
 
 
@@ -49,12 +49,10 @@ export class DateInputComponent{
 
   readonly disable = input.required<boolean>();
 
-  protected date = {
-    day: this.day(),
-    month: this.month(),
-    year: this.year(),
-  };
-  protected dateOutput = output<object>()
+  protected date = computed(() => {
+    return new Date(Number( this.year() ) , Number( this.month() ) - 1, Number( this.day() ));
+  })
+  protected dateOutput = output<Date>()
   
 
   onlyNumber(input: HTMLInputElement){
@@ -90,6 +88,6 @@ export class DateInputComponent{
   }
 
   emitDate(){
-    this.dateOutput.emit(this.date);
+    this.dateOutput.emit(this.date());
   }
 }

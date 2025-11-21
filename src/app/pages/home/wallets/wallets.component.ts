@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { WalletComponent } from '../../../components/wallet/wallet.component';
 import { Router } from '@angular/router';
 import { AccountService } from '../../../services/account.service';
+import { WalletsService } from '../../../services/wallets.service';
 @Component({
     selector: 'wallets',
     styleUrl: './wallets.component.scss',
@@ -42,10 +43,11 @@ import { AccountService } from '../../../services/account.service';
     `
 })
 export class WalletsComponent {
-    wallets = signal([])
     protected router = inject(Router)
     protected accountService = inject(AccountService)
     protected account = this.accountService.getCurrentAccount()
+    protected walletsService = inject(WalletsService)
+    protected wallets = this.walletsService.getHoldings()
 
     formatMoney(value: number){
         const currency = this.account()?.currency ;
