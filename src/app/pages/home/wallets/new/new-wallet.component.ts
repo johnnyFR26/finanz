@@ -150,19 +150,7 @@ export class NewWalletComponent {
 
 
     onSubmit() {
-        console.log(this.formValue())
-        this.walletsService.postHoldingRequest(this.formValue())
-
-        let holdings = this.walletsService.getHoldings()
-        let firstMoviment = computed(() => {
-            return{
-                value: this.value(),
-                holdingId: holdings()[holdings.length - 1].id,
-                type: <type>"input"
-            }
-        })
-        this.walletsService.postMovimentRequest(firstMoviment())
-
-        this.router.navigate(['/home/creditCard'])
+        this.walletsService.postHoldingRequest(this.formValue(), this.value())
+        this.router.navigate(['/home/wallets'])
     }
 }

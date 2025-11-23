@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { Component, inject, input } from "@angular/core";
+import { AfterViewInit, Component, inject, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
@@ -37,7 +37,7 @@ import { HoldingModel } from '../../models/holding.model';
                     </span>
                     
                     <span><span>Saldo Atual:</span>
-                        <span class="data">{{wallet().total | currency: account()?.currency}}</span>
+                        <span class="data">{{total | currency: account()?.currency}}</span>
                     </span>
                     
                     <span><span>Tempo decorrido (<span class="green">{{wallet().controls?.type === 'monthly' ? 'meses' : 'dias'}}</span>):</span>
@@ -48,7 +48,7 @@ import { HoldingModel } from '../../models/holding.model';
             <div class="comparison">
                 <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
                 <hr/>
-                <span class="green" [innerHTML]="formatMoney(wallet().total)"></span>
+                <span class="green" [innerHTML]="formatMoney(total)"></span>
             </div>
         </div>
             
@@ -56,20 +56,20 @@ import { HoldingModel } from '../../models/holding.model';
     `
 })
 
-export class WalletComponent{
+export class WalletComponent implements AfterViewInit{
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
     
     public wallet = input(<HoldingModel>{
         name: 'Carteira',
-        total: 130,
+        total: 100,
         tax: 10,
         movimentations: [
             {
                 value: 100,
             }
         ],
-        createdAt: new Date(),
+        createdAt: new Date(2025, 1, 20),
         dueDate: new Date(),
         controls: {
             icon: 'account_balance',
@@ -78,9 +78,39 @@ export class WalletComponent{
             compound: true,
         },
     })
-    readonly passedTime = new Date().getMonth() - this.wallet().createdAt.getMonth();
-    protected type = this.wallet().controls?.type === "monthly" ? "mensal" : "diário";
+    protected type = "";
+    protected passedTime = 0;
+    protected total = this.wallet().movimentations[0].value + this.wallet().movimentations[0].value * this.wallet().tax * this.passedTime / 100;
 
+    ngAfterViewInit(): void {
+    this.type = this.wallet().controls?.type === "monthly" ? "mensal" : "diário";
+    this.passedTime = this.wallet().controls?.type === "monthly" ? this.subMonthDate(new Date(), this.wallet().createdAt) : this.subDayDate(new Date(), this.wallet().createdAt);
+    this.total = this.wallet().movimentations[0].value + this.wallet().movimentations[0].value * this.wallet().tax * this.passedTime / 100;
+
+    }
+    
+    subMonthDate(date1: Date, date2: Date){
+        const year1 = date1.getFullYear();
+        const month1 = date1.getMonth();
+        const day1 = date1.getDate();
+
+        const year2 = date2.getFullYear();
+        const month2 = date2.getMonth();
+        const day2 = date2.getDate();
+
+        let months = (year1 - year2) * 12 + month1 - month2;
+
+        if(day1 < day2){
+            months--;
+        }
+        return months;
+    }
+
+    subDayDate(date1: Date, date2: Date){
+        let days = Math.floor((date1.getTime() - date2.getTime()) / 86400000);
+        return days;
+    }
+    
     
     formatMoney(value: number){
         const currency = this.account()?.currency ;
