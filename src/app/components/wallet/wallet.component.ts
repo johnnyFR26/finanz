@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { AfterViewInit, Component, inject, input } from "@angular/core";
+import { AfterViewInit, Component, effect, inject, input } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
@@ -50,13 +50,14 @@ import { HoldingModel } from '../../models/holding.model';
                 <hr/>
                 <span class="green" [innerHTML]="formatMoney(total)"></span>
             </div>
+            <button mat-button class="gains">ADICIONAR MOVIMENTAÇÃO</button>
         </div>
             
 
     `
 })
 
-export class WalletComponent implements AfterViewInit{
+export class WalletComponent{
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
     
@@ -66,6 +67,7 @@ export class WalletComponent implements AfterViewInit{
         tax: 10,
         movimentations: [
             {
+                createdAt: new Date(2025, 1, 20),
                 value: 100,
             }
         ],
@@ -80,16 +82,49 @@ export class WalletComponent implements AfterViewInit{
     })
     protected type = "";
     protected passedTime = 0;
-    protected total = this.wallet().movimentations[0].value + this.wallet().movimentations[0].value * this.wallet().tax * this.passedTime / 100;
+    protected total = 0;
 
-    ngAfterViewInit(): void {
-    this.type = this.wallet().controls?.type === "monthly" ? "mensal" : "diário";
-    this.passedTime = this.wallet().controls?.type === "monthly" ? this.subMonthDate(new Date(), this.wallet().createdAt) : this.subDayDate(new Date(), this.wallet().createdAt);
-    this.total = this.wallet().movimentations[0].value + this.wallet().movimentations[0].value * this.wallet().tax * this.passedTime / 100;
+    constructor() {
+        effect(() => {
+            const w = this.wallet();
+            if(!w) return;
 
+            if(this.wallet().controls?.type === "monthly"){
+                this.type = "mensal"
+                this.passedTime = this.subMonthDate(new Date(), this.wallet().createdAt)
+            } else {
+                this.type = "diário"
+                this.passedTime = this.subDayDate(new Date(), this.wallet().createdAt)
+            }
+            this.total = this.calcTotal();
+        })
+    }
+
+    calcTotal(){
+        let total = 0;
+        for(let moviment of this.wallet().movimentations){
+            console.log(this.wallet())
+            let time = 0;
+            const date = new Date(this.wallet().createdAt);
+            date.setMonth(new Date(moviment.createdAt).getMonth())
+            if(this.wallet().controls?.type == "monthly"){
+                time = this.subMonthDate(new Date(), date)
+            } else {
+                date.setDate(new Date(moviment.createdAt).getDate())
+                time = this.subDayDate(new Date(), date)
+            }
+            if(this.wallet().controls?.compound){
+                total += moviment.value * Math.pow(( 1 + this.wallet().tax / 100), time) ;
+            } else {
+                total += Number(moviment.value) + moviment.value * (this.wallet().tax / 100) * time ;
+            }
+            console.log(time)
+        }
+        return total;
     }
     
     subMonthDate(date1: Date, date2: Date){
+        date2 = new Date(date2)
         const year1 = date1.getFullYear();
         const month1 = date1.getMonth();
         const day1 = date1.getDate();
@@ -107,6 +142,7 @@ export class WalletComponent implements AfterViewInit{
     }
 
     subDayDate(date1: Date, date2: Date){
+        date2 = new Date(date2)
         let days = Math.floor((date1.getTime() - date2.getTime()) / 86400000);
         return days;
     }

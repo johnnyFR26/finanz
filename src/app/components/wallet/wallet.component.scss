@@ -67,3 +67,14 @@ summary{
 ::ng-deep .cents{
     font-size: 10px;
 }
+.small-box{
+    @include mat.button-overrides((
+            text-container-shape: 20px,
+            text-ripple-color: black,
+    ));
+    ::ng-deep button{
+        padding: 0;
+        *{font-size: 14px !important;}
+    }
+    .gains{--color:var(--principal-color);}
+}
