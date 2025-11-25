@@ -27,8 +27,8 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                 <details>
                     <summary>Detalhes</summary>
                     <section>
-                        <span><span>Investimento Inicial:</span>
-                            <span class="data">{{wallet().movimentations[0]?.value | currency: account()?.currency}}</span>
+                        <span><span>Investimento:</span>
+                            <span class="data">{{invested | currency: account()?.currency}}</span>
                         </span>
                         
                         <span><span>Rendimento <span class="green">{{type}}(%)</span>:</span>
@@ -36,7 +36,7 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                         </span>
                         
                         <span><span>Rendimento <span class="green">{{type}}($)</span>:</span>
-                            <span class="data">{{wallet().tax/100 * wallet().movimentations[0].value | currency: account()?.currency}}</span>
+                            <span class="data">{{valuePerMonth | currency: account()?.currency}}</span>
                         </span>
                         
                         <span><span>Saldo Atual:</span>
@@ -49,7 +49,7 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                     </section>
                 </details>
                 <div class="comparison">
-                    <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
+                    <span [innerHTML]="formatMoney(invested)"></span>
                     <hr/>
                     <span class="green" [innerHTML]="formatMoney(total)"></span>
                 </div>
@@ -75,6 +75,7 @@ export class WalletComponent{
     protected passedTime = 0;
     protected total = 0;
     protected invested = 0;
+    protected valuePerMonth = 0;
 
     constructor() {
         effect(() => {
@@ -88,9 +89,17 @@ export class WalletComponent{
                 this.type = "diário"
                 this.passedTime = this.subDayDate(new Date(), this.wallet().createdAt)
             }
+
             this.total = this.calcTotal();
             this.invested = this.calcInvested();
             this.value.emit({total: this.total, invested: this.invested});
+
+            
+            if(this.wallet().controls?.compound){
+                this.valuePerMonth = this.total * this.wallet().tax / 100;
+            } else {
+                this.valuePerMonth = this.invested * this.wallet().tax / 100;
+            }
         })
     }
 

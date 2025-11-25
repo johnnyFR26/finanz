@@ -49,10 +49,20 @@ export class WalletsComponent {
     protected wallets = this.walletsService.getHoldings()
     protected total = signal<number>(0)
     protected invested = signal<number>(0)
+    protected values: any[] = []
 
     updateTotalValue(value: any){
-        this.total.update(a => a + value.total)
-        this.invested.update(a => a + value.invested)
+        this.values.push(value)
+        if (this.values.length === this.wallets().length) {
+            this.total.set(0);
+            this.invested.set(0);
+
+            for (const v of this.values) {
+                this.total.update(t => t + v.total);
+                this.invested.update(i => i + v.invested);
+            }
+            this.values = [];
+        }
     }
 
     formatMoney(value: number){
