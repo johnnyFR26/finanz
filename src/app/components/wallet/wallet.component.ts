@@ -4,6 +4,8 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
 import { HoldingModel } from '../../models/holding.model';
+import { MatDialog } from '@angular/material/dialog';
+import { MovimentationModalComponent } from './movimentation/movimentation-modal.component';
 
 @Component({
     selector: 'wallet',
@@ -50,7 +52,10 @@ import { HoldingModel } from '../../models/holding.model';
                 <hr/>
                 <span class="green" [innerHTML]="formatMoney(total)"></span>
             </div>
-            <button mat-button class="gains">ADICIONAR MOVIMENTAÇÃO</button>
+            <section class="buttons">
+                <button mat-button class="gains" (click)="openDialog('Depositar na Carteira','input')">DEPOSITAR</button>
+                <button mat-button class="losts" (click)="openDialog('Sacar da Carteira','output')">SACAR</button>
+            </section>
         </div>
             
 
@@ -58,6 +63,7 @@ import { HoldingModel } from '../../models/holding.model';
 })
 
 export class WalletComponent{
+    readonly dialog = inject(MatDialog);
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
     
@@ -69,6 +75,7 @@ export class WalletComponent{
             {
                 createdAt: new Date(2025, 1, 20),
                 value: 100,
+                type: "input",
             }
         ],
         createdAt: new Date(2025, 1, 20),
@@ -103,7 +110,6 @@ export class WalletComponent{
     calcTotal(){
         let total = 0;
         for(let moviment of this.wallet().movimentations){
-            console.log(this.wallet())
             let time = 0;
             const date = new Date(this.wallet().createdAt);
             date.setMonth(new Date(moviment.createdAt).getMonth())
@@ -113,12 +119,17 @@ export class WalletComponent{
                 date.setDate(new Date(moviment.createdAt).getDate())
                 time = this.subDayDate(new Date(), date)
             }
+            let value = 0;
             if(this.wallet().controls?.compound){
-                total += moviment.value * Math.pow(( 1 + this.wallet().tax / 100), time) ;
+                value = moviment.value * Math.pow(( 1 + this.wallet().tax / 100), time) ;
             } else {
-                total += Number(moviment.value) + moviment.value * (this.wallet().tax / 100) * time ;
+                value = Number(moviment.value) + moviment.value * (this.wallet().tax / 100) * time ;
             }
-            console.log(time)
+            if(moviment.type === "input"){
+                total += value;
+            } else {
+                total -= value;
+            }
         }
         return total;
     }
@@ -158,5 +169,16 @@ export class WalletComponent{
 
         const [money, cents] = formatted.split(',');
         return `${money},<span class="cents">${cents}</span>`;
+    }
+    
+    openDialog(title: string, type: string): void {
+        this.dialog.open(MovimentationModalComponent, {
+            data: {
+                name: this.wallet().name,
+                id: this.wallet().id,
+                title,
+                type
+            },
+        });
     }
 }

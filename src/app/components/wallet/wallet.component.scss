@@ -72,9 +72,18 @@ summary{
             text-container-shape: 20px,
             text-ripple-color: black,
     ));
-    ::ng-deep button{
-        padding: 0;
-        *{font-size: 14px !important;}
+    .buttons{
+        display: flex;
+        justify-content: space-between;
+
+        ::ng-deep button{
+            width: 48%;
+            * {
+                font-size: 14px !important;
+                --mat-sys-primary: var(--color) !important;
+            }
+        }
+        .gains{--color:var(--principal-color);}
+        .losts{--color:var(--red);}
     }
-    .gains{--color:var(--principal-color);}
 }
