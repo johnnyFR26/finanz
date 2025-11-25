@@ -15,7 +15,7 @@ import { WalletsService } from '../../../services/wallets.service';
         <section class="wallets">
             <section class="walletsGrid">
                 @for(wallet of wallets(); track $index){
-                    <wallet [wallet]="wallet"/>
+                    <wallet [wallet]="wallet" (value)="updateTotalValue($event)"/>
                 }
                 <div class="small-box" (click)="this.router.navigate(['/home/wallets/new'])">
                     <mat-icon>add_circle_outline</mat-icon>
@@ -26,7 +26,7 @@ import { WalletsService } from '../../../services/wallets.service';
         <section class="info">
             <div class="small-box">
                 <label>Saldo total:</label>
-                <h2 [innerHTML]="formatMoney(390)" class="green"></h2>
+                <h2 [innerHTML]="formatMoney(total())" class="green"></h2>
             </div>
             <div class="small-box">
                 <label>Total investido:</label>
@@ -47,6 +47,12 @@ export class WalletsComponent {
     protected account = this.accountService.getCurrentAccount()
     protected walletsService = inject(WalletsService)
     protected wallets = this.walletsService.getHoldings()
+    protected total = signal<number>(0)
+    protected invested = signal<number>(0)
+
+    updateTotalValue(value: number){
+        this.total.update(a => a + value)
+    }
 
     formatMoney(value: number){
         const currency = this.account()?.currency ;
@@ -59,4 +65,5 @@ export class WalletsComponent {
         const [money, cents] = formatted.split(',');
         return `${money},<span class="cents">${cents}</span>`;
     }
+    
 }

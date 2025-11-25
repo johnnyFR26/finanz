@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { AfterViewInit, Component, effect, inject, input } from "@angular/core";
+import { AfterViewInit, Component, effect, inject, input, output } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
@@ -66,6 +66,7 @@ export class WalletComponent{
     readonly dialog = inject(MatDialog);
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
+    protected value = output<number>();
     
     public wallet = input(<HoldingModel>{
         name: 'Carteira',
@@ -104,6 +105,7 @@ export class WalletComponent{
                 this.passedTime = this.subDayDate(new Date(), this.wallet().createdAt)
             }
             this.total = this.calcTotal();
+            this.value.emit(this.total);
         })
     }
 
