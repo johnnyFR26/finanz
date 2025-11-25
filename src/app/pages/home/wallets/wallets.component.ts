@@ -17,7 +17,6 @@ import { WalletsService } from '../../../services/wallets.service';
                 @for(wallet of wallets(); track $index){
                     <wallet [wallet]="wallet"/>
                 }
-                <wallet/>
                 <div class="small-box" (click)="this.router.navigate(['/home/wallets/new'])">
                     <mat-icon>add_circle_outline</mat-icon>
                     <h2 class="title">Criar uma caixinha</h2>
