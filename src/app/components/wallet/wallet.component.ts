@@ -68,12 +68,13 @@ export class WalletComponent{
     readonly dialog = inject(MatDialog);
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
-    protected value = output<number>();
+    protected value = output<any>();
     
     public wallet = input.required<HoldingModel>()
     protected type = "";
     protected passedTime = 0;
     protected total = 0;
+    protected invested = 0;
 
     constructor() {
         effect(() => {
@@ -88,7 +89,8 @@ export class WalletComponent{
                 this.passedTime = this.subDayDate(new Date(), this.wallet().createdAt)
             }
             this.total = this.calcTotal();
-            this.value.emit(this.total);
+            this.invested = this.calcInvested();
+            this.value.emit({total: this.total, invested: this.invested});
         })
     }
 
@@ -114,6 +116,18 @@ export class WalletComponent{
                 total += value;
             } else {
                 total -= value;
+            }
+        }
+        return total;
+    }
+
+    calcInvested(){
+        let total = 0;
+        for(let moviment of this.wallet()?.movimentations){
+            if(moviment.type === "input"){
+                total += Number(moviment.value);
+            } else {
+                total -= Number(moviment.value);
             }
         }
         return total;

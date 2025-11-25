@@ -30,11 +30,11 @@ import { WalletsService } from '../../../services/wallets.service';
             </div>
             <div class="small-box">
                 <label>Total investido:</label>
-                <h2 [innerHTML]="formatMoney(300)"></h2>
+                <h2 [innerHTML]="formatMoney(invested())"></h2>
             </div>
             <div class="small-box">
                 <label>Rendimento total:</label>
-                <h2 [innerHTML]="formatMoney(90)" class="green"></h2>
+                <h2 [innerHTML]="formatMoney(total() - invested())" class="green"></h2>
             </div>
         </section>
         
@@ -50,8 +50,9 @@ export class WalletsComponent {
     protected total = signal<number>(0)
     protected invested = signal<number>(0)
 
-    updateTotalValue(value: number){
-        this.total.update(a => a + value)
+    updateTotalValue(value: any){
+        this.total.update(a => a + value.total)
+        this.invested.update(a => a + value.invested)
     }
 
     formatMoney(value: number){
