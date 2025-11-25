@@ -11,7 +11,6 @@ import { MatIcon } from "@angular/material/icon";
 import { MatSelect } from "@angular/material/select";
 import { DateInputComponent } from "../../../../components/date-input/date-input.component";
 import { WalletsService } from "../../../../services/wallets.service";
-import { type } from "../../../../models/moviment.model";
 import { CreateHoldingDto } from "../../../../models/holding.model";
 
 @Component({
@@ -121,6 +120,10 @@ export class NewWalletComponent {
     updateDate(date: Date){
         this.closingDate.set(date)
     }
+
+    protected isFormValid = computed(() => {
+        return this.value() > 0 && this.name().length >= 3
+    })
     
     
     private accountService = inject(AccountService)
@@ -150,7 +153,9 @@ export class NewWalletComponent {
 
 
     onSubmit() {
-        this.walletsService.postHoldingRequest(this.formValue(), this.value())
-        this.router.navigate(['/home/wallets'])
+        if(this.isFormValid()){
+            this.walletsService.postHoldingRequest(this.formValue(), this.value())
+            this.router.navigate(['/home/wallets'])
+        }
     }
 }

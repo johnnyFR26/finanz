@@ -27,7 +27,7 @@ import { AccountService } from '../../../services/account.service';
 
       <section>
         <label>Valor</label>
-        <input class="input" type="number" [(ngModel)]="value" name="value" [ngModelOptions]="{standalone: true}"/>
+        <input class="input" required type="number" [(ngModel)]="this.value" name="value" [ngModelOptions]="{standalone: true}"/>
       </section>
 
       <mat-dialog-actions>
@@ -58,6 +58,10 @@ export class MovimentationModalComponent{
     readonly id = signal<string>(this.data.id);
     readonly type = signal<type>(this.data.type);
     protected value = signal<number>(0.00);
+
+    protected isFormValid = computed(() => {
+      return this.value() >= 0
+    })
     
     protected formValue = computed(() => {
       return <createMovimentModel>{

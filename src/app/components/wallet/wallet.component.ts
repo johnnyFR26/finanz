@@ -23,35 +23,37 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                     <p>{{wallet().controls?.description}}</p>
                 </section>
             </section>
-            <details>
-                <summary>Detalhes</summary>
-                <section>
-                    <span><span>Investimento Inicial:</span>
-                        <span class="data">{{wallet().movimentations[0].value | currency: account()?.currency}}</span>
-                    </span>
-                    
-                    <span><span>Rendimento <span class="green">{{type}}(%)</span>:</span>
-                        <span class="data">{{wallet().tax}}%</span>
-                    </span>
-                    
-                    <span><span>Rendimento <span class="green">{{type}}($)</span>:</span>
-                        <span class="data">{{wallet().tax/100 * wallet().movimentations[0].value | currency: account()?.currency}}</span>
-                    </span>
-                    
-                    <span><span>Saldo Atual:</span>
-                        <span class="data">{{total | currency: account()?.currency}}</span>
-                    </span>
-                    
-                    <span><span>Tempo decorrido (<span class="green">{{wallet().controls?.type === 'monthly' ? 'meses' : 'dias'}}</span>):</span>
-                        <span class="data">{{passedTime}}</span>
-                    </span>
-                </section>
-            </details>
-            <div class="comparison">
-                <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
-                <hr/>
-                <span class="green" [innerHTML]="formatMoney(total)"></span>
-            </div>
+            @if (wallet().movimentations) {            
+                <details>
+                    <summary>Detalhes</summary>
+                    <section>
+                        <span><span>Investimento Inicial:</span>
+                            <span class="data">{{wallet().movimentations[0]?.value | currency: account()?.currency}}</span>
+                        </span>
+                        
+                        <span><span>Rendimento <span class="green">{{type}}(%)</span>:</span>
+                            <span class="data">{{wallet().tax}}%</span>
+                        </span>
+                        
+                        <span><span>Rendimento <span class="green">{{type}}($)</span>:</span>
+                            <span class="data">{{wallet().tax/100 * wallet().movimentations[0].value | currency: account()?.currency}}</span>
+                        </span>
+                        
+                        <span><span>Saldo Atual:</span>
+                            <span class="data">{{total | currency: account()?.currency}}</span>
+                        </span>
+                        
+                        <span><span>Tempo decorrido (<span class="green">{{wallet().controls?.type === 'monthly' ? 'meses' : 'dias'}}</span>):</span>
+                            <span class="data">{{passedTime}}</span>
+                        </span>
+                    </section>
+                </details>
+                <div class="comparison">
+                    <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
+                    <hr/>
+                    <span class="green" [innerHTML]="formatMoney(total)"></span>
+                </div>
+            }
             <section class="buttons">
                 <button mat-button class="gains" (click)="openDialog('Depositar na Carteira','input')">DEPOSITAR</button>
                 <button mat-button class="losts" (click)="openDialog('Sacar da Carteira','output')">SACAR</button>
@@ -67,26 +69,7 @@ export class WalletComponent{
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
     
-    public wallet = input(<HoldingModel>{
-        name: 'Carteira',
-        total: 100,
-        tax: 10,
-        movimentations: [
-            {
-                createdAt: new Date(2025, 1, 20),
-                value: 100,
-                type: "input",
-            }
-        ],
-        createdAt: new Date(2025, 1, 20),
-        dueDate: new Date(),
-        controls: {
-            icon: 'account_balance',
-            description: 'fundos de emergência',
-            type: 'monthly',
-            compound: true,
-        },
-    })
+    public wallet = input.required<HoldingModel>()
     protected type = "";
     protected passedTime = 0;
     protected total = 0;
@@ -109,7 +92,7 @@ export class WalletComponent{
 
     calcTotal(){
         let total = 0;
-        for(let moviment of this.wallet().movimentations){
+        for(let moviment of this.wallet()?.movimentations){
             let time = 0;
             const date = new Date(this.wallet().createdAt);
             date.setMonth(new Date(moviment.createdAt).getMonth())
