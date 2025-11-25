@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { provideNativeDateAdapter } from "@angular/material/core";
+import { provideNativeDateAdapter} from "@angular/material/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -9,11 +9,12 @@ import { AccountService } from "../../../../services/account.service";
 import { Router } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
+import { MatSelectModule } from "@angular/material/select";
 
 @Component({
     selector: "app-new-credit-card",
     styleUrls: ["./new-credit-card.component.scss"],
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon],
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIcon, MatSelectModule],
     providers: [provideNativeDateAdapter()],
     template: `
     <div class="new-credit-card">
@@ -26,7 +27,11 @@ import { MatIcon } from "@angular/material/icon";
             </div>
             <div>
                 <label for="company">Empresa</label>
-                <input class="input" type="text" id="company" name="company" [(ngModel)]="company" placeholder="Empresa" required>
+                <mat-select class="input" id="company" name="company" [(ngModel)]="company" placeholder="Empresa" required>
+                    @for (company of companies; track $index) {
+                        <mat-option [value]="company"><img src="/credit-card/{{company}}.png">{{company}}</mat-option>
+                    }
+                </mat-select>
             </div>
 
             <div>
@@ -61,6 +66,10 @@ export class NewCreditCardComponent {
     protected closingDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected paymentDate = signal<{month: number, day: number}>({month: 1, day: 1})
     protected router = inject(Router)
+
+    readonly companies = [
+        "Alelo", "American Express", "Diners Club", "Elo", "Hipercard", "Maestro", "Mastercard", "Visa"
+    ]
     
     protected closingDateValue = signal<Date | null>(null)
     protected paymentDateValue = signal<Date | null>(null)
