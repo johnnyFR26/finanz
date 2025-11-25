@@ -54,7 +54,7 @@ details section{
     }
 }
 
-.green{
+.green, .green::ng-deep *{
     color: var(--green);
 }
 
@@ -62,4 +62,28 @@ summary{
     text-align: center;
     direction: rtl;
     cursor: pointer;
+}
+
+::ng-deep .cents{
+    font-size: 10px;
+}
+.small-box{
+    @include mat.button-overrides((
+            text-container-shape: 20px,
+            text-ripple-color: black,
+    ));
+    .buttons{
+        display: flex;
+        justify-content: space-between;
+
+        ::ng-deep button{
+            width: 48%;
+            * {
+                font-size: 14px !important;
+                --mat-sys-primary: var(--color) !important;
+            }
+        }
+        .gains{--color:var(--principal-color);}
+        .losts{--color:var(--red);}
+    }
 }

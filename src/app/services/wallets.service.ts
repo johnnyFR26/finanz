@@ -3,7 +3,7 @@ import { effect, inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { CreateHoldingDto, HoldingModel } from "../models/holding.model";
 import { AccountService } from "./account.service";
-import { createMovimentModel, MovimentModel } from "../models/moviment.model";
+import { createMovimentModel, MovimentModel, type } from "../models/moviment.model";
 
 interface HoldingsResponse {
   holdings: HoldingModel[];
@@ -25,12 +25,19 @@ export class WalletsService {
         })
     }
 
-    postHoldingRequest(holding: CreateHoldingDto) {
+    postHoldingRequest(holding: CreateHoldingDto, value: number) {
         return this.http.post<HoldingModel>(`${this.urlApi}/holdings`, holding)
             .subscribe({
                 next: (response) => {
                     console.log(response)
                     this.setHoldings([...this.holdings(), response])
+                    let firstMoviment = {
+                        accountId: this.account()?.id,
+                        value: value,
+                        holdingId: response.id,
+                        type: <type>"input"
+                    }
+                    this.postMovimentRequest(firstMoviment)
                 },
                 error: (error) => {
                     console.error(error)
@@ -51,6 +58,19 @@ export class WalletsService {
                 next: (response) => {
                     console.log(response)
                     this.getHoldingsRequest()
+                },
+                error: (error) => {
+                    console.error(error)
+                }
+            });
+    }
+
+    deleteHostingRequest(holdingId: string) {
+        return this.http.delete<HoldingModel>(`${this.urlApi}/holdings/${holdingId}`)
+            .subscribe({
+                next: (response) => {
+                    console.log(response)
+                    this.setHoldings([...this.holdings(), response])
                 },
                 error: (error) => {
                     console.error(error)

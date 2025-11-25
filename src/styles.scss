@@ -89,6 +89,16 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     font-style: italic;
 }
 
+@font-face {
+    font-family: ABeeZee;
+    src: url(/fonts/ABeeZee/ABeeZee-Regular.ttf);
+}
+@font-face {
+    font-family: ABeeZee;
+    src: url(/fonts/ABeeZee/ABeeZee-Regular.ttf);
+    font-style: italic;
+}
+
 
 body {
     background-color:var(--grey-background); 
@@ -162,7 +172,7 @@ body {
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
     --mat-select-panel-background-color: var(--input-area);
-    --mat-option-selected-state-layer-color: var(--principal-color);
+    --mat-option-selected-state-layer-color: var(--input-area);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     color:  var(--color, var(--white));
     font-family: var(--font, KoHo);
@@ -198,6 +208,9 @@ body {
     padding: 10px;
 }
 
+.mat-mdc-select-panel{
+    padding: 0 !important;
+}
 
 .light{
     position: relative;

@@ -10,8 +10,15 @@ export interface HoldingModel {
     createdAt: Date;
     updatedAt: Date;
     movimentations: MovimentModel[];
-    controls?: Record<string, object>;
+    controls?: {
+        description: string;
+        icon: string;
+        type: type;
+        compound: boolean;
+    }
 }
+
+export type type = 'monthly' | 'daily';
 
 export type CreateHoldingDto = Omit<HoldingModel, 'id' | 'createdAt' | 'updatedAt'>;
 

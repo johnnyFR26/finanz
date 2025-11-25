@@ -1,41 +1,157 @@
 @use '@angular/material' as mat;
 :host{
-    display: flex;
+    display: grid;
     align-items: start;
-    flex-direction: column;
-    padding: 50px 5%;
+    padding: 10px 5%;
     box-sizing: border-box;
+    height: 100%;
     width: 100%;
 }
 
-.wallets{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 700px;
-    overflow-y: auto;
-    gap: 25px;
-    width: 65%;
-    justify-items: center;
-    border-right: 2px solid var(--green);
+.leftTitle{
+    grid-area: title;
 }
 
-.small-box{
-    width: 275px;
-    height: 207px;
-    color: var(--grey-background);
-    justify-content: center;
-    align-items: center;
-    transition: 0.2s;
+.wallets{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
 
-    mat-icon{
-        width: 81px;
-        height: 81px;
-        font-size: 81px;
-    }
-    &:hover{
-        color: var(--green);
+.walletsGrid{
+    display: grid;
+    gap: 25px;
+    height: auto;
+    width: 100%;
+    align-items: start;
+    justify-items: center;
+    padding-top: 2px;
+    grid-area: wallets;
+    grid-auto-rows: auto;
+    
+    .small-box{
+        width: 275px;
+        height: 207px;
+        color: var(--grey-background);
+        justify-content: center;
+        align-items: center;
         transition: 0.2s;
-        scale: 1.1;
-        cursor: pointer;
+
+        mat-icon{
+            width: 81px;
+            height: 81px;
+            font-size: 81px;
+        }
+        &:hover{
+            color: var(--green);
+            transition: 0.2s;
+            border: 2px solid var(--green);
+            cursor: pointer;
+            scale: 1.01;
+        }
+    }
+}
+
+.info{
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    
+    .small-box{
+        padding: 10px;
+
+        label{
+            font-size: 14px;
+            font-family: KoHo;
+            margin: 0;
+        }
+    
+        h2{
+            font-size: 24px;
+            
+            ::ng-deep .cents{
+                font-size: 16px;
+            }
+    
+            &.green, &.green::ng-deep .cents{
+                color: var(--green);
+            }
+        }
+    }
+}
+
+@media (min-width:1440px) {
+    .walletsGrid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 1440px) {
+    .walletsGrid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .walletsGrid{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width:700px){
+    :host{
+        grid-template-areas: 
+        "title title"
+        "wallets info";
+        grid-template-columns: 65% 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    
+    .wallets{
+        border-right: 2px solid var(--green);
+    }
+
+}
+@media (max-width:700px) {
+    :host{
+        grid-template-areas: 
+        "title"
+        "info"
+        "wallets";
+        grid-template-columns: 1fr;
+        gap:20px;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    .info {
+        padding: 0;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        .small-box{
+            width: auto;
+            flex-grow: 1;
+        }
+    }
+    
+    .wallets{
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .walletsGrid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:630px) {
+    .walletsGrid{
+        grid-template-columns: 1fr;
     }
 }
