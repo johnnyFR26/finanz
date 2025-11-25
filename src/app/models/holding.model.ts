@@ -9,7 +9,7 @@ export interface HoldingModel {
     dueDate: Date;
     createdAt: Date;
     updatedAt: Date;
-    movimentations: MovimentModel[];
+    movimentations: MovimentModel[] | [];
     controls?: {
         description: string;
         icon: string;
