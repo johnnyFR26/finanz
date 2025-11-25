@@ -15,7 +15,7 @@ import { WalletsService } from '../../../services/wallets.service';
         <section class="wallets">
             <section class="walletsGrid">
                 @for(wallet of wallets(); track $index){
-                    <wallet [wallet]="wallet"/>
+                    <wallet [wallet]="wallet" (value)="updateTotalValue($event)"/>
                 }
                 <div class="small-box" (click)="this.router.navigate(['/home/wallets/new'])">
                     <mat-icon>add_circle_outline</mat-icon>
@@ -26,15 +26,15 @@ import { WalletsService } from '../../../services/wallets.service';
         <section class="info">
             <div class="small-box">
                 <label>Saldo total:</label>
-                <h2 [innerHTML]="formatMoney(390)" class="green"></h2>
+                <h2 [innerHTML]="formatMoney(total())" class="green"></h2>
             </div>
             <div class="small-box">
                 <label>Total investido:</label>
-                <h2 [innerHTML]="formatMoney(300)"></h2>
+                <h2 [innerHTML]="formatMoney(invested())"></h2>
             </div>
             <div class="small-box">
                 <label>Rendimento total:</label>
-                <h2 [innerHTML]="formatMoney(90)" class="green"></h2>
+                <h2 [innerHTML]="formatMoney(total() - invested())" class="green"></h2>
             </div>
         </section>
         
@@ -47,6 +47,23 @@ export class WalletsComponent {
     protected account = this.accountService.getCurrentAccount()
     protected walletsService = inject(WalletsService)
     protected wallets = this.walletsService.getHoldings()
+    protected total = signal<number>(0)
+    protected invested = signal<number>(0)
+    protected values: any[] = []
+
+    updateTotalValue(value: any){
+        this.values.push(value)
+        if (this.values.length === this.wallets().length) {
+            this.total.set(0);
+            this.invested.set(0);
+
+            for (const v of this.values) {
+                this.total.update(t => t + v.total);
+                this.invested.update(i => i + v.invested);
+            }
+            this.values = [];
+        }
+    }
 
     formatMoney(value: number){
         const currency = this.account()?.currency ;
@@ -59,4 +76,5 @@ export class WalletsComponent {
         const [money, cents] = formatted.split(',');
         return `${money},<span class="cents">${cents}</span>`;
     }
+    
 }

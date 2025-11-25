@@ -1,5 +1,5 @@
 import { MatIcon } from '@angular/material/icon';
-import { AfterViewInit, Component, effect, inject, input } from "@angular/core";
+import { AfterViewInit, Component, effect, inject, input, output } from "@angular/core";
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountService } from '../../services/account.service';
@@ -27,8 +27,8 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                 <details>
                     <summary>Detalhes</summary>
                     <section>
-                        <span><span>Investimento Inicial:</span>
-                            <span class="data">{{wallet().movimentations[0]?.value | currency: account()?.currency}}</span>
+                        <span><span>Investimento:</span>
+                            <span class="data">{{invested | currency: account()?.currency}}</span>
                         </span>
                         
                         <span><span>Rendimento <span class="green">{{type}}(%)</span>:</span>
@@ -36,7 +36,7 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                         </span>
                         
                         <span><span>Rendimento <span class="green">{{type}}($)</span>:</span>
-                            <span class="data">{{wallet().tax/100 * wallet().movimentations[0].value | currency: account()?.currency}}</span>
+                            <span class="data">{{valuePerMonth | currency: account()?.currency}}</span>
                         </span>
                         
                         <span><span>Saldo Atual:</span>
@@ -49,7 +49,7 @@ import { MovimentationModalComponent } from './movimentation/movimentation-modal
                     </section>
                 </details>
                 <div class="comparison">
-                    <span [innerHTML]="formatMoney(wallet().movimentations[0].value)"></span>
+                    <span [innerHTML]="formatMoney(invested)"></span>
                     <hr/>
                     <span class="green" [innerHTML]="formatMoney(total)"></span>
                 </div>
@@ -68,11 +68,14 @@ export class WalletComponent{
     readonly dialog = inject(MatDialog);
     private accountService = inject(AccountService)
     readonly account = this.accountService.getCurrentAccount()
+    protected value = output<any>();
     
     public wallet = input.required<HoldingModel>()
     protected type = "";
     protected passedTime = 0;
     protected total = 0;
+    protected invested = 0;
+    protected valuePerMonth = 0;
 
     constructor() {
         effect(() => {
@@ -86,7 +89,17 @@ export class WalletComponent{
                 this.type = "diário"
                 this.passedTime = this.subDayDate(new Date(), this.wallet().createdAt)
             }
+
             this.total = this.calcTotal();
+            this.invested = this.calcInvested();
+            this.value.emit({total: this.total, invested: this.invested});
+
+            
+            if(this.wallet().controls?.compound){
+                this.valuePerMonth = this.total * this.wallet().tax / 100;
+            } else {
+                this.valuePerMonth = this.invested * this.wallet().tax / 100;
+            }
         })
     }
 
@@ -112,6 +125,18 @@ export class WalletComponent{
                 total += value;
             } else {
                 total -= value;
+            }
+        }
+        return total;
+    }
+
+    calcInvested(){
+        let total = 0;
+        for(let moviment of this.wallet()?.movimentations){
+            if(moviment.type === "input"){
+                total += Number(moviment.value);
+            } else {
+                total -= Number(moviment.value);
             }
         }
         return total;
