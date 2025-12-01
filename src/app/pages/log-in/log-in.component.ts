@@ -167,6 +167,7 @@ export class LogInComponent implements AfterViewInit {
         console.error("Erro na requisição:", err.error);
         console.log("DEU MERDA");
         this.openSnackBar(err.error.error)
+        this.isLoading.set(false)
       }
     })
 
