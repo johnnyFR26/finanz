@@ -315,7 +315,7 @@ a{
     padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
     
-    h2{
+    > h2{
         font-family: KoHo;
         font-size: 16px;
         flex-shrink: 0;
@@ -323,7 +323,7 @@ a{
         margin-right: 5px;
     }
 
-    h1{
+    > h1{
         font-family: KoHo;
         font-size: 30px;
         font-weight: normal;
@@ -333,7 +333,7 @@ a{
         padding-left: 7px;
     }
 
-    div{
+    > div{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -344,7 +344,7 @@ a{
         font-size: 18px;
     }
 
-    mat-icon{
+    > mat-icon{
         width: 20px;
         height: 20px;
         font-size: 20px;

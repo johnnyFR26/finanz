@@ -12,7 +12,9 @@ import { AccountService } from '../../services/account.service';
     template: `
       <div class="box card">
         <div class="name">
-            <img src="/credit-card/mastercard.svg">
+            @if (companies.includes(creditCard().company)) {
+                <img src="/credit-card/{{creditCard().company}}.png">
+            }
             <h3>{{ creditCard().name}}</h3>
             <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
         </div>
@@ -45,6 +47,8 @@ export class CreditCardComponent{
         name: 'My credit card',
         limit: 1000,
         availableLimit: 1000,
-
+        company: "Mastercard"
     })
+
+    readonly companies = ["Alelo", "American Express", "Diners Club", "Elo", "Hipercard", "Maestro", "Mastercard", "Visa"]
 }
