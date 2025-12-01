@@ -23,15 +23,6 @@
         </a>
         
         <a mat-list-item routerLinkActive="active" 
-        (click)="redirectToPath('/home/accounts')"
-        (keypress)="redirectToPath('/home/accounts')"
-        tabindex="0"
-        >
-          <mat-icon>account_balance</mat-icon>
-          <span>Contas</span>
-        </a>
-        
-        <a mat-list-item routerLinkActive="active" 
         (click)="redirectToPath('/home/transactions')"
         (keypress)="redirectToPath('/home/transactions')"
         tabindex="0"
@@ -40,7 +31,6 @@
           <span>Extrato</span>
         </a>
         
-        @if (this.user()?.user?.controls?.plan === 'premium') {
           <a mat-list-item routerLinkActive="active" 
           (click)="redirectToPath('/home/IA')"
           (keypress)="redirectToPath('/home/IA')"
@@ -49,7 +39,7 @@
             <mat-icon>star</mat-icon>
             <span>Zezinho IA</span>
           </a>
-        }
+        
         
         <a mat-list-item routerLinkActive="active" 
         (click)="redirectToPath('/home/creditCard')"

@@ -55,7 +55,7 @@ export const routes: Routes = [
             {
                 path: 'IA',
                 loadComponent: () => import('./pages/home/IA/ia.component').then(m => m.IAComponent),
-                canActivate: [doesUserHaveAccount, isUserPlanPremium],
+                canActivate: [doesUserHaveAccount],
             },
             {
                 path: 'planning',
