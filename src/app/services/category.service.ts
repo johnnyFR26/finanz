@@ -22,7 +22,7 @@ export class CategoryService{
     }
 
     setCategories(categories: CategoryModel[]){
-        if(categories.length === 0) {
+        if(this.categories()?.length === 0) {
             this.categories.set(this.categories().concat(categories))
         }else{
             this.categories.set(categories)
