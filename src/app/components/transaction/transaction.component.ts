@@ -1,4 +1,4 @@
-import { Component, inject, input, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -8,10 +8,25 @@ import { TransactionModel } from '../../models/transaction.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTransactionModalComponent } from '../../modals/edit-transactions/edit-transaction-modal.component';
 import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-file-modal.component';
+import { FileUploadService } from '../../services/fileUpload.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageViewerModalComponent } from '../attachedFile/image-viewer.component';
+import { AttachmentGalleryComponent } from "../attachedFile/attachedFile.component";
+import { UserService } from '../../services/user.service';
+
+interface AttachedFile {
+  id: string;
+  originalName: string;
+  url: string;
+  mimeType: string;
+  size: number;
+  createdAt: Date;
+  thumbnail?: string;
+}
 
 @Component({
-    selector: 'transaction',
-    imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe],
+    selector: 'app-transaction',
+    imports: [MatIconModule, MatButtonModule, MatExpansionModule, DatePipe, CurrencyPipe, AttachmentGalleryComponent],
     styleUrl: './transaction.component.scss',
     template: `
     <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -26,19 +41,28 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
         </mat-panel-title>
         <mat-panel-description>
           <div>
-          <span class="date">{{transaction().createdAt | date: "dd/MM/yyyy"}}</span>
-          <h1 [class]="transaction().type == 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
+          <span class="date">{{transaction()!.createdAt | date: "dd/MM/yyyy"}}</span>
+          <h1 [class]="transaction()!.type === 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
-          {{transaction()?.category?.name}} 
-          @if (transaction().category?.controls?.icon) {
-            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category?.controls?.icon}}</mat-icon>
+          {{transaction().category.name}} 
+          @if (transaction().category.controls?.icon) {
+            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category.controls?.icon}}</mat-icon>
           }
         </mat-panel-description>
       </mat-expansion-panel-header>
       @if(transaction().creditCard){
-        <p>Cartão: {{transaction()?.creditCard?.name}}</p>
+        <p>Cartão: {{transaction().creditCard?.name}}</p>
       }
-      <p>{{transaction()?.description}}</p>
+      <p>{{transaction().description}}</p>
+      @if(transaction().files.length > 0){      
+        <app-attachment-gallery
+         [files]="transaction()!.files"
+         (addAttachment)="openUploadModal()"
+          (fileClick)="viewFile($event)"
+         (fileDownload)="downloadFile($event)"
+         (fileDelete)="deleteFile($event)">
+      </app-attachment-gallery>
+      }
         <div class="tools">
           <button (click)="openUploadModal()" mat-icon-button aria-label="anexar">
             <mat-icon class="file">attach_file</mat-icon>
@@ -56,11 +80,17 @@ import { FileUploadModalComponent } from '../../modals/attach-file-modal/attach-
 
 export class TransactionComponent{
   readonly panelOpenState = signal(false);
-  readonly transaction = input<any>();
+  readonly transaction = input.required<TransactionModel>();
   readonly buttonSelected = signal(true);
   private accountService = inject(AccountService);
+  private uploadService = inject(FileUploadService)
+  private userService = inject(UserService)
+  private user = this.userService.getUserInfo()
   readonly dialog = inject(MatDialog);
   readonly account = this.accountService.getCurrentAccount()
+    private snackBar = inject(MatSnackBar);
+ 
+
     uploadedFile: any = null;
 
   switchSelect() : void {
@@ -73,17 +103,31 @@ export class TransactionComponent{
   };
 
       openUploadModal(): void {
-    const dialogRef = this.dialog.open(FileUploadModalComponent, {
-      width: '600px',
-      maxWidth: '90vw',
-      disableClose: false,
-      autoFocus: true
-    });
+    const dialogRef = this.dialog.open(FileUploadModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Arquivo selecionado:', result);
-        this.handleFileUpload(result);
+        this.uploadService.uploadFile(result.file, {
+          userId: String(this.user()!.user.id),
+          transactionId: this.transaction().id
+        }).subscribe({
+          next: (progress) => {
+            if (progress.state === 'uploading') {
+              console.log(`Upload: ${progress.progress}%`);
+            } else if (progress.state === 'done') {
+              console.log('Upload completo!', progress.response);
+              this.snackBar.open('Arquivo enviado!', 'Fechar', {
+                duration: 3000
+              });
+            }
+          },
+          error: (error) => {
+            console.error('Erro:', error);
+            this.snackBar.open('Erro no upload', 'Fechar', {
+              duration: 5000
+            });
+          }
+        });
       }
     });
   }
@@ -104,7 +148,7 @@ export class TransactionComponent{
     // this.sendAsArrayBuffer(fileData);
   }
   openEditTransactionModal(transaction: TransactionModel) : void{
-    const dialogRef = this.dialog.open(EditTransactionModalComponent, {
+     this.dialog.open(EditTransactionModalComponent, {
           data: {
             transaction: transaction,
         },
@@ -117,4 +161,24 @@ export class TransactionComponent{
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
+
+  viewFile(file: AttachedFile): void {
+    console.log("2", file);
+    this.dialog.open(ImageViewerModalComponent, {
+      data: file,
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      panelClass: 'image-viewer-dialog'
+    });
+  }
+
+  downloadFile(file: AttachedFile): void {
+    window.open(file.url, '_blank');
+  }
+
+  deleteFile(file: AttachedFile): void {
+    if (confirm(`Deseja remover ${file.originalName}?`)) {
+      // Lógica de delete
+    }
+}
 }

@@ -8,7 +8,7 @@ export interface CreditCardModel {
     company: string;
     expire: Date;
     close: Date;
-    controls?: any;
+    controls?: Record<string, object>;
     createdAt?: Date;
     updatedAt?: Date;
 }

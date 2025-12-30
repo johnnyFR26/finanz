@@ -1,62 +1,181 @@
+:host {
+  height: 100vh;
+  display: block;
+}
+
+* {
+  --mat-list-list-item-label-text-color: white;
+  --mat-sys-on-surface: #a5d437;
+  --mat-sys-corner-full: 0;
+  --primary-green: #a5d437;
+  --dark-green: #46a310;
+}
+
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #3f3f3f
-}
-.sidemenu{
-    --top: 64px;
-    background-color: var(--gray-form);
-    margin-right: 90%;
-    max-width: 50vw;
-    width: 360px;
-    min-width: 140px;
-    height: calc(100% - var(--top));
-    position: fixed;
-    top:var(--top);
-    border-radius: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3f3f3f;
+  z-index: 100;
 }
 
-@media (max-width: 599px) {
-    .sidemenu{
-        --top: 56px;
+.sidemenu {
+  background: rgba(0, 0, 0, 0.788) !important;
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(75, 75, 75, 0.5) !important;
+  max-width: 280px !important;
+  width: 280px !important;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  padding-bottom: 70px;
+
+  > a:not(#logout) {
+    margin-bottom: 4px;
+  }
+}
+
+mat-nav-list {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 !important;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(165, 212, 55, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(165, 212, 55, 0.5);
     }
+  }
 }
 
-.center {
-    position: fixed;
+::ng-deep {
+  .mat-mdc-list-item {
+    margin-bottom: 4px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid transparent !important;
+    height: 48px !important;
+    padding: 0 16px !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(165, 212, 55, 0.2) !important;
+
+      mat-icon {
+        color: var(--primary-green) !important;
+      }
+    }
+
+    &.mdc-list-item--activated,
+    &.active {
+      background: rgba(165, 212, 55, 0.15) !important;
+      border-color: rgba(165, 212, 55, 0.5) !important;
+      box-shadow: 0 2px 8px rgba(165, 212, 55, 0.2);
+
+      .mdc-list-item__primary-text,
+      span {
+        color: var(--primary-green) !important;
+      }
+
+      mat-icon {
+        color: var(--primary-green) !important;
+      }
+    }
+
+    .mdc-list-item__content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    mat-icon {
+      color: #999;
+      transition: color 0.2s ease;
+      margin-right: 12px;
+    }
+  }
+}
+
+#logout {
+  position: fixed !important;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  width: calc(100% - 16px) !important;
+  max-width: 264px !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(244, 67, 54, 0.3) !important;
+  transition: all 0.2s ease !important;
+  background: rgba(244, 67, 54, 0.05) !important;
+
+  &:hover {
+    background: rgba(244, 67, 54, 0.15) !important;
+    border-color: #f44336 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+  }
+
+  ::ng-deep {
+    mat-icon {
+      color: #f44336 !important;
+    }
+
+    .mdc-list-item__primary-text,
+    .mdc-list-item__content {
+      color: #f44336 !important;
+    }
+  }
 }
 
 .container {
-    background-color: #00000000;
-    position: relative;
+  background-color: transparent;
+  position: relative;
 }
 
-*{
-    --mat-sys-corner-full: 0;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-mat-side-nav{
-    background-color: #666565;
-}
-:host{
-    height: 100vh;
-    display: block;
+@media (max-width: 968px) {
+  .sidemenu {
+    max-width: 280px !important;
+  }
 }
 
-mat-nav-list{
-    box-sizing: border-box;
-    height: 100%;
-}
+@media (max-width: 599px) {
+  .sidemenu {
+    max-width: 260px !important;
+    width: 260px !important;
+  }
 
-.menu{
-    height: 100%;
-    position: relative;
-}
-
-#logout{
-    --mat-list-list-item-label-text-color: var(--red);
-    position: absolute;
-    bottom: 0px;
+  #logout {
+    max-width: 244px !important;
+  }
 }

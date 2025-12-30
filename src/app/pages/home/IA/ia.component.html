@@ -1,23 +1,191 @@
-<div class="chat-container">
-  <div class="messages">
-      <p><span id="first-message"></span><span class="cursor">|</span></p>
-      @for (message of messasges; track $index) {
-        <markdown [data]="message"></markdown>
+<div class="chat-wrapper">
+  <div 
+    class="sidebar-backdrop" 
+    [class.show]="showSidebar()"
+    (click)="toggleSidebar()"
+    (keydown.escape)="toggleSidebar()"
+    tabindex="0"
+  ></div>
+
+  <aside class="chat-sidebar" [class.open]="showSidebar()">
+    <div class="sidebar-header">
+      <div class="sidebar-title">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <h3>Conversas</h3>
+      </div>
+      <button mat-icon-button (click)="createNewConversation()" matTooltip="Nova conversa">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+
+    <div class="conversations-list">
+      @if (isLoadingConversations()) {
+        <div class="loading-conversations">
+          <mat-spinner diameter="30"></mat-spinner>
+        </div>
       }
-  </div>
-</div>
 
-<div class="chat-input-container">
-  <textarea 
-    [(ngModel)]="message"
-    (keydown.enter)="sendMessage()"
-    placeholder="Digite sua mensagem..."
-    rows="1"
-    class="chat-input"
-    #inputArea
-  ></textarea>
+      @for (conversation of conversations(); track conversation.id) {
+        <div 
+          class="conversation-item"
+          [class.active]="currentConversationId() === conversation.id"
+          (click)="selectConversation(conversation.id)"
+          (keydown.enter)="selectConversation(conversation.id)"
+          tabindex="0"
+        >
+          <div class="conversation-info">
+            <h4 class="conversation-title">{{ conversation.title }}</h4>
+            <span class="conversation-date">{{ formatDate(conversation.lastMessageAt) }}</span>
+          </div>
+          
+          <button 
+            mat-icon-button 
+            [matMenuTriggerFor]="conversationMenu"
+            (click)="$event.stopPropagation()"
+            class="conversation-menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
 
-  <button class="send-button" (click)="sendMessage()">
-    <mat-icon>send</mat-icon>
-  </button>
+          <mat-menu #conversationMenu="matMenu">
+            <button mat-menu-item (click)="renameConversation(conversation.id)">
+              <mat-icon>edit</mat-icon>
+              <span>Renomear</span>
+            </button>
+            <button mat-menu-item (click)="exportConversation(conversation.id)">
+              <mat-icon>download</mat-icon>
+              <span>Exportar</span>
+            </button>
+            <button mat-menu-item (click)="deleteConversation(conversation.id)" class="delete-item">
+              <mat-icon>delete</mat-icon>
+              <span>Deletar</span>
+            </button>
+          </mat-menu>
+        </div>
+      }
+
+      @if (conversations().length === 0 && !isLoadingConversations()) {
+        <div class="no-conversations">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <p>Nenhuma conversa ainda</p>
+          <button mat-stroked-button (click)="createNewConversation()">
+            Iniciar conversa
+          </button>
+        </div>
+      }
+    </div>
+  </aside>
+  <main class="chat-main">
+    <div class="chat-header">
+      <div class="header-left">
+        <button mat-icon-button (click)="toggleSidebar()" class="menu-button">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="header-info">
+          <mat-icon class="ai-icon">smart_toy</mat-icon>
+          <div class="header-text">
+            <h2>{{ currentConversation()?.title || 'Zezinho IA' }}</h2>
+            <span class="status" [class.online]="!isLoading()">
+              {{ isLoading() ? 'Digitando...' : 'Online' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button mat-icon-button (click)="createNewConversation()" matTooltip="Nova conversa">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="clearChat()" [disabled]="messages().length === 0" matTooltip="Limpar conversa">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-container" #chatContainer>
+      <div class="messages">
+        @if (showInitialMessage()) {
+          <div class="message assistant initial-message">
+            <div class="message-avatar">
+              <mat-icon>smart_toy</mat-icon>
+            </div>
+            <div class="message-content">
+              <p>
+                <span #initialMessageElement></span>
+                <span class="cursor" [class.hidden]="!isTypingInitial()">|</span>
+              </p>
+            </div>
+          </div>
+        }
+
+        @for (message of messages(); track message.id) {
+          <div class="message" [class.user]="message.role === 'user'" [class.assistant]="message.role === 'assistant'">
+            <div class="message-avatar">
+              @if (message.role === 'user') {
+                <mat-icon>person</mat-icon>
+              } @else {
+                <mat-icon>smart_toy</mat-icon>
+              }
+            </div>
+            <div class="message-content">
+              @if (message.role === 'user') {
+                <p>{{ message.content }}</p>
+              } @else {
+                @if (message.isTyping) {
+                  <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                } @else {
+                  <markdown [data]="message.content"></markdown>
+                }
+              }
+              <span class="message-time">{{ formatTime(message.timestamp) }}</span>
+            </div>
+          </div>
+        }
+
+        @if (isLoading() && !hasTypingMessage()) {
+          <div class="message assistant">
+            <div class="message-avatar">
+              <mat-icon>smart_toy</mat-icon>
+            </div>
+            <div class="message-content">
+              <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="chat-input-container">
+      <textarea 
+        [(ngModel)]="currentMessage"
+        (keydown.enter)="handleEnter($event)"
+        (input)="adjustTextareaHeight()"
+        placeholder="Digite sua mensagem..."
+        rows="1"
+        class="chat-input"
+        [disabled]="isLoading()"
+        #inputArea
+      ></textarea>
+
+      <button 
+        class="send-button" 
+        (click)="sendMessage()"
+        [disabled]="!canSend()"
+      >
+        @if (isLoading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          <mat-icon>send</mat-icon>
+        }
+      </button>
+    </div>
+  </main>
 </div>

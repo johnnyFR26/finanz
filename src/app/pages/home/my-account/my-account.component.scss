@@ -82,6 +82,17 @@ h1, h2, label{
         border-right: 5px solid var(--principal-color);
         grid-template-columns: 1fr 1fr;
         gap: 30px;
+
+        height: 500px;
+        overflow-y: auto;
+    }
+    >section{
+        display: flex;
+        gap: 20px;
+        
+        >span{
+            padding-top: 30px;
+        }
     }
 }
 

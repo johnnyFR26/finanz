@@ -1,6 +1,6 @@
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartOptions } from './../../../../node_modules/chart.js/dist/types/index.d';
-import { Component, computed, effect, inject, OnInit } from "@angular/core";
+import { ChartOptions } from './../../../../node_modules/chart.js/dist/types/index.d';
+import { Component, computed, effect, inject } from "@angular/core";
 import { TransactionService } from '../../services/transaction.service';
 import { CategoryService } from '../../services/category.service';
 
@@ -18,65 +18,46 @@ export class GraphsComponent {
   protected sub = this.transactionService.sub;
 
   categoriesNames = computed(() => {
-    return this.categories().map(c => c.name)
-  })
-  simpleOutputSums = computed(() => {
+    return this.categories().map(c => c?.name).filter(name => name != null);
+  });
 
-  return this.categories().map(category => 
-    // @ts-ignore
-    category?.transactions
-      .filter(transaction => transaction.type === 'output')
-      .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
-  );
-});
+  simpleOutputSums = computed(() => {
+    return this.categories().map(category => 
+      (category?.transactions ?? [])
+        .filter(transaction => transaction.type === 'output')
+        .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
+    );
+  });
 
   simpleInputSums = computed(() => {
+    return this.categories().map(category => 
+      (category?.transactions ?? [])
+        .filter(transaction => transaction.type === 'input')
+        .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
+    );
+  });
 
-  return this.categories().map(category => 
-    // @ts-ignore
-    category?.transactions
-      .filter(transaction => transaction.type === 'input')
-      .reduce((sum, transaction) => sum + parseFloat(transaction.value), 0)
-  );
-});
-colors = [
-  "#FF5733", // Laranja avermelhado
-  "#33FF57", // Verde
-  "#3357FF", // Azul
-  "#FF33A6", // Rosa
-  "#FFD433", // Amarelo
-  "#33FFF3", // Ciano
-  "#8E33FF", // Roxo
-  "#FF8C33", // Laranja
-  "#33FF8C", // Verde claro
-  "#FF3333"  // Vermelho
-]
+  colors = [
+    "#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFD433",
+    "#33FFF3", "#8E33FF", "#FF8C33", "#33FF8C", "#FF3333"
+  ];
 
-  constructor() {
-    effect(() => {
-      this.categories = this.categoryService.getCurrentCategories()
-    })
-  }
-  
-
-
-  doughnutChartData = {
+  doughnutChartData = computed(() => ({
     labels: ['Receitas', 'Despesas'],
     datasets: [{
       data: [this.sum(), this.sub()],
       backgroundColor: ['#9FF04C', '#E74C3C'],
       borderWidth: 0,
     }]
-  };
+  }));
 
-  // Gráfico Despesas por Categoria
-  categoryChartData = {
-    labels: this.categories().map(c => c.name),
+  categoryChartData = computed(() => ({
+    labels: this.categories().map(c => c?.name).filter(name => name != null),
     datasets: [{
-      data: [30, 20, 25, 15, 10],
-      backgroundColor: ['#3B82F6', '#EC4899', '#F59E0B', '#10B981', '#6366F1'],
+      data: this.simpleOutputSums(),
+      backgroundColor: this.colors.slice(0, this.categories().length),
     }]
-  };
+  }));
 
   chartOptions: ChartOptions<'doughnut'> = {
     responsive: true,
@@ -86,4 +67,10 @@ colors = [
       }
     }
   };
+
+  constructor() {
+    effect(() => {
+      this.categories = this.categoryService.getCurrentCategories();
+    });
+  }
 }

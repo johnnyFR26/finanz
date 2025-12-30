@@ -89,6 +89,16 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     font-style: italic;
 }
 
+@font-face {
+    font-family: ABeeZee;
+    src: url(/fonts/ABeeZee/ABeeZee-Regular.ttf);
+}
+@font-face {
+    font-family: ABeeZee;
+    src: url(/fonts/ABeeZee/ABeeZee-Regular.ttf);
+    font-style: italic;
+}
+
 
 body {
     background-color:var(--grey-background); 
@@ -97,8 +107,7 @@ body {
     flex-direction: column; 
     display: flex;
     align-items: center;
-    padding-top: var(--topsize);
-    height: calc(100% - var(--topsize));
+    height: 100%;
 }
 
 @media (orientation: portrait){
@@ -160,7 +169,7 @@ body {
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
     --mat-select-panel-background-color: var(--input-area);
-    --mat-option-selected-state-layer-color: var(--principal-color);
+    --mat-option-selected-state-layer-color: var(--input-area);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     --reverse-color: var(--white);
     color:  var(--color, var(--black));
@@ -215,6 +224,9 @@ body {
     padding: 10px;
 }
 
+.mat-mdc-select-panel{
+    padding: 0 !important;
+}
 
 .light{
     position: relative;
@@ -323,7 +335,7 @@ a{
         background-color: var(--gray-box);
     }
 
-    h2{
+    > h2{
         font-family: KoHo;
         font-size: 16px;
         flex-shrink: 0;
@@ -331,7 +343,7 @@ a{
         margin-right: 5px;
     }
 
-    h1{
+    > h1{
         font-family: KoHo;
         font-size: 30px;
         font-weight: normal;
@@ -341,7 +353,7 @@ a{
         padding-left: 7px;
     }
 
-    div{
+    > div{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -352,7 +364,7 @@ a{
         font-size: 18px;
     }
 
-    mat-icon{
+    > mat-icon{
         width: 20px;
         height: 20px;
         font-size: 20px;

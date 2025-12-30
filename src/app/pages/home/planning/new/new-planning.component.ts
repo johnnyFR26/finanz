@@ -361,7 +361,7 @@ export class NewPlanningComponent {
   }
 
   async onSubmit(): Promise<void> {
-    if (this.planningForm.valid) {
+    console.log('onSubmit() called', this.planningForm.value, this.planningForm.valid);
       this.isSubmitting.set(true);
       
       try {
@@ -402,9 +402,6 @@ export class NewPlanningComponent {
       } finally {
         this.isSubmitting.set(false);
       }
-    } else {
-      this.markFormGroupTouched();
-    }
   }
 
   onCancel(): void {

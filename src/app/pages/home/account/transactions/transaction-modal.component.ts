@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject, model, signal} from '@angular/core';
+import { Component, computed, inject, model, signal} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -37,7 +37,7 @@ import { CreditCardService } from '../../../../services/credit-card.service';
           <button mat-icon-button (click)="openCategoriesDialog()"><mat-icon>add_box</mat-icon></button>
         </div>
 
-        @if (type() == "output") {
+        @if (type() === "output") {
           <label for="input">Cartão</label>
           <mat-select [(ngModel)]="creditCardId" class="input" name="type" id="input">
             @for(creditCard of creditCards(); track $index){
@@ -110,14 +110,14 @@ export class TransactionModalComponent{
       this.dialogRef.close();
       console.table(this.formValue())
     }
-    onSubmit(): any {
+    onSubmit(): void {
       console.table(this.formValue())
       this.transactionService.createTransaction(this.formValue())
       this.dialogRef.close()
     }
 
     openCategoriesDialog(): void {
-        const dialogRef = this.dialog.open(AddCategoriesModalComponent, {
+         this.dialog.open(AddCategoriesModalComponent, {
           data: {
             id: this.account()?.id,
         },

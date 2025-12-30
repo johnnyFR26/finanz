@@ -106,6 +106,7 @@ export class LogInComponent implements AfterViewInit {
 
   public email = signal<string>('')
   public password = signal<string>('')
+  public isLoading = signal<boolean>(false)
 
   public formValue = computed(() => {
     return {
@@ -121,6 +122,7 @@ export class LogInComponent implements AfterViewInit {
 
   onSubmit(){
     console.log('Form Value:', this.formValue())
+    this.isLoading.set(true)
 
     this.userService.loginUser(this.formValue()).subscribe({
       next: (response) => {
@@ -157,12 +159,15 @@ export class LogInComponent implements AfterViewInit {
           console.log("Usuário não possui conta")
         }
 
+          this.isLoading.set(false)
+
         }
       },
       error: (err) => {
         console.error("Erro na requisição:", err.error);
         console.log("DEU MERDA");
         this.openSnackBar(err.error.error)
+        this.isLoading.set(false)
       }
     })
 

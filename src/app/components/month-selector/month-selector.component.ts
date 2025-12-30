@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, output} from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from "@angular/material/icon";
 
@@ -18,12 +18,26 @@ import { MatIconModule } from "@angular/material/icon";
 export class MonthSelectorComponent{
   readonly months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
   protected monthNumber = new Date().getMonth();
+  protected month = output<number>()
+
+  constructor(){
+    this.updateMonth();
+  }
+
   addMonth(){
-    if(this.monthNumber<11)
+    if(this.monthNumber<11){
       this.monthNumber += 1;
+      this.updateMonth();
+    }
   }
   subMonth(){
-    if(this.monthNumber>0)
+    if(this.monthNumber>0){
       this.monthNumber -= 1;
+      this.updateMonth();
+  }
+}
+
+  updateMonth(){
+    this.month.emit(this.monthNumber);
   }
 }

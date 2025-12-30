@@ -1,35 +1,42 @@
 import { Component, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { AccountService } from "../../../services/account.service";
-import { CurrencyPipe } from "@angular/common";
+import { MatSelectModule } from "@angular/material/select";
+import { UserService } from "../../../services/user.service";
 
 @Component({
     selector: 'app-create-account',
+    styleUrls: ["./create-account.component.scss"],
     template: `
-    <div class="create-account">
-    <h1>{{account()?.currentValue | currency: 'BRL'}}</h1>
-        <div class="create-account__container">
-            <h1 class="create-account__title">Criar conta</h1>
-            <form (ngSubmit)="onSubmit()" class="create-account__form">
-                <input [(ngModel)]="currentValue" [ngModelOptions]="{standalone: true}" type="number" placeholder="Valor inicial" class="create-account__input">
-                <button type="submit" class="create-account__button">Criar conta</button>
-            </form>
-        </div>
+        <form (ngSubmit)="onSubmit()" class="small-box">
+            <section class="initialMessage">
+                <h1>Bem vindo {{ user()?.user?.name?.split(" ")?.slice(0, 2)?.join(' ') ?? ""}}</h1>
+                <h2>Para iniciarmos a gerir seus gastos, vamos criar a sua conta Finanz:</h2>
+            </section>
+            <section>
+                <label for="initialValue">Valor inicial</label>
+                <input [(ngModel)]="currentValue" id="initialValue" [ngModelOptions]="{standalone: true}" type="number" placeholder="Valor inicial" class="input">
+            </section>
+            <section>
+                <label for="Currency">Moeda</label>
+                <mat-select [(ngModel)]="fixedCurrency" id="Currency" class="input">
+                    <mat-option value="BRL">Real (BRL)</mat-option>
+                    <mat-option value="USD">Dólar Americano (USD)</mat-option>
+                </mat-select>
+            </section>
+            <button type="submit" class="button">Criar conta</button>
+        </form>
     `,
-    styles: `
-        input, button {
-            color: #000;
-            padding: 5px;
-        }
-    `,
-    imports: [FormsModule, CurrencyPipe]
+    imports: [FormsModule, MatSelectModule]
 })
 export class CreateAccountComponent {
 
     protected currentValue = signal<number>(0.00)
-    private fixedCurrency = signal<string>('BRL')
+    protected fixedCurrency = signal<string>('BRL')
     private accountService = inject(AccountService)
     protected account = this.accountService.getCurrentAccount()
+    protected userService = inject(UserService)
+    readonly user = this.userService.getUserInfo();
 
     public formValue = computed(() => {
         return {

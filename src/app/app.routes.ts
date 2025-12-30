@@ -1,7 +1,7 @@
-import { CanActivate } from '@angular/router';
 import { Routes } from '@angular/router';
 import { isUserLogged } from './guards/is-user-logged.can-activate.guard';
 import { doesUserHaveAccount } from './guards/does-user-have-account.can-activate.guard';
+import { isUserPlanPremium } from './guards/is-user-plan-premium.can.activate.guard';
 
 export const routes: Routes = [
     {
@@ -20,6 +20,16 @@ export const routes: Routes = [
             {
                 path: 'account',
                 loadComponent: () => import('./pages/home/account/account.component').then(m => m.AccountComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'wallets',
+                loadComponent: () => import('./pages/home/wallets/wallets.component').then(m => m.WalletsComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
+                path: 'wallets/new',
+                loadComponent: () => import('./pages/home/wallets/new/new-wallet.component').then(m => m.NewWalletComponent),
                 canActivate: [doesUserHaveAccount],
             },
             {

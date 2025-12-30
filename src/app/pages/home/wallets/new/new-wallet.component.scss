@@ -1,0 +1,209 @@
+:host{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box{
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+
+    width: auto;
+    box-sizing: border-box;
+    padding: 20px 50px;
+    margin-top: 10px;
+
+    box-shadow: 0 10px 20px 0 #000;
+    background-color: var(--gray-box);
+}
+
+h2{
+    color: var(--green);
+    font-size: 32px;
+    font-family: KoHo;
+    margin: 0;
+}
+
+.Input{
+    width: 100%;
+    textarea{
+        resize: vertical;
+        font-size: small;
+    }
+}
+
+label{
+    font-family: AbeeZee;
+    font-size: 16px;
+    bottom: 6px;
+}
+
+.input{
+    background-color: var(--grey-background);
+}
+
+.button{
+    align-self: center;
+}
+
+.radios{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    label{
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--grey-background);
+        border-radius: 10px;
+        padding: 15px;
+        gap: 10px;
+        width: 200px;
+        border: 3px solid transparent;
+        mat-icon{
+            font-size: 37px;
+            width: 37px;
+            height: 37px;
+            color: #080808;
+        }
+        &:hover mat-icon{color: var(--white);}
+        transition: .2s;
+    }
+    input{
+        visibility: hidden;
+        position: absolute;
+        &:checked + label{
+            border-color: var(--green);
+            mat-icon{color: var(--green);}
+        }
+    }
+}
+
+.percent{
+    display: flex;
+    align-items: center;
+    color: var(--green);
+    gap: 5px;
+    .input{
+        color: var(--green);
+        width: 70px;
+        font-size: 24px;
+    }
+    mat-icon{
+        width: 48px;
+        height: 48px;
+        font-size: 48px;
+    }
+}
+
+.checks{
+    width: 100%;
+}
+
+.check{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    --greenHover: color-mix(in hsl, var(--green), #000 30%);
+    --actualColor: var(--green);
+    label{
+        input{
+            visibility: hidden;
+        }
+        span{
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--actualColor);
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            &:after{
+                content: "";
+                position: absolute;
+                display: none;
+                left: 35%;
+                top: 10%;
+                width: 5px;
+                height: 10px;
+                border: solid var(--gray-box);
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+        &:hover{
+            --actualColor: var(--greenHover);
+        }
+        input:checked + span{
+            background-color: var(--actualColor);
+            &:after{
+                display: block;
+            }
+        }
+    }
+}
+
+.back{
+    background-color: var(--principal-color);
+    color: var(--black);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 4px;
+    transition: 0.2s;
+    &:hover{
+        scale: 1.1;
+        transition: 0.4s;
+    }
+    z-index: 2;
+}
+
+mat-select{
+  background-color: transparent;
+  position: relative;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  z-index: 1;
+
+  
+}
+
+.select-icon{
+  background-color: var(--grey-background);
+  border-radius: 5px;
+  padding: 0 4px;
+  position: relative;
+  width: auto;
+}
+
+.icon{
+  top: 8px;
+  right: 20px;
+  position: absolute;
+  z-index: 0;
+}
+
+.mat-mdc-option {
+    padding: 2px 10px !important;
+}
+
+::ng-deep div.mat-mdc-select-panel {
+    background-color: var(--grey-background);
+}
+
+::ng-deep .mat-mdc-select-panel {
+    background-color: #101010 !important;
+    border-radius: 0 6px 6px 0;
+    overflow-x: hidden !important;
+}
