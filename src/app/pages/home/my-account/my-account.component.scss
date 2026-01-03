@@ -65,12 +65,13 @@ h1, h2, label{
 }
 
 .typePlan{
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--font-color);
+    color: var(--reverse-color);
     padding: 0 10px;
     border-radius: 7px;
     &.premium{
         background-color: var(--green);
+        color: var(--black);
     }
 }
 
@@ -121,7 +122,7 @@ h1, h2, label{
         font-size: 20px;
         border: 0;
         border-radius: 0;
-        border-bottom: 1px solid var(--white);
+        border-bottom: 1px solid var(--font-color);
         margin-bottom: 10px;
         appearance: base-select;
         option{

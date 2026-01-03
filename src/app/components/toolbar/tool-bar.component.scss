@@ -3,10 +3,6 @@
 :host{
     display: block;
 }
-*{
-    
-    --mat-icon-color: var(--principal-color);
-}
 
 mat-toolbar {
     width: 100%;
@@ -14,7 +10,7 @@ mat-toolbar {
     top: 0;
     left: 0;
     z-index: 1000; /* Para garantir que fique acima de outros elementos */
-    background-color: var(--gray-form);
+    background-color: transparent;
 
     .current{
         margin-left: 5px;
@@ -43,4 +39,8 @@ mat-toolbar {
     icon-size: 30px,
     state-layer-size: 50px,
   ));
+}
+
+mat-icon{
+    color: var(--principal-color);
 }

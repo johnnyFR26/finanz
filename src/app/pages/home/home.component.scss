@@ -20,7 +20,7 @@ footer {
 }
 
 .sidemenu {
-  background: rgba(var(--reverse-color), 0.788) !important;
+  background: color-mix(in srgb, var(--reverse-color) 78.8%, transparent) !important;
   backdrop-filter: blur(10px);
   border-right: 1px solid rgba(75, 75, 75, 0.5) !important;
   max-width: 280px !important;
@@ -74,9 +74,11 @@ mat-nav-list {
     padding: 0 16px !important;
     --mat-list-list-item-focus-state-layer-color: var(--green);
     --mat-list-list-item-focus-state-layer-opacity: 0.25;
+    --mat-list-list-item-hover-state-layer-color: var(--green);
+    --mat-list-list-item-hover-state-layer-opacity: 0.12;
     &:hover {
       background: rgba(255, 255, 255, 0.05) !important;
-      border-color: rgba(165, 212, 55, 0.2) !important;
+      border-color: rgba(165, 212, 55, 0.5) !important;
 
       mat-icon {
         color: var(--principal-color);
@@ -108,7 +110,7 @@ mat-nav-list {
     }
 
     mat-icon {
-      color: color-mix(in srgb, var(--font-color) 80%, var(--reverse-color));
+      color: color-mix(in srgb, var(--font-color) 90%, var(--reverse-color));
       transition: color 0.2s ease;
       margin-right: 12px;
     }

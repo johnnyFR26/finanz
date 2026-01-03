@@ -7,16 +7,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 1rem 0;
+  gap: 10px;
   .chart {
-    background-color: var(--gray-form);
+    background-color: var(--gray-box);
     padding: 1rem;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 5px 10px -4px #000;
-
-    &.dark{
-      background-color: var(--gray-box);
-    }
 
     canvas {
       padding: 10%;

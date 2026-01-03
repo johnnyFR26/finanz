@@ -4,40 +4,29 @@
   flex-wrap: wrap;
 }
 
+::ng-deep .mat-mdc-select-panel{
+  background-color: var(--grey-background) !important;
+  overflow-x: hidden !important;
+  
+  &::-webkit-scrollbar-thumb{
+      border-radius: 10px;
+      background: var(--input-area);
+      &:hover{
+          background: var(--input-area2);
+      }
+  }
+}
+
 ::ng-deep .mat-mdc-option {
-  color: white !important;
-  background-color: #1a1a1a !important;
+  color: var(--font-color) !important;
+
+  background-color: var(--grey-background) !important;
 
   padding: 2px 10px !important;
   width: 100%;
 
   &:hover {
-    background-color: #322f2f !important;
-  }
-}
-
-::ng-deep div.mat-mdc-select-panel {
-  background-color: #1a1a1a !important;
-}
-
-::ng-deep .mat-mdc-select-panel {
-  background-color: #101010 !important;
-  color: white;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2),
-              0px 2px 2px rgba(0, 0, 0, 0.14),
-              0px 1px 5px rgba(0, 0, 0, 0.12);
-  border-radius: 6px;
-  overflow-x: hidden !important;
-  &::-webkit-scrollbar{
-      background: #0000;
-      width: 7px;
-  }
-  &::-webkit-scrollbar-thumb{
-      border-radius: 10px;
-      background: #424242;
-      &:hover{
-          background: #626262;
-      }
+    background-color: var(--gray-form) !important;
   }
 }
 
@@ -88,8 +77,8 @@ mat-select{
 }
 
 ::ng-deep .income *{
-  --mat-sys-primary: var(--principal-color);
-  --mat-sys-on-surface: var(--principal-color);
+  --mat-sys-primary: var(--green);
+  --mat-sys-on-surface: var(--green);
 }
 
 .divisao div{

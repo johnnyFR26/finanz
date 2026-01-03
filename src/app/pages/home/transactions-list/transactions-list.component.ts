@@ -12,7 +12,7 @@ import { MonthSelectorComponent } from "../../../components/month-selector/month
   standalone: true,
   imports: [TransactionComponent, MatIcon, CurrencyPipe, FormsModule, CommonModule, MonthSelectorComponent],
   template: `
-  <select class="mini-box" style="margin-bottom:30px;scale:1.2;" [(ngModel)]="type" [ngClass]="{
+  <select class="mini-box filter" [(ngModel)]="type" [ngClass]="{
     'all': type() === 'transaction',
     'revenue': type() === 'input',
     'expense': type() === 'output'

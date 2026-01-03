@@ -107,6 +107,8 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     flex-direction: column; 
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    padding-top: calc(var(--headersize) * 3 / 4);
     height: 100%;
 }
 
@@ -149,11 +151,11 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     --principal-color: #181824;
     --grey-background: #E4EDFD;
     --gray: #EBF2FF66;
-    --gray-form: hsl(222, 39%, 87%);
-    --gray-box: #eaedf2;
+    --gray-form: #d1d9eb;
+    --gray-box: #DFE3EB;
     --gray-font: #7A7AA7;
     --placeholder: #464647;
-    --input-area: #d4d4ee;
+    --input-area: #cbcbf5;
     --input-area2: #afafc6;
     --green: #9DBE1F;
     --red: #B83226;
@@ -161,10 +163,10 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     --black: #181824;
     --blue: #3060B0;
     --magenta: #cb6ce6;
-    --yellow: #ffde59;
+    --yellow: #cdb03d;
     --mat-sys-primary: var(--principal-color);
     --mat-sys-surface: var(--gray-form);
-    --mat-sys-on-surface: var(--principal-color);
+    --mat-sys-on-surface: var(--font-color);
     --mat-sys-on-surface-variant: currentColor;
     --mat-sys-surface-variant: var(--input-area2);
     --mat-fab-foreground-color: black;
@@ -192,6 +194,7 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     --green: #cbe957;
     --red: #D35348;
     --blue: #4285F4;
+    --yellow: #ffde59;
     --principal-color: var(--green);
     --grey-background: #181824;
     --gray: #EBF2FF66;
@@ -203,7 +206,9 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
     --input-area2: #373760;
     --reverse-color: var(--black);
     --font-color: var(--white);
-    color:  var(--color, var(--font-color));
+    &:not(mat-icon){
+        color:  var(--color, var(--font-color));
+    }
     &::-webkit-scrollbar-thumb{
         border-radius: 10px;
         background: #424242;
@@ -285,13 +290,16 @@ a{
 }
 
 .sign{
-  width: 30%;
+  width: 50%;
   height: 100vh;
   align-self: end;
   display: flex;
   flex-direction: column; 
   align-items: center; 
+  box-sizing: border-box;
   padding: 0 10%;
+  overflow-y: auto;
+  overflow-x: hidden;
     h1{font-weight:normal; font-family: KoHo;margin: 0;}
 }
 
@@ -335,10 +343,7 @@ a{
     width: 100%;
     padding: 0 0 0 5px;
     box-sizing: border-box;
-    background-color: var(--gray-form);
-    .dark &{
-        background-color: var(--gray-box);
-    }
+    background-color: var(--gray-box);
     border-radius: 10px;
     padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
@@ -524,6 +529,8 @@ body, .body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     transition: 0.3s;
     color: var(--input-area2); 
     mat-icon{
+        transition: 0.3s;
+        color: var(--input-area2); 
         min-width: 100px;
         min-height: 100px;
         font-size: 100px;
@@ -537,7 +544,10 @@ body, .body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         transition: 0.5s;
         color: var(--color);
         h2{
-        transition: 0.5s;
+            transition: 0.5s;
+            color: var(--color);
+        }
+        mat-icon{
             color: var(--color);
         }
     }
@@ -602,6 +612,7 @@ mat-progress-bar{
         height: 18px;
         width: 30px;
         position: absolute;
+        color: var(--font-color);
         text-shadow: 1px 0 5px var(--reverse-color);
         right: 10px;
     }
