@@ -100,7 +100,7 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
 }
 
 
-body {
+.body {
     background-color:var(--grey-background); 
 }
 .centro{
@@ -149,12 +149,12 @@ body {
     --principal-color: #181824;
     --grey-background: #E4EDFD;
     --gray: #EBF2FF66;
-    --gray-form: #d1d9eb;
-    --gray-box: #DFE3EB;
+    --gray-form: hsl(222, 39%, 87%);
+    --gray-box: #eaedf2;
     --gray-font: #7A7AA7;
     --placeholder: #464647;
     --input-area: #d4d4ee;
-    --input-area2: #c6c6da;
+    --input-area2: #afafc6;
     --green: #9DBE1F;
     --red: #B83226;
     --white: #f0f8ff;
@@ -172,7 +172,8 @@ body {
     --mat-option-selected-state-layer-color: var(--input-area);
     --mat-datepicker-calendar-container-background-color: var(--gray-form);
     --reverse-color: var(--white);
-    color:  var(--color, var(--black));
+    --font-color: var(--black);
+    color:  var(--color, var(--font-color));
     font-family: var(--font, KoHo);
     &::-webkit-scrollbar{
         background: #0000;
@@ -180,13 +181,13 @@ body {
     }
     &::-webkit-scrollbar-thumb{
         border-radius: 10px;
-        background: #424242;
+        background: #c6d0d7;
         &:hover{
-            background: #626262;
+            background: #b5bec9;
         }
     }
 }
-*.dark{
+.dark, .dark *{
     --black: #171722;
     --green: #cbe957;
     --red: #D35348;
@@ -201,7 +202,15 @@ body {
     --input-area: #232334;
     --input-area2: #373760;
     --reverse-color: var(--black);
-    color:  var(--color, var(--white));
+    --font-color: var(--white);
+    color:  var(--color, var(--font-color));
+    &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+        background: #424242;
+        &:hover{
+            background: #626262;
+        }
+    }
 }
 
 .form, .mat-mdc-dialog-surface{
@@ -327,6 +336,9 @@ a{
     padding: 0 0 0 5px;
     box-sizing: border-box;
     background-color: var(--gray-form);
+    .dark &{
+        background-color: var(--gray-box);
+    }
     border-radius: 10px;
     padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
@@ -452,8 +464,8 @@ a{
     width: 85px;
     margin: 50px 0 30px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body, .body { height: 100%; }
+body, .body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .name{
     display: flex;
@@ -485,7 +497,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .card{
     font-family: league-spartan;
-    box-shadow: 0 20px 20px -12px #000;
+    box-shadow: 0 10px 10px -6px #000;
 }
 .title{
     color: var(--principal-color);

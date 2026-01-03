@@ -37,12 +37,12 @@ h1, h2, label{
         .edit{
             position: absolute;
             background-color: var(--white);
-            color: var(--color);
             border-radius: 5px;
             height: 30px;
             width: 30px;
             box-shadow: 0px 4px 10px 0px #000;
             mat-icon{
+                color: var(--black);
                 height: 20px;
                 width: 20px;
                 font-size: 20px;

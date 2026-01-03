@@ -6,6 +6,8 @@ import { UserService } from "../../../services/user.service";
 import { TransactionService } from "../../../services/transaction.service";
 import { AchievementComponent } from "../../../components/achievement/achievement.component";
 import { AchievementService } from "../../../services/achievement.service";
+import { FormsModule } from "@angular/forms";
+import { ThemeService } from "../../../services/themeService";
 
 @Component({
     selector: 'app-my-account',
@@ -41,7 +43,7 @@ import { AchievementService } from "../../../services/achievement.service";
           <option value="USD">Estados Unidos ($)</option>
         </select>
         <label labelfor="appearence-select">Aparência</label>
-        <select name="appearence" id="appearence-select">
+        <select name="appearence" [(ngModel)]="theme" (change)="onThemeChange($event)">
           <option value="dark">Modo Escuro</option>
           <option value="light">Modo Claro</option>
           <option value="system">De Acordo Com o Sistema</option>
@@ -83,24 +85,30 @@ import { AchievementService } from "../../../services/achievement.service";
     </div>
     `,
     styleUrl: './my-account.component.scss',
-    imports: [MatIconModule, MatButtonModule, AchievementComponent]
+    imports: [MatIconModule, MatButtonModule, FormsModule, AchievementComponent]
 })
 export class MyAccountComponent implements OnInit{
     protected transactionService = inject(TransactionService)
     private accountService = inject(AccountService)
     private userService = inject(UserService)
     private achievementService = inject(AchievementService)
+    protected themeService = inject(ThemeService)
     protected user = this.userService.getUserInfo()
     protected account = this.accountService.getCurrentAccount()
     public id = this.account()?.id
     protected sum = this.transactionService.sum;
     protected sub = this.transactionService.sub;
     protected achievements = this.achievementService.getCurrentAchievements();
+    public theme = signal(this.themeService.getTheme());
 
     protected countdown: string | undefined;
 
     ngOnInit(): void {
       this.updateCountDown();
+    }
+
+    onThemeChange(event: Event) {
+      this.themeService.updateTheme((event.target as HTMLSelectElement).value)
     }
 
     updateCountDown() {
