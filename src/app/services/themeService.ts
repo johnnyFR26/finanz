@@ -1,46 +1,50 @@
-import { inject, Injectable } from "@angular/core";
-import { UserService } from "./user.service";
+import { effect, Injectable, signal } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
 })
 export class ThemeService {
-    readonly userService = inject(UserService);
-    readonly user = this.userService.getUserInfo();
-    
-    protected theme = "";
+
     protected darkMode = false;
+    protected theme = signal(this.loadThemeFromLocalStorage() ?? "system");
 
     constructor() {
-      if (this.user != null && this.user()?.user.controls.theme){
-        this.theme = this.user()?.user.controls.theme
-      } else {
-        this.theme = "system"
-      }
-
-      this.checkTheme();
+      effect(()=> {
+        this.syncThemeWithLocalStorage()
+        this.checkTheme();
+      })
     }
 
     getTheme(){
-        return this.theme;
+        return this.theme();
     }
 
     getDarkTheme(){
         return this.darkMode;
     }
 
-    updateTheme(theme: string) {
-        this.theme = theme;
+    updateTheme(theme: String) {
+        this.theme.set(theme);
+        this.syncThemeWithLocalStorage();
         this.checkTheme();
     }
 
     checkTheme() {
-      if(this.theme == "system" && window.matchMedia('(prefers-color-scheme: dark)').matches || this.theme == "dark"){
+      if(this.theme() == "system" && window.matchMedia('(prefers-color-scheme: dark)').matches || this.theme() == "dark"){
         this.darkMode = true;
       } else {
         this.darkMode = false;
       }
       this.applicateTheme();
+    }
+
+    syncThemeWithLocalStorage(){
+        //@ts-ignore
+        localStorage.setItem('ThemeData', this.theme())
+    }
+    
+    loadThemeFromLocalStorage(): String | null{
+        return localStorage.getItem('ThemeData');
     }
 
     applicateTheme() {
