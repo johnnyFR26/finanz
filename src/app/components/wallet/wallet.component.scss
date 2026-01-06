@@ -46,7 +46,7 @@ details section{
     display: flex;
     flex-direction: column;
     .data{
-        color: color-mix(in srgb,var(--white)70%,transparent);
+        color: color-mix(in srgb,var(--font-color)70%,transparent);
     }
     > span {
         display: flex;
@@ -83,7 +83,7 @@ summary{
                 --mat-sys-primary: var(--color) !important;
             }
         }
-        .gains{--color:var(--principal-color);}
+        .gains{--color:var(--green);}
         .losts{--color:var(--red);}
     }
 }

@@ -37,12 +37,12 @@ h1, h2, label{
         .edit{
             position: absolute;
             background-color: var(--white);
-            color: var(--grey-background);
             border-radius: 5px;
             height: 30px;
             width: 30px;
             box-shadow: 0px 4px 10px 0px #000;
             mat-icon{
+                color: var(--black);
                 height: 20px;
                 width: 20px;
                 font-size: 20px;
@@ -65,12 +65,13 @@ h1, h2, label{
 }
 
 .typePlan{
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--font-color);
+    color: var(--reverse-color);
     padding: 0 10px;
     border-radius: 7px;
     &.premium{
-        background-color: var(--principal-color);
+        background-color: var(--green);
+        color: var(--black);
     }
 }
 
@@ -121,13 +122,13 @@ h1, h2, label{
         font-size: 20px;
         border: 0;
         border-radius: 0;
-        border-bottom: 1px solid var(--white);
+        border-bottom: 1px solid var(--font-color);
         margin-bottom: 10px;
         appearance: base-select;
         option{
             background-color: var(--input-area);
             &:checked{background-color: var(--input-area2);}
-            &:hover{background-color: var(--principal-color);color: var(--black);}
+            &:hover{background-color: var(--green);color: var(--black);}
             &::checkmark{display: none;}
         }
         &::picker(select){

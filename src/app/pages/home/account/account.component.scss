@@ -9,21 +9,26 @@
 
 .buttons{
     display: flex;
+    flex-wrap: wrap;
     width: 90vw;
     gap: 20px;
 
     button{
-        background-color: var(--gray-box);
+        background-color: var(--grey-background);
         border: 2px solid currentColor;
         border-radius: 10px;
         width: 150px;
         height: 35px;
         padding: 10px 0px;
+
+        :host-context(.dark) &{
+            background-color: var(--gray-box);
+        }
     }
 }
 
 .deposit{
-    color: var(--principal-color);
+    color: var(--green);
 }
 
 .transfer{
@@ -36,8 +41,8 @@
 }
 
 
-.currency{--small-box-color: var(--white);}
-.gains{--small-box-color: var(--principal-color);}
+.currency{--small-box-color: currentColor;}
+.gains{--small-box-color: var(--green);}
 .losts{--small-box-color: var(--red);}
 .credit-card{--small-box-color: var(--blue);}
 
@@ -71,12 +76,12 @@ select{
     min-width: 40%;
     flex-shrink: 0;
     appearance: base-select;
-    background-color: var(--gray-form);
+    background-color: var(--grey-background);
     font-size: 16px;
     option{
         background-color: var(--input-area);
         &:checked{background-color: var(--input-area2);}
-        &:hover{background-color: var(--principal-color);color: var(--black);}
+        &:hover{background-color: var(--green);color: var(--black);}
         &::checkmark{display: none;}
     }
     &::picker(select){

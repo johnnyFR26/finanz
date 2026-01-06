@@ -2,13 +2,14 @@
 :host{
     display: grid;
     align-items: start;
-    padding: 10px 5%;
+    padding: 0 5% 10px 5%;
     box-sizing: border-box;
     height: 100%;
     width: 100%;
 }
 
 .leftTitle{
+    margin-top: 0;
     grid-area: title;
 }
 
@@ -40,9 +41,11 @@
         transition: 0.2s;
 
         mat-icon{
+            color: var(--grey-background);
             width: 81px;
             height: 81px;
             font-size: 81px;
+            transition: 0.2s;
         }
         &:hover{
             color: var(--green);
@@ -50,6 +53,10 @@
             border: 2px solid var(--green);
             cursor: pointer;
             scale: 1.01;
+            mat-icon{
+                transition: 0.2s;
+                color: var(--green);
+            }
         }
     }
 }

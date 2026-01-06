@@ -41,7 +41,10 @@ mat-icon{
     }
     &.uncompleted{
         color: var(--gray-box);
-        background-color: var(--gray-form);
+        background-color: var(--input-area2);
+        :host-context(.dark) &{
+            background-color: var(--gray-form);
+        }
     }
 }
 

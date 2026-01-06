@@ -100,13 +100,15 @@ src: url("/fonts/TT Berlinerins Trial Grotesk.otf");
 }
 
 
-body {
+.body {
     background-color:var(--grey-background); 
 }
 .centro{
     flex-direction: column; 
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    padding-top: calc(var(--headersize) * 3 / 4);
     height: 100%;
 }
 
@@ -146,39 +148,66 @@ body {
     top: var(--headersize);
 }
 *{
-    --gradient2:linear-gradient(var(--principal-color), var(--grey-background));
-    --gradient: linear-gradient( var(--grey-background) 10%, color-mix(in srgb, var(--principal-color), var(--grey-background) 80%)  50%, var(--grey-background) 90%);
+    --principal-color: #181824;
+    --grey-background: #E4EDFD;
+    --gray: #EBF2FF66;
+    --gray-form: #d1d9eb;
+    --gray-box: #DFE3EB;
+    --gray-font: #7A7AA7;
+    --placeholder: #464647;
+    --input-area: #cbcbf5;
+    --input-area2: #afafc6;
+    --green: #9DBE1F;
+    --red: #B83226;
+    --white: #f0f8ff;
+    --black: #181824;
+    --blue: #3060B0;
+    --magenta: #cb6ce6;
+    --yellow: #cdb03d;
+    --mat-sys-primary: var(--principal-color);
+    --mat-sys-surface: var(--gray-form);
+    --mat-sys-on-surface: var(--font-color);
+    --mat-sys-on-surface-variant: currentColor;
+    --mat-sys-surface-variant: var(--input-area2);
+    --mat-fab-foreground-color: black;
+    --mat-select-panel-background-color: var(--input-area);
+    --mat-option-selected-state-layer-color: var(--input-area);
+    --mat-datepicker-calendar-container-background-color: var(--gray-form);
+    --reverse-color: var(--white);
+    --font-color: var(--black);
+    color:  var(--color, var(--font-color));
+    font-family: var(--font, KoHo);
+    &::-webkit-scrollbar{
+        background: #0000;
+        width: 7px;
+    }
+    &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+        background: #c6d0d7;
+        &:hover{
+            background: #b5bec9;
+        }
+    }
+}
+.dark, .dark *{
+    --black: #171722;
+    --green: #cbe957;
+    --red: #D35348;
+    --blue: #4285F4;
+    --yellow: #ffde59;
     --principal-color: var(--green);
     --grey-background: #181824;
     --gray: #EBF2FF66;
     --gray-form: #111119;
     --gray-box: #282838;
     --gray-font: #7A7AA7;
-    --gray-transaction: color-mix(in hsl, var(--gray-form)80%, #000);
     --placeholder: #464647;
     --input-area: #232334;
     --input-area2: #373760;
-    --green: #cbe957;
-    --red: #ff5757;
-    --white: #f0f8ff;
-    --black: #171722;
-    --blue: #38b6ff;
-    --magenta: #cb6ce6;
-    --yellow: #ffde59;
-    --mat-sys-primary: var(--principal-color);
-    --mat-sys-surface: var(--gray-form);
-    --mat-sys-on-surface: var(--white);
-    --mat-sys-on-surface-variant: var(--white);
-    --mat-sys-surface-variant: var(--input-area2);
-    --mat-fab-foreground-color: black;
-    --mat-select-panel-background-color: var(--input-area);
-    --mat-option-selected-state-layer-color: var(--input-area);
-    --mat-datepicker-calendar-container-background-color: var(--gray-form);
-    color:  var(--color, var(--white));
-    font-family: var(--font, KoHo);
-    &::-webkit-scrollbar{
-        background: #0000;
-        width: 7px;
+    --reverse-color: var(--black);
+    --font-color: var(--white);
+    &:not(mat-icon){
+        color:  var(--color, var(--font-color));
     }
     &::-webkit-scrollbar-thumb{
         border-radius: 10px;
@@ -188,15 +217,16 @@ body {
         }
     }
 }
+
 .form, .mat-mdc-dialog-surface{
     background-color: var(--gray-form);
     width: 300px;
     border-radius: 5px;
-    box-shadow: 0 0 0 5px var(--principal-color),
-    0 10px 0 5px var(--principal-color),
-    0 -2px 0 5px var(--principal-color),
-    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22),
-    0 10px 35px 0 rgba(from var(--principal-color) r g b / 0.22);
+    box-shadow: 0 0 0 5px var(--green),
+    0 10px 0 5px var(--green),
+    0 -2px 0 5px var(--green),
+    0 10px 35px 0 rgba(from var(--green) r g b / 0.22),
+    0 10px 35px 0 rgba(from var(--green) r g b / 0.22);
     justify-self: center ;
 }
 .form, .content{
@@ -260,18 +290,21 @@ a{
 }
 
 .sign{
-  width: 30%;
+  width: 50%;
   height: 100vh;
   align-self: end;
   display: flex;
   flex-direction: column; 
   align-items: center; 
+  box-sizing: border-box;
   padding: 0 10%;
+  overflow-y: auto;
+  overflow-x: hidden;
     h1{font-weight:normal; font-family: KoHo;margin: 0;}
 }
 
 .array-container{
-  z-index: -1;
+  z-index: 0;
   padding: 10px;
   height: calc(100vh - 20px);
   width: 50vw;
@@ -315,6 +348,10 @@ a{
     padding: 12px 8px 20px 15px;
     box-shadow: 0 5px 10px -4px #000;
     
+    &.dark{
+        background-color: var(--gray-box);
+    }
+
     > h2{
         font-family: KoHo;
         font-size: 16px;
@@ -362,7 +399,7 @@ a{
 
 .gains{
     mat-icon{
-        color: var(--principal-color);
+        color: var(--green);
         rotate: -90deg;
     }
 }
@@ -389,14 +426,14 @@ a{
 }
 .button{
     color: black;
-    background-color: var(--principal-color);
+    background-color: var(--green);
     border: 2px solid #0000;
     border-radius: 4px;
     font-size: 20px;
     padding: 7px 20px;
     margin: 10px 0;
     font-family: TT-Berlinerins;
-    box-shadow: 0 0 5px var(--principal-color);
+    box-shadow: 0 0 5px var(--green);
     transition: 0.2s;
     &:hover:not(:disabled){
         scale: 1.1;
@@ -416,12 +453,12 @@ a{
     font-family: KoHo;
     font-size: 20px;
     border-radius: 4px;
-    border: 2px solid var(--principal-color);
+    border: 2px solid var(--green);
     background-color: var(--input-area);
     padding:10px 3px;
     a{
         font-family: KoHo;
-        color: var(--principal-color);
+        color: var(--green);
         text-decoration: none;
         &:hover{
             text-decoration: underline;
@@ -432,8 +469,8 @@ a{
     width: 85px;
     margin: 50px 0 30px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body, .body { height: 100%; }
+body, .body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .name{
     display: flex;
@@ -465,7 +502,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .card{
     font-family: league-spartan;
-    box-shadow: 0 20px 20px -12px #000;
+    box-shadow: 0 10px 10px -6px #000;
 }
 .title{
     color: var(--principal-color);
@@ -490,8 +527,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: column;
     align-items: center;
     transition: 0.3s;
-    color: var(--input-area2);
+    color: var(--input-area2); 
     mat-icon{
+        transition: 0.3s;
+        color: var(--input-area2); 
         min-width: 100px;
         min-height: 100px;
         font-size: 100px;
@@ -503,10 +542,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
     &:hover{
         transition: 0.5s;
-        color: var(--white);
+        color: var(--color);
         h2{
-        transition: 0.5s;
-            color: var(--white);
+            transition: 0.5s;
+            color: var(--color);
+        }
+        mat-icon{
+            color: var(--color);
         }
     }
 }
@@ -536,8 +578,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   justify-self: flex-end;
 
-  & button{
-    background-color: var(--input-area);
+  button{
+    background-color: var(--input-area2);
     width: 34px;
     height: 34px;
     margin: 4px;
@@ -551,6 +593,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .category-icon{
+    color: var(--white);
     background-color: #470688;
     width: 30px !important;
     height: 30px !important;
@@ -569,8 +612,8 @@ mat-progress-bar{
         height: 18px;
         width: 30px;
         position: absolute;
-        color: var(--white);
-        text-shadow: 1px 0 5px #000;
+        color: var(--font-color);
+        text-shadow: 1px 0 5px var(--reverse-color);
         right: 10px;
     }
 }

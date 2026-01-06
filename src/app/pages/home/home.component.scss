@@ -4,7 +4,6 @@
 }
 
 * {
-  --mat-list-list-item-label-text-color: white;
   --mat-sys-on-surface: #a5d437;
   --mat-sys-corner-full: 0;
   --primary-green: #a5d437;
@@ -21,7 +20,7 @@ footer {
 }
 
 .sidemenu {
-  background: rgba(0, 0, 0, 0.788) !important;
+  background: color-mix(in srgb, var(--reverse-color) 78.8%, transparent) !important;
   backdrop-filter: blur(10px);
   border-right: 1px solid rgba(75, 75, 75, 0.5) !important;
   max-width: 280px !important;
@@ -73,19 +72,22 @@ mat-nav-list {
     border: 1px solid transparent !important;
     height: 48px !important;
     padding: 0 16px !important;
-    
+    --mat-list-list-item-focus-state-layer-color: var(--green);
+    --mat-list-list-item-focus-state-layer-opacity: 0.25;
+    --mat-list-list-item-hover-state-layer-color: var(--green);
+    --mat-list-list-item-hover-state-layer-opacity: 0.12;
     &:hover {
       background: rgba(255, 255, 255, 0.05) !important;
-      border-color: rgba(165, 212, 55, 0.2) !important;
+      border-color: rgba(165, 212, 55, 0.5) !important;
 
       mat-icon {
-        color: var(--primary-green) !important;
+        color: var(--principal-color);
       }
     }
 
     &.mdc-list-item--activated,
     &.active {
-      background: rgba(165, 212, 55, 0.15) !important;
+      background: rgba(191, 252, 49, 0.15) !important;
       border-color: rgba(165, 212, 55, 0.5) !important;
       box-shadow: 0 2px 8px rgba(165, 212, 55, 0.2);
 
@@ -95,7 +97,7 @@ mat-nav-list {
       }
 
       mat-icon {
-        color: var(--primary-green) !important;
+        color: var(--principal-color) !important;
       }
     }
 
@@ -108,7 +110,7 @@ mat-nav-list {
     }
 
     mat-icon {
-      color: #999;
+      color: color-mix(in srgb, var(--font-color) 90%, var(--reverse-color));
       transition: color 0.2s ease;
       margin-right: 12px;
     }

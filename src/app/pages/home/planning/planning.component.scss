@@ -22,7 +22,6 @@
 
 .add{
     background-color: var(--principal-color);
-    color: var(--grey-background);
     border-radius: 10px;
     padding: 5px;
     height: 24px;
@@ -36,6 +35,9 @@
         scale: 1.2;
         rotate: (180deg);
         transition: .5s;
+    }
+    mat-icon{
+    color: var(--grey-background);
     }
 }
 
@@ -68,7 +70,7 @@
         font-size: 30px;
     }
 
-    &.gains{h2, span{color: var(--principal-color);}}
+    &.gains{h2, span{color: var(--green);}}
     &.losts{h2, span{color: var(--red);}}
     &.balance{h2, span{color: var(--magenta)}}
     &.economy{h2, span{color: var(--yellow)}}

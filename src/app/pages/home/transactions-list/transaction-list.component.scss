@@ -2,23 +2,25 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 100%;
 }
 
 .box:not(.transaction-list){
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 174px);
     margin: 0;
     display: flex;
     align-items: flex-end;
+    background-color: transparent;
 }
 
 .transaction-list{
     display: block;
     overflow: auto;
     padding: 5px;
-    border: solid 5px var(--gray-transaction);
+    border: solid 5px var(--gray-form);
     height: 60vh;
-    background-color: var(--gray-transaction);
+    background-color: var(--gray-form);
     align-self: flex-end;
     margin: 0;
     width: 100%;
@@ -32,6 +34,7 @@
     display: flex;
     flex-flow: column wrap;
     padding: 5px;
+    margin: 10px 0;
     
     h1{
         font-size: large;
@@ -51,13 +54,19 @@
 }
 .gains{
     & h2{
-        color: var(--principal-color);
+        --color: var(--green);
     }
 }
 .losts{
     & h2{
-        color: var(--red);
+        --color: var(--red);
     }    
+}
+
+.filter{
+    margin-bottom:30px;
+    scale:1.2;
+    --color: var(--black)
 }
 
 .all:not(month-selector), .revenue:not(month-selector), .expense:not(month-selector){
@@ -65,11 +74,12 @@
 }
 
 .all{
-    --type: var(--white);;
+    --type: var(--white);
+    --type1: var(--font-color);
 }
     
 .revenue{
-    --type: var(--principal-color);
+    --type: var(--green);
 }
 
 .expense{

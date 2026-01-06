@@ -7,6 +7,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 1rem 0;
+  gap: 10px;
   .chart {
     background-color: var(--gray-box);
     padding: 1rem;
@@ -20,7 +21,6 @@
     }
 
     p {
-      color: white;
       margin-top: 0.5rem;
       font-weight: 600;
       justify-self: flex-start;
