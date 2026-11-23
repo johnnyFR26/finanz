@@ -1,13 +1,16 @@
 import { PlanningCategory } from "./planning-category.model"
+import { PlanningIncome } from "./planning-income.model"
+import { PlanningExpense } from "./planning-expense.model"
 
 export interface PlanningModel {
     id: string
-    month: number
-    day?: number
-    year: number
+    month: string
     limit: number
-    available: number
+    availableLimit: number
     title?: string
     accountId: string
-    categories: PlanningCategory[]
+    categories?: PlanningCategory[]
+    planningCategories: any[]
+    incomes: PlanningIncome[]
+    expenses: PlanningExpense[]
 }

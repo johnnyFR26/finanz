@@ -34,7 +34,7 @@
 .division{
     display: grid;
     gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin: 10px 0;
     div{
         font-size: 14px;
@@ -275,4 +275,13 @@ mat-progress-bar{
 
 .category-progress {
   animation: progressFill 1s ease-out;
+}
+
+.spinner {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

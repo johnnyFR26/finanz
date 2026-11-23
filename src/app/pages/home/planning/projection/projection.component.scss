@@ -1,0 +1,82 @@
+.projection {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .projection-card {
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    mat-card-header {
+      margin-bottom: 20px;
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 24px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+  }
+
+  .error-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    color: #c62828;
+    border-radius: 4px;
+    border-left: 4px solid #d32f2f;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .projection-table {
+    width: 100%;
+
+    .balance-positive {
+      color: #388e3c;
+      font-weight: 600;
+    }
+
+    .balance-negative {
+      color: #d32f2f;
+      font-weight: 600;
+    }
+  }
+
+  tr.mat-mdc-row:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  tr.mat-mdc-row:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.back {
+  background-color: var(--principal-color);
+  color: var(--reverse-color);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 4px;
+  transition: 0.2s;
+  &:hover {
+    scale: 1.1;
+    transition: 0.4s;
+  }
+}
