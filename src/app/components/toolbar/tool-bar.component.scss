@@ -16,19 +16,6 @@ mat-toolbar {
         margin-left: 5px;
     }
 }
-.name-user {
-    margin-left: auto;
-    font-size: 20px;
-    font-weight: bold;
-    padding-right: 16px; 
-    scale: 1.3;
-}
-
-.Logo{
-    height: 40px;
-    margin-left: 5px;
-}
-
 .example-icon{
     mat-icon{
         height: 30px;
@@ -39,6 +26,20 @@ mat-toolbar {
     icon-size: 30px,
     state-layer-size: 50px,
   ));
+}
+
+.Logo{
+    height: 40px;
+    margin-left: 5px;
+}
+
+.name-user {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 16px;
+    min-width: 48px;
+    min-height: 48px;
 }
 
 mat-icon{

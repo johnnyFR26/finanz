@@ -1,18 +1,25 @@
-import { effect, Injectable, signal } from "@angular/core";
+import { effect, Injectable, OnDestroy, signal } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
 })
-export class ThemeService {
+export class ThemeService implements OnDestroy {
 
     protected darkMode = false;
     protected theme = signal(this.loadThemeFromLocalStorage() ?? "system");
+    private mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    private mediaListener = () => this.checkTheme();
 
     constructor() {
+      this.mediaQuery.addEventListener('change', this.mediaListener);
       effect(()=> {
         this.syncThemeWithLocalStorage()
         this.checkTheme();
       })
+    }
+
+    ngOnDestroy() {
+      this.mediaQuery.removeEventListener('change', this.mediaListener);
     }
 
     getTheme(){
@@ -30,7 +37,7 @@ export class ThemeService {
     }
 
     checkTheme() {
-      if(this.theme() == "system" && window.matchMedia('(prefers-color-scheme: dark)').matches || this.theme() == "dark"){
+      if(this.theme() == "system" && this.mediaQuery.matches || this.theme() == "dark"){
         this.darkMode = true;
       } else {
         this.darkMode = false;

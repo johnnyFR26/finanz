@@ -1,17 +1,17 @@
 <div class="dots array-container"></div>
-<form class="sign" name="form" (ngSubmit)="onSubmit()">
-  <img src="favicon.ico" alt="logo" class="logo"/>
+<form class="sign" name="form" (ngSubmit)="onSubmit()" aria-label="Formulário de cadastro">
+  <img src="favicon.ico" alt="Finanz logo" class="logo"/>
   <h1>Cadastrar</h1>
   <label for="email">EMAIL</label>
-  <input class="input" type="email" id="email" name="email" [(ngModel)]="email" required email placeholder="emailexemplo@gmail.com"/>
+  <input class="input" type="email" id="email" name="email" [(ngModel)]="email" required email placeholder="emailexemplo@gmail.com" autocomplete="email"/>
   
-  <label for="email">NOME</label>
-  <input class="input" type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Exemplo da Silva"/>
+  <label for="name">NOME</label>
+  <input class="input" type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Exemplo da Silva" autocomplete="name"/>
 
   <div class="divisao">
     <div>
       <label for="phone">TELEFONE</label>
-      <input class="input" type="text" id="phone" name="phone" mask="(00) 00000-0000" [(ngModel)]="phone" required placeholder="(13)99999-9999"/>
+      <input class="input" type="text" id="phone" name="phone" mask="(00) 00000-0000" [(ngModel)]="phone" required placeholder="(13)99999-9999" autocomplete="tel"/>
     </div>
     <div>
     <label for="cpf">CPF</label>
@@ -19,12 +19,12 @@
     </div>
   </div>
   <label for="password">SENHA</label>
-  <input class="input" type="password" name="password" id="password" [(ngModel)]="password" required placeholder="senhaexemplo123"/>
+  <input class="input" type="password" name="password" id="password" [(ngModel)]="password" required placeholder="senhaexemplo123" autocomplete="new-password"/>
 
-  <label for="password">CONFIRMAR SENHA</label>
-  <input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" required />
+  <label for="confirmPassword">CONFIRMAR SENHA</label>
+  <input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" required autocomplete="new-password"/>
 
-  <p>Ao criar uma conta, você concorda que leu os <a href="https://myownblog.toastytech.com.br/blog/finanz/termos-de-uso">Termos de uso</a> e concorda com isso.</p>
+  <p>Ao criar uma conta, você concorda que leu os <a href="https://myownblog.toastytech.com.br/blog/finanz/termos-de-uso" target="_blank" rel="noopener noreferrer">Termos de uso</a> e concorda com isso.</p>
 
   <button type="submit" [disabled]="!isFormValid()" class="button">ENTRAR</button>
 

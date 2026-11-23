@@ -71,6 +71,7 @@ mat-nav-list {
     transition: all 0.2s ease !important;
     border: 1px solid transparent !important;
     height: 48px !important;
+    min-height: 48px !important;
     padding: 0 16px !important;
     --mat-list-list-item-focus-state-layer-color: var(--green);
     --mat-list-list-item-focus-state-layer-opacity: 0.25;

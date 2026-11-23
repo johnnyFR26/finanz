@@ -67,6 +67,9 @@
 .pass{
   position: absolute;
   padding: 0 5px;
+  mat-icon {
+    color: var(--font-color);
+  }
 }
 
 .sign{

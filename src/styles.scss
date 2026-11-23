@@ -472,6 +472,16 @@ a{
 html, body, .body { height: 100%; }
 body, .body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .name{
     display: flex;
     align-items: center;

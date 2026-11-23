@@ -1,8 +1,8 @@
 <mat-sidenav-container class="container">
  
   <!-- Menu Lateral -->
-  <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false">
-    <mat-nav-list>
+  <mat-sidenav class="sidemenu" #sidenav mode="over" opened="false" role="navigation" aria-label="Menu principal">
+    <mat-nav-list aria-label="Navegação principal">
       <div class="menu">
         <a mat-list-item routerLinkActive="active" 
         (click)="redirectToPath('/home/account')"
@@ -79,7 +79,7 @@
       <app-tool-bar [sidenav]="sidenav"></app-tool-bar>
     </header>
  
-    <main class="centro">
+    <main class="centro" role="main">
       <router-outlet></router-outlet>
     </main>  
   </mat-sidenav-content>

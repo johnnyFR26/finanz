@@ -8,15 +8,16 @@
     </div>
   }
 </div>
-<form name="form" (ngSubmit)="onSubmit()" class="sign">
-  <img src="favicon.ico" alt="logo" class="logo"/>
+<form name="form" (ngSubmit)="onSubmit()" class="sign" aria-label="Formulário de login">
+  <img src="favicon.ico" alt="Finanz logo" class="logo"/>
   <h1>LOGIN</h1>
   <label for="email">EMAIL</label>
-  <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com"/>
+  <input type="email" id="email" name="email" [(ngModel)]="email" required email class="input" placeholder="emailexemplo@gmail.com" autocomplete="email"/>
   <label for="password">SENHA</label>
   <div class="input">
-  <input matInput type="password" name="password" id="password" [(ngModel)]="password" [type]="showPassword ? 'password' : 'text'" class="input" placeholder="senhaexemplo123">
-    <mat-icon class="pass" (click)="togglePassword()" matSuffix>
+  <input matInput type="password" name="password" id="password" [(ngModel)]="password" [type]="showPassword ? 'password' : 'text'" class="input" placeholder="senhaexemplo123" autocomplete="current-password">
+    <button type="button" class="pass" (click)="togglePassword()" aria-label="Mostrar ou ocultar senha" style="background:none;border:none;cursor:pointer;">
+    <mat-icon matSuffix>
     @if(showPassword){
       lock
     }
@@ -24,10 +25,11 @@
       lock_open
     }
     </mat-icon>
+    </button>
   </div>
   <a href="https://www.google.com" class="esqueci">esqueci minha senha</a>
   <button [disabled]="!isFormValid() || isLoading()" type="submit" class="button">{{ isLoading() ? 'Entrando...' : 'ENTRAR' }}</button>
-  <button class="google" (click)="this.authService.loginWithGoogle()"><img src="google.svg" alt="login com google">Fazer Login com o Google</button>
+  <button type="button" class="google" (click)="this.authService.loginWithGoogle()"><img src="google.svg" alt="Logo do Google">Fazer Login com o Google</button>
   <p class="link"> Não tem conta? Crie uma <a (click)="goTo('signin')">AQUI</a></p>
 </form>
 <div class="grid array-container"></div>

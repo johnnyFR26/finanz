@@ -12,13 +12,13 @@ import { ThemeService } from "../../services/themeService";
 @Component({
     selector: 'app-tool-bar',
     template: `
-        <mat-toolbar>
-            <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-toolbar role="banner">
+            <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Abrir menu de navegação">
                 <mat-icon>menu</mat-icon>
             </button>
-            <img [src]="logo" class="Logo"/>
-            <button mat-icon-button class="name-user" (click)="openDialog()" aria-label="Example icon-button with share icon">
-                <mat-icon class="icon" >account_circle</mat-icon>
+            <img [src]="logo" class="Logo" alt="Finanz logo"/>
+            <button mat-icon-button class="name-user" (click)="openDialog()" aria-label="Abrir perfil do usuário">
+                <mat-icon class="icon">account_circle</mat-icon>
             </button>
         </mat-toolbar>
     `,
