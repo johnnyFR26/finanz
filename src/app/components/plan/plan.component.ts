@@ -1,14 +1,17 @@
 import { AccountService } from './../../services/account.service';
+import { PlanningService } from './../../services/planning.service';
 import { MatIcon } from '@angular/material/icon';
 import { Component, computed, inject, input, signal } from "@angular/core";
 import { CurrencyPipe, NgStyle } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'plan',
     styleUrl: './plan.component.scss',
-    imports: [MatIcon, MatButtonModule, MatProgressBarModule, CurrencyPipe, NgStyle],
+    imports: [MatIcon, MatButtonModule, MatProgressBarModule, MatSnackBarModule, CurrencyPipe, NgStyle],
     template: `
         <div class="box plan">
             <span class="top">
@@ -22,6 +25,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
                     }@else {
                         <button mat-icon-button aria-label="descricao" (click)="showDetails.set(false)"><mat-icon>visibility_off</mat-icon></button>
                     }
+                    <button mat-icon-button aria-label="ver projeção" (click)="router.navigate(['/home/planning/projection', plan().id])"><mat-icon>timeline</mat-icon></button>
+                    <button mat-icon-button aria-label="duplicar planejamento" (click)="onDuplicate()" [disabled]="duplicating()">
+                        @if (duplicating()) {
+                            <mat-icon class="spinner">refresh</mat-icon>
+                        } @else {
+                            <mat-icon>content_copy</mat-icon>
+                        }
+                    </button>
                     <button mat-icon-button aria-label="editar"><mat-icon>edit</mat-icon></button>
                     <button mat-icon-button aria-label="deletar"><mat-icon>delete</mat-icon></button>
                 </div>
@@ -113,10 +124,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class PlanComponent {
     readonly accountService = inject(AccountService)
+    private planningService = inject(PlanningService)
+    private snackBar = inject(MatSnackBar)
+    protected router = inject(Router)
     protected account = this.accountService.getCurrentAccount()
     
     public plan = input<any>()
     public showDetails = signal(false)
+    public duplicating = signal(false)
     
     protected missing = computed(() => this.plan().limit - this.plan().availableLimit);
     protected percentage = computed(() => this.missing() / this.plan().limit);
@@ -186,5 +201,26 @@ export class PlanComponent {
         }
         
         return color;
+    }
+    
+    protected onDuplicate(): void {
+        this.duplicating.set(true);
+        this.planningService.duplicatePlanning(this.plan().id).subscribe({
+            next: () => {
+                this.snackBar.open('Planejamento duplicado com sucesso!', 'Fechar', {
+                    duration: 3000,
+                    panelClass: ['success-snackbar']
+                });
+                this.planningService.getPlannings();
+                this.duplicating.set(false);
+            },
+            error: () => {
+                this.snackBar.open('Erro ao duplicar planejamento. Tente novamente.', 'Fechar', {
+                    duration: 5000,
+                    panelClass: ['error-snackbar']
+                });
+                this.duplicating.set(false);
+            }
+        });
     }
 }
