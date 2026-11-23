@@ -92,3 +92,29 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+.classification-section {
+  margin: 10px;
+
+  .classification-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .classification-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    @media (orientation: portrait) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .classification {
+    &.fixed-expenses { h2, span { color: var(--magenta); } }
+    &.installment-expenses { h2, span { color: var(--yellow); } }
+    &.variable-expenses { h2, span { color: var(--green); } }
+  }
+}

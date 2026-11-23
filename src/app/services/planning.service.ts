@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { effect, inject, Injectable, signal } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { PlanningModel } from "../models/planning.model";
 import { PlanningCategory } from "../models/planning-category.model";
@@ -14,7 +15,22 @@ interface CreatePlanningRequest {
   title?: string;
   accountId: string;
   categories: PlanningCategory[];
+  incomes?: Array<{ name: string; value: number }>;
+  expenses?: Array<{
+    name: string;
+    totalValue: number;
+    installments: number;
+    currentInstallment: number;
+    startDate: string;
+    type: string;
+  }>;
 }
+
+interface PlanningsResponse {
+  plannings: PlanningModel[];
+  pagination: any;
+}
+
 @Injectable({
     providedIn: "root",
 })
@@ -33,8 +49,8 @@ export class PlanningService {
 
     createPlanning(planning: CreatePlanningRequest) {
         return this.http.post(`${this.urlApi}/planning`, planning).subscribe({
-            next: (response) => {
-                console.log(response)
+            next: () => {
+                this.getPlannings()
             },
             error: (error) => {
                 console.error(error)
@@ -43,15 +59,22 @@ export class PlanningService {
     }
 
     getPlannings() {
-        this.http.get<PlanningModel[]>(`${this.urlApi}/planning/account/${this.account()?.id}`).subscribe({
+        this.http.get<PlanningsResponse>(`${this.urlApi}/planning/account/${this.account()?.id}`).subscribe({
             next: (response) => {
-                /*@ts-ignore */
                 this.setPlannings(response.plannings)
             },
             error: (error) => {
                 console.error(error)
             }
         })
+    }
+
+    duplicatePlanning(planningId: string): Observable<any> {
+        return this.http.post<any>(`${this.urlApi}/planning/${planningId}/duplicate`, {})
+    }
+
+    getProjection(planningId: string): Observable<any> {
+        return this.http.get<any>(`${this.urlApi}/planning/${planningId}/projection`)
     }
 
     getPlanningsSignal() {

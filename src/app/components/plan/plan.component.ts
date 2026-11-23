@@ -31,6 +31,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
                 <div><span>META</span>{{plan().limit | currency: account()?.currency}}</div>
                 <div><span>GASTO</span>{{totalSpent() | currency: account()?.currency}}</div>
                 <div><span>DISPONÍVEL</span>{{plan().availableLimit | currency: account()?.currency}}</div>
+                <div><span>RECEITAS</span>{{totalIncome() | currency: account()?.currency}}</div>
+                <div><span>DESPESAS</span>{{totalExpenses() | currency: account()?.currency}}</div>
             </div>
             
             <div class="progress-container">
@@ -119,6 +121,14 @@ export class PlanComponent {
     protected missing = computed(() => this.plan().limit - this.plan().availableLimit);
     protected percentage = computed(() => this.missing() / this.plan().limit);
     
+    protected totalIncome = computed(() =>
+        this.plan()?.incomes?.reduce((s: number, i: any) => s + Number(i.value), 0) || 0
+    );
+
+    protected totalExpenses = computed(() =>
+        this.plan()?.expenses?.reduce((s: number, e: any) => s + Number(e.monthlyValue), 0) || 0
+    );
+
     protected totalSpent = computed(() => {
         return this.plan().planningCategories?.reduce((total: number, category: any) => {
             return total + (parseFloat(category.limit) - parseFloat(category.availableLimit));

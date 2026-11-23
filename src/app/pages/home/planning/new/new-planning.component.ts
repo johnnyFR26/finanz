@@ -38,6 +38,16 @@ interface CreatePlanningRequest {
   title?: string;
   accountId: string;
   categories: PlanningCategory[];
+  incomes?: Array<{ name: string; value: number }>;
+  expenses?: Array<{
+    name: string;
+    totalValue: number;
+    installments: number;
+    currentInstallment: number;
+    monthlyValue: number;
+    startDate: string;
+    type: string;
+  }>;
 }
 
 @Component({
@@ -100,6 +110,54 @@ interface CreatePlanningRequest {
             </div>
     
             <mat-divider></mat-divider>
+
+            <!-- Fontes de Renda -->
+            <div class="form-section">
+              <div class="section-header">
+                <h3 class="section-title">
+                  <mat-icon>account_balance</mat-icon>
+                  Fontes de Renda
+                </h3>
+                <button type="button" mat-raised-button color="primary" (click)="addIncome()">
+                  <mat-icon>add</mat-icon>
+                  Adicionar Renda
+                </button>
+              </div>
+
+              <div formArrayName="incomes" class="incomes-list">
+                @for (incomeControl of incomesArray.controls; track incomeControl; let i = $index) {
+                  <div [formGroupName]="i" class="income-item">
+                    <mat-card class="income-card">
+                      <div class="income-form">
+                        <mat-form-field class="income-name">
+                          <mat-label>Nome</mat-label>
+                          <input matInput formControlName="name" placeholder="Ex: Salário">
+                        </mat-form-field>
+                        <mat-form-field class="income-value">
+                          <mat-label>Valor</mat-label>
+                          <input matInput type="number" formControlName="value" placeholder="0.00">
+                          <span matTextPrefix>R$&nbsp;</span>
+                        </mat-form-field>
+                        <button type="button" mat-icon-button color="warn" (click)="removeIncome(i)"
+                          [attr.aria-label]="'Remover renda ' + i">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </mat-card>
+                  </div>
+                }
+
+                @if (incomesArray.length === 0) {
+                  <div class="no-items">
+                    <mat-icon>account_balance</mat-icon>
+                    <p>Nenhuma fonte de renda adicionada</p>
+                    <p class="hint">Clique em "Adicionar Renda" para começar</p>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
     
             <div class="form-section">
               <h3 class="section-title">
@@ -139,6 +197,21 @@ interface CreatePlanningRequest {
                     <span class="label">Soma Categorias:</span>
                     <span class="value categories" [class.warning]="categoriesTotal() > totalLimit()">
                       R$ {{ categoriesTotal() | number:'1.2-2' }}
+                    </span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Receitas:</span>
+                    <span class="value available">R$ {{ totalIncome() | number:'1.2-2' }}</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Despesas:</span>
+                    <span class="value categories">R$ {{ totalExpenses() | number:'1.2-2' }}</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Balanço:</span>
+                    <span class="value" [class.available]="totalIncome() - totalExpenses() >= 0"
+                      [class.warning]="totalIncome() - totalExpenses() < 0">
+                      R$ {{ totalIncome() - totalExpenses() | number:'1.2-2' }}
                     </span>
                   </div>
                 </div>
@@ -238,6 +311,78 @@ interface CreatePlanningRequest {
             </div>
     
             <mat-divider></mat-divider>
+
+            <!-- Despesas -->
+            <div class="form-section">
+              <div class="section-header">
+                <h3 class="section-title">
+                  <mat-icon>receipt_long</mat-icon>
+                  Despesas
+                </h3>
+                <button type="button" mat-raised-button color="primary" (click)="addExpense()">
+                  <mat-icon>add</mat-icon>
+                  Adicionar Despesa
+                </button>
+              </div>
+
+              <div formArrayName="expenses" class="expenses-list">
+                @for (expenseControl of expensesArray.controls; track expenseControl; let i = $index) {
+                  <div [formGroupName]="i" class="expense-item">
+                    <mat-card class="expense-card">
+                      <div class="expense-form">
+                        <mat-form-field class="expense-name">
+                          <mat-label>Nome</mat-label>
+                          <input matInput formControlName="name" placeholder="Ex: Aluguel">
+                        </mat-form-field>
+                        <mat-form-field class="expense-type">
+                          <mat-label>Tipo</mat-label>
+                          <mat-select formControlName="type">
+                            <mat-option value="fixed">Fixa</mat-option>
+                            <mat-option value="installment">Parcelada</mat-option>
+                            <mat-option value="variable">Variável</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="expense-value">
+                          <mat-label>Valor Total</mat-label>
+                          <input matInput type="number" formControlName="totalValue" placeholder="0.00">
+                          <span matTextPrefix>R$&nbsp;</span>
+                        </mat-form-field>
+                        @if (getExpenseControl(i, 'type')?.value === 'installment') {
+                          <mat-form-field class="expense-installments">
+                            <mat-label>Parcelas</mat-label>
+                            <input matInput type="number" formControlName="installments" placeholder="2">
+                          </mat-form-field>
+                          <mat-form-field class="expense-current">
+                            <mat-label>Parcela Atual</mat-label>
+                            <input matInput type="number" formControlName="currentInstallment" placeholder="1">
+                          </mat-form-field>
+                        }
+                        <mat-form-field class="expense-date">
+                          <mat-label>Data Início</mat-label>
+                          <input matInput [matDatepicker]="expDatePicker" formControlName="startDate" readonly>
+                          <mat-datepicker-toggle matIconSuffix [for]="expDatePicker"></mat-datepicker-toggle>
+                          <mat-datepicker #expDatePicker></mat-datepicker>
+                        </mat-form-field>
+                        <button type="button" mat-icon-button color="warn" (click)="removeExpense(i)"
+                          [attr.aria-label]="'Remover despesa ' + i">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </mat-card>
+                  </div>
+                }
+
+                @if (expensesArray.length === 0) {
+                  <div class="no-items">
+                    <mat-icon>receipt_long</mat-icon>
+                    <p>Nenhuma despesa adicionada</p>
+                    <p class="hint">Clique em "Adicionar Despesa" para começar</p>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
     
             <div class="form-actions">
               <button type="button" mat-stroked-button (click)="onCancel()">
@@ -290,6 +435,23 @@ export class NewPlanningComponent {
     }, 0);
   });
 
+  totalIncome = computed(() => {
+    return this.incomesArray.controls.reduce((total, control) => {
+      const value = control.get('value')?.value || 0;
+      return total + Number(value);
+    }, 0);
+  });
+
+  totalExpenses = computed(() => {
+    return this.expensesArray.controls.reduce((total, control) => {
+      const type = control.get('type')?.value;
+      const totalValue = Number(control.get('totalValue')?.value) || 0;
+      const installments = Number(control.get('installments')?.value) || 1;
+      const monthlyValue = type === 'installment' ? totalValue / installments : totalValue;
+      return total + monthlyValue;
+    }, 0);
+  });
+
   availableCategories = computed(() => {
     const selectedIds = this.categoriesArray.controls
       .map(control => control.get('categoryId')?.value)
@@ -302,13 +464,23 @@ export class NewPlanningComponent {
     return this.planningForm.get('categories') as FormArray;
   }
 
+  get incomesArray(): FormArray {
+    return this.planningForm.get('incomes') as FormArray;
+  }
+
+  get expensesArray(): FormArray {
+    return this.planningForm.get('expenses') as FormArray;
+  }
+
   private createForm(): FormGroup {
     return this.fb.group({
       title: [''],
       date: [new Date(), Validators.required],
       total: [0, [Validators.required, Validators.min(0.01)]],
       available: [0, [Validators.required, Validators.min(0.01)]],
-      categories: this.fb.array([])
+      categories: this.fb.array([]),
+      incomes: this.fb.array([]),
+      expenses: this.fb.array([])
     });
   }
 
@@ -316,6 +488,24 @@ export class NewPlanningComponent {
     return this.fb.group({
       categoryId: ['', Validators.required],
       limit: [0, [Validators.required, Validators.min(0.01)]]
+    });
+  }
+
+  private createIncomeForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      value: [0, [Validators.required, Validators.min(0.01)]]
+    });
+  }
+
+  private createExpenseForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      type: ['fixed', Validators.required],
+      totalValue: [0, [Validators.required, Validators.min(0.01)]],
+      installments: [2, [Validators.required, Validators.min(2)]],
+      currentInstallment: [1, [Validators.required, Validators.min(1)]],
+      startDate: [new Date(), Validators.required]
     });
   }
 
@@ -329,6 +519,22 @@ export class NewPlanningComponent {
     this.categoriesArray.removeAt(index);
   }
 
+  addIncome(): void {
+    this.incomesArray.push(this.createIncomeForm());
+  }
+
+  removeIncome(index: number): void {
+    this.incomesArray.removeAt(index);
+  }
+
+  addExpense(): void {
+    this.expensesArray.push(this.createExpenseForm());
+  }
+
+  removeExpense(index: number): void {
+    this.expensesArray.removeAt(index);
+  }
+
   onCategoryChange(index: number): void {
     const categoryId = this.getCategoryControl(index, 'categoryId')?.value;
     const category = this.availableCategoriesData().find(cat => cat.id === categoryId);
@@ -340,6 +546,10 @@ export class NewPlanningComponent {
 
   getCategoryControl(index: number, controlName: string) {
     return this.categoriesArray.at(index)?.get(controlName);
+  }
+
+  getExpenseControl(index: number, controlName: string) {
+    return this.expensesArray.at(index)?.get(controlName);
   }
 
   getCategoryName(index: number): string {
@@ -369,7 +579,7 @@ export class NewPlanningComponent {
         const selectedDate = new Date(formValue.date);
         
         const request: CreatePlanningRequest = {
-          month: /*String(selectedDate.getMonth() + 1)*/ new Date(selectedDate),
+          month: new Date(selectedDate),
           day: selectedDate.getDate(),
           year: selectedDate.getFullYear(),
           limit: Number(formValue.total),
@@ -379,7 +589,28 @@ export class NewPlanningComponent {
           categories: formValue.categories.map((cat: Category) => ({
             categoryId: cat.categoryId,
             limit: Number(cat.limit)
-          }))
+          })),
+          incomes: formValue.incomes.map((inc: any) => ({
+            name: inc.name,
+            value: Number(inc.value)
+          })),
+          expenses: formValue.expenses.map((exp: any) => {
+            const type = exp.type;
+            const totalValue = Number(exp.totalValue);
+            const installments = type === 'installment' ? Number(exp.installments) : 1;
+            const currentInstallment = type === 'installment' ? Number(exp.currentInstallment) : 1;
+            const monthlyValue = type === 'installment' ? totalValue / installments : totalValue;
+            const startDate = exp.startDate instanceof Date ? exp.startDate.toISOString() : new Date(exp.startDate).toISOString();
+            return {
+              name: exp.name,
+              totalValue,
+              installments,
+              currentInstallment,
+              monthlyValue,
+              startDate,
+              type
+            };
+          })
         };
 
         console.log('Criando planejamento:', request);
