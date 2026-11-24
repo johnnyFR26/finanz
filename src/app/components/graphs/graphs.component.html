@@ -1,52 +1,101 @@
-<div class="charts-container">
-  <!-- Gráfico Receita vs Despesa -->
-  <div class="chart">
-    <p>RECEITA X DESPESA</p>
-    <canvas baseChart
-      [data]="{
-    labels: ['Receitas', 'Despesas'],
-    datasets: [{
-      data: [this.sum(), this.sub()],
-      backgroundColor: ['#9FF04C', '#E74C3C'],
-      borderWidth: 0,
-    }]
-  }"
-      [options]="chartOptions"
-      [type]="'doughnut'">
-    </canvas>
+@if (loading()) {
+  <div class="dashboard-grid" role="status" aria-label="Carregando gráficos">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
   </div>
-
-  <!-- Gráfico de Despesas por Categoria -->
-  <div class="chart">
-    <p>RECEITAS POR CATEGORIA</p>
-    <canvas baseChart
-      [data]="{
-      labels: this.categoriesNames(),
-      datasets: [{
-        data: this.simpleInputSums(),
-        backgroundColor: this.colors,
-        borderWidth: 0,
-      }]
-      }"
-      [options]="chartOptions"
-      [type]="'doughnut'">
-    </canvas>
+} @else if (!hasTransactionData()) {
+  <div class="dashboard-grid">
+    <div class="empty-state">
+      <mat-icon>insert_chart_outlined</mat-icon>
+      <h2>Nenhum dado disponível</h2>
+      <p>Adicione transações para visualizar seus gráficos financeiros.</p>
+    </div>
   </div>
+} @else {
+  <div class="dashboard-grid">
+    @if (insights().length > 0) {
+      <div class="insight-banner">
+        @for (insight of insights(); track $index) {
+          <p [class.insight-highlight]="$first">{{ insight }}</p>
+        }
+      </div>
+    }
 
-  <div class="chart">
-    <p>DESPESAS POR CATEGORIA</p>
-    <canvas baseChart
-      [data]="{
-      labels: this.categoriesNames(),
-      datasets: [{
-        data: this.simpleOutputSums(),
-        backgroundColor: this.colors,
-        borderWidth: 0,
-      }]
-      }"
-      [options]="chartOptions"
-      [type]="'doughnut'">
-    </canvas>
+    <div class="metric-hero small-box"
+      [class.metric-hero--positive]="savingsRate() > 0"
+      [class.metric-hero--negative]="savingsRate() <= 0">
+      <h2>Taxa de Economia</h2>
+      <h1>{{ savingsRateFormatted() }}%</h1>
+    </div>
+
+    <div class="chart-card small-box">
+      <h3>Receitas vs Despesas</h3>
+      <canvas baseChart
+        [data]="incomeExpenseChartData()"
+        [options]="chartOptions()"
+        [type]="'doughnut'"
+        aria-label="Gráfico de receitas versus despesas">
+      </canvas>
+    </div>
+
+    <div class="chart-card small-box">
+      <h3>Despesas por Categoria</h3>
+      <canvas baseChart
+        [data]="expenseByCategoryData()"
+        [options]="chartOptions()"
+        [type]="'doughnut'"
+        aria-label="Gráfico de despesas por categoria">
+      </canvas>
+    </div>
+
+    <div class="chart-card small-box">
+      <h3>Receitas por Categoria</h3>
+      <canvas baseChart
+        [data]="incomeByCategoryData()"
+        [options]="chartOptions()"
+        [type]="'doughnut'"
+        aria-label="Gráfico de receitas por categoria">
+      </canvas>
+    </div>
+
+    @if (trendChartData()) {
+      <div class="chart-card chart-card--wide small-box">
+        <h3>Tendência de Gastos</h3>
+        <canvas baseChart
+          [data]="trendChartData()!"
+          [options]="barChartOptions()"
+          [type]="'bar'"
+          aria-label="Gráfico de tendência mensal de receitas e despesas">
+        </canvas>
+      </div>
+    }
+
+    @if (hasPlanningData() && budgetChartData()) {
+      <div class="chart-card small-box">
+        <h3>Utilização do Orçamento</h3>
+        <canvas baseChart
+          [data]="budgetChartData()!"
+          [options]="budgetChartOptions()"
+          [type]="'bar'"
+          aria-label="Gráfico de utilização do orçamento por categoria">
+        </canvas>
+      </div>
+    }
+
+    @if (hasCreditCardData() && creditCardChartData()) {
+      <div class="chart-card small-box">
+        <h3>Uso do Cartão de Crédito</h3>
+        <canvas baseChart
+          [data]="creditCardChartData()!"
+          [options]="creditCardChartOptions()"
+          [type]="'bar'"
+          aria-label="Gráfico de uso percentual dos cartões de crédito">
+        </canvas>
+      </div>
+    }
   </div>
-
-</div>
+}

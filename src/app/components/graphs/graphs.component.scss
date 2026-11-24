@@ -1,47 +1,141 @@
 :host {
   width: 90vw;
 }
-.charts-container {
+
+.dashboard-grid {
   width: 100%;
+  display: grid;
+  gap: 16px;
+  padding: 1rem 0;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.chart-card {
+  background-color: var(--gray-box);
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px -4px #000;
+
+  h3 {
+    font-family: Dosis;
+    margin: 0 0 0.5rem;
+    color: var(--font-color);
+  }
+
+  canvas {
+    max-height: 300px;
+    width: 100%;
+  }
+}
+
+.chart-card--wide {
+  grid-column: span 1;
+}
+
+@media (min-width: 600px) {
+  .chart-card--wide {
+    grid-column: span 2;
+  }
+}
+
+.metric-hero {
+  text-align: center;
+
+  h2 {
+    font-family: Dosis;
+    margin: 0;
+    color: var(--font-color);
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-family: League-Spartan;
+    margin: 0;
+  }
+}
+
+.metric-hero--positive h1 {
+  color: var(--green);
+}
+
+.metric-hero--negative h1 {
+  color: var(--red);
+}
+
+.insight-banner {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 1rem 0;
-  gap: 10px;
-  .chart {
-    background-color: var(--gray-box);
-    padding: 1rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 5px 10px -4px #000;
+  gap: 8px;
 
-    canvas {
-      padding: 10%;
-      max-width: 100%;
-    }
-
-    p {
-      margin-top: 0.5rem;
-      font-weight: 600;
-      justify-self: flex-start;
-    }
+  p {
+    background: var(--gray-box);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-family: KoHo;
+    font-size: 14px;
+    margin: 0;
+    color: var(--font-color);
   }
-}
-@media (orientation: portrait) {
-  .charts-container {
-    flex-direction: column;
-    align-items: center;
-    .chart{
-      width: calc(100% - 2rem);
-    }
+
+  .insight-highlight {
+    border-left: 3px solid var(--principal-color);
+    font-weight: 600;
   }
 }
 
-@media (orientation: landscape) {
-  .charts-container {
-    .chart{
-      width: 25%;
-      max-width: 33%;
-    }
+.skeleton-card {
+  background: var(--gray-box);
+  border-radius: 20px;
+  min-height: 200px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.6;
   }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--gray-font);
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+  }
+
+  h2 {
+    font-family: Dosis;
+  }
+
+  p {
+    font-family: KoHo;
+  }
+}
+
+/* Fitts's Law — touch-friendly interactive areas */
+button,
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
 }
