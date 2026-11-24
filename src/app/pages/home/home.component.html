@@ -14,6 +14,15 @@
         </a>
         
         <a mat-list-item routerLinkActive="active" 
+        (click)="redirectToPath('/home/overview')"
+        (keypress)="redirectToPath('/home/overview')"
+        tabindex="0"
+        >
+          <mat-icon>dashboard</mat-icon>
+          <span>Visão Geral</span>
+        </a>
+        
+        <a mat-list-item routerLinkActive="active" 
         (click)="redirectToPath('/home/wallets')"
         (keypress)="redirectToPath('/home/wallets')"
         tabindex="0"
