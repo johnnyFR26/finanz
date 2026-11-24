@@ -1,72 +1,377 @@
 .projection {
   padding: 20px;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
+  padding-bottom: 40px;
+}
 
-  .projection-card {
-    background-color: transparent;
-    margin-top: 20px;
-    margin-bottom: 20px;
+// --- Page Title ---
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--principal-color);
+  margin: 20px 0 24px;
+  font-family: Dosis;
+}
 
-    mat-card-header {
-      margin-bottom: 20px;
+// --- Loading / Error ---
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+}
 
-      mat-card-title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 24px;
-        font-weight: 500;
-      }
-    }
-  }
+.error-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  color: var(--red);
+  border-radius: 8px;
+  border-left: 4px solid var(--red);
+  background: var(--gray-box);
 
-  .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 20px;
-  }
-
-  .error-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
-    color: var(--red);
-    border-radius: 4px;
-    border-left: 4px solid var(--red);
-
-    mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  .projection-table {
-    width: 100%;
-
-    .balance-positive {
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    .balance-negative {
-      color: var(--red);
-      font-weight: 600;
-    }
-  }
-
-  tr.mat-mdc-row:nth-child(even) {
-    background-color: var(--gray-box);
-  }
-
-  tr.mat-mdc-row:hover {
-    background-color: var(--input-area);
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 }
 
+// --- Summary Cards ---
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summary-card {
+  background: var(--gray-box);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .card-label {
+    font-size: 12px;
+    color: var(--gray-font);
+    font-family: Dosis;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: League-Spartan, sans-serif;
+  }
+
+  .card-detail {
+    font-size: 12px;
+    color: var(--gray-font);
+  }
+
+  // Color variants
+  &.savings {
+    .card-icon {
+      background: rgba(var(--green-rgb, 155, 190, 31), 0.15);
+      mat-icon { color: var(--green); }
+    }
+    .card-value { color: var(--green); }
+  }
+
+  &.commitment {
+    .card-icon {
+      background: rgba(var(--yellow-rgb, 205, 176, 61), 0.15);
+      mat-icon { color: var(--yellow); }
+    }
+    .card-value { color: var(--yellow); }
+  }
+
+  &.best-month {
+    .card-icon {
+      background: rgba(var(--blue-rgb, 48, 96, 176), 0.15);
+      mat-icon { color: var(--blue); }
+    }
+    .card-value { color: var(--blue); }
+  }
+
+  &.installments {
+    .card-icon {
+      background: rgba(var(--magenta-rgb, 203, 108, 230), 0.15);
+      mat-icon { color: var(--magenta); }
+    }
+    .card-value { color: var(--magenta); }
+  }
+}
+
+// --- Charts ---
+.charts-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-container {
+  background: var(--gray-box);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  &.full-width-chart {
+    margin-bottom: 24px;
+  }
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Dosis;
+  color: var(--gray-font);
+  margin: 0 0 12px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 240px;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.full-width-chart .chart-wrapper {
+  height: 200px;
+}
+
+// --- Insights ---
+.insights-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Dosis;
+  color: var(--principal-color);
+  margin: 0 0 12px;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--gray-box);
+  border-left: 4px solid transparent;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateX(2px);
+  }
+
+  .insight-icon {
+    flex-shrink: 0;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+  }
+
+  .insight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .insight-title {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Dosis;
+  }
+
+  .insight-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--gray-font);
+  }
+
+  &.insight-positive {
+    border-left-color: var(--green);
+    .insight-icon { color: var(--green); }
+  }
+
+  &.insight-negative {
+    border-left-color: var(--red);
+    .insight-icon { color: var(--red); }
+  }
+
+  &.insight-neutral {
+    border-left-color: var(--blue);
+    .insight-icon { color: var(--blue); }
+  }
+
+  &.insight-tip {
+    border-left-color: var(--yellow);
+    .insight-icon { color: var(--yellow); }
+  }
+}
+
+// --- Table ---
+.table-section {
+  margin-top: 24px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  background: var(--gray-box);
+}
+
+.projection-table {
+  width: 100%;
+
+  th.mat-mdc-header-cell {
+    font-family: Dosis;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-font);
+  }
+
+  td.mat-mdc-cell {
+    font-family: Dosis;
+    font-size: 14px;
+  }
+
+  .income-cell {
+    color: var(--green);
+  }
+
+  .expense-cell {
+    color: var(--red);
+  }
+
+  .balance-positive {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .balance-negative {
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .completed-cell {
+    color: var(--magenta);
+    font-size: 12px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: var(--gray-form);
+}
+
+tr.mat-mdc-row:hover {
+  background-color: var(--input-area);
+}
+
+tr.best-month-row {
+  position: relative;
+
+  &::before {
+    content: '★';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--yellow);
+    font-size: 12px;
+  }
+}
+
+// --- Back Button ---
 .back {
   background-color: var(--principal-color);
   color: var(--reverse-color);
@@ -78,5 +383,28 @@
   &:hover {
     scale: 1.1;
     transition: 0.4s;
+  }
+}
+
+mat-divider {
+  margin: 24px 0;
+}
+
+// --- Responsive ---
+@media (max-width: 480px) {
+  .projection {
+    padding: 12px;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .chart-wrapper {
+    height: 200px;
+  }
+
+  .full-width-chart .chart-wrapper {
+    height: 180px;
   }
 }
