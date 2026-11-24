@@ -40,20 +40,26 @@ interface AttachedFile {
           </button>
         </mat-panel-title>
         <mat-panel-description>
-          <div>
-          <span class="date">{{transaction()!.createdAt | date: "dd/MM/yyyy"}}</span>
-          <h1 [class]="transaction()!.type === 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
+          <div class="tx-info">
+            <span class="date">{{transaction()!.createdAt | date: "dd/MM/yyyy"}}</span>
+            <h1 [class]="transaction()!.type === 'output' ? 'saida' : 'entrada'">{{transaction().value | currency: account()?.currency}}</h1>
           </div>
-          {{transaction().category.name}} 
-          @if (transaction().category.controls?.icon) {
-            <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category.controls?.icon}}</mat-icon>
-          }
+          <span class="tx-category">
+            @if (transaction().category.controls?.icon) {
+              <mat-icon class="category-icon" [style.background-color]="transaction().category.controls?.color">{{transaction().category.controls?.icon}}</mat-icon>
+            }
+            {{transaction().category.name}}
+          </span>
         </mat-panel-description>
       </mat-expansion-panel-header>
       @if(transaction().creditCard){
-        <p>Cartão: {{transaction().creditCard?.name}}</p>
+        <div class="credit-card-badge">
+          <mat-icon>credit_card</mat-icon> {{transaction().creditCard?.name}}
+        </div>
       }
-      <p>{{transaction().description}}</p>
+      @if(transaction().description){
+        <p class="tx-detail">{{transaction().description}}</p>
+      }
       @if(transaction().files.length > 0){      
         <app-attachment-gallery
          [files]="transaction()!.files"

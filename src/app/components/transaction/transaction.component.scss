@@ -1,58 +1,155 @@
 @use '@angular/material' as mat;
-:host{
-    width: 100%;
-    --mat-expansion-header-collapsed-state-height: 60px;
+
+:host {
+  width: 100%;
+  display: block;
+  --mat-expansion-header-collapsed-state-height: 56px;
 }
-:root {
-  @include mat.expansion-overrides((
-    container-shape: 20px 20px,
-  ));
-}
-*{
+
+* {
   --mat-sys-surface: var(--gray-form);
 }
-button:not(.tools button){
-  background-color: transparent;
+
+// ── Panel ───────────────────────────────────────────────────────
+mat-expansion-panel {
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--input-area);
+  border-radius: 0 !important;
+  background: transparent;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+mat-expansion-panel-header {
+  padding: 0 12px !important;
+}
+
+// ── Title (checkbox) ────────────────────────────────────────────
+mat-panel-title {
+  flex-grow: 0;
+  margin-right: 8px;
+}
+
+button:not(.tools button) {
+  background: transparent;
   border: 0;
-  border-radius: 100%;
+  border-radius: 50%;
   padding: 0;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
-mat-panel-title{
-  flex-grow: 0;
+// ── Description row ─────────────────────────────────────────────
+mat-panel-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: Dosis;
+  font-size: 14px;
+  min-width: 0;
 }
 
-h1{
-  font-size: large;
+.tx-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.date {
+  font-size: 12px;
+  color: var(--gray-font);
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: League-Spartan, sans-serif;
   margin: 0;
 }
 
-.date{
-  font-size: medium;
-}
-
-.entrada{
+.entrada {
   color: var(--green);
 }
-.saida{
+
+.saida {
   color: var(--red);
 }
-.file{
-  rotate: 45deg;
+
+// ── Category badge ──────────────────────────────────────────────
+.tx-category {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--gray-font);
+  flex-shrink: 0;
 }
 
-mat-expansion-panel-header{
-  padding: 0 8px;
+.category-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  padding: 4px;
+  border-radius: 6px;
 }
-mat-expansion-panel{
-  box-shadow: unset !important;
-  border-bottom: solid 2px var(--grey-background);
-  border-radius: 0;
+
+// ── Expanded Content ────────────────────────────────────────────
+.tx-detail {
+  padding: 4px 0 8px;
+  font-family: Dosis;
+  font-size: 14px;
+  color: var(--gray-font);
 }
-mat-panel-description{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
+
+.credit-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  background: var(--input-area);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  color: var(--blue);
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// ── Tools ───────────────────────────────────────────────────────
+.tools {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  justify-content: flex-end;
+
+  button {
+    background: var(--input-area);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--input-area2);
+    }
+  }
+}
+
+.file {
+  rotate: 45deg;
 }

@@ -1,87 +1,186 @@
-:host{
+.extrato {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 12px 32px;
+}
+
+// ── Title ───────────────────────────────────────────────────────
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Dosis;
+  color: var(--principal-color);
+  margin: 0 0 12px;
+  align-self: flex-start;
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+// ── Summary Cards ───────────────────────────────────────────────
+.summary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin: 16px 0;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--gray-box);
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1);
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  div {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    width: 100%;
-}
+    gap: 2px;
+    min-width: 0;
+  }
 
-.box:not(.transaction-list){
-    width: 100%;
-    height: calc(100vh - 174px);
-    margin: 0;
-    display: flex;
-    align-items: flex-end;
-    background-color: transparent;
-}
+  .summary-label {
+    font-size: 11px;
+    font-family: Dosis;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-font);
+  }
 
-.transaction-list{
-    display: block;
-    overflow: auto;
-    padding: 5px;
-    border: solid 5px var(--gray-form);
-    height: 60vh;
-    background-color: var(--gray-form);
-    align-self: flex-end;
-    margin: 0;
-    width: 100%;
-}
+  .summary-value {
+    font-size: 17px;
+    font-weight: 700;
+    font-family: League-Spartan, sans-serif;
+  }
 
-.value{
-    background-color: var(--input-area);
-    border-radius: 5px;
-    height: 40px;
-    min-width: 120px;
-    display: flex;
-    flex-flow: column wrap;
-    padding: 5px;
-    margin: 10px 0;
-    
-    h1{
-        font-size: large;
-        margin: 0;
+  &.income {
+    mat-icon { color: var(--green); }
+    .summary-value { color: var(--green); }
+  }
+
+  &.expense {
+    mat-icon { color: var(--red); }
+    .summary-value { color: var(--red); }
+  }
+
+  &.balance {
+    &.positive {
+      mat-icon { color: var(--green); }
+      .summary-value { color: var(--green); }
     }
-    h2{
-        font-size: medium;
-        margin: 0;
+    &.negative {
+      mat-icon { color: var(--red); }
+      .summary-value { color: var(--red); }
     }
-    
-    mat-icon{
-        font-size: 40px;
-        height: 40px;
-        width: 40px;
-        align-self: end;
+  }
+}
+
+// ── Filter Toggle ───────────────────────────────────────────────
+.filter-group {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  mat-button-toggle {
+    font-family: Dosis;
+    font-size: 13px;
+    font-weight: 500;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+      vertical-align: middle;
     }
+  }
 }
-.gains{
-    & h2{
-        --color: var(--green);
+
+// ── Transaction count ───────────────────────────────────────────
+.tx-count {
+  align-self: flex-start;
+  font-size: 12px;
+  color: var(--gray-font);
+  font-family: Dosis;
+  margin-bottom: 8px;
+}
+
+// ── Transaction List ────────────────────────────────────────────
+.transaction-list {
+  width: 100%;
+  background: var(--gray-form);
+  border-radius: 10px;
+  overflow: hidden auto;
+  max-height: 60vh;
+  padding: 4px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--input-area2);
+  }
+}
+
+// ── Empty State ─────────────────────────────────────────────────
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  color: var(--gray-font);
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  p {
+    margin: 4px 0;
+    font-family: Dosis;
+    font-size: 15px;
+
+    &.hint {
+      font-size: 13px;
+      opacity: 0.7;
     }
-}
-.losts{
-    & h2{
-        --color: var(--red);
-    }    
+  }
 }
 
-.filter{
-    margin-bottom:30px;
-    scale:1.2;
-    --color: var(--black)
-}
-
-.all:not(month-selector), .revenue:not(month-selector), .expense:not(month-selector){
-    background-color: var(--type);
-}
-
-.all{
-    --type: var(--white);
-    --type1: var(--font-color);
-}
-    
-.revenue{
-    --type: var(--green);
-}
-
-.expense{
-    --type: var(--red);
+// ── Responsive ──────────────────────────────────────────────────
+@media (max-width: 480px) {
+  .extrato {
+    padding: 0 8px 24px;
+  }
 }
