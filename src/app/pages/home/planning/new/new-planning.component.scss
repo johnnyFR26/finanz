@@ -37,7 +37,7 @@
         margin-bottom: 16px;
         font-size: 18px;
         font-weight: 500;
-        color: #1976d2;
+        color: var(--principal-color);
 
         mat-icon {
           font-size: 20px;
@@ -84,8 +84,9 @@
       }
     }
 
+    // Resumo de valores — usa variáveis do tema
     .values-summary {
-      background: #f5f5f5;
+      background: var(--gray-box);
       border-radius: 8px;
       padding: 16px;
       margin-top: 16px;
@@ -102,25 +103,25 @@
 
         .label {
           font-weight: 500;
-          color: #666;
+          color: var(--gray-font);
         }
 
         .value {
           font-weight: 600;
 
           &.total {
-            color: #1976d2;
+            color: var(--principal-color);
           }
 
           &.available {
-            color: #388e3c;
+            color: var(--green);
           }
 
           &.categories {
-            color: #f57c00;
+            color: var(--yellow);
 
             &.warning {
-              color: #d32f2f;
+              color: var(--red);
               font-weight: 700;
             }
           }
@@ -128,18 +129,17 @@
       }
     }
 
+    // Cards de categorias — fundo e bordas compatíveis com dark/light
     .categories-list {
       .category-item {
-
         margin-bottom: 16px;
 
         .category-card {
-
+          background-color: var(--gray-box);
           padding: 16px;
-          border-left: 4px solid #1976d2;
+          border-left: 4px solid var(--principal-color);
 
           .category-form {
-
             display: flex;
             align-items: flex-start;
             gap: 16px;
@@ -171,13 +171,12 @@
           }
 
           .category-info {
-
             margin-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 12px;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid var(--input-area2);
 
             @media (max-width: 768px) {
               flex-direction: column;
@@ -186,15 +185,14 @@
             }
 
             .category-name {
-
               font-weight: 500;
-              color: #333;
+              color: var(--font-color);
             }
 
             .category-percentage {
               font-size: 0.875rem;
-              color: #666;
-              background: #e3f2fd;
+              color: var(--font-color);
+              background: var(--input-area);
               padding: 4px 8px;
               border-radius: 12px;
             }
@@ -203,10 +201,9 @@
       }
 
       .no-categories {
-
         text-align: center;
         padding: 40px 20px;
-        color: #666;
+        color: var(--gray-font);
 
         mat-icon {
           font-size: 48px;
@@ -217,7 +214,6 @@
         }
 
         p {
-
           margin: 8px 0;
 
           &.hint {
@@ -228,15 +224,21 @@
       }
     }
 
-    .incomes-list, .expenses-list {
-      .income-item, .expense-item {
+    // Cards de rendas e despesas — fundo e bordas compatíveis
+    .incomes-list,
+    .expenses-list {
+      .income-item,
+      .expense-item {
         margin-bottom: 16px;
 
-        .income-card, .expense-card {
+        .income-card,
+        .expense-card {
+          background-color: var(--gray-box);
           padding: 16px;
-          border-left: 4px solid #388e3c;
+          border-left: 4px solid var(--green);
 
-          .income-form, .expense-form {
+          .income-form,
+          .expense-form {
             display: flex;
             align-items: flex-start;
             gap: 16px;
@@ -247,12 +249,14 @@
               gap: 8px;
             }
 
-            .income-name, .expense-name {
+            .income-name,
+            .expense-name {
               flex: 2;
               min-width: 200px;
             }
 
-            .income-value, .expense-value {
+            .income-value,
+            .expense-value {
               flex: 1;
               min-width: 150px;
             }
@@ -262,7 +266,8 @@
               min-width: 150px;
             }
 
-            .expense-installments, .expense-current {
+            .expense-installments,
+            .expense-current {
               flex: 1;
               min-width: 100px;
             }
@@ -285,14 +290,14 @@
         }
 
         .expense-card {
-          border-left-color: #f57c00;
+          border-left-color: var(--yellow);
         }
       }
 
       .no-items {
         text-align: center;
         padding: 40px 20px;
-        color: #666;
+        color: var(--gray-font);
 
         mat-icon {
           font-size: 48px;
@@ -321,9 +326,9 @@
         align-items: center;
         gap: 8px;
         padding: 12px 16px;
-        color: #c62828;
+        color: var(--red);
         border-radius: 4px;
-        border-left: 4px solid #d32f2f;
+        border-left: 4px solid var(--red);
 
         mat-icon {
           font-size: 18px;
@@ -360,8 +365,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 ::ng-deep .success-snackbar {
@@ -397,23 +406,23 @@
     .planning-card {
       mat-card-header {
         mat-card-title {
-          font-size: 20px;//tente achar o comentário sacana
+          font-size: 20px;
         }
       }
     }
   }
 }
 
-.back{
-    background-color: var(--principal-color);
-    color: var(--reverse-color);
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    border-radius: 4px;
-    transition: 0.2s;
-    &:hover{
-        scale: 1.1;
-        transition: 0.4s;
-    }
+.back {
+  background-color: var(--principal-color);
+  color: var(--reverse-color);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 4px;
+  transition: 0.2s;
+  &:hover {
+    scale: 1.1;
+    transition: 0.4s;
+  }
 }
