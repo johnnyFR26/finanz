@@ -1,0 +1,436 @@
+// ═══════════════════════════════════════════════════════════════
+//  Overview Dashboard — Visão Geral Financeira
+// ═══════════════════════════════════════════════════════════════
+
+.overview {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+mat-divider {
+  margin: 0;
+}
+
+// ── Health Score Hero ───────────────────────────────────────────
+.health-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: var(--gray-box);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12);
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+.score-ring {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 5px solid;
+  transition: border-color 0.3s;
+
+  &.excellent { border-color: var(--green); }
+  &.good { border-color: var(--blue); }
+  &.fair { border-color: var(--yellow); }
+  &.poor { border-color: var(--red); }
+
+  .score-value {
+    font-size: 36px;
+    font-weight: 800;
+    font-family: League-Spartan, sans-serif;
+    line-height: 1;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: var(--gray-font);
+    font-family: Dosis;
+  }
+}
+
+.score-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.score-title {
+  font-family: Dosis;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.score-grade {
+  font-family: League-Spartan, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
+  &.excellent { color: var(--green); }
+  &.good { color: var(--blue); }
+  &.fair { color: var(--yellow); }
+  &.poor { color: var(--red); }
+}
+
+.score-hint {
+  font-size: 13px;
+  color: var(--gray-font);
+  margin: 0;
+}
+
+// ── Health Factors ──────────────────────────────────────────────
+.factors-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 400px) { grid-template-columns: 1fr; }
+}
+
+.factor-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--gray-box);
+  border-left: 3px solid;
+
+  &.factor-good { border-left-color: var(--green); mat-icon { color: var(--green); } }
+  &.factor-warning { border-left-color: var(--yellow); mat-icon { color: var(--yellow); } }
+  &.factor-danger { border-left-color: var(--red); mat-icon { color: var(--red); } }
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .factor-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .factor-label {
+    font-size: 12px;
+    font-family: Dosis;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .factor-score {
+    font-size: 11px;
+    color: var(--gray-font);
+    text-align: right;
+  }
+}
+
+// ── Summary Cards ───────────────────────────────────────────────
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 400px) { grid-template-columns: 1fr; }
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--gray-box);
+  border-radius: 12px;
+  cursor: default;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+
+  &:hover { transform: translateY(-2px); }
+
+  &[ng-reflect-router-link],
+  &:has(+ void) { cursor: pointer; } // clickable cards
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-family: Dosis;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-font);
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: League-Spartan, sans-serif;
+  }
+
+  &.balance-card { mat-icon { color: var(--blue); } .stat-value { color: var(--blue); } cursor: pointer; }
+  &.income-card { mat-icon { color: var(--green); } .stat-value { color: var(--green); } }
+  &.expense-card { mat-icon { color: var(--red); } .stat-value { color: var(--red); } }
+  &.savings-card { mat-icon { color: var(--yellow); } .stat-value { color: var(--yellow); } }
+  &.invest-card { mat-icon { color: var(--magenta); } .stat-value { color: var(--magenta); } cursor: pointer; }
+  &.net-card { mat-icon { color: var(--principal-color); } .stat-value { color: var(--principal-color); } }
+}
+
+// ── Charts ──────────────────────────────────────────────────────
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.chart-box {
+  background: var(--gray-box);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.chart-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Dosis;
+  color: var(--gray-font);
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+
+  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+}
+
+.chart-wrap {
+  position: relative;
+  height: 240px;
+
+  canvas { width: 100% !important; height: 100% !important; }
+}
+
+.doughnut-wrap { height: 220px; }
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 160px;
+  color: var(--gray-font);
+  font-size: 14px;
+  font-family: Dosis;
+
+  mat-icon { font-size: 20px; width: 20px; height: 20px; opacity: 0.5; }
+}
+
+// ── Section Title ───────────────────────────────────────────────
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Dosis;
+  color: var(--principal-color);
+  margin: 0 0 14px;
+
+  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+}
+
+// ── Budget Compliance ───────────────────────────────────────────
+.budget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.budget-item {
+  background: var(--gray-box);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.budget-name {
+  font-family: Dosis;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.budget-pct {
+  font-family: League-Spartan, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--green);
+
+  &.over { color: var(--red); }
+}
+
+.budget-values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--gray-font);
+}
+
+// ── Investments ─────────────────────────────────────────────────
+.invest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 480px) { grid-template-columns: 1fr; }
+}
+
+.invest-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  background: var(--gray-box);
+  border-radius: 10px;
+  border-left: 3px solid var(--magenta);
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: var(--magenta);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+.invest-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.invest-name {
+  font-family: Dosis;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.invest-value {
+  font-family: League-Spartan, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--magenta);
+}
+
+.invest-detail {
+  font-size: 11px;
+  color: var(--gray-font);
+}
+
+// ── Insights ────────────────────────────────────────────────────
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.insight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--gray-box);
+  border-left: 4px solid transparent;
+  transition: transform 0.15s;
+
+  &:hover { transform: translateX(2px); }
+
+  mat-icon {
+    flex-shrink: 0;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .insight-title {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Dosis;
+  }
+
+  .insight-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--gray-font);
+  }
+
+  &.insight-positive { border-left-color: var(--green); mat-icon { color: var(--green); } }
+  &.insight-negative { border-left-color: var(--red); mat-icon { color: var(--red); } }
+  &.insight-neutral { border-left-color: var(--blue); mat-icon { color: var(--blue); } }
+  &.insight-tip { border-left-color: var(--yellow); mat-icon { color: var(--yellow); } }
+}
+
+// ── Responsive ──────────────────────────────────────────────────
+@media (max-width: 480px) {
+  .overview { padding: 12px; gap: 16px; }
+  .chart-wrap { height: 200px; }
+  .doughnut-wrap { height: 180px; }
+}

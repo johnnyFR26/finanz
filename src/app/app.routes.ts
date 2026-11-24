@@ -18,6 +18,11 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/home/createAccount/create-account.component').then(m => m.CreateAccountComponent)
             },
             {
+                path: 'overview',
+                loadComponent: () => import('./pages/home/overview/overview.component').then(m => m.OverviewComponent),
+                canActivate: [doesUserHaveAccount],
+            },
+            {
                 path: 'account',
                 loadComponent: () => import('./pages/home/account/account.component').then(m => m.AccountComponent),
                 canActivate: [doesUserHaveAccount],
