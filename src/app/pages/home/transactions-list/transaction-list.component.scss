@@ -35,8 +35,21 @@
   width: 100%;
   margin: 16px 0;
 
-  @media (max-width: 520px) {
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr 1fr;
+
+    // Balance card spans full width on 2-col
+    .summary-card.balance {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 400px) {
     grid-template-columns: 1fr;
+
+    .summary-card.balance {
+      grid-column: auto;
+    }
   }
 }
 
@@ -44,15 +57,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px;
+  padding: 12px;
   border-radius: 10px;
   background: var(--gray-box);
   box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1);
 
   mat-icon {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
   }
 
@@ -69,12 +82,14 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--gray-font);
+    white-space: nowrap;
   }
 
   .summary-value {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     font-family: League-Spartan, sans-serif;
+    white-space: nowrap;
   }
 
   &.income {
@@ -115,9 +130,20 @@
       font-size: 16px;
       width: 16px;
       height: 16px;
-      margin-right: 4px;
       vertical-align: middle;
     }
+
+    // Label next to icon
+    .toggle-label {
+      margin-left: 4px;
+    }
+  }
+}
+
+// On narrow screens, hide text labels and show only icons
+@media (max-width: 480px) {
+  .filter-group mat-button-toggle .toggle-label {
+    display: none;
   }
 }
 
@@ -182,5 +208,9 @@
 @media (max-width: 480px) {
   .extrato {
     padding: 0 8px 24px;
+  }
+
+  .page-title {
+    font-size: 18px;
   }
 }

@@ -51,6 +51,7 @@ mat-panel-description {
   font-family: Dosis;
   font-size: 14px;
   min-width: 0;
+  overflow: hidden;
 }
 
 .tx-info {
@@ -58,6 +59,7 @@ mat-panel-description {
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex-shrink: 1;
 }
 
 .date {
@@ -70,6 +72,7 @@ h1 {
   font-weight: 700;
   font-family: League-Spartan, sans-serif;
   margin: 0;
+  white-space: nowrap;
 }
 
 .entrada {
@@ -88,6 +91,10 @@ h1 {
   font-size: 13px;
   color: var(--gray-font);
   flex-shrink: 0;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .category-icon {
@@ -96,6 +103,24 @@ h1 {
   height: 20px !important;
   padding: 4px;
   border-radius: 6px;
+  flex-shrink: 0;
+}
+
+// On very narrow screens, hide category text and show only icon
+@media (max-width: 400px) {
+  .tx-category {
+    gap: 0;
+    font-size: 0; // hide text
+    max-width: none;
+  }
+
+  .category-icon {
+    font-size: 20px !important;
+  }
+
+  h1 {
+    font-size: 14px;
+  }
 }
 
 // ── Expanded Content ────────────────────────────────────────────

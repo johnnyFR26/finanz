@@ -49,13 +49,13 @@ import { MonthSelectorComponent } from '../../../components/month-selector/month
       <!-- Filter Toggle -->
       <mat-button-toggle-group [value]="type()" (change)="type.set($event.value)" class="filter-group" aria-label="Filtrar transações">
         <mat-button-toggle value="transaction">
-          <mat-icon>list</mat-icon> Todas
+          <mat-icon>list</mat-icon><span class="toggle-label">Todas</span>
         </mat-button-toggle>
         <mat-button-toggle value="input">
-          <mat-icon>arrow_downward</mat-icon> Receitas
+          <mat-icon>arrow_downward</mat-icon><span class="toggle-label">Receitas</span>
         </mat-button-toggle>
         <mat-button-toggle value="output">
-          <mat-icon>arrow_upward</mat-icon> Despesas
+          <mat-icon>arrow_upward</mat-icon><span class="toggle-label">Despesas</span>
         </mat-button-toggle>
       </mat-button-toggle-group>
 
